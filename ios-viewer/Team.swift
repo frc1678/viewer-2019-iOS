@@ -1,42 +1,46 @@
 //
-//  Match.swift
+//  Team.swift
 //
-//  Created by Bryton Moeller on 1/18/17
-//  Copyright (c) Citrus Circuits. All rights reserved.
+//  Created by Carter Luck on 1/14/18
+//  Copyright (c) . All rights reserved.
 //
 
 import Foundation
 import SwiftyJSON
 
-public final class Team: NSObject {
+public final class Team: NSCoding {
 
   // MARK: Declaration for string constants to be used to decode and also serialize.
   private struct SerializationKeys {
     static let name = "name"
-    static let pitOrganization = "pitOrganization"
-    static let pitProgrammingLanguage = "pitProgrammingLanguage"
-    static let number = "number"
-    static let pitAvailableWeight = "pitAvailableWeight"
-    static let calculatedData = "calculatedData"
-    static let pitSelectedImageName = "pitSelectedImageName"
-    static let pitAllImageURLs = "pitAllImageURLs"
     static let pitDriveTrain = "pitDriveTrain"
+    static let number = "number"
+    static let calculatedData = "calculatedData"
+    static let pitAllImageUrls = "pitAllImageUrls"
+    static let pitSEALsNotes = "pitSEALsNotes"
     static let pitDidDemonstrateCheesecakePotential = "pitDidDemonstrateCheesecakePotential"
-    static let pitSEALSNotes = "pitSEALSNotes"
+    static let pitSelectedImageName = "pitSelectedImageName"
+    static let numMatchesPlayed = "numMatchesPlayed"
+    static let pitClimberType = "pitClimberType"
+    static let pitProgrammingLanguage = "pitProgrammingLanguage"
+    static let pitAvailableWeight = "pitAvailableWeight"
+    static let pitMaxHeight = "pitMaxHeight"
   }
 
   // MARK: Properties
   public var name: String?
-  public var pitOrganization: String?
-  public var pitProgrammingLanguage: String?
-  public var number: Int = -1
-  public var pitAvailableWeight: Int = -1
-  public var calculatedData: CalculatedTeamData?
-  public var pitSelectedImageName: String?
-  public var pitAllImageURLs: [String: String]?
   public var pitDriveTrain: String?
+  public var number: Int?
+  public var calculatedData: CalculatedTeamData?
+    public var pitAllImageUrls: [String: String]?
+  public var pitSEALsNotes: String?
   public var pitDidDemonstrateCheesecakePotential: Bool? = false
-  public var pitSEALSNotes: String?
+  public var pitSelectedImageName: String?
+  public var numMatchesPlayed: Int?
+  public var pitClimberType: String?
+  public var pitProgrammingLanguage: String?
+  public var pitAvailableWeight: Int?
+  public var pitMaxHeight: Int?
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -52,16 +56,18 @@ public final class Team: NSObject {
   /// - parameter json: JSON object from SwiftyJSON.
   public required init(json: JSON) {
     name = json[SerializationKeys.name].string
-    pitOrganization = json[SerializationKeys.pitOrganization].string
-    pitProgrammingLanguage = json[SerializationKeys.pitProgrammingLanguage].string
-    number = json[SerializationKeys.number].intValue
-    pitAvailableWeight = json[SerializationKeys.pitAvailableWeight].intValue
-    calculatedData = CalculatedTeamData(json: json[SerializationKeys.calculatedData])
-    pitSelectedImageName = json[SerializationKeys.pitSelectedImageName].string
-    pitAllImageURLs = json[SerializationKeys.pitAllImageURLs].dictionaryObject as! [String: String]?
     pitDriveTrain = json[SerializationKeys.pitDriveTrain].string
+    number = json[SerializationKeys.number].int
+    calculatedData = CalculatedTeamData(json: json[SerializationKeys.calculatedData])
+    pitAllImageUrls = json[SerializationKeys.pitAllImageUrls].dictionaryObject as! [String: String]?
+    pitSEALsNotes = json[SerializationKeys.pitSEALsNotes].string
     pitDidDemonstrateCheesecakePotential = json[SerializationKeys.pitDidDemonstrateCheesecakePotential].boolValue
-    pitSEALSNotes = json[SerializationKeys.pitSEALSNotes].stringValue
+    pitSelectedImageName = json[SerializationKeys.pitSelectedImageName].string
+    numMatchesPlayed = json[SerializationKeys.numMatchesPlayed].int
+    pitClimberType = json[SerializationKeys.pitClimberType].string
+    pitProgrammingLanguage = json[SerializationKeys.pitProgrammingLanguage].string
+    pitAvailableWeight = json[SerializationKeys.pitAvailableWeight].int
+    pitMaxHeight = json[SerializationKeys.pitMaxHeight].int
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -70,18 +76,52 @@ public final class Team: NSObject {
   public func dictionaryRepresentation() -> [String: Any] {
     var dictionary: [String: Any] = [:]
     if let value = name { dictionary[SerializationKeys.name] = value }
-    if let value = pitOrganization { dictionary[SerializationKeys.pitOrganization] = value }
-    if let value = pitProgrammingLanguage { dictionary[SerializationKeys.pitProgrammingLanguage] = value }
-    dictionary[SerializationKeys.number] = number
-    dictionary[SerializationKeys.pitAvailableWeight] = pitAvailableWeight
+    if let value = pitDriveTrain { dictionary[SerializationKeys.pitDriveTrain] = value }
+    if let value = number { dictionary[SerializationKeys.number] = value }
     if let value = calculatedData { dictionary[SerializationKeys.calculatedData] = value.dictionaryRepresentation() }
-    if let value = pitSelectedImageName { dictionary[SerializationKeys.pitSelectedImageName] = value }
-    if let value = pitAllImageURLs { dictionary[SerializationKeys.pitAllImageURLs] = value }
-    if let value = pitSEALSNotes { dictionary[SerializationKeys.pitSEALSNotes] = value }
-    
-    dictionary[SerializationKeys.pitDriveTrain] = pitDriveTrain
+    if let value = pitAllImageUrls { dictionary[SerializationKeys.pitAllImageUrls] = value }
+    if let value = pitSEALsNotes { dictionary[SerializationKeys.pitSEALsNotes] = value }
     dictionary[SerializationKeys.pitDidDemonstrateCheesecakePotential] = pitDidDemonstrateCheesecakePotential
+    if let value = pitSelectedImageName { dictionary[SerializationKeys.pitSelectedImageName] = value }
+    if let value = numMatchesPlayed { dictionary[SerializationKeys.numMatchesPlayed] = value }
+    if let value = pitClimberType { dictionary[SerializationKeys.pitClimberType] = value }
+    if let value = pitProgrammingLanguage { dictionary[SerializationKeys.pitProgrammingLanguage] = value }
+    if let value = pitAvailableWeight { dictionary[SerializationKeys.pitAvailableWeight] = value }
+    if let value = pitMaxHeight { dictionary[SerializationKeys.pitMaxHeight] = value }
     return dictionary
+  }
+
+  // MARK: NSCoding Protocol
+  required public init(coder aDecoder: NSCoder) {
+    self.name = aDecoder.decodeObject(forKey: SerializationKeys.name) as? String
+    self.pitDriveTrain = aDecoder.decodeObject(forKey: SerializationKeys.pitDriveTrain) as? String
+    self.number = aDecoder.decodeObject(forKey: SerializationKeys.number) as? Int
+    self.calculatedData = aDecoder.decodeObject(forKey: SerializationKeys.calculatedData) as? CalculatedTeamData
+    self.pitAllImageUrls = aDecoder.decodeObject(forKey: SerializationKeys.pitAllImageUrls) as? [String:String]
+    self.pitSEALsNotes = aDecoder.decodeObject(forKey: SerializationKeys.pitSEALsNotes) as? String
+    self.pitDidDemonstrateCheesecakePotential = aDecoder.decodeBool(forKey: SerializationKeys.pitDidDemonstrateCheesecakePotential)
+    self.pitSelectedImageName = aDecoder.decodeObject(forKey: SerializationKeys.pitSelectedImageName) as? String
+    self.numMatchesPlayed = aDecoder.decodeObject(forKey: SerializationKeys.numMatchesPlayed) as? Int
+    self.pitClimberType = aDecoder.decodeObject(forKey: SerializationKeys.pitClimberType) as? String
+    self.pitProgrammingLanguage = aDecoder.decodeObject(forKey: SerializationKeys.pitProgrammingLanguage) as? String
+    self.pitAvailableWeight = aDecoder.decodeObject(forKey: SerializationKeys.pitAvailableWeight) as? Int
+    self.pitMaxHeight = aDecoder.decodeObject(forKey: SerializationKeys.pitMaxHeight) as? Int
+  }
+
+  public func encode(with aCoder: NSCoder) {
+    aCoder.encode(name, forKey: SerializationKeys.name)
+    aCoder.encode(pitDriveTrain, forKey: SerializationKeys.pitDriveTrain)
+    aCoder.encode(number, forKey: SerializationKeys.number)
+    aCoder.encode(calculatedData, forKey: SerializationKeys.calculatedData)
+    aCoder.encode(pitAllImageUrls, forKey: SerializationKeys.pitAllImageUrls)
+    aCoder.encode(pitSEALsNotes, forKey: SerializationKeys.pitSEALsNotes)
+    aCoder.encode(pitDidDemonstrateCheesecakePotential, forKey: SerializationKeys.pitDidDemonstrateCheesecakePotential)
+    aCoder.encode(pitSelectedImageName, forKey: SerializationKeys.pitSelectedImageName)
+    aCoder.encode(numMatchesPlayed, forKey: SerializationKeys.numMatchesPlayed)
+    aCoder.encode(pitClimberType, forKey: SerializationKeys.pitClimberType)
+    aCoder.encode(pitProgrammingLanguage, forKey: SerializationKeys.pitProgrammingLanguage)
+    aCoder.encode(pitAvailableWeight, forKey: SerializationKeys.pitAvailableWeight)
+    aCoder.encode(pitMaxHeight, forKey: SerializationKeys.pitMaxHeight)
   }
 
 }
