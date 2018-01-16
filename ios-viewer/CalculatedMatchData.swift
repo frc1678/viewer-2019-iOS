@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyJSON
 
-public final class CalculatedMatchData: NSCoding {
+public final class CalculatedMatchData: NSObject {
 
   // MARK: Declaration for string constants to be used to decode and also serialize.
   private struct SerializationKeys {
@@ -28,12 +28,12 @@ public final class CalculatedMatchData: NSCoding {
   public var actualBlueRPs: Int?
   public var predictedRedAutoQuest: Bool? = false
   public var predictedRedRPs: Int?
-  public var predictedBlueScore: Int?
+  public var predictedBlueScore: Int = -1
   public var actualRedRPs: Int?
   public var predictedBlueAutoQuest: Bool? = false
   public var predictedBlueRPs: Int?
   public var blueWinChance: Int?
-  public var predictedRedScore: Int?
+  public var predictedRedScore: Int = -1
   public var redWinChance: Int?
 
   // MARK: SwiftyJSON Initializers
@@ -52,12 +52,12 @@ public final class CalculatedMatchData: NSCoding {
     actualBlueRPs = json[SerializationKeys.actualBlueRPs].int
     predictedRedAutoQuest = json[SerializationKeys.predictedRedAutoQuest].boolValue
     predictedRedRPs = json[SerializationKeys.predictedRedRPs].int
-    predictedBlueScore = json[SerializationKeys.predictedBlueScore].int
+    predictedBlueScore = json[SerializationKeys.predictedBlueScore].int!
     actualRedRPs = json[SerializationKeys.actualRedRPs].int
     predictedBlueAutoQuest = json[SerializationKeys.predictedBlueAutoQuest].boolValue
     predictedBlueRPs = json[SerializationKeys.predictedBlueRPs].int
     blueWinChance = json[SerializationKeys.blueWinChance].int
-    predictedRedScore = json[SerializationKeys.predictedRedScore].int
+    predictedRedScore = json[SerializationKeys.predictedRedScore].int!
     redWinChance = json[SerializationKeys.redWinChance].int
   }
 
@@ -69,12 +69,12 @@ public final class CalculatedMatchData: NSCoding {
     if let value = actualBlueRPs { dictionary[SerializationKeys.actualBlueRPs] = value }
     dictionary[SerializationKeys.predictedRedAutoQuest] = predictedRedAutoQuest
     if let value = predictedRedRPs { dictionary[SerializationKeys.predictedRedRPs] = value }
-    if let value = predictedBlueScore { dictionary[SerializationKeys.predictedBlueScore] = value }
+    dictionary[SerializationKeys.predictedBlueScore] = predictedBlueScore
     if let value = actualRedRPs { dictionary[SerializationKeys.actualRedRPs] = value }
     dictionary[SerializationKeys.predictedBlueAutoQuest] = predictedBlueAutoQuest
     if let value = predictedBlueRPs { dictionary[SerializationKeys.predictedBlueRPs] = value }
     if let value = blueWinChance { dictionary[SerializationKeys.blueWinChance] = value }
-    if let value = predictedRedScore { dictionary[SerializationKeys.predictedRedScore] = value }
+    dictionary[SerializationKeys.predictedRedScore] = predictedRedScore
     if let value = redWinChance { dictionary[SerializationKeys.redWinChance] = value }
     return dictionary
   }
@@ -84,12 +84,12 @@ public final class CalculatedMatchData: NSCoding {
     self.actualBlueRPs = aDecoder.decodeObject(forKey: SerializationKeys.actualBlueRPs) as? Int
     self.predictedRedAutoQuest = aDecoder.decodeBool(forKey: SerializationKeys.predictedRedAutoQuest)
     self.predictedRedRPs = aDecoder.decodeObject(forKey: SerializationKeys.predictedRedRPs) as? Int
-    self.predictedBlueScore = aDecoder.decodeObject(forKey: SerializationKeys.predictedBlueScore) as? Int
+    self.predictedBlueScore = (aDecoder.decodeObject(forKey: SerializationKeys.predictedBlueScore) as? Int)!
     self.actualRedRPs = aDecoder.decodeObject(forKey: SerializationKeys.actualRedRPs) as? Int
     self.predictedBlueAutoQuest = aDecoder.decodeBool(forKey: SerializationKeys.predictedBlueAutoQuest)
     self.predictedBlueRPs = aDecoder.decodeObject(forKey: SerializationKeys.predictedBlueRPs) as? Int
     self.blueWinChance = aDecoder.decodeObject(forKey: SerializationKeys.blueWinChance) as? Int
-    self.predictedRedScore = aDecoder.decodeObject(forKey: SerializationKeys.predictedRedScore) as? Int
+    self.predictedRedScore = (aDecoder.decodeObject(forKey: SerializationKeys.predictedRedScore) as? Int)!
     self.redWinChance = aDecoder.decodeObject(forKey: SerializationKeys.redWinChance) as? Int
   }
 

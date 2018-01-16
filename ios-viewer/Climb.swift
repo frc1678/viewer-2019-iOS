@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyJSON
 
-public final class Climb: NSCoding {
+public final class Climb: NSObject {
 
   // MARK: Declaration for string constants to be used to decode and also serialize.
   private struct SerializationKeys {

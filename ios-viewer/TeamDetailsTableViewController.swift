@@ -72,11 +72,11 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                             }, couldNotFetch: {
                                 DispatchQueue.main.async(execute: { () -> Void in
                                     //team has images
-                                    if team.pitAllImageURLs != nil {
+                                    if team.pitAllImageUrls != nil {
                                         //team has selected image
                                         if team.pitSelectedImageName != nil && team.pitSelectedImageName != "" {
                                             //get url
-                                            let url = URL(string: (Array(Array(team.pitAllImageURLs!.values)).filter { $0.contains((team.pitSelectedImageName!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!
+                                            let url = URL(string: (Array(Array(team.pitAllImageUrls!.values)).filter { $0.contains((team.pitSelectedImageName!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!
                                             //set imageview
                                             imageView.hnk_setImageFromURL(url, success: { _ in
                                                 self.resetTableViewHeight()
@@ -88,11 +88,11 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     }
                     let noRobotPhoto = UIImage(named: "SorryNoRobotPhoto")
                     //if team has urls
-                    if let urls = self.team?.pitAllImageURLs {
+                    if let urls = self.team?.pitAllImageUrls {
                         //iterate thru urls
                         for url in urls.values {
                             //if not all photos are downloaded
-                            if self.photos.count < self.team!.pitAllImageURLs!.count {
+                            if self.photos.count < self.team!.pitAllImageUrls!.count {
                                 //add this photo
                                 self.photos.append(MWPhoto(url: URL(string: url)))
                             }
@@ -287,10 +287,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if !Utils.teamDetailsKeys.defaultKeys.contains(dataKey) { //Default keys are currently just 'matchDatas' and 'TeamInMatchDatas'... if NOT a default key
                 var dataPoint = AnyObject?.init(nilLiteral: ())
                 var secondDataPoint = AnyObject?.init(nilLiteral: ())
-                if dataKey.contains("calculatedData.avgGearsPlacedByLiftAuto") {
+                /*if dataKey.contains("calculatedData.avgGearsPlacedByLiftAuto") {
                     //This is not really used, not one of the keys
                     dataPoint = team?.calculatedData?.avgGearsPlacedByLiftAuto?[dataKey.components(separatedBy: ".")[2]] as AnyObject
-                } else if dataKey.contains("calculatedData") {
+                } else */if dataKey.contains("calculatedData") {
                     dataPoint = team!.value(forKeyPath: dataKey) as AnyObject
                 } else {
                     dataPoint = (team!.dictionaryRepresentation() as NSDictionary).object(forKey: dataKey) as AnyObject
@@ -334,7 +334,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 } else if Utils.teamDetailsKeys.longTextCells.contains(dataKey) {
                     let notesCell: ResizableNotesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailStringCell", for: indexPath) as! ResizableNotesTableViewCell
                     notesCell.titleLabel?.text = Utils.humanReadableNames[dataKey]
-                    notesCell.notesLabel.text = team!.pitSEALSNotes
+                    notesCell.notesLabel.text = team!.pitSEALsNotes
                     notesCell.selectionStyle = UITableViewCellSelectionStyle.none
                     cell = notesCell
                 } else if Utils.teamDetailsKeys.unrankedCells.contains(dataKey) || dataKey.contains("pit") { //pit keys
@@ -346,9 +346,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     
                     if "\(dataPoint)".isEmpty /*|| (dataPoint as? Float != nil && dataPoint as! Float == 0.0)*/ {
                         unrankedCell.detailLabel.text = ""
-                       } else if dataKey == "pitOrganization" { //In the pit scout, the selector is indexed 0 to 4, this translates it back in to what those numbers mean.
+                       } /*else if dataKey == "pitOrganization" { //In the pit scout, the selector is indexed 0 to 4, this translates it back in to what those numbers mean.
                         unrankedCell.detailLabel!.text! = (team?.pitOrganization) ?? ""
-                    } else if dataKey == "pitProgrammingLanguage" {
+                    } */else if dataKey == "pitProgrammingLanguage" {
                         unrankedCell.detailLabel!.text! = (team?.pitProgrammingLanguage) ?? ""
                     } else if dataKey == "pitDriveTrain" {
                         unrankedCell.detailLabel!.text! = (team?.pitDriveTrain) ?? ""

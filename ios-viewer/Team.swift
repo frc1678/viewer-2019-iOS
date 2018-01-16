@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyJSON
 
-public final class Team: NSCoding {
+public final class Team: NSObject {
 
   // MARK: Declaration for string constants to be used to decode and also serialize.
   private struct SerializationKeys {
@@ -30,7 +30,7 @@ public final class Team: NSCoding {
   // MARK: Properties
   public var name: String?
   public var pitDriveTrain: String?
-  public var number: Int?
+  public var number: Int = -1
   public var calculatedData: CalculatedTeamData?
     public var pitAllImageUrls: [String: String]?
   public var pitSEALsNotes: String?
@@ -39,7 +39,7 @@ public final class Team: NSCoding {
   public var numMatchesPlayed: Int?
   public var pitClimberType: String?
   public var pitProgrammingLanguage: String?
-  public var pitAvailableWeight: Int?
+  public var pitAvailableWeight: Int = -1
   public var pitMaxHeight: Int?
 
   // MARK: SwiftyJSON Initializers
@@ -57,7 +57,7 @@ public final class Team: NSCoding {
   public required init(json: JSON) {
     name = json[SerializationKeys.name].string
     pitDriveTrain = json[SerializationKeys.pitDriveTrain].string
-    number = json[SerializationKeys.number].int
+    number = json[SerializationKeys.number].intValue
     calculatedData = CalculatedTeamData(json: json[SerializationKeys.calculatedData])
     pitAllImageUrls = json[SerializationKeys.pitAllImageUrls].dictionaryObject as! [String: String]?
     pitSEALsNotes = json[SerializationKeys.pitSEALsNotes].string
@@ -66,7 +66,7 @@ public final class Team: NSCoding {
     numMatchesPlayed = json[SerializationKeys.numMatchesPlayed].int
     pitClimberType = json[SerializationKeys.pitClimberType].string
     pitProgrammingLanguage = json[SerializationKeys.pitProgrammingLanguage].string
-    pitAvailableWeight = json[SerializationKeys.pitAvailableWeight].int
+    pitAvailableWeight = json[SerializationKeys.pitAvailableWeight].intValue
     pitMaxHeight = json[SerializationKeys.pitMaxHeight].int
   }
 
@@ -77,7 +77,6 @@ public final class Team: NSCoding {
     var dictionary: [String: Any] = [:]
     if let value = name { dictionary[SerializationKeys.name] = value }
     if let value = pitDriveTrain { dictionary[SerializationKeys.pitDriveTrain] = value }
-    if let value = number { dictionary[SerializationKeys.number] = value }
     if let value = calculatedData { dictionary[SerializationKeys.calculatedData] = value.dictionaryRepresentation() }
     if let value = pitAllImageUrls { dictionary[SerializationKeys.pitAllImageUrls] = value }
     if let value = pitSEALsNotes { dictionary[SerializationKeys.pitSEALsNotes] = value }
@@ -86,7 +85,6 @@ public final class Team: NSCoding {
     if let value = numMatchesPlayed { dictionary[SerializationKeys.numMatchesPlayed] = value }
     if let value = pitClimberType { dictionary[SerializationKeys.pitClimberType] = value }
     if let value = pitProgrammingLanguage { dictionary[SerializationKeys.pitProgrammingLanguage] = value }
-    if let value = pitAvailableWeight { dictionary[SerializationKeys.pitAvailableWeight] = value }
     if let value = pitMaxHeight { dictionary[SerializationKeys.pitMaxHeight] = value }
     return dictionary
   }
@@ -95,7 +93,7 @@ public final class Team: NSCoding {
   required public init(coder aDecoder: NSCoder) {
     self.name = aDecoder.decodeObject(forKey: SerializationKeys.name) as? String
     self.pitDriveTrain = aDecoder.decodeObject(forKey: SerializationKeys.pitDriveTrain) as? String
-    self.number = aDecoder.decodeObject(forKey: SerializationKeys.number) as? Int
+    self.number = (aDecoder.decodeObject(forKey: SerializationKeys.number) as? Int)!
     self.calculatedData = aDecoder.decodeObject(forKey: SerializationKeys.calculatedData) as? CalculatedTeamData
     self.pitAllImageUrls = aDecoder.decodeObject(forKey: SerializationKeys.pitAllImageUrls) as? [String:String]
     self.pitSEALsNotes = aDecoder.decodeObject(forKey: SerializationKeys.pitSEALsNotes) as? String
@@ -104,7 +102,7 @@ public final class Team: NSCoding {
     self.numMatchesPlayed = aDecoder.decodeObject(forKey: SerializationKeys.numMatchesPlayed) as? Int
     self.pitClimberType = aDecoder.decodeObject(forKey: SerializationKeys.pitClimberType) as? String
     self.pitProgrammingLanguage = aDecoder.decodeObject(forKey: SerializationKeys.pitProgrammingLanguage) as? String
-    self.pitAvailableWeight = aDecoder.decodeObject(forKey: SerializationKeys.pitAvailableWeight) as? Int
+    self.pitAvailableWeight = (aDecoder.decodeObject(forKey: SerializationKeys.pitAvailableWeight) as? Int)!
     self.pitMaxHeight = aDecoder.decodeObject(forKey: SerializationKeys.pitMaxHeight) as? Int
   }
 

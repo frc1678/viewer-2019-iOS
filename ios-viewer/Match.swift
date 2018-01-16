@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyJSON
 
-public final class Match: NSCoding {
+public final class Match: NSObject {
 
   // MARK: Declaration for string constants to be used to decode and also serialize.
   private struct SerializationKeys {
@@ -40,7 +40,7 @@ public final class Match: NSCoding {
   public var blueCubesInVaultFinal: [String:Int]?
     public var redSwitch: [String:String]?
   public var redDidFaceBoss: Bool? = false
-  public var number: Int?
+  public var number: Int = -1
   public var calculatedData: CalculatedMatchData?
   public var foulPointsGainedRed: Int?
   public var blueDidAutoQuest: Bool? = false
@@ -49,10 +49,10 @@ public final class Match: NSCoding {
   public var blueAllianceTeamNumbers: [Int]?
   public var redCubesForPowerup: [String:Int]?
     public var scale: [String:String]?
-  public var blueScore: Int?
+  public var blueScore: Int = -1
   public var blueSwitch: [String:String]?
   public var foulPointsGainedBlue: Int?
-  public var redScore: Int?
+  public var redScore: Int = -1
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -73,7 +73,7 @@ public final class Match: NSCoding {
     blueCubesInVaultFinal = json[SerializationKeys.blueCubesInVaultFinal].dictionaryObject as! [String: Int]?
     redSwitch = (json[SerializationKeys.redSwitch].dictionaryObject as! [String: String]?)!
     redDidFaceBoss = json[SerializationKeys.redDidFaceBoss].boolValue
-    number = json[SerializationKeys.number].int
+    number = json[SerializationKeys.number].intValue
     calculatedData = CalculatedMatchData(json: json[SerializationKeys.calculatedData])
     foulPointsGainedRed = json[SerializationKeys.foulPointsGainedRed].int
     blueDidAutoQuest = json[SerializationKeys.blueDidAutoQuest].boolValue
@@ -82,10 +82,10 @@ public final class Match: NSCoding {
     if let items = json[SerializationKeys.blueAllianceTeamNumbers].array { blueAllianceTeamNumbers = items.map { $0.intValue } }
     redCubesForPowerup = json[SerializationKeys.redCubesForPowerup].dictionaryObject as! [String: Int]?
     scale = json[SerializationKeys.scale].dictionaryObject as! [String: String]?
-    blueScore = json[SerializationKeys.blueScore].int
+    blueScore = json[SerializationKeys.blueScore].intValue
     blueSwitch = json[SerializationKeys.blueSwitch].dictionaryObject as! [String: String]?
     foulPointsGainedBlue = json[SerializationKeys.foulPointsGainedBlue].int
-    redScore = json[SerializationKeys.redScore].int
+    redScore = json[SerializationKeys.redScore].intValue
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -97,9 +97,9 @@ public final class Match: NSCoding {
     if let value = blueCubesForPowerup { dictionary[SerializationKeys.blueCubesForPowerup] = value }
     dictionary[SerializationKeys.blueDidFaceBoss] = blueDidFaceBoss
     if let value = blueCubesInVaultFinal { dictionary[SerializationKeys.blueCubesInVaultFinal] = value }
-    if let value = redSwitch { dictionary[SerializationKeys.redSwitch] = value.dictionaryRepresentation() }
+    dictionary[SerializationKeys.redSwitch] = redSwitch
     dictionary[SerializationKeys.redDidFaceBoss] = redDidFaceBoss
-    if let value = number { dictionary[SerializationKeys.number] = value }
+    dictionary[SerializationKeys.number] = number
     if let value = calculatedData { dictionary[SerializationKeys.calculatedData] = value.dictionaryRepresentation() }
     if let value = foulPointsGainedRed { dictionary[SerializationKeys.foulPointsGainedRed] = value }
     dictionary[SerializationKeys.blueDidAutoQuest] = blueDidAutoQuest
@@ -107,11 +107,11 @@ public final class Match: NSCoding {
     if let value = redCubesInVaultFinal { dictionary[SerializationKeys.redCubesInVaultFinal] = value }
     if let value = blueAllianceTeamNumbers { dictionary[SerializationKeys.blueAllianceTeamNumbers] = value }
     if let value = redCubesForPowerup { dictionary[SerializationKeys.redCubesForPowerup] = value }
-    if let value = scale { dictionary[SerializationKeys.scale] = value.dictionaryRepresentation() }
-    if let value = blueScore { dictionary[SerializationKeys.blueScore] = value }
-    if let value = blueSwitch { dictionary[SerializationKeys.blueSwitch] = value.dictionaryRepresentation() }
+    dictionary[SerializationKeys.scale] = scale
+    dictionary[SerializationKeys.blueScore] = blueScore
+    dictionary[SerializationKeys.blueSwitch] = blueSwitch
     if let value = foulPointsGainedBlue { dictionary[SerializationKeys.foulPointsGainedBlue] = value }
-    if let value = redScore { dictionary[SerializationKeys.redScore] = value }
+    dictionary[SerializationKeys.redScore] = redScore
     return dictionary
   }
 
@@ -123,7 +123,7 @@ public final class Match: NSCoding {
     self.blueCubesInVaultFinal = aDecoder.decodeObject(forKey: SerializationKeys.blueCubesInVaultFinal) as? [String:Int]
     self.redSwitch = aDecoder.decodeObject(forKey: SerializationKeys.redSwitch) as? [String:String]
     self.redDidFaceBoss = aDecoder.decodeBool(forKey: SerializationKeys.redDidFaceBoss)
-    self.number = aDecoder.decodeObject(forKey: SerializationKeys.number) as? Int
+    self.number = (aDecoder.decodeObject(forKey: SerializationKeys.number) as? Int)!
     self.calculatedData = aDecoder.decodeObject(forKey: SerializationKeys.calculatedData) as? CalculatedMatchData
     self.foulPointsGainedRed = aDecoder.decodeObject(forKey: SerializationKeys.foulPointsGainedRed) as? Int
     self.blueDidAutoQuest = aDecoder.decodeBool(forKey: SerializationKeys.blueDidAutoQuest)
@@ -132,10 +132,10 @@ public final class Match: NSCoding {
     self.blueAllianceTeamNumbers = aDecoder.decodeObject(forKey: SerializationKeys.blueAllianceTeamNumbers) as? [Int]
     self.redCubesForPowerup = aDecoder.decodeObject(forKey: SerializationKeys.redCubesForPowerup) as? [String:Int]
     self.scale = aDecoder.decodeObject(forKey: SerializationKeys.scale) as? [String:String]
-    self.blueScore = aDecoder.decodeObject(forKey: SerializationKeys.blueScore) as? Int
+    self.blueScore = (aDecoder.decodeObject(forKey: SerializationKeys.blueScore) as? Int)!
     self.blueSwitch = aDecoder.decodeObject(forKey: SerializationKeys.blueSwitch) as? [String:String]
     self.foulPointsGainedBlue = aDecoder.decodeObject(forKey: SerializationKeys.foulPointsGainedBlue) as? Int
-    self.redScore = aDecoder.decodeObject(forKey: SerializationKeys.redScore) as? Int
+    self.redScore = (aDecoder.decodeObject(forKey: SerializationKeys.redScore) as? Int)!
   }
 
   public func encode(with aCoder: NSCoder) {

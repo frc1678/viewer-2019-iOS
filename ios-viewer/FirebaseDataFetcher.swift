@@ -416,7 +416,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             }
         }
         //sort array by # and return it
-        return array.sorted { Int($0.number) < Int($1.number) }
+        return array.sorted { $0.number < $1.number }
     }
     
     /**
@@ -447,7 +447,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             }
         }
         //sort
-        importantMatches.sort { Int($0.number) > Int($1.number) }
+        importantMatches.sort { $0.number > $1.number }
         //return
         return importantMatches
     }
@@ -462,7 +462,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     /** Returns second pick list */
     func getOverallSecondPickList() -> [Team] {
-        return self.teams.sorted { $0.calculatedData?.allRotorsAbility > $1.calculatedData?.allRotorsAbility }
+        return self.teams.sorted { $0.calculatedData?.secondPickAbility > $1.calculatedData?.secondPickAbility }
     }
     
     /*func getConditionalSecondPickList(_ teamNum: Int) -> [Team] {
@@ -767,9 +767,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             var value : Any?
             if path.contains("calculatedData") {
                 value = (TIMD.calculatedData!.dictionaryRepresentation() as NSDictionary).object(forKey: path.replacingOccurrences(of: "calculatedData.", with: ""))
-            } else if path.contains("gearsPlacedByLiftAuto") {
+            } /*else if path.contains("gearsPlacedByLiftAuto") {
                 value = TIMD.gearsPlacedByLiftAuto?[path.components(separatedBy: ".")[1]]
-            } else {
+            } */else {
                 value = (TIMD.dictionaryRepresentation() as NSDictionary).object(forKey: path)
             }
             if value != nil {
@@ -815,7 +815,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     */
     func matchesUntilTeamNextMatch(_ teamNumber : Int) -> String? {
         //sort matches by match num
-        let sortedMatches = self.matches.sorted { Int($0.number) < Int($1.number) }
+        let sortedMatches = self.matches.sorted { $0.number < $1.number }
         //if currentmatch is a real match
         if self.currentMatchManager.currentMatch < sortedMatches.count {
             //get the index of the current match. In theory, this should just be currentMatch - 1, right???
