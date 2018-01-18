@@ -16,14 +16,15 @@ public final class CalculatedTeamData: NSObject {
     static let avgNumHumanPortalIntakeTele = "avgNumHumanPortalIntakeTele"
     static let switchFailPercentageAuto = "switchFailPercentageAuto"
     static let avgNumElevatedPyramidIntakeAuto = "avgNumElevatedPyramidIntakeAuto"
-    static let avgCubesPlacedInSwitchTele = "avgCubesPlacedInSwitchTele"
+    static let avgAllianceSwitchCubesTele = "avgAllianceSwitchCubesTele"
+    static let avgOpponentSwitchCubesTele = "avgOpponentSwitchCubesTele"
     static let avgCubesPlacedInScaleTele = "avgCubesPlacedInScaleTele"
     static let avgAgility = "avgAgility"
     static let secondPickAbility = "secondPickAbility"
-    static let avgNumGoodDecicions = "avgNumGoodDecicions"
-    static let avgNumBluePlatformIntakeAuto = "avgNumBluePlatformIntakeAuto"
+    static let avgNumGoodDecisions = "avgNumGoodDecisions"
+    static let avgNumAlliancePlatformIntakeAuto = "avgNumAlliancePlatformIntakeAuto"
     static let avgNumReturnIntakeTele = "avgNumReturnIntakeTele"
-    static let avgNumRedPlatformIntakeTele = "avgNumRedPlatformIntakeTele"
+    static let avgNumOpponentPlatformIntakeTele = "avgNumOpponentPlatformIntakeTele"
     static let avgNumBadDecisions = "avgNumBadDecisions"
     static let avgClimbTime = "avgClimbTime"
     static let predictedClimb = "predictedClimb"
@@ -39,13 +40,15 @@ public final class CalculatedTeamData: NSObject {
     static let autoRunPercentage = "autoRunPercentage"
     static let avgNumCubesFumbledTele = "avgNumCubesFumbledTele"
     static let scaleFailPercentageAuto = "scaleFailPercentageAuto"
-    static let avgCubesSpilled = "avgCubesSpilled"
-    static let avgCubesPlacedInSwitchAuto = "avgCubesPlacedInSwitchAuto"
+    static let avgNumCubesSpilledAuto = "avgNumCubesSpilledAuto"
+    static let avgNumCubesSpilledTele = "avgNumCubesSpilledTele"
+    static let avgAllianceSwitchCubesAuto = "avgAllianceSwitchCubesAuto"
+    static let avgOpponentSwitchCubesAuto = "avgOpponentSwitchCubesAuto"
     static let switchFailPercentageTele = "switchFailPercentageTele"
-    static let avgNumBluePlatformIntakeTele = "avgNumBluePlatformIntakeTele"
+    static let avgNumAlliancePlatformIntakeTele = "avgNumAlliancePlatformIntakeTele"
     static let avgNumGroundIntakeTele = "avgNumGroundIntakeTele"
     static let climbPercentage = "climbPercentage"
-    static let avgNumRedPlatformIntakeAuto = "avgNumRedPlatformIntakeAuto"
+    static let avgNumOpponentPlatformIntakeAuto = "avgNumOpponentPlatformIntakeAuto"
     static let canScoreBothSwitchSidesAuto = "canScoreBothSwitchSidesAuto"
     static let avgNumGroundPortalIntakeTele = "avgNumGroundPortalIntakeTele"
     static let avgNumElevatedPyramidIntakeTele = "avgNumElevatedPyramidIntakeTele"
@@ -62,53 +65,56 @@ public final class CalculatedTeamData: NSObject {
   }
 
   // MARK: Properties
-  public var avgNumCubesFumbledAuto: Float?
-  public var avgNumHumanPortalIntakeTele: Float?
-  public var switchFailPercentageAuto: Float?
-  public var avgNumElevatedPyramidIntakeAuto: Float?
-  public var avgCubesPlacedInSwitchTele: Float?
-  public var avgCubesPlacedInScaleTele: Float?
-  public var avgAgility: Float?
-  public var secondPickAbility: Float?
-  public var avgNumGoodDecicions: Float?
-  public var avgNumBluePlatformIntakeAuto: Float?
-  public var avgNumReturnIntakeTele: Float?
-  public var avgNumRedPlatformIntakeTele: Float?
-  public var avgNumBadDecisions: Float?
-  public var avgClimbTime: Float?
-  public var predictedClimb: Float?
-  public var avgDrivingAbility: Float?
-  public var avgNumExchangeInputTele: Float?
-  public var avgDefense: Float?
-  public var avgCubesPlacedInScaleAuto: Float?
+  public var avgNumCubesFumbledAuto: Float = -1.0
+  public var avgNumHumanPortalIntakeTele: Float = -1.0
+  public var switchFailPercentageAuto: Float = -1.0
+  public var avgNumElevatedPyramidIntakeAuto: Float = -1.0
+  public var avgOpponentSwitchCubesAuto: Float = -1.0
+  public var avgOpponentSwitchCubesTele: Float = -1.0
+  public var avgAllianceSwitchCubesAuto: Float = -1.0
+  public var avgAllianceSwitchCubesTele: Float = -1.0
+  public var avgAgility: Float = -1.0
+  public var secondPickAbility: Float = -1.0
+  public var avgNumGoodDecisions: Float = -1.0
+  public var avgNumAlliancePlatformIntakeAuto: Float = -1.0
+  public var avgNumReturnIntakeTele: Float = -1.0
+  public var avgNumOpponentPlatformIntakeTele: Float = -1.0
+  public var avgNumBadDecisions: Float = -1.0
+  public var avgClimbTime: Float = -1.0
+  public var predictedClimb: Float = -1.0
+  public var avgDrivingAbility: Float = -1.0
+  public var avgNumExchangeInputTele: Float = -1.0
+  public var avgDefense: Float = -1.0
+  public var avgCubesPlacedInScaleAuto: Float = -1.0
   public var disabledPercentage: Float = -1.0
-  public var predictedNumScaleCubesAuto: Float?
-  public var scaleFailPercentageTele: Float?
+  public var predictedNumScaleCubesAuto: Float = -1.0
+  public var scaleFailPercentageTele: Float = -1.0
   public var incapacitatedPercentage: Float = -1.0
-  public var predictedNumAllianceSwitchCubesAuto: Float?
-  public var autoRunPercentage: Float?
-  public var avgNumCubesFumbledTele: Float?
-  public var scaleFailPercentageAuto: Float?
-  public var avgCubesSpilled: Float?
-  public var avgCubesPlacedInSwitchAuto: Float?
-  public var switchFailPercentageTele: Float?
-  public var avgNumBluePlatformIntakeTele: Float?
-  public var avgNumGroundIntakeTele: Float?
-  public var climbPercentage: Float?
-  public var avgNumRedPlatformIntakeAuto: Float?
+  public var predictedNumAllianceSwitchCubesAuto: Float = -1.0
+  public var autoRunPercentage: Float = -1.0
+  public var avgNumCubesFumbledTele: Float = -1.0
+  public var scaleFailPercentageAuto: Float = -1.0
+  public var avgNumCubesSpilledAuto: Float = -1.0
+  public var avgNumCubesSpilledTele: Float = -1.0
+  public var switchFailPercentageTele: Float = -1.0
+  public var avgNumAlliancePlatformIntakeTele: Float = -1.0
+  public var avgNumGroundIntakeTele: Float = -1.0
+  public var climbPercentage: Float = -1.0
+  public var avgNumOpponentPlatformIntakeAuto: Float = -1.0
   public var canScoreBothSwitchSidesAuto: Bool? = false
-  public var avgNumGroundPortalIntakeTele: Float?
-  public var avgNumElevatedPyramidIntakeTele: Float?
-  public var avgNumGroundPyramidIntakeTele: Float?
+  public var avgNumGroundPortalIntakeTele: Float = -1.0
+  public var avgNumElevatedPyramidIntakeTele: Float = -1.0
+  public var avgNumGroundPyramidIntakeTele: Float = -1.0
   public var numMatchesPlayed: Int?
   public var avgNumGroundPyramidIntakeAuto: Float = -1.0
-  public var avgSpeed: Float?
+  public var avgSpeed: Float = -1.0
   public var firstPickAbility: Float = -1.0
     public var actualSeed: Int = -1
     public var predictedSeed: Int?
     public var predictedNumRPs: Float = 1.0
     public var actualNumRPs: Float = -1.0
     public var dysfunctionalPercentage: Float = -1.0
+    public var avgCubesPlacedInScaleTele: Float = -1.0
     
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -123,53 +129,60 @@ public final class CalculatedTeamData: NSObject {
   ///
   /// - parameter json: JSON object from SwiftyJSON.
   public required init(json: JSON) {
-    avgNumCubesFumbledAuto = json[SerializationKeys.avgNumCubesFumbledAuto].float
-    avgNumHumanPortalIntakeTele = json[SerializationKeys.avgNumHumanPortalIntakeTele].float
-    switchFailPercentageAuto = json[SerializationKeys.switchFailPercentageAuto].float
-    avgNumElevatedPyramidIntakeAuto = json[SerializationKeys.avgNumElevatedPyramidIntakeAuto].float
-    avgCubesPlacedInSwitchTele = json[SerializationKeys.avgCubesPlacedInSwitchTele].float
-    avgCubesPlacedInScaleTele = json[SerializationKeys.avgCubesPlacedInScaleTele].float
-    avgAgility = json[SerializationKeys.avgAgility].float
-    secondPickAbility = json[SerializationKeys.secondPickAbility].float
-    avgNumGoodDecicions = json[SerializationKeys.avgNumGoodDecicions].float
-    avgNumBluePlatformIntakeAuto = json[SerializationKeys.avgNumBluePlatformIntakeAuto].float
-    avgNumReturnIntakeTele = json[SerializationKeys.avgNumReturnIntakeTele].float
-    avgNumRedPlatformIntakeTele = json[SerializationKeys.avgNumRedPlatformIntakeTele].float
-    avgNumBadDecisions = json[SerializationKeys.avgNumBadDecisions].float
-    avgClimbTime = json[SerializationKeys.avgClimbTime].float
-    predictedClimb = json[SerializationKeys.predictedClimb].float
-    avgDrivingAbility = json[SerializationKeys.avgDrivingAbility].float
-    avgNumExchangeInputTele = json[SerializationKeys.avgNumExchangeInputTele].float
-    avgDefense = json[SerializationKeys.avgDefense].float
-    avgCubesPlacedInScaleAuto = json[SerializationKeys.avgCubesPlacedInScaleAuto].float
+    avgNumCubesFumbledAuto = json[SerializationKeys.avgNumCubesFumbledAuto].floatValue
+    avgNumHumanPortalIntakeTele = json[SerializationKeys.avgNumHumanPortalIntakeTele].floatValue
+    switchFailPercentageAuto = json[SerializationKeys.switchFailPercentageAuto].floatValue
+    avgNumElevatedPyramidIntakeAuto = json[SerializationKeys.avgNumElevatedPyramidIntakeAuto].floatValue
+    avgAllianceSwitchCubesAuto = json[SerializationKeys.avgAllianceSwitchCubesAuto].floatValue
+    avgAllianceSwitchCubesTele = json[SerializationKeys.avgAllianceSwitchCubesTele].floatValue
+    avgOpponentSwitchCubesAuto = json[SerializationKeys.avgOpponentSwitchCubesAuto].floatValue
+    avgOpponentSwitchCubesTele = json[SerializationKeys.avgOpponentSwitchCubesTele].floatValue
+    avgAgility = json[SerializationKeys.avgAgility].floatValue
+    secondPickAbility = json[SerializationKeys.secondPickAbility].floatValue
+    avgNumGoodDecisions = json[SerializationKeys.avgNumGoodDecisions].floatValue
+    avgNumAlliancePlatformIntakeAuto = json[SerializationKeys.avgNumAlliancePlatformIntakeAuto].floatValue
+    avgNumReturnIntakeTele = json[SerializationKeys.avgNumReturnIntakeTele].floatValue
+    avgNumOpponentPlatformIntakeTele = json[SerializationKeys.avgNumOpponentPlatformIntakeTele].floatValue
+    avgNumBadDecisions = json[SerializationKeys.avgNumBadDecisions].floatValue
+    avgClimbTime = json[SerializationKeys.avgClimbTime].floatValue
+    predictedClimb = json[SerializationKeys.predictedClimb].floatValue
+    avgDrivingAbility = json[SerializationKeys.avgDrivingAbility].floatValue
+    avgNumExchangeInputTele = json[SerializationKeys.avgNumExchangeInputTele].floatValue
+    avgDefense = json[SerializationKeys.avgDefense].floatValue
+    avgCubesPlacedInScaleAuto = json[SerializationKeys.avgCubesPlacedInScaleAuto].floatValue
     disabledPercentage = json[SerializationKeys.disabledPercentage].floatValue
-    predictedNumScaleCubesAuto = json[SerializationKeys.predictedNumScaleCubesAuto].float
-    scaleFailPercentageTele = json[SerializationKeys.scaleFailPercentageTele].float
+    predictedNumScaleCubesAuto = json[SerializationKeys.predictedNumScaleCubesAuto].floatValue
+    scaleFailPercentageTele = json[SerializationKeys.scaleFailPercentageTele].floatValue
     incapacitatedPercentage = json[SerializationKeys.incapacitatedPercentage].floatValue
-    predictedNumAllianceSwitchCubesAuto = json[SerializationKeys.predictedNumAllianceSwitchCubesAuto].float
-    autoRunPercentage = json[SerializationKeys.autoRunPercentage].float
-    avgNumCubesFumbledTele = json[SerializationKeys.avgNumCubesFumbledTele].float
-    scaleFailPercentageAuto = json[SerializationKeys.scaleFailPercentageAuto].float
-    avgCubesSpilled = json[SerializationKeys.avgCubesSpilled].float
-    avgCubesPlacedInSwitchAuto = json[SerializationKeys.avgCubesPlacedInSwitchAuto].float
-    switchFailPercentageTele = json[SerializationKeys.switchFailPercentageTele].float
-    avgNumBluePlatformIntakeTele = json[SerializationKeys.avgNumBluePlatformIntakeTele].float
-    avgNumGroundIntakeTele = json[SerializationKeys.avgNumGroundIntakeTele].float
-    climbPercentage = json[SerializationKeys.climbPercentage].float
-    avgNumRedPlatformIntakeAuto = json[SerializationKeys.avgNumRedPlatformIntakeAuto].float
+    predictedNumAllianceSwitchCubesAuto = json[SerializationKeys.predictedNumAllianceSwitchCubesAuto].floatValue
+    autoRunPercentage = json[SerializationKeys.autoRunPercentage].floatValue
+    avgNumCubesFumbledTele = json[SerializationKeys.avgNumCubesFumbledTele].floatValue
+    scaleFailPercentageAuto = json[SerializationKeys.scaleFailPercentageAuto].floatValue
+    avgNumCubesSpilledAuto = json[SerializationKeys.avgNumCubesSpilledAuto].floatValue
+    avgNumCubesSpilledTele = json[SerializationKeys.avgNumCubesSpilledTele].floatValue
+    avgAllianceSwitchCubesTele = json[SerializationKeys.avgAllianceSwitchCubesTele].floatValue
+    avgAllianceSwitchCubesAuto = json[SerializationKeys.avgAllianceSwitchCubesAuto].floatValue
+    avgOpponentSwitchCubesTele = json[SerializationKeys.avgOpponentSwitchCubesTele].floatValue
+    avgOpponentSwitchCubesAuto = json[SerializationKeys.avgOpponentSwitchCubesAuto].floatValue
+    switchFailPercentageTele = json[SerializationKeys.switchFailPercentageTele].floatValue
+    avgNumAlliancePlatformIntakeTele = json[SerializationKeys.avgNumAlliancePlatformIntakeTele].floatValue
+    avgNumGroundIntakeTele = json[SerializationKeys.avgNumGroundIntakeTele].floatValue
+    climbPercentage = json[SerializationKeys.climbPercentage].floatValue
+    avgNumOpponentPlatformIntakeAuto = json[SerializationKeys.avgNumOpponentPlatformIntakeAuto].floatValue
     canScoreBothSwitchSidesAuto = json[SerializationKeys.canScoreBothSwitchSidesAuto].boolValue
-    avgNumGroundPortalIntakeTele = json[SerializationKeys.avgNumGroundPortalIntakeTele].float
-    avgNumElevatedPyramidIntakeTele = json[SerializationKeys.avgNumElevatedPyramidIntakeTele].float
-    avgNumGroundPyramidIntakeTele = json[SerializationKeys.avgNumGroundPyramidIntakeTele].float
+    avgNumGroundPortalIntakeTele = json[SerializationKeys.avgNumGroundPortalIntakeTele].floatValue
+    avgNumElevatedPyramidIntakeTele = json[SerializationKeys.avgNumElevatedPyramidIntakeTele].floatValue
+    avgNumGroundPyramidIntakeTele = json[SerializationKeys.avgNumGroundPyramidIntakeTele].floatValue
     numMatchesPlayed = json[SerializationKeys.numMatchesPlayed].int
-    avgNumGroundPyramidIntakeAuto = json[SerializationKeys.avgNumGroundPyramidIntakeAuto].float!
-    avgSpeed = json[SerializationKeys.avgSpeed].float
+    avgNumGroundPyramidIntakeAuto = json[SerializationKeys.avgNumGroundPyramidIntakeAuto].floatValue
+    avgSpeed = json[SerializationKeys.avgSpeed].floatValue
     firstPickAbility = json[SerializationKeys.firstPickAbility].floatValue
     actualSeed = json[SerializationKeys.actualSeed].intValue
     predictedSeed = json[SerializationKeys.predictedSeed].int
     predictedNumRPs = json[SerializationKeys.predictedNumRPs].floatValue
     actualNumRPs = json[SerializationKeys.actualNumRPs].floatValue
     dysfunctionalPercentage = json[SerializationKeys.dysfunctionalPercentage].floatValue
+    avgCubesPlacedInScaleTele = json[SerializationKeys.avgCubesPlacedInScaleTele].floatValue
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -177,106 +190,112 @@ public final class CalculatedTeamData: NSObject {
   /// - returns: A Key value pair containing all valid values in the object.
   public func dictionaryRepresentation() -> [String: Any] {
     var dictionary: [String: Any] = [:]
-    if let value = avgNumCubesFumbledAuto { dictionary[SerializationKeys.avgNumCubesFumbledAuto] = value }
-    if let value = avgNumHumanPortalIntakeTele { dictionary[SerializationKeys.avgNumHumanPortalIntakeTele] = value }
-    if let value = switchFailPercentageAuto { dictionary[SerializationKeys.switchFailPercentageAuto] = value }
-    if let value = avgNumElevatedPyramidIntakeAuto { dictionary[SerializationKeys.avgNumElevatedPyramidIntakeAuto] = value }
-    if let value = avgCubesPlacedInSwitchTele { dictionary[SerializationKeys.avgCubesPlacedInSwitchTele] = value }
-    if let value = avgCubesPlacedInScaleTele { dictionary[SerializationKeys.avgCubesPlacedInScaleTele] = value }
-    if let value = avgAgility { dictionary[SerializationKeys.avgAgility] = value }
-    if let value = secondPickAbility { dictionary[SerializationKeys.secondPickAbility] = value }
-    if let value = avgNumGoodDecicions { dictionary[SerializationKeys.avgNumGoodDecicions] = value }
-    if let value = avgNumBluePlatformIntakeAuto { dictionary[SerializationKeys.avgNumBluePlatformIntakeAuto] = value }
-    if let value = avgNumReturnIntakeTele { dictionary[SerializationKeys.avgNumReturnIntakeTele] = value }
-    if let value = avgNumRedPlatformIntakeTele { dictionary[SerializationKeys.avgNumRedPlatformIntakeTele] = value }
-    if let value = avgNumBadDecisions { dictionary[SerializationKeys.avgNumBadDecisions] = value }
-    if let value = avgClimbTime { dictionary[SerializationKeys.avgClimbTime] = value }
-    if let value = predictedClimb { dictionary[SerializationKeys.predictedClimb] = value }
-    if let value = avgDrivingAbility { dictionary[SerializationKeys.avgDrivingAbility] = value }
-    if let value = avgNumExchangeInputTele { dictionary[SerializationKeys.avgNumExchangeInputTele] = value }
-    if let value = avgDefense { dictionary[SerializationKeys.avgDefense] = value }
-    if let value = avgCubesPlacedInScaleAuto { dictionary[SerializationKeys.avgCubesPlacedInScaleAuto] = value }
+    dictionary[SerializationKeys.avgNumCubesFumbledAuto] = avgNumCubesFumbledAuto
+    dictionary[SerializationKeys.avgNumHumanPortalIntakeTele] = avgNumHumanPortalIntakeTele
+    dictionary[SerializationKeys.switchFailPercentageAuto] = switchFailPercentageAuto
+    dictionary[SerializationKeys.avgNumElevatedPyramidIntakeAuto] = avgNumElevatedPyramidIntakeAuto
+    dictionary[SerializationKeys.avgAllianceSwitchCubesTele] = avgAllianceSwitchCubesTele
+    dictionary[SerializationKeys.avgAllianceSwitchCubesAuto] = avgAllianceSwitchCubesAuto
+    dictionary[SerializationKeys.avgOpponentSwitchCubesTele] = avgOpponentSwitchCubesTele
+    dictionary[SerializationKeys.avgOpponentSwitchCubesTele] = avgOpponentSwitchCubesAuto
+    dictionary[SerializationKeys.avgAgility] = avgAgility
+    dictionary[SerializationKeys.secondPickAbility] = secondPickAbility
+    dictionary[SerializationKeys.avgNumGoodDecisions] = avgNumGoodDecisions
+    dictionary[SerializationKeys.avgNumAlliancePlatformIntakeAuto] = avgNumAlliancePlatformIntakeAuto
+    dictionary[SerializationKeys.avgNumReturnIntakeTele] = avgNumReturnIntakeTele
+    dictionary[SerializationKeys.avgNumOpponentPlatformIntakeTele] = avgNumOpponentPlatformIntakeTele
+    dictionary[SerializationKeys.avgNumBadDecisions] = avgNumBadDecisions
+    dictionary[SerializationKeys.avgClimbTime] = avgClimbTime
+    dictionary[SerializationKeys.predictedClimb] = predictedClimb
+    dictionary[SerializationKeys.avgDrivingAbility] = avgDrivingAbility
+    dictionary[SerializationKeys.avgNumExchangeInputTele] = avgNumExchangeInputTele
+    dictionary[SerializationKeys.avgDefense] = avgDefense
+    dictionary[SerializationKeys.avgCubesPlacedInScaleAuto] = avgCubesPlacedInScaleAuto
     dictionary[SerializationKeys.disabledPercentage] = disabledPercentage
-    if let value = predictedNumScaleCubesAuto { dictionary[SerializationKeys.predictedNumScaleCubesAuto] = value }
-    if let value = scaleFailPercentageTele { dictionary[SerializationKeys.scaleFailPercentageTele] = value }
+    dictionary[SerializationKeys.predictedNumScaleCubesAuto] = predictedNumScaleCubesAuto
+    dictionary[SerializationKeys.scaleFailPercentageTele] = scaleFailPercentageTele
     dictionary[SerializationKeys.incapacitatedPercentage] = incapacitatedPercentage
-    if let value = predictedNumAllianceSwitchCubesAuto { dictionary[SerializationKeys.predictedNumAllianceSwitchCubesAuto] = value }
-    if let value = autoRunPercentage { dictionary[SerializationKeys.autoRunPercentage] = value }
-    if let value = avgNumCubesFumbledTele { dictionary[SerializationKeys.avgNumCubesFumbledTele] = value }
-    if let value = scaleFailPercentageAuto { dictionary[SerializationKeys.scaleFailPercentageAuto] = value }
-    if let value = avgCubesSpilled { dictionary[SerializationKeys.avgCubesSpilled] = value }
-    if let value = avgCubesPlacedInSwitchAuto { dictionary[SerializationKeys.avgCubesPlacedInSwitchAuto] = value }
-    if let value = switchFailPercentageTele { dictionary[SerializationKeys.switchFailPercentageTele] = value }
-    if let value = avgNumBluePlatformIntakeTele { dictionary[SerializationKeys.avgNumBluePlatformIntakeTele] = value }
-    if let value = avgNumGroundIntakeTele { dictionary[SerializationKeys.avgNumGroundIntakeTele] = value }
-    if let value = climbPercentage { dictionary[SerializationKeys.climbPercentage] = value }
-    if let value = avgNumRedPlatformIntakeAuto { dictionary[SerializationKeys.avgNumRedPlatformIntakeAuto] = value }
+    dictionary[SerializationKeys.predictedNumAllianceSwitchCubesAuto] = predictedNumAllianceSwitchCubesAuto
+    dictionary[SerializationKeys.autoRunPercentage] = autoRunPercentage
+    dictionary[SerializationKeys.avgNumCubesFumbledTele] = avgNumCubesFumbledTele
+    dictionary[SerializationKeys.scaleFailPercentageAuto] = scaleFailPercentageAuto
+    dictionary[SerializationKeys.avgNumCubesSpilledAuto] = avgNumCubesSpilledAuto
+    dictionary[SerializationKeys.avgNumCubesSpilledTele] = avgNumCubesSpilledTele
+    dictionary[SerializationKeys.switchFailPercentageTele] = switchFailPercentageTele
+    dictionary[SerializationKeys.avgNumAlliancePlatformIntakeTele] = avgNumAlliancePlatformIntakeTele
+    dictionary[SerializationKeys.avgNumGroundIntakeTele] = avgNumGroundIntakeTele
+    dictionary[SerializationKeys.climbPercentage] = climbPercentage
+    dictionary[SerializationKeys.avgNumOpponentPlatformIntakeAuto] = avgNumOpponentPlatformIntakeAuto
     dictionary[SerializationKeys.canScoreBothSwitchSidesAuto] = canScoreBothSwitchSidesAuto
-    if let value = avgNumGroundPortalIntakeTele { dictionary[SerializationKeys.avgNumGroundPortalIntakeTele] = value }
-    if let value = avgNumElevatedPyramidIntakeTele { dictionary[SerializationKeys.avgNumElevatedPyramidIntakeTele] = value }
-    if let value = avgNumGroundPyramidIntakeTele { dictionary[SerializationKeys.avgNumGroundPyramidIntakeTele] = value }
+    dictionary[SerializationKeys.avgNumGroundPortalIntakeTele] = avgNumGroundPortalIntakeTele
+    dictionary[SerializationKeys.avgNumElevatedPyramidIntakeAuto] = avgNumElevatedPyramidIntakeAuto
+    dictionary[SerializationKeys.avgNumGroundPyramidIntakeTele] = avgNumGroundPyramidIntakeTele
     if let value = numMatchesPlayed { dictionary[SerializationKeys.numMatchesPlayed] = value }
     dictionary[SerializationKeys.avgNumGroundPyramidIntakeAuto] = avgNumGroundPyramidIntakeAuto
 
-    if let value = avgSpeed { dictionary[SerializationKeys.avgSpeed] = value }
+    dictionary[SerializationKeys.avgSpeed] = avgSpeed
     dictionary[SerializationKeys.firstPickAbility] = firstPickAbility
     dictionary[SerializationKeys.actualSeed] = actualSeed
     if let value = predictedSeed { dictionary[SerializationKeys.predictedSeed] = value }
     dictionary[SerializationKeys.predictedNumRPs] = predictedNumRPs
     dictionary[SerializationKeys.actualNumRPs] = actualNumRPs
     dictionary[SerializationKeys.dysfunctionalPercentage] = dysfunctionalPercentage
+    dictionary[SerializationKeys.avgCubesPlacedInScaleTele] = avgCubesPlacedInScaleTele
     return dictionary
   }
 
   // MARK: NSCoding Protocol
   required public init(coder aDecoder: NSCoder) {
-    self.avgNumCubesFumbledAuto = aDecoder.decodeObject(forKey: SerializationKeys.avgNumCubesFumbledAuto) as? Float
-    self.avgNumHumanPortalIntakeTele = aDecoder.decodeObject(forKey: SerializationKeys.avgNumHumanPortalIntakeTele) as? Float
-    self.switchFailPercentageAuto = aDecoder.decodeObject(forKey: SerializationKeys.switchFailPercentageAuto) as? Float
-    self.avgNumElevatedPyramidIntakeAuto = aDecoder.decodeObject(forKey: SerializationKeys.avgNumElevatedPyramidIntakeAuto) as? Float
-    self.avgCubesPlacedInSwitchTele = aDecoder.decodeObject(forKey: SerializationKeys.avgCubesPlacedInSwitchTele) as? Float
-    self.avgCubesPlacedInScaleTele = aDecoder.decodeObject(forKey: SerializationKeys.avgCubesPlacedInScaleTele) as? Float
-    self.avgAgility = aDecoder.decodeObject(forKey: SerializationKeys.avgAgility) as? Float
-    self.secondPickAbility = aDecoder.decodeObject(forKey: SerializationKeys.secondPickAbility) as? Float
-    self.avgNumGoodDecicions = aDecoder.decodeObject(forKey: SerializationKeys.avgNumGoodDecicions) as? Float
-    self.avgNumBluePlatformIntakeAuto = aDecoder.decodeObject(forKey: SerializationKeys.avgNumBluePlatformIntakeAuto) as? Float
-    self.avgNumReturnIntakeTele = aDecoder.decodeObject(forKey: SerializationKeys.avgNumReturnIntakeTele) as? Float
-    self.avgNumRedPlatformIntakeTele = aDecoder.decodeObject(forKey: SerializationKeys.avgNumRedPlatformIntakeTele) as? Float
-    self.avgNumBadDecisions = aDecoder.decodeObject(forKey: SerializationKeys.avgNumBadDecisions) as? Float
-    self.avgClimbTime = aDecoder.decodeObject(forKey: SerializationKeys.avgClimbTime) as? Float
-    self.predictedClimb = aDecoder.decodeObject(forKey: SerializationKeys.predictedClimb) as? Float
-    self.avgDrivingAbility = aDecoder.decodeObject(forKey: SerializationKeys.avgDrivingAbility) as? Float
-    self.avgNumExchangeInputTele = aDecoder.decodeObject(forKey: SerializationKeys.avgNumExchangeInputTele) as? Float
-    self.avgDefense = aDecoder.decodeObject(forKey: SerializationKeys.avgDefense) as? Float
-    self.avgCubesPlacedInScaleAuto = aDecoder.decodeObject(forKey: SerializationKeys.avgCubesPlacedInScaleAuto) as? Float
+    self.avgNumCubesFumbledAuto = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumCubesFumbledAuto) as? Float)!
+    self.avgNumHumanPortalIntakeTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumHumanPortalIntakeTele) as? Float)!
+    self.switchFailPercentageAuto = (aDecoder.decodeObject(forKey: SerializationKeys.switchFailPercentageAuto) as? Float)!
+    self.avgNumElevatedPyramidIntakeAuto = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumElevatedPyramidIntakeAuto) as? Float)!
+    self.avgAllianceSwitchCubesTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgAllianceSwitchCubesTele) as? Float)!
+    self.avgAllianceSwitchCubesAuto = (aDecoder.decodeObject(forKey: SerializationKeys.avgAllianceSwitchCubesAuto) as? Float)!
+    self.avgOpponentSwitchCubesTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgOpponentSwitchCubesTele) as? Float)!
+    self.avgOpponentSwitchCubesAuto = (aDecoder.decodeObject(forKey: SerializationKeys.avgOpponentSwitchCubesAuto) as? Float)!
+    self.avgAgility = (aDecoder.decodeObject(forKey: SerializationKeys.avgAgility) as? Float)!
+    self.secondPickAbility = (aDecoder.decodeObject(forKey: SerializationKeys.secondPickAbility) as? Float)!
+    self.avgNumGoodDecisions = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumGoodDecisions) as? Float)!
+    self.avgNumAlliancePlatformIntakeAuto = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumAlliancePlatformIntakeAuto) as? Float)!
+    self.avgNumReturnIntakeTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumReturnIntakeTele) as? Float)!
+    self.avgNumOpponentPlatformIntakeTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumOpponentPlatformIntakeTele) as? Float)!
+    self.avgNumBadDecisions = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumBadDecisions) as? Float)!
+    self.avgClimbTime = (aDecoder.decodeObject(forKey: SerializationKeys.avgClimbTime) as? Float)!
+    self.predictedClimb = (aDecoder.decodeObject(forKey: SerializationKeys.predictedClimb) as? Float)!
+    self.avgDrivingAbility = (aDecoder.decodeObject(forKey: SerializationKeys.avgDrivingAbility) as? Float)!
+    self.avgNumExchangeInputTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumExchangeInputTele) as? Float)!
+    self.avgDefense = (aDecoder.decodeObject(forKey: SerializationKeys.avgDefense) as? Float)!
+    self.avgCubesPlacedInScaleAuto = (aDecoder.decodeObject(forKey: SerializationKeys.avgCubesPlacedInScaleAuto) as? Float)!
     self.disabledPercentage = (aDecoder.decodeObject(forKey: SerializationKeys.disabledPercentage) as? Float)!
-    self.predictedNumScaleCubesAuto = aDecoder.decodeObject(forKey: SerializationKeys.predictedNumScaleCubesAuto) as? Float
-    self.scaleFailPercentageTele = aDecoder.decodeObject(forKey: SerializationKeys.scaleFailPercentageTele) as? Float
+    self.predictedNumScaleCubesAuto = (aDecoder.decodeObject(forKey: SerializationKeys.predictedNumScaleCubesAuto) as? Float)!
+    self.scaleFailPercentageTele = (aDecoder.decodeObject(forKey: SerializationKeys.scaleFailPercentageTele) as? Float)!
     self.incapacitatedPercentage = (aDecoder.decodeObject(forKey: SerializationKeys.incapacitatedPercentage) as? Float)!
-    self.predictedNumAllianceSwitchCubesAuto = aDecoder.decodeObject(forKey: SerializationKeys.predictedNumAllianceSwitchCubesAuto) as? Float
-    self.autoRunPercentage = aDecoder.decodeObject(forKey: SerializationKeys.autoRunPercentage) as? Float
-    self.avgNumCubesFumbledTele = aDecoder.decodeObject(forKey: SerializationKeys.avgNumCubesFumbledTele) as? Float
-    self.scaleFailPercentageAuto = aDecoder.decodeObject(forKey: SerializationKeys.scaleFailPercentageAuto) as? Float
-    self.avgCubesSpilled = aDecoder.decodeObject(forKey: SerializationKeys.avgCubesSpilled) as? Float
-    self.avgCubesPlacedInSwitchAuto = aDecoder.decodeObject(forKey: SerializationKeys.avgCubesPlacedInSwitchAuto) as? Float
-    self.switchFailPercentageTele = aDecoder.decodeObject(forKey: SerializationKeys.switchFailPercentageTele) as? Float
-    self.avgNumBluePlatformIntakeTele = aDecoder.decodeObject(forKey: SerializationKeys.avgNumBluePlatformIntakeTele) as? Float
-    self.avgNumGroundIntakeTele = aDecoder.decodeObject(forKey: SerializationKeys.avgNumGroundIntakeTele) as? Float
-    self.climbPercentage = aDecoder.decodeObject(forKey: SerializationKeys.climbPercentage) as? Float
-    self.avgNumRedPlatformIntakeAuto = aDecoder.decodeObject(forKey: SerializationKeys.avgNumRedPlatformIntakeAuto) as? Float
+    self.predictedNumAllianceSwitchCubesAuto = (aDecoder.decodeObject(forKey: SerializationKeys.predictedNumAllianceSwitchCubesAuto) as? Float)!
+    self.autoRunPercentage = (aDecoder.decodeObject(forKey: SerializationKeys.autoRunPercentage) as? Float)!
+    self.avgNumCubesFumbledTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumCubesFumbledTele) as? Float)!
+    self.scaleFailPercentageAuto = (aDecoder.decodeObject(forKey: SerializationKeys.scaleFailPercentageAuto) as? Float)!
+    self.avgNumCubesSpilledAuto = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumCubesSpilledAuto) as? Float)!
+    self.avgNumCubesSpilledTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumCubesSpilledTele) as? Float)!
+    self.switchFailPercentageTele = (aDecoder.decodeObject(forKey: SerializationKeys.switchFailPercentageTele) as? Float)!
+    self.avgNumAlliancePlatformIntakeTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumAlliancePlatformIntakeTele) as? Float)!
+    self.avgNumGroundIntakeTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumGroundIntakeTele) as? Float)!
+    self.climbPercentage = (aDecoder.decodeObject(forKey: SerializationKeys.climbPercentage) as? Float)!
+    self.avgNumOpponentPlatformIntakeAuto = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumOpponentPlatformIntakeAuto) as? Float)!
     self.canScoreBothSwitchSidesAuto = aDecoder.decodeBool(forKey: SerializationKeys.canScoreBothSwitchSidesAuto)
-    self.avgNumGroundPortalIntakeTele = aDecoder.decodeObject(forKey: SerializationKeys.avgNumGroundPortalIntakeTele) as? Float
-    self.avgNumElevatedPyramidIntakeTele = aDecoder.decodeObject(forKey: SerializationKeys.avgNumElevatedPyramidIntakeTele) as? Float
-    self.avgNumGroundPyramidIntakeTele = aDecoder.decodeObject(forKey: SerializationKeys.avgNumGroundPyramidIntakeTele) as? Float
+    self.avgNumGroundPortalIntakeTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumGroundPortalIntakeTele) as? Float)!
+    self.avgNumElevatedPyramidIntakeTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumElevatedPyramidIntakeTele) as? Float)!
+    self.avgNumGroundPyramidIntakeTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumGroundPyramidIntakeTele) as? Float)!
     self.numMatchesPlayed = aDecoder.decodeObject(forKey: SerializationKeys.numMatchesPlayed) as? Int
     self.avgNumGroundPyramidIntakeAuto = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumGroundPyramidIntakeAuto) as? Float)!
-    self.avgSpeed = aDecoder.decodeObject(forKey: SerializationKeys.avgSpeed) as? Float
+    self.avgSpeed = (aDecoder.decodeObject(forKey: SerializationKeys.avgSpeed) as? Float)!
     self.firstPickAbility = (aDecoder.decodeObject(forKey: SerializationKeys.firstPickAbility) as? Float)!
     self.actualSeed = (aDecoder.decodeObject(forKey: SerializationKeys.actualSeed) as? Int)!
     self.predictedSeed = aDecoder.decodeObject(forKey: SerializationKeys.predictedSeed) as? Int
     self.predictedNumRPs = (aDecoder.decodeObject(forKey: SerializationKeys.predictedNumRPs) as? Float)!
     self.actualNumRPs = (aDecoder.decodeObject(forKey: SerializationKeys.actualNumRPs) as? Float)!
     self.dysfunctionalPercentage = (aDecoder.decodeObject(forKey: SerializationKeys.dysfunctionalPercentage) as? Float)!
+    self.avgCubesPlacedInScaleTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgCubesPlacedInScaleTele) as? Float)!
   }
 
   public func encode(with aCoder: NSCoder) {
@@ -284,14 +303,16 @@ public final class CalculatedTeamData: NSObject {
     aCoder.encode(avgNumHumanPortalIntakeTele, forKey: SerializationKeys.avgNumHumanPortalIntakeTele)
     aCoder.encode(switchFailPercentageAuto, forKey: SerializationKeys.switchFailPercentageAuto)
     aCoder.encode(avgNumElevatedPyramidIntakeAuto, forKey: SerializationKeys.avgNumElevatedPyramidIntakeAuto)
-    aCoder.encode(avgCubesPlacedInSwitchTele, forKey: SerializationKeys.avgCubesPlacedInSwitchTele)
-    aCoder.encode(avgCubesPlacedInScaleTele, forKey: SerializationKeys.avgCubesPlacedInScaleTele)
+    aCoder.encode(avgAllianceSwitchCubesTele, forKey: SerializationKeys.avgAllianceSwitchCubesTele)
+    aCoder.encode(avgAllianceSwitchCubesAuto, forKey: SerializationKeys.avgAllianceSwitchCubesAuto)
+    aCoder.encode(avgOpponentSwitchCubesTele, forKey: SerializationKeys.avgOpponentSwitchCubesTele)
+    aCoder.encode(avgOpponentSwitchCubesAuto, forKey: SerializationKeys.avgOpponentSwitchCubesAuto)
     aCoder.encode(avgAgility, forKey: SerializationKeys.avgAgility)
     aCoder.encode(secondPickAbility, forKey: SerializationKeys.secondPickAbility)
-    aCoder.encode(avgNumGoodDecicions, forKey: SerializationKeys.avgNumGoodDecicions)
-    aCoder.encode(avgNumBluePlatformIntakeAuto, forKey: SerializationKeys.avgNumBluePlatformIntakeAuto)
+    aCoder.encode(avgNumGoodDecisions, forKey: SerializationKeys.avgNumGoodDecisions)
+    aCoder.encode(avgNumAlliancePlatformIntakeAuto, forKey: SerializationKeys.avgNumAlliancePlatformIntakeAuto)
     aCoder.encode(avgNumReturnIntakeTele, forKey: SerializationKeys.avgNumReturnIntakeTele)
-    aCoder.encode(avgNumRedPlatformIntakeTele, forKey: SerializationKeys.avgNumRedPlatformIntakeTele)
+    aCoder.encode(avgNumOpponentPlatformIntakeTele, forKey: SerializationKeys.avgNumOpponentPlatformIntakeTele)
     aCoder.encode(avgNumBadDecisions, forKey: SerializationKeys.avgNumBadDecisions)
     aCoder.encode(avgClimbTime, forKey: SerializationKeys.avgClimbTime)
     aCoder.encode(predictedClimb, forKey: SerializationKeys.predictedClimb)
@@ -307,13 +328,13 @@ public final class CalculatedTeamData: NSObject {
     aCoder.encode(autoRunPercentage, forKey: SerializationKeys.autoRunPercentage)
     aCoder.encode(avgNumCubesFumbledTele, forKey: SerializationKeys.avgNumCubesFumbledTele)
     aCoder.encode(scaleFailPercentageAuto, forKey: SerializationKeys.scaleFailPercentageAuto)
-    aCoder.encode(avgCubesSpilled, forKey: SerializationKeys.avgCubesSpilled)
-    aCoder.encode(avgCubesPlacedInSwitchAuto, forKey: SerializationKeys.avgCubesPlacedInSwitchAuto)
+    aCoder.encode(avgNumCubesSpilledAuto, forKey: SerializationKeys.avgNumCubesSpilledAuto)
+    aCoder.encode(avgNumCubesSpilledTele, forKey: SerializationKeys.avgNumCubesSpilledTele)
     aCoder.encode(switchFailPercentageTele, forKey: SerializationKeys.switchFailPercentageTele)
-    aCoder.encode(avgNumBluePlatformIntakeTele, forKey: SerializationKeys.avgNumBluePlatformIntakeTele)
+    aCoder.encode(avgNumAlliancePlatformIntakeTele, forKey: SerializationKeys.avgNumAlliancePlatformIntakeTele)
     aCoder.encode(avgNumGroundIntakeTele, forKey: SerializationKeys.avgNumGroundIntakeTele)
     aCoder.encode(climbPercentage, forKey: SerializationKeys.climbPercentage)
-    aCoder.encode(avgNumRedPlatformIntakeAuto, forKey: SerializationKeys.avgNumRedPlatformIntakeAuto)
+    aCoder.encode(avgNumOpponentPlatformIntakeAuto, forKey: SerializationKeys.avgNumOpponentPlatformIntakeAuto)
     aCoder.encode(canScoreBothSwitchSidesAuto, forKey: SerializationKeys.canScoreBothSwitchSidesAuto)
     aCoder.encode(avgNumGroundPortalIntakeTele, forKey: SerializationKeys.avgNumGroundPortalIntakeTele)
     aCoder.encode(avgNumElevatedPyramidIntakeTele, forKey: SerializationKeys.avgNumElevatedPyramidIntakeTele)
@@ -327,6 +348,7 @@ public final class CalculatedTeamData: NSObject {
     aCoder.encode(actualNumRPs, forKey: SerializationKeys.actualNumRPs)
     aCoder.encode(predictedNumRPs, forKey: SerializationKeys.predictedNumRPs)
     aCoder.encode(dysfunctionalPercentage, forKey: SerializationKeys.dysfunctionalPercentage)
+    aCoder.encode(avgCubesPlacedInScaleTele, forKey: SerializationKeys.avgCubesPlacedInScaleTele)
   }
 
 }

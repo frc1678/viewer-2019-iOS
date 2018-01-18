@@ -74,7 +74,7 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
             multiCell!.teamLabel!.text = String(describing: team!.number)
         }
         if team!.calculatedData?.secondPickAbility != nil {
-            multiCell!.scoreLabel!.text = String(Utils.roundValue(Float(team!.calculatedData!.secondPickAbility!), toDecimalPlaces: 2)
+            multiCell!.scoreLabel!.text = String(Utils.roundValue(Float(team!.calculatedData!.secondPickAbility), toDecimalPlaces: 2)
             )
         } else {
             multiCell!.scoreLabel!.text = ""
