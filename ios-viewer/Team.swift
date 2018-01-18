@@ -18,7 +18,7 @@ public final class Team: NSObject {
     static let calculatedData = "calculatedData"
     static let pitAllImageUrls = "pitAllImageUrls"
     static let pitSEALsNotes = "pitSEALsNotes"
-    static let pitDidDemonstrateCheesecakePotential = "pitDidDemonstrateCheesecakePotential"
+    static let pitCanCheesecake = "pitCanCheesecake"
     static let pitSelectedImageName = "pitSelectedImageName"
     static let numMatchesPlayed = "numMatchesPlayed"
     static let pitClimberType = "pitClimberType"
@@ -34,7 +34,7 @@ public final class Team: NSObject {
   public var calculatedData: CalculatedTeamData?
     public var pitAllImageUrls: [String: String]?
   public var pitSEALsNotes: String?
-  public var pitDidDemonstrateCheesecakePotential: Bool? = false
+  public var pitCanCheesecake: Bool? = false
   public var pitSelectedImageName: String?
   public var numMatchesPlayed: Int?
   public var pitClimberType: String?
@@ -61,7 +61,7 @@ public final class Team: NSObject {
     calculatedData = CalculatedTeamData(json: json[SerializationKeys.calculatedData])
     pitAllImageUrls = json[SerializationKeys.pitAllImageUrls].dictionaryObject as! [String: String]?
     pitSEALsNotes = json[SerializationKeys.pitSEALsNotes].string
-    pitDidDemonstrateCheesecakePotential = json[SerializationKeys.pitDidDemonstrateCheesecakePotential].boolValue
+    pitCanCheesecake = json[SerializationKeys.pitCanCheesecake].boolValue
     pitSelectedImageName = json[SerializationKeys.pitSelectedImageName].string
     numMatchesPlayed = json[SerializationKeys.numMatchesPlayed].int
     pitClimberType = json[SerializationKeys.pitClimberType].string
@@ -80,7 +80,7 @@ public final class Team: NSObject {
     if let value = calculatedData { dictionary[SerializationKeys.calculatedData] = value.dictionaryRepresentation() }
     if let value = pitAllImageUrls { dictionary[SerializationKeys.pitAllImageUrls] = value }
     if let value = pitSEALsNotes { dictionary[SerializationKeys.pitSEALsNotes] = value }
-    dictionary[SerializationKeys.pitDidDemonstrateCheesecakePotential] = pitDidDemonstrateCheesecakePotential
+    dictionary[SerializationKeys.pitCanCheesecake] = pitCanCheesecake
     if let value = pitSelectedImageName { dictionary[SerializationKeys.pitSelectedImageName] = value }
     if let value = numMatchesPlayed { dictionary[SerializationKeys.numMatchesPlayed] = value }
     if let value = pitClimberType { dictionary[SerializationKeys.pitClimberType] = value }
@@ -97,7 +97,7 @@ public final class Team: NSObject {
     self.calculatedData = aDecoder.decodeObject(forKey: SerializationKeys.calculatedData) as? CalculatedTeamData
     self.pitAllImageUrls = aDecoder.decodeObject(forKey: SerializationKeys.pitAllImageUrls) as? [String:String]
     self.pitSEALsNotes = aDecoder.decodeObject(forKey: SerializationKeys.pitSEALsNotes) as? String
-    self.pitDidDemonstrateCheesecakePotential = aDecoder.decodeBool(forKey: SerializationKeys.pitDidDemonstrateCheesecakePotential)
+    self.pitCanCheesecake = aDecoder.decodeBool(forKey: SerializationKeys.pitCanCheesecake)
     self.pitSelectedImageName = aDecoder.decodeObject(forKey: SerializationKeys.pitSelectedImageName) as? String
     self.numMatchesPlayed = aDecoder.decodeObject(forKey: SerializationKeys.numMatchesPlayed) as? Int
     self.pitClimberType = aDecoder.decodeObject(forKey: SerializationKeys.pitClimberType) as? String
@@ -113,7 +113,7 @@ public final class Team: NSObject {
     aCoder.encode(calculatedData, forKey: SerializationKeys.calculatedData)
     aCoder.encode(pitAllImageUrls, forKey: SerializationKeys.pitAllImageUrls)
     aCoder.encode(pitSEALsNotes, forKey: SerializationKeys.pitSEALsNotes)
-    aCoder.encode(pitDidDemonstrateCheesecakePotential, forKey: SerializationKeys.pitDidDemonstrateCheesecakePotential)
+    aCoder.encode(pitCanCheesecake, forKey: SerializationKeys.pitCanCheesecake)
     aCoder.encode(pitSelectedImageName, forKey: SerializationKeys.pitSelectedImageName)
     aCoder.encode(numMatchesPlayed, forKey: SerializationKeys.numMatchesPlayed)
     aCoder.encode(pitClimberType, forKey: SerializationKeys.pitClimberType)
