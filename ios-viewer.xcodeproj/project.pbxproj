@@ -52,9 +52,10 @@
 		19B0382E1E2C58D3006E25A2 /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B038241E2C58D3006E25A2 /* UIColor+HexString.m */; };
 		19B038321E2C5919006E25A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B038301E2C5919006E25A2 /* AppDelegate.m */; };
 		19B038331E2C5919006E25A2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B038311E2C5919006E25A2 /* main.m */; };
-		19B038491E2DE55B006E25A2 /* ShotTimesForBoiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B038461E2DE55B006E25A2 /* ShotTimesForBoiler.swift */; };
 		19B0384B1E2DE55B006E25A2 /* TeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B038481E2DE55B006E25A2 /* TeamInMatchData.swift */; };
 		20B97B0927CBDC12735F6F22 /* Pods_Current_Match.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0394ACA1B0BF4AF13EA11B /* Pods_Current_Match.framework */; };
+		8C0200B52011987C00A75272 /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0200B42011987B00A75272 /* Attempt.swift */; };
+		8C0200B72011988600A75272 /* Climb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0200B62011988600A75272 /* Climb.swift */; };
 		8C25A7CC1E33F2790012A23E /* CalculatedTeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25A7CB1E33F2790012A23E /* CalculatedTeamInMatchData.swift */; };
 		8C5868711E34254E0056EA17 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C58686C1E34254E0056EA17 /* Storyboard.storyboard */; };
 		8C65E7921FD0FEA6000E71A2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C65E7911FD0FEA6000E71A2 /* GoogleService-Info.plist */; };
@@ -157,9 +158,10 @@
 		19B0382F1E2C5919006E25A2 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		19B038301E2C5919006E25A2 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		19B038311E2C5919006E25A2 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		19B038461E2DE55B006E25A2 /* ShotTimesForBoiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotTimesForBoiler.swift; sourceTree = "<group>"; };
 		19B038481E2DE55B006E25A2 /* TeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInMatchData.swift; sourceTree = "<group>"; };
 		763F6CE09D211CAEC3E4C000 /* Pods-CurrentMatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrentMatch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CurrentMatch/Pods-CurrentMatch.debug.xcconfig"; sourceTree = "<group>"; };
+		8C0200B42011987B00A75272 /* Attempt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attempt.swift; sourceTree = "<group>"; };
+		8C0200B62011988600A75272 /* Climb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Climb.swift; sourceTree = "<group>"; };
 		8C25A7CB1E33F2790012A23E /* CalculatedTeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedTeamInMatchData.swift; sourceTree = "<group>"; };
 		8C58686D1E34254E0056EA17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Storyboard.storyboard; sourceTree = "<group>"; };
 		8C58687E1E3426200056EA17 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -317,11 +319,12 @@
 		19B0383B1E2DD7A3006E25A2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				190DFE3D1E30697500477B6D /* CalculatedTeamData.swift */,
+				8C0200B42011987B00A75272 /* Attempt.swift */,
 				8C25A7CB1E33F2790012A23E /* CalculatedTeamInMatchData.swift */,
+				190DFE3D1E30697500477B6D /* CalculatedTeamData.swift */,
 				190DFE431E306A1700477B6D /* CalculatedMatchData.swift */,
+				8C0200B62011988600A75272 /* Climb.swift */,
 				190DFE451E30703E00477B6D /* Match.swift */,
-				19B038461E2DE55B006E25A2 /* ShotTimesForBoiler.swift */,
 				19B038481E2DE55B006E25A2 /* TeamInMatchData.swift */,
 				190DFE471E3079D000477B6D /* Team.swift */,
 				19B037FC1E2C5891006E25A2 /* Reflectable.swift */,
@@ -624,7 +627,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				190DFE3E1E30697500477B6D /* CalculatedTeamData.swift in Sources */,
-				19B038491E2DE55B006E25A2 /* ShotTimesForBoiler.swift in Sources */,
 				19B038131E2C5891006E25A2 /* GraphViewController.swift in Sources */,
 				19B038151E2C5891006E25A2 /* ArrayTableViewController.m in Sources */,
 				19B038051E2C5891006E25A2 /* FirebaseDataFetcher.swift in Sources */,
@@ -647,11 +649,13 @@
 				8CD8FA6C1E5A4474004C2825 /* NSData+NSData_HexString.m in Sources */,
 				19B037EB1E2C586C006E25A2 /* SeedTableViewController.m in Sources */,
 				190DFE4C1E308BBD00477B6D /* TIMDDetailsViewController.swift in Sources */,
+				8C0200B72011988600A75272 /* Climb.swift in Sources */,
 				19B038261E2C58D3006E25A2 /* ResizableNotesTableViewCell.swift in Sources */,
 				19B0382D1E2C58D3006E25A2 /* UINavigationController+SGProgress.m in Sources */,
 				19B037EC1E2C586C006E25A2 /* PredictedSeedTableViewController.m in Sources */,
 				19B038271E2C58D3006E25A2 /* UnrankedTableViewCell.swift in Sources */,
 				19B037E71E2C586C006E25A2 /* ScheduleTableViewController.m in Sources */,
+				8C0200B52011987C00A75272 /* Attempt.swift in Sources */,
 				190DFE461E30703E00477B6D /* Match.swift in Sources */,
 				19B037ED1E2C586C006E25A2 /* FirstPickTableViewController.m in Sources */,
 				19B038281E2C58D3006E25A2 /* MultiCellTableViewCell.m in Sources */,

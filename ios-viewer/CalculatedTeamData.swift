@@ -40,8 +40,8 @@ public final class CalculatedTeamData: NSObject {
     static let autoRunPercentage = "autoRunPercentage"
     static let avgNumCubesFumbledTele = "avgNumCubesFumbledTele"
     static let scaleFailPercentageAuto = "scaleFailPercentageAuto"
-    static let avgNumCubesSpilledAuto = "avgNumCubesSpilledAuto"
-    static let avgNumCubesSpilledTele = "avgNumCubesSpilledTele"
+    static let avgCubesSpilledAuto = "avgCubesSpilledAuto"
+    static let avgCubesSpilledTele = "avgCubesSpilledTele"
     static let avgAllianceSwitchCubesAuto = "avgAllianceSwitchCubesAuto"
     static let avgOpponentSwitchCubesAuto = "avgOpponentSwitchCubesAuto"
     static let switchFailPercentageTele = "switchFailPercentageTele"
@@ -62,6 +62,8 @@ public final class CalculatedTeamData: NSObject {
     static let predictedNumRPs = "predictedNumRPs"
     static let actualNumRPs = "actualNumRPs"
     static let dysfunctionalPercentage = "dysfunctionalPercentage"
+    static let totalNumGoodDecisions = "totalNumGoodDecisions"
+    static let totalNumBadDecisions = "totalNumBadDecisions"
   }
 
   // MARK: Properties
@@ -94,14 +96,14 @@ public final class CalculatedTeamData: NSObject {
   public var autoRunPercentage: Float = -1.0
   public var avgNumCubesFumbledTele: Float = -1.0
   public var scaleFailPercentageAuto: Float = -1.0
-  public var avgNumCubesSpilledAuto: Float = -1.0
-  public var avgNumCubesSpilledTele: Float = -1.0
+  public var avgCubesSpilledAuto: Float = -1.0
+  public var avgCubesSpilledTele: Float = -1.0
   public var switchFailPercentageTele: Float = -1.0
   public var avgNumAlliancePlatformIntakeTele: Float = -1.0
   public var avgNumGroundIntakeTele: Float = -1.0
   public var climbPercentage: Float = -1.0
   public var avgNumOpponentPlatformIntakeAuto: Float = -1.0
-  public var canScoreBothSwitchSidesAuto: Bool? = false
+  public var canScoreBothSwitchSidesAuto: Bool = false
   public var avgNumGroundPortalIntakeTele: Float = -1.0
   public var avgNumElevatedPyramidIntakeTele: Float = -1.0
   public var avgNumGroundPyramidIntakeTele: Float = -1.0
@@ -115,6 +117,8 @@ public final class CalculatedTeamData: NSObject {
     public var actualNumRPs: Float = -1.0
     public var dysfunctionalPercentage: Float = -1.0
     public var avgCubesPlacedInScaleTele: Float = -1.0
+    public var totalNumGoodDecisions: Int = -1
+    public var totalNumBadDecisions: Int = -1
     
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -158,8 +162,8 @@ public final class CalculatedTeamData: NSObject {
     autoRunPercentage = json[SerializationKeys.autoRunPercentage].floatValue
     avgNumCubesFumbledTele = json[SerializationKeys.avgNumCubesFumbledTele].floatValue
     scaleFailPercentageAuto = json[SerializationKeys.scaleFailPercentageAuto].floatValue
-    avgNumCubesSpilledAuto = json[SerializationKeys.avgNumCubesSpilledAuto].floatValue
-    avgNumCubesSpilledTele = json[SerializationKeys.avgNumCubesSpilledTele].floatValue
+    avgCubesSpilledAuto = json[SerializationKeys.avgCubesSpilledAuto].floatValue
+    avgCubesSpilledTele = json[SerializationKeys.avgCubesSpilledTele].floatValue
     avgAllianceSwitchCubesTele = json[SerializationKeys.avgAllianceSwitchCubesTele].floatValue
     avgAllianceSwitchCubesAuto = json[SerializationKeys.avgAllianceSwitchCubesAuto].floatValue
     avgOpponentSwitchCubesTele = json[SerializationKeys.avgOpponentSwitchCubesTele].floatValue
@@ -183,6 +187,8 @@ public final class CalculatedTeamData: NSObject {
     actualNumRPs = json[SerializationKeys.actualNumRPs].floatValue
     dysfunctionalPercentage = json[SerializationKeys.dysfunctionalPercentage].floatValue
     avgCubesPlacedInScaleTele = json[SerializationKeys.avgCubesPlacedInScaleTele].floatValue
+    totalNumGoodDecisions = json[SerializationKeys.totalNumGoodDecisions].intValue
+    totalNumBadDecisions = json[SerializationKeys.totalNumBadDecisions].intValue
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -219,8 +225,8 @@ public final class CalculatedTeamData: NSObject {
     dictionary[SerializationKeys.autoRunPercentage] = autoRunPercentage
     dictionary[SerializationKeys.avgNumCubesFumbledTele] = avgNumCubesFumbledTele
     dictionary[SerializationKeys.scaleFailPercentageAuto] = scaleFailPercentageAuto
-    dictionary[SerializationKeys.avgNumCubesSpilledAuto] = avgNumCubesSpilledAuto
-    dictionary[SerializationKeys.avgNumCubesSpilledTele] = avgNumCubesSpilledTele
+    dictionary[SerializationKeys.avgCubesSpilledAuto] = avgCubesSpilledAuto
+    dictionary[SerializationKeys.avgCubesSpilledTele] = avgCubesSpilledTele
     dictionary[SerializationKeys.switchFailPercentageTele] = switchFailPercentageTele
     dictionary[SerializationKeys.avgNumAlliancePlatformIntakeTele] = avgNumAlliancePlatformIntakeTele
     dictionary[SerializationKeys.avgNumGroundIntakeTele] = avgNumGroundIntakeTele
@@ -241,6 +247,8 @@ public final class CalculatedTeamData: NSObject {
     dictionary[SerializationKeys.actualNumRPs] = actualNumRPs
     dictionary[SerializationKeys.dysfunctionalPercentage] = dysfunctionalPercentage
     dictionary[SerializationKeys.avgCubesPlacedInScaleTele] = avgCubesPlacedInScaleTele
+    dictionary[SerializationKeys.totalNumGoodDecisions] = totalNumGoodDecisions
+    dictionary[SerializationKeys.totalNumBadDecisions] = totalNumBadDecisions
     return dictionary
   }
 
@@ -275,8 +283,8 @@ public final class CalculatedTeamData: NSObject {
     self.autoRunPercentage = (aDecoder.decodeObject(forKey: SerializationKeys.autoRunPercentage) as? Float)!
     self.avgNumCubesFumbledTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumCubesFumbledTele) as? Float)!
     self.scaleFailPercentageAuto = (aDecoder.decodeObject(forKey: SerializationKeys.scaleFailPercentageAuto) as? Float)!
-    self.avgNumCubesSpilledAuto = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumCubesSpilledAuto) as? Float)!
-    self.avgNumCubesSpilledTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumCubesSpilledTele) as? Float)!
+    self.avgCubesSpilledAuto = (aDecoder.decodeObject(forKey: SerializationKeys.avgCubesSpilledAuto) as? Float)!
+    self.avgCubesSpilledTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgCubesSpilledTele) as? Float)!
     self.switchFailPercentageTele = (aDecoder.decodeObject(forKey: SerializationKeys.switchFailPercentageTele) as? Float)!
     self.avgNumAlliancePlatformIntakeTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumAlliancePlatformIntakeTele) as? Float)!
     self.avgNumGroundIntakeTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgNumGroundIntakeTele) as? Float)!
@@ -296,6 +304,8 @@ public final class CalculatedTeamData: NSObject {
     self.actualNumRPs = (aDecoder.decodeObject(forKey: SerializationKeys.actualNumRPs) as? Float)!
     self.dysfunctionalPercentage = (aDecoder.decodeObject(forKey: SerializationKeys.dysfunctionalPercentage) as? Float)!
     self.avgCubesPlacedInScaleTele = (aDecoder.decodeObject(forKey: SerializationKeys.avgCubesPlacedInScaleTele) as? Float)!
+    self.totalNumGoodDecisions = (aDecoder.decodeObject(forKey: SerializationKeys.totalNumGoodDecisions) as? Int)!
+    self.totalNumBadDecisions = (aDecoder.decodeObject(forKey: SerializationKeys.totalNumBadDecisions) as? Int)!
   }
 
   public func encode(with aCoder: NSCoder) {
@@ -328,8 +338,8 @@ public final class CalculatedTeamData: NSObject {
     aCoder.encode(autoRunPercentage, forKey: SerializationKeys.autoRunPercentage)
     aCoder.encode(avgNumCubesFumbledTele, forKey: SerializationKeys.avgNumCubesFumbledTele)
     aCoder.encode(scaleFailPercentageAuto, forKey: SerializationKeys.scaleFailPercentageAuto)
-    aCoder.encode(avgNumCubesSpilledAuto, forKey: SerializationKeys.avgNumCubesSpilledAuto)
-    aCoder.encode(avgNumCubesSpilledTele, forKey: SerializationKeys.avgNumCubesSpilledTele)
+    aCoder.encode(avgCubesSpilledAuto, forKey: SerializationKeys.avgCubesSpilledAuto)
+    aCoder.encode(avgCubesSpilledTele, forKey: SerializationKeys.avgCubesSpilledTele)
     aCoder.encode(switchFailPercentageTele, forKey: SerializationKeys.switchFailPercentageTele)
     aCoder.encode(avgNumAlliancePlatformIntakeTele, forKey: SerializationKeys.avgNumAlliancePlatformIntakeTele)
     aCoder.encode(avgNumGroundIntakeTele, forKey: SerializationKeys.avgNumGroundIntakeTele)
@@ -349,6 +359,8 @@ public final class CalculatedTeamData: NSObject {
     aCoder.encode(predictedNumRPs, forKey: SerializationKeys.predictedNumRPs)
     aCoder.encode(dysfunctionalPercentage, forKey: SerializationKeys.dysfunctionalPercentage)
     aCoder.encode(avgCubesPlacedInScaleTele, forKey: SerializationKeys.avgCubesPlacedInScaleTele)
+    aCoder.encode(totalNumGoodDecisions, forKey: SerializationKeys.totalNumGoodDecisions)
+    aCoder.encode(totalNumBadDecisions, forKey: SerializationKeys.totalNumBadDecisions)
   }
 
 }

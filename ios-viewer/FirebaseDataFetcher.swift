@@ -154,7 +154,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             //look for the selected image url on firebase
             if let newURL = snap.childSnapshot(forPath: "selectedImageURL").value {
                 //if the url has changed
-                if team.pitSelectedImageName != newURL as? String {
+                if team.pitSelectedImage != newURL as? String {
                     //cache the new image under the team's number
                     cacheImage(snap.childSnapshot(forPath: "number").value as! Int, url: newURL as? String)
                 }
