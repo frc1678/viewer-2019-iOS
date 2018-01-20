@@ -112,7 +112,7 @@ public final class CalculatedTeamData: NSObject {
   public var avgSpeed: Float = -1.0
   public var firstPickAbility: Float = -1.0
     public var actualSeed: Int = -1
-    public var predictedSeed: Int?
+    public var predictedSeed: Int = -1
     public var predictedNumRPs: Float = 1.0
     public var actualNumRPs: Float = -1.0
     public var dysfunctionalPercentage: Float = -1.0
@@ -182,7 +182,7 @@ public final class CalculatedTeamData: NSObject {
     avgSpeed = json[SerializationKeys.avgSpeed].floatValue
     firstPickAbility = json[SerializationKeys.firstPickAbility].floatValue
     actualSeed = json[SerializationKeys.actualSeed].intValue
-    predictedSeed = json[SerializationKeys.predictedSeed].int
+    predictedSeed = json[SerializationKeys.predictedSeed].intValue
     predictedNumRPs = json[SerializationKeys.predictedNumRPs].floatValue
     actualNumRPs = json[SerializationKeys.actualNumRPs].floatValue
     dysfunctionalPercentage = json[SerializationKeys.dysfunctionalPercentage].floatValue
@@ -242,7 +242,7 @@ public final class CalculatedTeamData: NSObject {
     dictionary[SerializationKeys.avgSpeed] = avgSpeed
     dictionary[SerializationKeys.firstPickAbility] = firstPickAbility
     dictionary[SerializationKeys.actualSeed] = actualSeed
-    if let value = predictedSeed { dictionary[SerializationKeys.predictedSeed] = value }
+    dictionary[SerializationKeys.predictedSeed] = predictedSeed
     dictionary[SerializationKeys.predictedNumRPs] = predictedNumRPs
     dictionary[SerializationKeys.actualNumRPs] = actualNumRPs
     dictionary[SerializationKeys.dysfunctionalPercentage] = dysfunctionalPercentage
@@ -299,7 +299,7 @@ public final class CalculatedTeamData: NSObject {
     self.avgSpeed = (aDecoder.decodeObject(forKey: SerializationKeys.avgSpeed) as? Float)!
     self.firstPickAbility = (aDecoder.decodeObject(forKey: SerializationKeys.firstPickAbility) as? Float)!
     self.actualSeed = (aDecoder.decodeObject(forKey: SerializationKeys.actualSeed) as? Int)!
-    self.predictedSeed = aDecoder.decodeObject(forKey: SerializationKeys.predictedSeed) as? Int
+     self.predictedSeed = (aDecoder.decodeObject(forKey: SerializationKeys.predictedSeed) as? Int)!
     self.predictedNumRPs = (aDecoder.decodeObject(forKey: SerializationKeys.predictedNumRPs) as? Float)!
     self.actualNumRPs = (aDecoder.decodeObject(forKey: SerializationKeys.actualNumRPs) as? Float)!
     self.dysfunctionalPercentage = (aDecoder.decodeObject(forKey: SerializationKeys.dysfunctionalPercentage) as? Float)!

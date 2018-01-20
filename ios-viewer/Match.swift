@@ -68,22 +68,22 @@ public final class Match: NSObject {
   /// - parameter json: JSON object from SwiftyJSON.
   public required init(json: JSON) {
     if let items = json[SerializationKeys.redAllianceTeamNumbers].array { redAllianceTeamNumbers = items.map { $0.intValue } }
-    blueCubesForPowerup = json[SerializationKeys.blueCubesForPowerup].dictionaryObject as! [String: Int]?
+    blueCubesForPowerup = json[SerializationKeys.blueCubesForPowerup].dictionaryObject as? [String : Int]
     blueDidFaceBoss = json[SerializationKeys.blueDidFaceBoss].boolValue
-    blueCubesInVaultFinal = json[SerializationKeys.blueCubesInVaultFinal].dictionaryObject as! [String: Int]?
-    redSwitch = (json[SerializationKeys.redSwitch].dictionaryObject as! [String: String]?)!
+    blueCubesInVaultFinal = json[SerializationKeys.blueCubesInVaultFinal].dictionaryObject as? [String: Int]
+    redSwitch = (json[SerializationKeys.redSwitch].dictionaryObject as? [String: String])!
     redDidFaceBoss = json[SerializationKeys.redDidFaceBoss].boolValue
     number = json[SerializationKeys.number].intValue
     calculatedData = CalculatedMatchData(json: json[SerializationKeys.calculatedData])
     foulPointsGainedRed = json[SerializationKeys.foulPointsGainedRed].int
     blueDidAutoQuest = json[SerializationKeys.blueDidAutoQuest].boolValue
     redDidAutoQuest = json[SerializationKeys.redDidAutoQuest].boolValue
-    redCubesInVaultFinal = json[SerializationKeys.redCubesInVaultFinal].dictionaryObject as! [String: Int]?
+    redCubesInVaultFinal = json[SerializationKeys.redCubesInVaultFinal].dictionaryObject as? [String: Int]
     if let items = json[SerializationKeys.blueAllianceTeamNumbers].array { blueAllianceTeamNumbers = items.map { $0.intValue } }
-    redCubesForPowerup = json[SerializationKeys.redCubesForPowerup].dictionaryObject as! [String: Int]?
-    scale = json[SerializationKeys.scale].dictionaryObject as! [String: String]?
+    redCubesForPowerup = json[SerializationKeys.redCubesForPowerup].dictionaryObject as? [String: Int]
+    scale = json[SerializationKeys.scale].dictionaryObject as? [String: String]
     blueScore = json[SerializationKeys.blueScore].intValue
-    blueSwitch = json[SerializationKeys.blueSwitch].dictionaryObject as! [String: String]?
+    blueSwitch = json[SerializationKeys.blueSwitch].dictionaryObject as? [String: String]
     foulPointsGainedBlue = json[SerializationKeys.foulPointsGainedBlue].int
     redScore = json[SerializationKeys.redScore].intValue
   }

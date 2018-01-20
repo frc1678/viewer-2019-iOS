@@ -36,8 +36,8 @@ public final class CalculatedTeamInMatchData: NSObject {
     static let avgScaleTimeTele = "avgScaleTimeTele"
     static let numCubesPlacedAuto = "numCubesPlacedAuto"
     static let numOpponentSwitchFailedAuto = "numOpponentSwitchFailedAuto"
-    static let cubeAblility = "cubeAblility"
-  }
+    static let didClimb = "didClimb"
+}
 
   // MARK: Properties
   public var numOpponentSwitchSuccessTele: Int?
@@ -64,7 +64,7 @@ public final class CalculatedTeamInMatchData: NSObject {
   public var avgScaleTimeTele: Int?
   public var numCubesPlacedAuto: Int?
   public var numOpponentSwitchFailedAuto: Int?
-  public var cubeAblility: Int?
+  public var didClimb: Bool?
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -103,7 +103,7 @@ public final class CalculatedTeamInMatchData: NSObject {
     avgScaleTimeTele = json[SerializationKeys.avgScaleTimeTele].int
     numCubesPlacedAuto = json[SerializationKeys.numCubesPlacedAuto].int
     numOpponentSwitchFailedAuto = json[SerializationKeys.numOpponentSwitchFailedAuto].int
-    cubeAblility = json[SerializationKeys.cubeAblility].int
+    didClimb = json[SerializationKeys.didClimb].bool
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -135,7 +135,7 @@ public final class CalculatedTeamInMatchData: NSObject {
     if let value = avgScaleTimeTele { dictionary[SerializationKeys.avgScaleTimeTele] = value }
     if let value = numCubesPlacedAuto { dictionary[SerializationKeys.numCubesPlacedAuto] = value }
     if let value = numOpponentSwitchFailedAuto { dictionary[SerializationKeys.numOpponentSwitchFailedAuto] = value }
-    if let value = cubeAblility { dictionary[SerializationKeys.cubeAblility] = value }
+    if let value = didClimb { dictionary[SerializationKeys.didClimb] = value }
     return dictionary
   }
 
@@ -165,7 +165,7 @@ public final class CalculatedTeamInMatchData: NSObject {
     self.avgScaleTimeTele = aDecoder.decodeObject(forKey: SerializationKeys.avgScaleTimeTele) as? Int
     self.numCubesPlacedAuto = aDecoder.decodeObject(forKey: SerializationKeys.numCubesPlacedAuto) as? Int
     self.numOpponentSwitchFailedAuto = aDecoder.decodeObject(forKey: SerializationKeys.numOpponentSwitchFailedAuto) as? Int
-    self.cubeAblility = aDecoder.decodeObject(forKey: SerializationKeys.cubeAblility) as? Int
+    self.didClimb = aDecoder.decodeObject(forKey: SerializationKeys.didClimb) as? Bool
   }
 
   public func encode(with aCoder: NSCoder) {
@@ -193,7 +193,7 @@ public final class CalculatedTeamInMatchData: NSObject {
     aCoder.encode(avgScaleTimeTele, forKey: SerializationKeys.avgScaleTimeTele)
     aCoder.encode(numCubesPlacedAuto, forKey: SerializationKeys.numCubesPlacedAuto)
     aCoder.encode(numOpponentSwitchFailedAuto, forKey: SerializationKeys.numOpponentSwitchFailedAuto)
-    aCoder.encode(cubeAblility, forKey: SerializationKeys.cubeAblility)
+    aCoder.encode(didClimb, forKey: SerializationKeys.didClimb)
   }
 
 }

@@ -115,9 +115,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         let notGraphingValues = [
             "First Pick Ability",
             "Second Pick Ability",
-            "R Score Driving Ability",
-            // "Avg. Key Shooting Time",
-            
+            "Avg. Driving Ability",
+            "SW Fail Percentage Tele",
+            "SC Fail Percentage Tele",
+            "SW Fail Percentage Auto",
+            "SC Fail Percentage Auto",
+            "Multi-Side Auto",
+            "Total # of Good Decisions",
+            "Total # of Bad Decisions",
         ]
         
         /** Values that should be displayed as long text cells */
@@ -144,6 +149,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.switchFailPercentageAuto",
             "calculatedData.scaleFailPercentageTele",
             "calculatedData.switchFailPercentageTele",
+            "calculatedData.autoRunPercentage"
         ]
         
         //let otherNoCalcDataValues = [
@@ -278,13 +284,25 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         ]
         
-        /** Dict translating a key for a teamDetails datapoint to the key for the respective TIMD datapoint */
+        /** Dict translating a key for a teamDetails datapoint to the key for the respective TIMD datapoint. Does not include "calculatedData." in the keys. */
         let teamDetailsToTIMD = [
             //status
-            "incapacitatedPercentage" : "didBecomeIncapacitated",
-            "disabledPercentage" : "didStartDisabled",
-            "dysfunctionalPercentage" : "calculatedData.wasDysfunctional",
+            "incapacitatedPercentage" : "didGetIncapacitated",
+            "disabledPercentage" : "didGetDisabled",
+            "dysfunctionalPercentage" : "calculatedData.isDysfunctional",
             //scoring stuff
+            "avgCubesPlacedInScaleAuto" : "calculatedData.numScaleSuccessAuto",
+            "avgAllianceSwitchCubesAuto" : "calculatedData.numAllianceSwitchSuccessAuto",
+            "avgCubesPlacedInScaleTele" : "calculatedData.numScaleSuccessTele",
+            "avgAllianceSwitchCubesTele" : "calculatedData.numAllianceSwitchSuccessTele",
+            "avgNumCubesFumbledTele" : "numCubesFumbledTele",
+            "avgOpponentSwitchCubesTele" : "calculatedData.numOpponentSwitchSuccessTele",
+            "avgNumExchangeInputTele" : "numExchangeInput",
+            "avgNumGroundIntakeTele" : "numGroundIntakeTele",
+            "avgNumHumanPortalIntakeTele" : "numHumanPortalIntakeTele",
+            "avgNumGroundPortalIntakeTele" : "numGroundPortalIntakeTele",
+            "avgClimbTime" : "calculatedData.climbTime",
+            "climbPercentage" : "calculatedData.didClimb",
             //super data
             "avgSpeed" : "rankSpeed",
             "avgAgility" : "rankAgility",
@@ -584,6 +602,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.avgNumHumanPortalIntakeTele" : "Avg. Human PO Intakes Tele",
         "calculatedData.climbPercentage" : "Climb Percentage",
         "pitClimberType" : "Climber Type",
+        "calculatedData.avgCubesSpilledTele" : "Avg. Cubes Spilled Tele",
     ]
     
     /**

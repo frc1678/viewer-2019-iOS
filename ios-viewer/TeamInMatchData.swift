@@ -19,13 +19,13 @@ public final class TeamInMatchData: NSObject {
     static let numBadDecisions = "numBadDecisions"
     static let matchNumber = "matchNumber"
     static let numElevatedPyramidIntakeAuto = "numElevatedPyramidIntakeAuto"
-    static let numRedPlatformIntakeTele = "numRedPlatformIntakeTele"
+    static let opponentPlatformIntakeTele = "opponentPlatformIntakeTele"
     static let didPark = "didPark"
     static let startingPosition = "startingPosition"
     static let numGroundPortalIntakeTele = "numGroundPortalIntakeTele"
     static let scaleAttemptAuto = "scaleAttemptAuto"
     static let numReturnIntake = "numReturnIntake"
-    static let numBluePlatformIntakeAuto = "numBluePlatformIntakeAuto"
+    static let alliancePlatformIntakeAuto = "alliancePlatformIntakeAuto"
     static let didGetDisabled = "didGetDisabled"
     static let numHumanPortalIntakeTele = "numHumanPortalIntakeTele"
     static let numGroundPyramidIntakeAuto = "numGroundPyramidIntakeAuto"
@@ -42,10 +42,9 @@ public final class TeamInMatchData: NSObject {
     static let numGroundPyramidIntakeTele = "numGroundPyramidIntakeTele"
     static let numElevatedPyramidIntakeTele = "numElevatedPyramidIntakeTele"
     static let numSpilledCubesAuto = "numSpilledCubesAuto"
-    static let numBluePlatformIntakeTele = "numBluePlatformIntakeTele"
+    static let alliancePlatformIntakeTele = "alliancePlatformIntakeTele"
     static let rankSpeed = "rankSpeed"
     static let didMakeAutoRun = "didMakeAutoRun"
-    static let numRedPlatformIntakeAuto = "numRedPlatformIntakeAuto"
     static let rankAgility = "rankAgility"
     static let teamNumber = "teamNumber"
     static let numExchangeInput = "numExchangeInput"
@@ -60,13 +59,13 @@ public final class TeamInMatchData: NSObject {
   public var numBadDecisions: Int?
   public var matchNumber: Int?
   public var numElevatedPyramidIntakeAuto: Int?
-  public var numRedPlatformIntakeTele: [Int]?
+  public var opponentPlatformIntakeTele: [Bool]?
   public var didPark: Bool? = false
   public var startingPosition: String?
   public var numGroundPortalIntakeTele: Int?
   public var scaleAttemptAuto: [Attempt]?
   public var numReturnIntake: Int?
-  public var numBluePlatformIntakeAuto: [Int]?
+  public var alliancePlatformIntakeAuto: [Bool]?
   public var didGetDisabled: Bool? = false
   public var numHumanPortalIntakeTele: Int?
   public var numGroundPyramidIntakeAuto: Int?
@@ -83,10 +82,9 @@ public final class TeamInMatchData: NSObject {
   public var numGroundPyramidIntakeTele: Int?
   public var numElevatedPyramidIntakeTele: Int?
   public var numSpilledCubesAuto: Int?
-  public var numBluePlatformIntakeTele: [Int]?
+  public var alliancePlatformIntakeTele: [Bool]?
   public var rankSpeed: Int?
   public var didMakeAutoRun: Bool? = false
-  public var numRedPlatformIntakeAuto: [Int]?
   public var rankAgility: Int?
   public var teamNumber: Int?
   public var numExchangeInput: Int?
@@ -112,13 +110,13 @@ public final class TeamInMatchData: NSObject {
     numBadDecisions = json[SerializationKeys.numBadDecisions].int
     matchNumber = json[SerializationKeys.matchNumber].int
     numElevatedPyramidIntakeAuto = json[SerializationKeys.numElevatedPyramidIntakeAuto].int
-    if let items = json[SerializationKeys.numRedPlatformIntakeTele].array { numRedPlatformIntakeTele = items.map { $0.intValue } }
+    if let items = json[SerializationKeys.opponentPlatformIntakeTele].array { opponentPlatformIntakeTele = items.map { $0.boolValue } }
     didPark = json[SerializationKeys.didPark].boolValue
     startingPosition = json[SerializationKeys.startingPosition].string
     numGroundPortalIntakeTele = json[SerializationKeys.numGroundPortalIntakeTele].int
     if let items = json[SerializationKeys.scaleAttemptAuto].array { scaleAttemptAuto = items.map { Attempt(json: $0) } }
     numReturnIntake = json[SerializationKeys.numReturnIntake].int
-    if let items = json[SerializationKeys.numBluePlatformIntakeAuto].array { numBluePlatformIntakeAuto = items.map { $0.intValue } }
+    if let items = json[SerializationKeys.alliancePlatformIntakeAuto].array { alliancePlatformIntakeAuto = items.map { $0.boolValue } }
     didGetDisabled = json[SerializationKeys.didGetDisabled].boolValue
     numHumanPortalIntakeTele = json[SerializationKeys.numHumanPortalIntakeTele].int
     numGroundPyramidIntakeAuto = json[SerializationKeys.numGroundPyramidIntakeAuto].int
@@ -135,10 +133,9 @@ public final class TeamInMatchData: NSObject {
     numGroundPyramidIntakeTele = json[SerializationKeys.numGroundPyramidIntakeTele].int
     numElevatedPyramidIntakeTele = json[SerializationKeys.numElevatedPyramidIntakeTele].int
     numSpilledCubesAuto = json[SerializationKeys.numSpilledCubesAuto].int
-    if let items = json[SerializationKeys.numBluePlatformIntakeTele].array { numBluePlatformIntakeTele = items.map { $0.intValue } }
+    if let items = json[SerializationKeys.alliancePlatformIntakeTele].array { alliancePlatformIntakeTele = items.map { $0.boolValue } }
     rankSpeed = json[SerializationKeys.rankSpeed].int
     didMakeAutoRun = json[SerializationKeys.didMakeAutoRun].boolValue
-    if let items = json[SerializationKeys.numRedPlatformIntakeAuto].array { numRedPlatformIntakeAuto = items.map { $0.intValue } }
     rankAgility = json[SerializationKeys.rankAgility].int
     teamNumber = json[SerializationKeys.teamNumber].int
     numExchangeInput = json[SerializationKeys.numExchangeInput].int
@@ -157,13 +154,13 @@ public final class TeamInMatchData: NSObject {
     if let value = numBadDecisions { dictionary[SerializationKeys.numBadDecisions] = value }
     if let value = matchNumber { dictionary[SerializationKeys.matchNumber] = value }
     if let value = numElevatedPyramidIntakeAuto { dictionary[SerializationKeys.numElevatedPyramidIntakeAuto] = value }
-    if let value = numRedPlatformIntakeTele { dictionary[SerializationKeys.numRedPlatformIntakeTele] = value }
+    if let value = opponentPlatformIntakeTele { dictionary[SerializationKeys.opponentPlatformIntakeTele] = value }
     dictionary[SerializationKeys.didPark] = didPark
     if let value = startingPosition { dictionary[SerializationKeys.startingPosition] = value }
     if let value = numGroundPortalIntakeTele { dictionary[SerializationKeys.numGroundPortalIntakeTele] = value }
     if let value = scaleAttemptAuto { dictionary[SerializationKeys.scaleAttemptAuto] = value.map { $0.dictionaryRepresentation() } }
     if let value = numReturnIntake { dictionary[SerializationKeys.numReturnIntake] = value }
-    if let value = numBluePlatformIntakeAuto { dictionary[SerializationKeys.numBluePlatformIntakeAuto] = value }
+    if let value = alliancePlatformIntakeAuto { dictionary[SerializationKeys.alliancePlatformIntakeAuto] = value }
     dictionary[SerializationKeys.didGetDisabled] = didGetDisabled
     if let value = numHumanPortalIntakeTele { dictionary[SerializationKeys.numHumanPortalIntakeTele] = value }
     if let value = numGroundPyramidIntakeAuto { dictionary[SerializationKeys.numGroundPyramidIntakeAuto] = value }
@@ -180,10 +177,9 @@ public final class TeamInMatchData: NSObject {
     if let value = numGroundPyramidIntakeTele { dictionary[SerializationKeys.numGroundPyramidIntakeTele] = value }
     if let value = numElevatedPyramidIntakeTele { dictionary[SerializationKeys.numElevatedPyramidIntakeTele] = value }
     if let value = numSpilledCubesAuto { dictionary[SerializationKeys.numSpilledCubesAuto] = value }
-    if let value = numBluePlatformIntakeTele { dictionary[SerializationKeys.numBluePlatformIntakeTele] = value }
+    if let value = alliancePlatformIntakeTele { dictionary[SerializationKeys.alliancePlatformIntakeTele] = value }
     if let value = rankSpeed { dictionary[SerializationKeys.rankSpeed] = value }
     dictionary[SerializationKeys.didMakeAutoRun] = didMakeAutoRun
-    if let value = numRedPlatformIntakeAuto { dictionary[SerializationKeys.numRedPlatformIntakeAuto] = value }
     if let value = rankAgility { dictionary[SerializationKeys.rankAgility] = value }
     if let value = teamNumber { dictionary[SerializationKeys.teamNumber] = value }
     if let value = numExchangeInput { dictionary[SerializationKeys.numExchangeInput] = value }
@@ -200,13 +196,13 @@ public final class TeamInMatchData: NSObject {
     self.numBadDecisions = aDecoder.decodeObject(forKey: SerializationKeys.numBadDecisions) as? Int
     self.matchNumber = aDecoder.decodeObject(forKey: SerializationKeys.matchNumber) as? Int
     self.numElevatedPyramidIntakeAuto = aDecoder.decodeObject(forKey: SerializationKeys.numElevatedPyramidIntakeAuto) as? Int
-    self.numRedPlatformIntakeTele = aDecoder.decodeObject(forKey: SerializationKeys.numRedPlatformIntakeTele) as? [Int]
+    self.opponentPlatformIntakeTele = aDecoder.decodeObject(forKey: SerializationKeys.opponentPlatformIntakeTele) as? [Bool]
     self.didPark = aDecoder.decodeBool(forKey: SerializationKeys.didPark)
     self.startingPosition = aDecoder.decodeObject(forKey: SerializationKeys.startingPosition) as? String
     self.numGroundPortalIntakeTele = aDecoder.decodeObject(forKey: SerializationKeys.numGroundPortalIntakeTele) as? Int
     self.scaleAttemptAuto = aDecoder.decodeObject(forKey: SerializationKeys.scaleAttemptAuto) as? [Attempt]
     self.numReturnIntake = aDecoder.decodeObject(forKey: SerializationKeys.numReturnIntake) as? Int
-    self.numBluePlatformIntakeAuto = aDecoder.decodeObject(forKey: SerializationKeys.numBluePlatformIntakeAuto) as? [Int]
+    self.alliancePlatformIntakeAuto = aDecoder.decodeObject(forKey: SerializationKeys.alliancePlatformIntakeAuto) as? [Bool]
     self.didGetDisabled = aDecoder.decodeBool(forKey: SerializationKeys.didGetDisabled)
     self.numHumanPortalIntakeTele = aDecoder.decodeObject(forKey: SerializationKeys.numHumanPortalIntakeTele) as? Int
     self.numGroundPyramidIntakeAuto = aDecoder.decodeObject(forKey: SerializationKeys.numGroundPyramidIntakeAuto) as? Int
@@ -223,10 +219,9 @@ public final class TeamInMatchData: NSObject {
     self.numGroundPyramidIntakeTele = aDecoder.decodeObject(forKey: SerializationKeys.numGroundPyramidIntakeTele) as? Int
     self.numElevatedPyramidIntakeTele = aDecoder.decodeObject(forKey: SerializationKeys.numElevatedPyramidIntakeTele) as? Int
     self.numSpilledCubesAuto = aDecoder.decodeObject(forKey: SerializationKeys.numSpilledCubesAuto) as? Int
-    self.numBluePlatformIntakeTele = aDecoder.decodeObject(forKey: SerializationKeys.numBluePlatformIntakeTele) as? [Int]
+    self.alliancePlatformIntakeTele = aDecoder.decodeObject(forKey: SerializationKeys.alliancePlatformIntakeTele) as? [Bool]
     self.rankSpeed = aDecoder.decodeObject(forKey: SerializationKeys.rankSpeed) as? Int
     self.didMakeAutoRun = aDecoder.decodeBool(forKey: SerializationKeys.didMakeAutoRun)
-    self.numRedPlatformIntakeAuto = aDecoder.decodeObject(forKey: SerializationKeys.numRedPlatformIntakeAuto) as? [Int]
     self.rankAgility = aDecoder.decodeObject(forKey: SerializationKeys.rankAgility) as? Int
     self.teamNumber = aDecoder.decodeObject(forKey: SerializationKeys.teamNumber) as? Int
     self.numExchangeInput = aDecoder.decodeObject(forKey: SerializationKeys.numExchangeInput) as? Int
@@ -241,13 +236,13 @@ public final class TeamInMatchData: NSObject {
     aCoder.encode(numBadDecisions, forKey: SerializationKeys.numBadDecisions)
     aCoder.encode(matchNumber, forKey: SerializationKeys.matchNumber)
     aCoder.encode(numElevatedPyramidIntakeAuto, forKey: SerializationKeys.numElevatedPyramidIntakeAuto)
-    aCoder.encode(numRedPlatformIntakeTele, forKey: SerializationKeys.numRedPlatformIntakeTele)
+    aCoder.encode(opponentPlatformIntakeTele, forKey: SerializationKeys.opponentPlatformIntakeTele)
     aCoder.encode(didPark, forKey: SerializationKeys.didPark)
     aCoder.encode(startingPosition, forKey: SerializationKeys.startingPosition)
     aCoder.encode(numGroundPortalIntakeTele, forKey: SerializationKeys.numGroundPortalIntakeTele)
     aCoder.encode(scaleAttemptAuto, forKey: SerializationKeys.scaleAttemptAuto)
     aCoder.encode(numReturnIntake, forKey: SerializationKeys.numReturnIntake)
-    aCoder.encode(numBluePlatformIntakeAuto, forKey: SerializationKeys.numBluePlatformIntakeAuto)
+    aCoder.encode(alliancePlatformIntakeAuto, forKey: SerializationKeys.alliancePlatformIntakeAuto)
     aCoder.encode(didGetDisabled, forKey: SerializationKeys.didGetDisabled)
     aCoder.encode(numHumanPortalIntakeTele, forKey: SerializationKeys.numHumanPortalIntakeTele)
     aCoder.encode(numGroundPyramidIntakeAuto, forKey: SerializationKeys.numGroundPyramidIntakeAuto)
@@ -264,10 +259,9 @@ public final class TeamInMatchData: NSObject {
     aCoder.encode(numGroundPyramidIntakeTele, forKey: SerializationKeys.numGroundPyramidIntakeTele)
     aCoder.encode(numElevatedPyramidIntakeTele, forKey: SerializationKeys.numElevatedPyramidIntakeTele)
     aCoder.encode(numSpilledCubesAuto, forKey: SerializationKeys.numSpilledCubesAuto)
-    aCoder.encode(numBluePlatformIntakeTele, forKey: SerializationKeys.numBluePlatformIntakeTele)
+    aCoder.encode(alliancePlatformIntakeTele, forKey: SerializationKeys.alliancePlatformIntakeTele)
     aCoder.encode(rankSpeed, forKey: SerializationKeys.rankSpeed)
     aCoder.encode(didMakeAutoRun, forKey: SerializationKeys.didMakeAutoRun)
-    aCoder.encode(numRedPlatformIntakeAuto, forKey: SerializationKeys.numRedPlatformIntakeAuto)
     aCoder.encode(rankAgility, forKey: SerializationKeys.rankAgility)
     aCoder.encode(teamNumber, forKey: SerializationKeys.teamNumber)
     aCoder.encode(numExchangeInput, forKey: SerializationKeys.numExchangeInput)
