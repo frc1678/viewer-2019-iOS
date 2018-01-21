@@ -401,21 +401,23 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     // MARK: TIMD keys
     /** Keys relating to the Autonomous period to be displayed in the TIMD view */
     static let TIMDAutoKeys : [String] = [
-        //"calculatedData.numLowShotsAuto",
-        //"numHoppersOpenedAuto",
-        //"calculatedData.numGearsPlacedAuto",
-        //"calculatedData.numHighShotsAuto",
+        "didMakeAutoRun",
+        "didCrossAutoZone",
+        "numCubesFumbledAuto",
+        "calculatedData.numAllianceSwitchCubeSuccessAuto",
+        "calculatedData.numScaleSuccessAuto"
     ]
     
     /** Keys relating to the Teleoperated period to be displayed in the TIMD view */
     static let TIMDTeleKeys : [String] = [
-        //"calculatedData.numLowShotsTele",
-        //"numGearLoaderIntakesTele",
-        //"calculatedData.numHighShotsTele",
-        //"numGearGroundIntakesTele",
-        //"numHoppersOpenedTele",
-        //"calculatedData.numGearsPlacedTele",
-        //"didLiftoff"
+        "calculatedData.numAllianceSwitchSuccessTele",
+        "calculatedData.numScaleSuccessTele",
+        "calculatedData.numOpponentSwitchSuccessTele",
+        "numExchangeInput",
+        "numGroundIntakeTele",
+        "numHumanPortalIntakeTele",
+        "climb",
+        "didPark"
     ]
     
     /** Keys relating to the status of a robot to be displayed in the TIMD view */
@@ -426,13 +428,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     
     /** Keys relating to the data Super Scouts collect to be displayed in the TIMD view */
     static let TIMDSuperKeys = [
-        //"rankBallControl",
-        "rankDefense",
-        "rankAgility",
         "rankSpeed",
-        //"rankGearControl",
-        //"drivingAbility",
-        //"superNotes"
+        "rankAgility",
+        "rankDefense",
+        "superNotes",
+        "numGoodDecisions",
+        "numBadDecisions"
     ]
     
     /** All sections of the TIMD view */
@@ -512,7 +513,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         //"calculatedData.numHighShotsAuto"
     ]
     
-    /** A dictionary with datapoints as keys and Human Readable Names as indices */
+    /** A dictionary with datapoints as keys and Human Readable versions as values */
     static let humanReadableNames = [
         "superNotes": "Super Scout Notes",
         "pitSEALsNotes" : "SEALs Notes",
@@ -603,6 +604,16 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.climbPercentage" : "Climb Percentage",
         "pitClimberType" : "Climber Type",
         "calculatedData.avgCubesSpilledTele" : "Avg. Cubes Spilled Tele",
+        "didPark" : "Parked",
+        "climb" : "Climb",
+        "numHumanPortalIntakeTele" : "Human Portal Intakes Tele",
+        "numGoodDecisions" : "Good Decisions",
+        "numBadDecisions" : "Bad Decisions",
+        "numGroundIntakeTele" : "Ground Intakes Tele",
+        "numExchangeInput" : "EX Inputs",
+        "numCubesFumbledAuto" : "Cubes Fumbled Auto",
+        "didCrossAutoZone" : "Crossed Auto Zone",
+        //"didMakeAutoRun" : "Made Auto Run",
     ]
     
     /**
