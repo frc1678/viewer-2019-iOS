@@ -71,7 +71,7 @@ public final class Match: NSObject {
     blueCubesForPowerup = json[SerializationKeys.blueCubesForPowerup].dictionaryObject as? [String : Int]
     blueDidFaceBoss = json[SerializationKeys.blueDidFaceBoss].boolValue
     blueCubesInVaultFinal = json[SerializationKeys.blueCubesInVaultFinal].dictionaryObject as? [String: Int]
-    redSwitch = (json[SerializationKeys.redSwitch].dictionaryObject as? [String: String])!
+    redSwitch = json[SerializationKeys.redSwitch].dictionaryObject as? [String: String]
     redDidFaceBoss = json[SerializationKeys.redDidFaceBoss].boolValue
     number = json[SerializationKeys.number].intValue
     calculatedData = CalculatedMatchData(json: json[SerializationKeys.calculatedData])

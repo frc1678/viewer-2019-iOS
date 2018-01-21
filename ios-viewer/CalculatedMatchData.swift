@@ -27,14 +27,14 @@ public final class CalculatedMatchData: NSObject {
   // MARK: Properties
   public var actualBlueRPs: Int?
   public var predictedRedAutoQuest: Bool? = false
-  public var predictedRedRPs: Int?
-  public var predictedBlueScore: Int = -1
+  public var predictedRedRPs: Float?
+  public var predictedBlueScore: Float = -1
   public var actualRedRPs: Int?
   public var predictedBlueAutoQuest: Bool? = false
-  public var predictedBlueRPs: Int?
-  public var blueWinChance: Int?
-  public var predictedRedScore: Int = -1
-  public var redWinChance: Int?
+  public var predictedBlueRPs: Float?
+  public var blueWinChance: Float?
+  public var predictedRedScore: Float = -1
+  public var redWinChance: Float?
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -51,14 +51,14 @@ public final class CalculatedMatchData: NSObject {
   public required init(json: JSON) {
     actualBlueRPs = json[SerializationKeys.actualBlueRPs].int
     predictedRedAutoQuest = json[SerializationKeys.predictedRedAutoQuest].boolValue
-    predictedRedRPs = json[SerializationKeys.predictedRedRPs].int
-    predictedBlueScore = json[SerializationKeys.predictedBlueScore].int!
+    predictedRedRPs = json[SerializationKeys.predictedRedRPs].float
+    predictedBlueScore = json[SerializationKeys.predictedBlueScore].floatValue
     actualRedRPs = json[SerializationKeys.actualRedRPs].int
     predictedBlueAutoQuest = json[SerializationKeys.predictedBlueAutoQuest].boolValue
-    predictedBlueRPs = json[SerializationKeys.predictedBlueRPs].int
-    blueWinChance = json[SerializationKeys.blueWinChance].int
-    predictedRedScore = json[SerializationKeys.predictedRedScore].int!
-    redWinChance = json[SerializationKeys.redWinChance].int
+    predictedBlueRPs = json[SerializationKeys.predictedBlueRPs].float
+    blueWinChance = json[SerializationKeys.blueWinChance].float
+    predictedRedScore = json[SerializationKeys.predictedRedScore].floatValue
+    redWinChance = json[SerializationKeys.redWinChance].float
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -83,14 +83,14 @@ public final class CalculatedMatchData: NSObject {
   required public init(coder aDecoder: NSCoder) {
     self.actualBlueRPs = aDecoder.decodeObject(forKey: SerializationKeys.actualBlueRPs) as? Int
     self.predictedRedAutoQuest = aDecoder.decodeBool(forKey: SerializationKeys.predictedRedAutoQuest)
-    self.predictedRedRPs = aDecoder.decodeObject(forKey: SerializationKeys.predictedRedRPs) as? Int
-    self.predictedBlueScore = (aDecoder.decodeObject(forKey: SerializationKeys.predictedBlueScore) as? Int)!
+    self.predictedRedRPs = aDecoder.decodeObject(forKey: SerializationKeys.predictedRedRPs) as? Float
+    self.predictedBlueScore = Float((aDecoder.decodeObject(forKey: SerializationKeys.predictedBlueScore) as? Float)!)
     self.actualRedRPs = aDecoder.decodeObject(forKey: SerializationKeys.actualRedRPs) as? Int
     self.predictedBlueAutoQuest = aDecoder.decodeBool(forKey: SerializationKeys.predictedBlueAutoQuest)
-    self.predictedBlueRPs = aDecoder.decodeObject(forKey: SerializationKeys.predictedBlueRPs) as? Int
-    self.blueWinChance = aDecoder.decodeObject(forKey: SerializationKeys.blueWinChance) as? Int
-    self.predictedRedScore = (aDecoder.decodeObject(forKey: SerializationKeys.predictedRedScore) as? Int)!
-    self.redWinChance = aDecoder.decodeObject(forKey: SerializationKeys.redWinChance) as? Int
+    self.predictedBlueRPs = aDecoder.decodeObject(forKey: SerializationKeys.predictedBlueRPs) as? Float
+    self.blueWinChance = aDecoder.decodeObject(forKey: SerializationKeys.blueWinChance) as? Float
+    self.predictedRedScore = (aDecoder.decodeObject(forKey: SerializationKeys.predictedRedScore) as? Float)!
+    self.redWinChance = aDecoder.decodeObject(forKey: SerializationKeys.redWinChance) as? Float
   }
 
   public func encode(with aCoder: NSCoder) {

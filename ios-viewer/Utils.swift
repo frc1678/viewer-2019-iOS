@@ -614,6 +614,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "numCubesFumbledAuto" : "Cubes Fumbled Auto",
         "didCrossAutoZone" : "Crossed Auto Zone",
         //"didMakeAutoRun" : "Made Auto Run",
+        "calculatedData.numAllianceSwitchCubeSuccessAuto" : "Successful SW Cubes Auto",
+        "calculatedData.numScaleSuccessAuto" : "Successful SC Cubes Auto",
+        "calculatedData.numAllianceSwitchSuccessTele" : "Successful SW Cubes Tele",
+        "calculatedData.numScaleSuccessTele" : "Successful SC Cubes Tele",
+        "calculatedData.numOpponentSwitchSuccessTele" : "Successful SWO Cubes Tele",
     ]
     
     /**

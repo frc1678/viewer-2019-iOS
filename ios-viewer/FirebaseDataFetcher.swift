@@ -308,6 +308,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         - parameter team: Team for which TIMDs are to be retrieved
     */
     func getTIMDataForTeam(_ team: Team) -> [TeamInMatchData] {
+        print(self.teamInMatches.filter { $0.teamNumber == team.number })
         return self.teamInMatches.filter { $0.teamNumber == team.number }
     }
     
