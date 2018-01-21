@@ -71,15 +71,15 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
         let multiCell = cell as? MultiCellTableViewCell
         let team = data as? Team
         if team!.number != -1 {
-            multiCell!.teamLabel!.text = String(team!.number)
+            multiCell!.teamLabel!.text = String(describing: team!.number)
         }
-        if team!.calculatedData?.allRotorsAbility != nil {
-            multiCell!.scoreLabel!.text = String(Utils.roundValue(Float(team!.calculatedData!.allRotorsAbility), toDecimalPlaces: 2)
+        if team!.calculatedData?.secondPickAbility != nil {
+            multiCell!.scoreLabel!.text = String(Utils.roundValue(Float(team!.calculatedData!.secondPickAbility), toDecimalPlaces: 2)
             )
         } else {
             multiCell!.scoreLabel!.text = ""
         }
-        multiCell!.rankLabel!.text = "\(self.firebaseFetcher.rankOfTeam(team!, withCharacteristic: "calculatedData.allRotorsAbility"))"
+        multiCell!.rankLabel!.text = "\(self.firebaseFetcher.rankOfTeam(team!, withCharacteristic: "calculatedData.secondPickAbility"))"
         if inPicklist {
             
         }

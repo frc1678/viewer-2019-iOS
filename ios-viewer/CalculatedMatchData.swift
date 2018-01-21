@@ -1,8 +1,8 @@
 //
 //  CalculatedMatchData.swift
 //
-//  Created by Bryton Moeller on 1/18/17
-//  Copyright (c) Citrus Circuits. All rights reserved.
+//  Created by Carter Luck on 1/14/18
+//  Copyright (c) . All rights reserved.
 //
 
 import Foundation
@@ -12,37 +12,29 @@ public final class CalculatedMatchData: NSObject {
 
   // MARK: Declaration for string constants to be used to decode and also serialize.
   private struct SerializationKeys {
-    static let actualRedRPs = "actualRedRPs"
-    static let blueWinChance = "blueWinChance"
-    static let fortyKilopascalChanceBlue = "fortyKilopascalChanceBlue"
-    static let predictedRedScore = "predictedRedScore"
-    static let sdPredictedRedScore = "sdPredictedRedScore"
-    static let redWinChance = "redWinChance"
     static let actualBlueRPs = "actualBlueRPs"
+    static let predictedRedAutoQuest = "predictedRedAutoQuest"
     static let predictedRedRPs = "predictedRedRPs"
     static let predictedBlueScore = "predictedBlueScore"
+    static let actualRedRPs = "actualRedRPs"
+    static let predictedBlueAutoQuest = "predictedBlueAutoQuest"
     static let predictedBlueRPs = "predictedBlueRPs"
-    static let fortyKilopascalChanceRed = "fortyKilopascalChanceRed"
-    static let allRotorsTurningChanceRed = "allRotorsTurningChanceRed"
-    static let allRotorsTurningChanceBlue = "allRotorsTurningChanceBlue"
-    static let sdPredictedBlueScore = "sdPredictedBlueScore"
+    static let blueWinChance = "blueWinChance"
+    static let predictedRedScore = "predictedRedScore"
+    static let redWinChance = "redWinChance"
   }
 
   // MARK: Properties
-  public var actualRedRPs: Int = -1
-  public var blueWinChance: Float = -1.0
-  public var fortyKilopascalChanceBlue: Float = -1.0
-  public var predictedRedScore: Float = -1.0
-  public var sdPredictedRedScore: Float = -1.0
-  public var redWinChance: Float = -1.0
-  public var actualBlueRPs: Int = -1
-  public var predictedRedRPs: Float = -1.0
-  public var predictedBlueScore: Float = -1.0
-  public var predictedBlueRPs: Float = -1.0
-  public var fortyKilopascalChanceRed: Float = -1.0
-  public var allRotorsTurningChanceRed: Float = -1.0
-  public var allRotorsTurningChanceBlue: Float = -1.0
-  public var sdPredictedBlueScore: Float = -1.0
+  public var actualBlueRPs: Int?
+  public var predictedRedAutoQuest: Bool? = false
+  public var predictedRedRPs: Float?
+  public var predictedBlueScore: Float = -1
+  public var actualRedRPs: Int?
+  public var predictedBlueAutoQuest: Bool? = false
+  public var predictedBlueRPs: Float?
+  public var blueWinChance: Float?
+  public var predictedRedScore: Float = -1
+  public var redWinChance: Float?
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -57,20 +49,16 @@ public final class CalculatedMatchData: NSObject {
   ///
   /// - parameter json: JSON object from SwiftyJSON.
   public required init(json: JSON) {
-    actualRedRPs = json[SerializationKeys.actualRedRPs].intValue
-    blueWinChance = json[SerializationKeys.blueWinChance].floatValue
-    fortyKilopascalChanceBlue = json[SerializationKeys.fortyKilopascalChanceBlue].floatValue
-    predictedRedScore = json[SerializationKeys.predictedRedScore].floatValue
-    sdPredictedRedScore = json[SerializationKeys.sdPredictedRedScore].floatValue
-    redWinChance = json[SerializationKeys.redWinChance].floatValue
-    actualBlueRPs = json[SerializationKeys.actualBlueRPs].intValue
-    predictedRedRPs = json[SerializationKeys.predictedRedRPs].floatValue
+    actualBlueRPs = json[SerializationKeys.actualBlueRPs].int
+    predictedRedAutoQuest = json[SerializationKeys.predictedRedAutoQuest].boolValue
+    predictedRedRPs = json[SerializationKeys.predictedRedRPs].float
     predictedBlueScore = json[SerializationKeys.predictedBlueScore].floatValue
-    predictedBlueRPs = json[SerializationKeys.predictedBlueRPs].floatValue
-    fortyKilopascalChanceRed = json[SerializationKeys.fortyKilopascalChanceRed].floatValue
-    allRotorsTurningChanceRed = json[SerializationKeys.allRotorsTurningChanceRed].floatValue
-    allRotorsTurningChanceBlue = json[SerializationKeys.allRotorsTurningChanceBlue].floatValue
-    sdPredictedBlueScore = json[SerializationKeys.sdPredictedBlueScore].floatValue
+    actualRedRPs = json[SerializationKeys.actualRedRPs].int
+    predictedBlueAutoQuest = json[SerializationKeys.predictedBlueAutoQuest].boolValue
+    predictedBlueRPs = json[SerializationKeys.predictedBlueRPs].float
+    blueWinChance = json[SerializationKeys.blueWinChance].float
+    predictedRedScore = json[SerializationKeys.predictedRedScore].floatValue
+    redWinChance = json[SerializationKeys.redWinChance].float
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -78,21 +66,44 @@ public final class CalculatedMatchData: NSObject {
   /// - returns: A Key value pair containing all valid values in the object.
   public func dictionaryRepresentation() -> [String: Any] {
     var dictionary: [String: Any] = [:]
-    dictionary[SerializationKeys.actualRedRPs] = actualRedRPs
-    dictionary[SerializationKeys.blueWinChance] = blueWinChance
-    dictionary[SerializationKeys.fortyKilopascalChanceBlue] = fortyKilopascalChanceBlue
-    dictionary[SerializationKeys.predictedRedScore] = predictedRedScore
-    dictionary[SerializationKeys.sdPredictedRedScore] = sdPredictedRedScore
-    dictionary[SerializationKeys.redWinChance] = redWinChance
-    dictionary[SerializationKeys.actualBlueRPs] = actualBlueRPs
-    dictionary[SerializationKeys.predictedRedRPs] = predictedRedRPs
+    if let value = actualBlueRPs { dictionary[SerializationKeys.actualBlueRPs] = value }
+    dictionary[SerializationKeys.predictedRedAutoQuest] = predictedRedAutoQuest
+    if let value = predictedRedRPs { dictionary[SerializationKeys.predictedRedRPs] = value }
     dictionary[SerializationKeys.predictedBlueScore] = predictedBlueScore
-    dictionary[SerializationKeys.predictedBlueRPs] = predictedBlueRPs
-    dictionary[SerializationKeys.fortyKilopascalChanceRed] = fortyKilopascalChanceRed
-    dictionary[SerializationKeys.allRotorsTurningChanceRed] = allRotorsTurningChanceRed
-    dictionary[SerializationKeys.allRotorsTurningChanceBlue] = allRotorsTurningChanceBlue
-    dictionary[SerializationKeys.sdPredictedBlueScore] = sdPredictedBlueScore
+    if let value = actualRedRPs { dictionary[SerializationKeys.actualRedRPs] = value }
+    dictionary[SerializationKeys.predictedBlueAutoQuest] = predictedBlueAutoQuest
+    if let value = predictedBlueRPs { dictionary[SerializationKeys.predictedBlueRPs] = value }
+    if let value = blueWinChance { dictionary[SerializationKeys.blueWinChance] = value }
+    dictionary[SerializationKeys.predictedRedScore] = predictedRedScore
+    if let value = redWinChance { dictionary[SerializationKeys.redWinChance] = value }
     return dictionary
+  }
+
+  // MARK: NSCoding Protocol
+  required public init(coder aDecoder: NSCoder) {
+    self.actualBlueRPs = aDecoder.decodeObject(forKey: SerializationKeys.actualBlueRPs) as? Int
+    self.predictedRedAutoQuest = aDecoder.decodeBool(forKey: SerializationKeys.predictedRedAutoQuest)
+    self.predictedRedRPs = aDecoder.decodeObject(forKey: SerializationKeys.predictedRedRPs) as? Float
+    self.predictedBlueScore = Float((aDecoder.decodeObject(forKey: SerializationKeys.predictedBlueScore) as? Float)!)
+    self.actualRedRPs = aDecoder.decodeObject(forKey: SerializationKeys.actualRedRPs) as? Int
+    self.predictedBlueAutoQuest = aDecoder.decodeBool(forKey: SerializationKeys.predictedBlueAutoQuest)
+    self.predictedBlueRPs = aDecoder.decodeObject(forKey: SerializationKeys.predictedBlueRPs) as? Float
+    self.blueWinChance = aDecoder.decodeObject(forKey: SerializationKeys.blueWinChance) as? Float
+    self.predictedRedScore = (aDecoder.decodeObject(forKey: SerializationKeys.predictedRedScore) as? Float)!
+    self.redWinChance = aDecoder.decodeObject(forKey: SerializationKeys.redWinChance) as? Float
+  }
+
+  public func encode(with aCoder: NSCoder) {
+    aCoder.encode(actualBlueRPs, forKey: SerializationKeys.actualBlueRPs)
+    aCoder.encode(predictedRedAutoQuest, forKey: SerializationKeys.predictedRedAutoQuest)
+    aCoder.encode(predictedRedRPs, forKey: SerializationKeys.predictedRedRPs)
+    aCoder.encode(predictedBlueScore, forKey: SerializationKeys.predictedBlueScore)
+    aCoder.encode(actualRedRPs, forKey: SerializationKeys.actualRedRPs)
+    aCoder.encode(predictedBlueAutoQuest, forKey: SerializationKeys.predictedBlueAutoQuest)
+    aCoder.encode(predictedBlueRPs, forKey: SerializationKeys.predictedBlueRPs)
+    aCoder.encode(blueWinChance, forKey: SerializationKeys.blueWinChance)
+    aCoder.encode(predictedRedScore, forKey: SerializationKeys.predictedRedScore)
+    aCoder.encode(redWinChance, forKey: SerializationKeys.redWinChance)
   }
 
 }

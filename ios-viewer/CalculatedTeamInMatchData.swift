@@ -1,8 +1,8 @@
 //
 //  CalculatedTeamInMatchData.swift
 //
-//  Created by Carter Luck on 1/21/17
-//  Copyright (c) Citrus Circuits. All rights reserved.
+//  Created by Carter Luck on 1/14/18
+//  Copyright (c) . All rights reserved.
 //
 
 import Foundation
@@ -12,28 +12,59 @@ public final class CalculatedTeamInMatchData: NSObject {
 
   // MARK: Declaration for string constants to be used to decode and also serialize.
   private struct SerializationKeys {
-    static let liftoffAbility = "liftoffAbility"
-    static let numLowShotsAuto = "numLowShotsAuto"
-    static let numHighShotsTele = "numHighShotsTele"
-    static let numLowShotsTele = "numLowShotsTele"
-    static let numHighShotsAuto = "numHighShotsAuto"
-    static let numGearsPlacedAuto = "numGearsPlacedAuto"
-    static let numGearsPlacedTele = "numGearsPlacedTele"
+    static let numOpponentSwitchSuccessTele = "numOpponentSwitchSuccessTele"
+    static let avgScaleTimeAuto = "avgScaleTimeAuto"
+    static let numCubesPlacedTele = "numCubesPlacedTele"
+    static let numOpponentSwitchFailedTele = "numOpponentSwitchFailedTele"
+    static let numAllianceSwitchFailedTele = "numAllianceSwitchFailedTele"
     static let drivingAbility = "drivingAbility"
-    static let wasDisfunctional = "wasDisfunctional"
-  }
+    static let numAllianceSwitchSuccessAuto = "numAllianceSwitchSuccessAuto"
+    static let numRPs = "numRPs"
+    static let avgAllianceSwitchTimeAuto = "avgAllianceSwitchTimeAuto"
+    static let climbTime = "climbTime"
+    static let numClimbAttempts = "numClimbAttempts"
+    static let numScaleFailedAuto = "numScaleFailedAuto"
+    static let numAllianceSwitchSuccessTele = "numAllianceSwitchSuccessTele"
+    static let numScaleSuccessTele = "numScaleSuccessTele"
+    static let didConflictWithAuto = "didConflictWithAuto"
+    static let numAllianceSwitchFailedAuto = "numAllianceSwitchFailedAuto"
+    static let avgAllianceSwitchTimeTele = "avgAllianceSwitchTimeTele"
+    static let numScaleFailedTele = "numScaleFailedTele"
+    static let isDysfunctional = "isDysfunctional"
+    static let numOpponentSwitchSuccessAuto = "numOpponentSwitchSuccessAuto"
+    static let numScaleSuccessAuto = "numScaleSuccessAuto"
+    static let avgScaleTimeTele = "avgScaleTimeTele"
+    static let numCubesPlacedAuto = "numCubesPlacedAuto"
+    static let numOpponentSwitchFailedAuto = "numOpponentSwitchFailedAuto"
+    static let didClimb = "didClimb"
+}
 
   // MARK: Properties
-  public var liftoffAbility: Float?
-  public var numLowShotsAuto: Float?
-  public var numHighShotsTele: Float?
-  public var numLowShotsTele: Float?
-  public var numHighShotsAuto: Float?
-    public var numGearsPlacedAuto: Float?
-    public var numGearsPlacedTele: Float?
-    public var drivingAbility: Float?
-    public var wasDisfunctional: Bool?
-
+  public var numOpponentSwitchSuccessTele: Int?
+  public var avgScaleTimeAuto: Int?
+  public var numCubesPlacedTele: Int?
+  public var numOpponentSwitchFailedTele: Int?
+  public var numAllianceSwitchFailedTele: Int?
+  public var drivingAbility: Int?
+  public var numAllianceSwitchSuccessAuto: Int?
+  public var numRPs: Int?
+  public var avgAllianceSwitchTimeAuto: Int?
+  public var climbTime: Int?
+  public var numClimbAttempts: Int?
+  public var numScaleFailedAuto: Int?
+  public var numAllianceSwitchSuccessTele: Int?
+  public var numScaleSuccessTele: Int?
+  public var didConflictWithAuto: Bool? = false
+  public var numAllianceSwitchFailedAuto: Int?
+  public var avgAllianceSwitchTimeTele: Int?
+  public var numScaleFailedTele: Int?
+  public var isDysfunctional: Bool? = false
+  public var numOpponentSwitchSuccessAuto: Int?
+  public var numScaleSuccessAuto: Int?
+  public var avgScaleTimeTele: Int?
+  public var numCubesPlacedAuto: Int?
+  public var numOpponentSwitchFailedAuto: Int?
+  public var didClimb: Bool?
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -48,16 +79,31 @@ public final class CalculatedTeamInMatchData: NSObject {
   ///
   /// - parameter json: JSON object from SwiftyJSON.
   public required init(json: JSON) {
-    liftoffAbility = json[SerializationKeys.liftoffAbility].float
-    numLowShotsAuto = json[SerializationKeys.numLowShotsAuto].float
-    numHighShotsTele = json[SerializationKeys.numHighShotsTele].float
-    numLowShotsTele = json[SerializationKeys.numLowShotsTele].float
-    numHighShotsAuto = json[SerializationKeys.numHighShotsAuto].float
-    numGearsPlacedAuto = json[SerializationKeys.numGearsPlacedAuto].float
-    numGearsPlacedTele = json[SerializationKeys.numGearsPlacedTele].float
-    drivingAbility = json[SerializationKeys.drivingAbility].float
-    wasDisfunctional = json[SerializationKeys.wasDisfunctional].bool
-    
+    numOpponentSwitchSuccessTele = json[SerializationKeys.numOpponentSwitchSuccessTele].int
+    avgScaleTimeAuto = json[SerializationKeys.avgScaleTimeAuto].int
+    numCubesPlacedTele = json[SerializationKeys.numCubesPlacedTele].int
+    numOpponentSwitchFailedTele = json[SerializationKeys.numOpponentSwitchFailedTele].int
+    numAllianceSwitchFailedTele = json[SerializationKeys.numAllianceSwitchFailedTele].int
+    drivingAbility = json[SerializationKeys.drivingAbility].int
+    numAllianceSwitchSuccessAuto = json[SerializationKeys.numAllianceSwitchSuccessAuto].int
+    numRPs = json[SerializationKeys.numRPs].int
+    avgAllianceSwitchTimeAuto = json[SerializationKeys.avgAllianceSwitchTimeAuto].int
+    climbTime = json[SerializationKeys.climbTime].int
+    numClimbAttempts = json[SerializationKeys.numClimbAttempts].int
+    numScaleFailedAuto = json[SerializationKeys.numScaleFailedAuto].int
+    numAllianceSwitchSuccessTele = json[SerializationKeys.numAllianceSwitchSuccessTele].int
+    numScaleSuccessTele = json[SerializationKeys.numScaleSuccessTele].int
+    didConflictWithAuto = json[SerializationKeys.didConflictWithAuto].boolValue
+    numAllianceSwitchFailedAuto = json[SerializationKeys.numAllianceSwitchFailedAuto].int
+    avgAllianceSwitchTimeTele = json[SerializationKeys.avgAllianceSwitchTimeTele].int
+    numScaleFailedTele = json[SerializationKeys.numScaleFailedTele].int
+    isDysfunctional = json[SerializationKeys.isDysfunctional].boolValue
+    numOpponentSwitchSuccessAuto = json[SerializationKeys.numOpponentSwitchSuccessAuto].int
+    numScaleSuccessAuto = json[SerializationKeys.numScaleSuccessAuto].int
+    avgScaleTimeTele = json[SerializationKeys.avgScaleTimeTele].int
+    numCubesPlacedAuto = json[SerializationKeys.numCubesPlacedAuto].int
+    numOpponentSwitchFailedAuto = json[SerializationKeys.numOpponentSwitchFailedAuto].int
+    didClimb = json[SerializationKeys.didClimb].bool
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -65,41 +111,89 @@ public final class CalculatedTeamInMatchData: NSObject {
   /// - returns: A Key value pair containing all valid values in the object.
   public func dictionaryRepresentation() -> [String: Any] {
     var dictionary: [String: Any] = [:]
-    if let value = liftoffAbility { dictionary[SerializationKeys.liftoffAbility] = value }
-    if let value = numLowShotsAuto { dictionary[SerializationKeys.numLowShotsAuto] = value }
-    if let value = numHighShotsTele { dictionary[SerializationKeys.numHighShotsTele] = value }
-    if let value = numLowShotsTele { dictionary[SerializationKeys.numLowShotsTele] = value }
-    if let value = numHighShotsAuto { dictionary[SerializationKeys.numHighShotsAuto] = value }
-    if let value = numGearsPlacedAuto { dictionary[SerializationKeys.numGearsPlacedAuto] = value }
-    if let value = numGearsPlacedTele { dictionary[SerializationKeys.numGearsPlacedTele] = value }
+    if let value = numOpponentSwitchSuccessTele { dictionary[SerializationKeys.numOpponentSwitchSuccessTele] = value }
+    if let value = avgScaleTimeAuto { dictionary[SerializationKeys.avgScaleTimeAuto] = value }
+    if let value = numCubesPlacedTele { dictionary[SerializationKeys.numCubesPlacedTele] = value }
+    if let value = numOpponentSwitchFailedTele { dictionary[SerializationKeys.numOpponentSwitchFailedTele] = value }
+    if let value = numAllianceSwitchFailedTele { dictionary[SerializationKeys.numAllianceSwitchFailedTele] = value }
     if let value = drivingAbility { dictionary[SerializationKeys.drivingAbility] = value }
-    if let value = wasDisfunctional { dictionary[SerializationKeys.wasDisfunctional] = value }
-    
+    if let value = numAllianceSwitchSuccessAuto { dictionary[SerializationKeys.numAllianceSwitchSuccessAuto] = value }
+    if let value = numRPs { dictionary[SerializationKeys.numRPs] = value }
+    if let value = avgAllianceSwitchTimeAuto { dictionary[SerializationKeys.avgAllianceSwitchTimeAuto] = value }
+    if let value = climbTime { dictionary[SerializationKeys.climbTime] = value }
+    if let value = numClimbAttempts { dictionary[SerializationKeys.numClimbAttempts] = value }
+    if let value = numScaleFailedAuto { dictionary[SerializationKeys.numScaleFailedAuto] = value }
+    if let value = numAllianceSwitchSuccessTele { dictionary[SerializationKeys.numAllianceSwitchSuccessTele] = value }
+    if let value = numScaleSuccessTele { dictionary[SerializationKeys.numScaleSuccessTele] = value }
+    dictionary[SerializationKeys.didConflictWithAuto] = didConflictWithAuto
+    if let value = numAllianceSwitchFailedAuto { dictionary[SerializationKeys.numAllianceSwitchFailedAuto] = value }
+    if let value = avgAllianceSwitchTimeTele { dictionary[SerializationKeys.avgAllianceSwitchTimeTele] = value }
+    if let value = numScaleFailedTele { dictionary[SerializationKeys.numScaleFailedTele] = value }
+    dictionary[SerializationKeys.isDysfunctional] = isDysfunctional
+    if let value = numOpponentSwitchSuccessAuto { dictionary[SerializationKeys.numOpponentSwitchSuccessAuto] = value }
+    if let value = numScaleSuccessAuto { dictionary[SerializationKeys.numScaleSuccessAuto] = value }
+    if let value = avgScaleTimeTele { dictionary[SerializationKeys.avgScaleTimeTele] = value }
+    if let value = numCubesPlacedAuto { dictionary[SerializationKeys.numCubesPlacedAuto] = value }
+    if let value = numOpponentSwitchFailedAuto { dictionary[SerializationKeys.numOpponentSwitchFailedAuto] = value }
+    if let value = didClimb { dictionary[SerializationKeys.didClimb] = value }
     return dictionary
   }
 
   // MARK: NSCoding Protocol
   required public init(coder aDecoder: NSCoder) {
-    self.liftoffAbility = aDecoder.decodeObject(forKey: SerializationKeys.liftoffAbility) as? Float
-    self.numLowShotsAuto = aDecoder.decodeObject(forKey: SerializationKeys.numLowShotsAuto) as? Float
-    self.numHighShotsTele = aDecoder.decodeObject(forKey: SerializationKeys.numHighShotsTele) as? Float
-    self.numLowShotsTele = aDecoder.decodeObject(forKey: SerializationKeys.numLowShotsTele) as? Float
-    self.numHighShotsAuto = aDecoder.decodeObject(forKey: SerializationKeys.numHighShotsAuto) as? Float
-    self.numGearsPlacedAuto = aDecoder.decodeObject(forKey: SerializationKeys.numGearsPlacedAuto) as? Float
-    self.numGearsPlacedTele = aDecoder.decodeObject(forKey: SerializationKeys.numGearsPlacedTele) as? Float
-    self.drivingAbility = aDecoder.decodeObject(forKey: SerializationKeys.drivingAbility) as? Float
-    self.wasDisfunctional = aDecoder.decodeObject(forKey: SerializationKeys.wasDisfunctional) as? Bool
+    self.numOpponentSwitchSuccessTele = aDecoder.decodeObject(forKey: SerializationKeys.numOpponentSwitchSuccessTele) as? Int
+    self.avgScaleTimeAuto = aDecoder.decodeObject(forKey: SerializationKeys.avgScaleTimeAuto) as? Int
+    self.numCubesPlacedTele = aDecoder.decodeObject(forKey: SerializationKeys.numCubesPlacedTele) as? Int
+    self.numOpponentSwitchFailedTele = aDecoder.decodeObject(forKey: SerializationKeys.numOpponentSwitchFailedTele) as? Int
+    self.numAllianceSwitchFailedTele = aDecoder.decodeObject(forKey: SerializationKeys.numAllianceSwitchFailedTele) as? Int
+    self.drivingAbility = aDecoder.decodeObject(forKey: SerializationKeys.drivingAbility) as? Int
+    self.numAllianceSwitchSuccessAuto = aDecoder.decodeObject(forKey: SerializationKeys.numAllianceSwitchSuccessAuto) as? Int
+    self.numRPs = aDecoder.decodeObject(forKey: SerializationKeys.numRPs) as? Int
+    self.avgAllianceSwitchTimeAuto = aDecoder.decodeObject(forKey: SerializationKeys.avgAllianceSwitchTimeAuto) as? Int
+    self.climbTime = aDecoder.decodeObject(forKey: SerializationKeys.climbTime) as? Int
+    self.numClimbAttempts = aDecoder.decodeObject(forKey: SerializationKeys.numClimbAttempts) as? Int
+    self.numScaleFailedAuto = aDecoder.decodeObject(forKey: SerializationKeys.numScaleFailedAuto) as? Int
+    self.numAllianceSwitchSuccessTele = aDecoder.decodeObject(forKey: SerializationKeys.numAllianceSwitchSuccessTele) as? Int
+    self.numScaleSuccessTele = aDecoder.decodeObject(forKey: SerializationKeys.numScaleSuccessTele) as? Int
+    self.didConflictWithAuto = aDecoder.decodeBool(forKey: SerializationKeys.didConflictWithAuto)
+    self.numAllianceSwitchFailedAuto = aDecoder.decodeObject(forKey: SerializationKeys.numAllianceSwitchFailedAuto) as? Int
+    self.avgAllianceSwitchTimeTele = aDecoder.decodeObject(forKey: SerializationKeys.avgAllianceSwitchTimeTele) as? Int
+    self.numScaleFailedTele = aDecoder.decodeObject(forKey: SerializationKeys.numScaleFailedTele) as? Int
+    self.isDysfunctional = aDecoder.decodeBool(forKey: SerializationKeys.isDysfunctional)
+    self.numOpponentSwitchSuccessAuto = aDecoder.decodeObject(forKey: SerializationKeys.numOpponentSwitchSuccessAuto) as? Int
+    self.numScaleSuccessAuto = aDecoder.decodeObject(forKey: SerializationKeys.numScaleSuccessAuto) as? Int
+    self.avgScaleTimeTele = aDecoder.decodeObject(forKey: SerializationKeys.avgScaleTimeTele) as? Int
+    self.numCubesPlacedAuto = aDecoder.decodeObject(forKey: SerializationKeys.numCubesPlacedAuto) as? Int
+    self.numOpponentSwitchFailedAuto = aDecoder.decodeObject(forKey: SerializationKeys.numOpponentSwitchFailedAuto) as? Int
+    self.didClimb = aDecoder.decodeObject(forKey: SerializationKeys.didClimb) as? Bool
   }
 
   public func encode(with aCoder: NSCoder) {
-    aCoder.encode(liftoffAbility, forKey: SerializationKeys.liftoffAbility)
-    aCoder.encode(numLowShotsAuto, forKey: SerializationKeys.numLowShotsAuto)
-    aCoder.encode(numHighShotsTele, forKey: SerializationKeys.numHighShotsTele)
-    aCoder.encode(numLowShotsTele, forKey: SerializationKeys.numLowShotsTele)
-    aCoder.encode(numHighShotsAuto, forKey: SerializationKeys.numHighShotsAuto)
-    aCoder.encode(numGearsPlacedAuto, forKey: SerializationKeys.numGearsPlacedAuto)
-    aCoder.encode(numGearsPlacedTele, forKey: SerializationKeys.numGearsPlacedTele)
+    aCoder.encode(numOpponentSwitchSuccessTele, forKey: SerializationKeys.numOpponentSwitchSuccessTele)
+    aCoder.encode(avgScaleTimeAuto, forKey: SerializationKeys.avgScaleTimeAuto)
+    aCoder.encode(numCubesPlacedTele, forKey: SerializationKeys.numCubesPlacedTele)
+    aCoder.encode(numOpponentSwitchFailedTele, forKey: SerializationKeys.numOpponentSwitchFailedTele)
+    aCoder.encode(numAllianceSwitchFailedTele, forKey: SerializationKeys.numAllianceSwitchFailedTele)
     aCoder.encode(drivingAbility, forKey: SerializationKeys.drivingAbility)
-    aCoder.encode(wasDisfunctional, forKey: SerializationKeys.wasDisfunctional)
+    aCoder.encode(numAllianceSwitchSuccessAuto, forKey: SerializationKeys.numAllianceSwitchSuccessAuto)
+    aCoder.encode(numRPs, forKey: SerializationKeys.numRPs)
+    aCoder.encode(avgAllianceSwitchTimeAuto, forKey: SerializationKeys.avgAllianceSwitchTimeAuto)
+    aCoder.encode(climbTime, forKey: SerializationKeys.climbTime)
+    aCoder.encode(numClimbAttempts, forKey: SerializationKeys.numClimbAttempts)
+    aCoder.encode(numScaleFailedAuto, forKey: SerializationKeys.numScaleFailedAuto)
+    aCoder.encode(numAllianceSwitchSuccessTele, forKey: SerializationKeys.numAllianceSwitchSuccessTele)
+    aCoder.encode(numScaleSuccessTele, forKey: SerializationKeys.numScaleSuccessTele)
+    aCoder.encode(didConflictWithAuto, forKey: SerializationKeys.didConflictWithAuto)
+    aCoder.encode(numAllianceSwitchFailedAuto, forKey: SerializationKeys.numAllianceSwitchFailedAuto)
+    aCoder.encode(avgAllianceSwitchTimeTele, forKey: SerializationKeys.avgAllianceSwitchTimeTele)
+    aCoder.encode(numScaleFailedTele, forKey: SerializationKeys.numScaleFailedTele)
+    aCoder.encode(isDysfunctional, forKey: SerializationKeys.isDysfunctional)
+    aCoder.encode(numOpponentSwitchSuccessAuto, forKey: SerializationKeys.numOpponentSwitchSuccessAuto)
+    aCoder.encode(numScaleSuccessAuto, forKey: SerializationKeys.numScaleSuccessAuto)
+    aCoder.encode(avgScaleTimeTele, forKey: SerializationKeys.avgScaleTimeTele)
+    aCoder.encode(numCubesPlacedAuto, forKey: SerializationKeys.numCubesPlacedAuto)
+    aCoder.encode(numOpponentSwitchFailedAuto, forKey: SerializationKeys.numOpponentSwitchFailedAuto)
+    aCoder.encode(didClimb, forKey: SerializationKeys.didClimb)
   }
+
 }

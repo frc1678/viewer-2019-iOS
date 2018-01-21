@@ -88,7 +88,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         let abilityKeys = [
             "calculatedData.firstPickAbility",
-            "calculatedData.overallSecondPickAbility",
+            "calculatedData.secondPickAbility",
             "calculatedData.autoAbility",
             "calculatedData.citrusDPR",
             "calculatedData.avgGroundIntakes",
@@ -115,9 +115,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         let notGraphingValues = [
             "First Pick Ability",
             "Second Pick Ability",
-            "R Score Driving Ability",
-            // "Avg. Key Shooting Time",
-            
+            "Avg. Driving Ability",
+            "SW Fail Percentage Tele",
+            "SC Fail Percentage Tele",
+            "SW Fail Percentage Auto",
+            "SC Fail Percentage Auto",
+            "Multi-Side Auto",
+            "Total # of Good Decisions",
+            "Total # of Bad Decisions",
         ]
         
         /** Values that should be displayed as long text cells */
@@ -126,7 +131,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         ]
         
         let longTextCells : [String] = [
-            "SEALSNotes"
+            "pitSEALsNotes"
         ]
         
         let unrankedCells = [
@@ -137,8 +142,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         /** Values to be displayed as percentages. */
         let percentageValues = [
             "calculatedData.disabledPercentage",
-            "calculatedData.disfunctionalPercentage",
-            "calculatedData.incapacitatedPercentage"
+            "calculatedData.dysfunctionalPercentage",
+            "calculatedData.incapacitatedPercentage",
+            "calculatedData.climbPercentage",
+            "calculatedData.scaleFailPercentageAuto",
+            "calculatedData.switchFailPercentageAuto",
+            "calculatedData.scaleFailPercentageTele",
+            "calculatedData.switchFailPercentageTele",
+            "calculatedData.autoRunPercentage"
         ]
         
         //let otherNoCalcDataValues = [
@@ -150,7 +161,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         let boolValues = [
             "calculatedData.disabledPercentage",
             "calculatedData.incapacitatedPercentage",
-            "pitDidDemonstrateCheesecakePotential"
+            "pitCanCheesecake",
+            "calculatedData.canScoreBothSwitchSidesAuto"
         ]
         
         
@@ -182,9 +194,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
                 "Default",
                 //"High Level",
                 "Status",
-                //"Autonomous",
-                //"Teleoperated",
-                //"End Game",
+                "Autonomous",
+                "Teleoperated",
+                "End Game",
                 "Super Scout",
                 "Pit Scout",
                 "SEALS"
@@ -211,9 +223,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
                 defaultKeys,
                 //highLevel,
                 statusKeys,
-                //autoKeys,
-                //teleKeys,
-                //endGame,
+                autoKeys,
+                teleKeys,
+                endGame,
                 superKeys,
                 pitKeys,
                 sealKeys
@@ -229,7 +241,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         let highLevel : [String] = [ //not needed
             /*"calculatedData.firstPickAbility",
-             "calculatedData.overallSecondPickAbility",
+             "calculatedData.secondPickAbility",
              "calculatedData.avgKeyShotTime",
              "calculatedData.avgHopperShotTime"*/
         ]
@@ -238,10 +250,15 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         //]
         /** Keys relating to autonomous to be displayed on teamDetails. */
-        //let autoKeys = [
+        let autoKeys = [
         //Some stuff is not needed
-        
-        //]
+            "calculatedData.avgCubesPlacedInScaleAuto",
+            "calculatedData.avgAllianceSwitchCubesAuto",
+            "calculatedData.canScoreBothSwitchSidesAuto",
+            //"didMakeAutoRun",
+            "calculatedData.switchFailPercentageAuto",
+            "calculatedData.scaleFailPercentageAuto"
+        ]
         
         let teleKeysMini : [String] = [
             //"calculatedData.avgHighShotsTele",
@@ -253,21 +270,39 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         ]
         
         /** Keys relating to Teleoperated to be displayed on teamDetails */
-        //let teleKeys = [
+        let teleKeys = [
+            "calculatedData.avgNumCubesFumbledTele",
+            "calculatedData.avgCubesPlacedInScaleTele",
+            "calculatedData.avgOpponentSwitchCubesTele",
+            "calculatedData.avgAllianceSwitchCubesTele",
+            "calculatedData.avgNumExchangeInputTele",
+            "calculatedData.avgNumGroundIntakeTele",
+            "calculatedData.avgNumHumanPortalIntakeTele",
+            "calculatedData.avgNumGroundPortalIntakeTele",
+            "calculatedData.switchFailPercentageTele",
+            "calculatedData.scaleFailPercentageTele"
         
+        ]
         
-        //]
-        
-        /** Dict translating a key for a teamDetails datapoint to the key for the respective TIMD datapoint */
+        /** Dict translating a key for a teamDetails datapoint to the key for the respective TIMD datapoint. Does not include "calculatedData." in the keys. */
         let teamDetailsToTIMD = [
             //status
-            "incapacitatedPercentage" : "didBecomeIncapacitated",
-            "disabledPercentage" : "didStartDisabled",
-            "disfunctionalPercentage" : "calculatedData.wasDisfunctional",
+            "incapacitatedPercentage" : "didGetIncapacitated",
+            "disabledPercentage" : "didGetDisabled",
+            "dysfunctionalPercentage" : "calculatedData.isDysfunctional",
             //scoring stuff
-            //"teleopShotAbility" : "calculatedData.teleopShotAbility",
-            //"avgGearsPlacedAuto" : "calculatedData.numGearsPlacedAuto",
-            //"avgGearsPlacedTele" : "calculatedData.numGearsPlacedTele",
+            "avgCubesPlacedInScaleAuto" : "calculatedData.numScaleSuccessAuto",
+            "avgAllianceSwitchCubesAuto" : "calculatedData.numAllianceSwitchSuccessAuto",
+            "avgCubesPlacedInScaleTele" : "calculatedData.numScaleSuccessTele",
+            "avgAllianceSwitchCubesTele" : "calculatedData.numAllianceSwitchSuccessTele",
+            "avgNumCubesFumbledTele" : "numCubesFumbledTele",
+            "avgOpponentSwitchCubesTele" : "calculatedData.numOpponentSwitchSuccessTele",
+            "avgNumExchangeInputTele" : "numExchangeInput",
+            "avgNumGroundIntakeTele" : "numGroundIntakeTele",
+            "avgNumHumanPortalIntakeTele" : "numHumanPortalIntakeTele",
+            "avgNumGroundPortalIntakeTele" : "numGroundPortalIntakeTele",
+            "avgClimbTime" : "calculatedData.climbTime",
+            "climbPercentage" : "calculatedData.didClimb",
             //super data
             "avgSpeed" : "rankSpeed",
             "avgAgility" : "rankAgility",
@@ -275,11 +310,13 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "avgDrivingAbility" : "calculatedData.drivingAbility",
             "avgDefense" : "rankDefense",
             //RScore super data
+            /* //Uncomment when calculations are up on firebase
             "RScoreDrivingAbility" : "calculatedData.drivingAbility",
             "RScoreAgility" : "rankAgility",
             "RScoreDefense" : "rankDefense",
             "RScoreSpeed" : "rankSpeed",
             "RScoreTorque" : "rankTorque",
+            */
             //Misc
             "actualNumRPs" : "calculatedData.numRPs",
             "numAutoPoints" : "calculatedData.numAutoPoints",
@@ -287,8 +324,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             ]
         
         /** Keys relating to the portions of the game that occur in the end (climbing, challenging, etc) */
-        //let endGame = [
-        //]
+        let endGame = [
+            "calculatedData.climbPercentage",
+            "calculatedData.avgClimbTime"
+        ]
         
         let siegeKeysMini : [String] = [
             //"calculatedData.liftoffAbility",
@@ -296,30 +335,30 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         ]
         
         let statusKeysMini = [
-            "calculatedData.disfunctionalPercentage",
+            "calculatedData.dysfunctionalPercentage",
             //"calculatedData.disabledPercentage",
             //"calculatedData.incapacitatedPercentage",
         ]
         
         /** Keys relating to the status of a robot to be displayed on teamDetails */
         let statusKeys = [
-            "calculatedData.disfunctionalPercentage",
+            "calculatedData.dysfunctionalPercentage",
             "calculatedData.disabledPercentage",
             "calculatedData.incapacitatedPercentage",
-            ]
+        ]
         
         /** Keys relating to the data the pit scout collects to be displayed on teamDetails */
         let pitKeys = [
             "pitDriveTrain",
+            "pitClimberType",
             "pitAvailableWeight",
-            //"pitOrganization",
             "pitProgrammingLanguage"
         ]
         
         /** Data collected by SEALS */
         let sealKeys = [
-            "pitDidDemonstrateCheesecakePotential",
-            "pitSEALSNotes"
+            "pitCanCheesecake",
+            "pitSEALsNotes"
         ]
         
         /** Human readable names for CTIMD keys */
@@ -331,7 +370,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "Number of RPs",
             "Number of Auto Points",
             "R Score Defense",
-            //"R Score Ball Control",
             "R Score Driving Ability",
             "Citrus DPR",
             "Second Pick Ability",
@@ -344,12 +382,16 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     static let superKeys = [
         //superNotes- They're in TIMDs, so see TeamDetails for more info
         "superNotes",
-        "calculatedData.RScoreDefense",
-        "calculatedData.RScoreAgility",
-        "calculatedData.RScoreSpeed",
+        "calculatedData.avgDrivingAbility",
+        "calculatedData.avgSpeed",
+        "calculatedData.avgAgility",
+        "calculatedData.avgDefense",
+        "calculatedData.totalNumGoodDecisions",
+        "calculatedData.totalNumBadDecisions"
+        
         //"calculatedData.avgBallControl",
         //"calculatedData.avgGearControl",
-        "calculatedData.RScoreDrivingAbility"
+        //"calculatedData.RScoreDrivingAbility"
     ]
     static let statusKeys = ["uploadedData.incapacitated", "uploadedData.disabled"]
     static let miscKeys = ["uploadedData.miscellaneousNotes"]
@@ -359,21 +401,23 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     // MARK: TIMD keys
     /** Keys relating to the Autonomous period to be displayed in the TIMD view */
     static let TIMDAutoKeys : [String] = [
-        //"calculatedData.numLowShotsAuto",
-        //"numHoppersOpenedAuto",
-        //"calculatedData.numGearsPlacedAuto",
-        //"calculatedData.numHighShotsAuto",
+        "didMakeAutoRun",
+        "didCrossAutoZone",
+        "numCubesFumbledAuto",
+        "calculatedData.numAllianceSwitchCubeSuccessAuto",
+        "calculatedData.numScaleSuccessAuto"
     ]
     
     /** Keys relating to the Teleoperated period to be displayed in the TIMD view */
     static let TIMDTeleKeys : [String] = [
-        //"calculatedData.numLowShotsTele",
-        //"numGearLoaderIntakesTele",
-        //"calculatedData.numHighShotsTele",
-        //"numGearGroundIntakesTele",
-        //"numHoppersOpenedTele",
-        //"calculatedData.numGearsPlacedTele",
-        //"didLiftoff"
+        "calculatedData.numAllianceSwitchSuccessTele",
+        "calculatedData.numScaleSuccessTele",
+        "calculatedData.numOpponentSwitchSuccessTele",
+        "numExchangeInput",
+        "numGroundIntakeTele",
+        "numHumanPortalIntakeTele",
+        "climb",
+        "didPark"
     ]
     
     /** Keys relating to the status of a robot to be displayed in the TIMD view */
@@ -384,13 +428,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     
     /** Keys relating to the data Super Scouts collect to be displayed in the TIMD view */
     static let TIMDSuperKeys = [
-        //"rankBallControl",
-        "rankDefense",
-        "rankAgility",
         "rankSpeed",
-        //"rankGearControl",
-        //"drivingAbility",
-        //"superNotes"
+        "rankAgility",
+        "rankDefense",
+        "superNotes",
+        "numGoodDecisions",
+        "numBadDecisions"
     ]
     
     /** All sections of the TIMD view */
@@ -432,7 +475,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "avgSpeed",
         "avgTorque",
         "disabledPercentage",
-        "disfunctionalPercentage",
+        "dysfunctionalPercentage",
         "firstPickAbility",
         "incapacitatedPercentage",
         "actualNumRPs",
@@ -444,7 +487,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "sdHighShotsTele",
         "sdLowShotsAuto",
         "sdLowShotsTele",
-        "overallSecondPickAbility",
+        "secondPickAbility",
         "secondPickAbility",
         //"avgGearsFumbledTele",
         //"avgGearsEjectedTele",
@@ -459,7 +502,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.firstPickAbility",
         "calculatedData.numRPs",
         "calculatedData.secondPickAbility",
-        "calculatedData.overallSecondPickAbility",
+        "calculatedData.secondPickAbility",
         "calculatedData.scoreContribution",
         //"calculatedData.hoppersOpenedAuto",
         //"calculatedData.hoppersOpenedTele",
@@ -470,24 +513,15 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         //"calculatedData.numHighShotsAuto"
     ]
     
-    /** A dictionary with datapoints as keys and Human Readable Names as indices */
+    /** A dictionary with datapoints as keys and Human Readable versions as values */
     static let humanReadableNames = [
         "superNotes": "Super Scout Notes",
-        "SEALSNotes" : "SEALS Notes",
-        //"calculatedData.avgGearsPlacedByLiftAuto.allianceWall": "Avg. Center Gears",
-        //"calculatedData.avgGearsPlacedByLiftAuto.hpStation": "Avg. HP Side Gears",
-        //"calculatedData.avgGearsPlacedByLiftAuto.boiler": "Avg. Boiler Side Gears",
+        "pitSEALsNotes" : "SEALs Notes",
         "calculatedData.actualSeed" : "Seed",
         "calculatedData.avgEvasion" : "Avg. Evasion",
-        //"calculatedData.avgGroundIntakes" : "Avg. Ground Intakes",
-        //"calculatedData.avgHighShotsAuto" : "Avg. High Shots Auto",
-        //"calculatedData.avgHighShotsTele" : "Avg. High Shots Tele",
-        //"calculatedData.avgLowShotsAuto" : "Avg. Low Shots Auto",
-        //"calculatedData.avgLowShotsTele" : "Avg. Low Shots Tele",
-        //"calculatedData.avgShotsBlocked" : "Avg. Shots Blocked",
         "calculatedData.avgTorque" : "Avg. Torque",
         "calculatedData.disabledPercentage" : "Disabled Percentage",
-        "calculatedData.disfunctionalPercentage" : "Dysfunctional Percentage",
+        "calculatedData.dysfunctionalPercentage" : "Dysfunctional Percentage",
         "calculatedData.driverAbility" : "Driver Ability",
         "calculatedData.firstPickAbility" : "First Pick Ability",
         "calculatedData.incapacitatedPercentage" : "Incapacitated Percentage",
@@ -496,17 +530,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.predictedNumRPs" : "Predicted # of RPs",
         "calculatedData.predictedSeed" : "Predicted Seed",
         "calculatedData.scalePercentage" : "Scale Percentage",
-        //"calculatedData.avgHighShotsAttemptedTele": "Avg. H Shots Tried",
-        //"calculatedData.sdBallsKnockedOffMidlineAuto" : "σ Balls off Midline Auto",
-        //"calculatedData.sdFailedDefenseCrossesAuto" : "σ Failed Defenses Auto",
-        //"calculatedData.baselineReachedPercentage" : "Baseline Percentage",
-        //"calculatedData.sdGroundIntakes" : "σ Ground Intakes",
-        //"calculatedData.sdHighShotsAuto" : "σ High Shots",
-        //"calculatedData.sdHighShotsTele" : "σ High Shots",
-        //"calculatedData.sdLowShotsAuto" : "σ Low Shots",
-        //"calculatedData.sdLowShotsTele" : "σ Low Shots",
-        //"calculatedData.sdShotsBlocked" : "σ Shots Blocked",
-        "calculatedData.overallSecondPickAbility" : "Second Pick Ability",
+        "calculatedData.secondPickAbility" : "Second Pick Ability",
         "matchDatas" : "Matches",
         "TeamInMatchDatas" : "TIMDs",
         "pitLowBarCapability": "Low Bar Ability",
@@ -526,85 +550,75 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "pitAvailableWeight" : "Avail. Weight",
         "pitOrganization" : "Pit Organization",
         "pitDidUseStandardTankDrive" : "Has Normal Tank Drivetrain",
-        "pitDidDemonstrateCheesecakePotential": "Cheesecakable",
-        //"rankBallControl" : "Ball Control Rank",
+        "pitCanCheesecake": "Cheesecakable",
         "rankDefense" : "Defense Rank",
         "rankAgility" : "Agility Rank",
         "rankSpeed" : "Speed Rank",
         "rankTorque" : "Torque Rank",
-        //"didScaleTele" : "Did Scale",
         "didBecomeIncapacitated" : "Was Incap.",
         "didStartDisabled" : "Was Disabled",
-        //"numShotsBlockedTele" : "Num Shots Blocked",
-        //"calculatedData.numLowShotsTele" : "Num Low Shots Made Tele",
-        //"calculatedData.numHighShotsTele" : "Num High Shots Made Tele",
         "calculatedData.RScoreSpeed" : "R Score Speed",
         "calculatedData.RScoreEvasion" : "R Score Evasion",
         "calculatedData.RScoreTorque" : "R Score Torque",
         "calculatedData.RScoreAgility": "R Score Agility",
         "calculatedData.RScoreDefense": "R Score Defense",
-        //"calculatedData.RScoreBallControl": "R Score Ball Control",
         "calculatedData.RScoreGearControl": "R Score Gear Control",
         "calculatedData.avgAgility": "Avg. Agility",
         "calculatedData.avgDefense": "Avg. Defense",
         "calculatedData.avgSpeed": "Avg. Speed",
-        //"calculatedData.avgBallControl": "Avg. Ball Control",
-        //"calculatedData.avgGearControl": "Avg. Gear Control",
         "calculatedData.avgDrivingAbility": "Avg. Driving Ability",
-        //"calculatedData.avgLowShotsAttemptedTele": "Avg. L Shots Tried",
         "pitNumberOfWheels": "Number of Wheels",
-        //"calculatedData.liftoffPercentage": "Liftoff Percentage",
-        //"calculatedData.liftoffAbility": "Liftoff Ability",
-        //"calculatedData.avgKeyShotTime": "Avg. Key Shooting Time",
-        //"lowShotTimesForBoilerTele" : "Low Shots Made Tele",
-        //"numGearLoaderIntakesTele" : "Gears Intaked From Loader Tele",
-        //"highShotTimesForBoilerTele" : "High Shots Made Tele",
-        //"numGearGroundIntakesTele" : "Gears Intaked From Ground Tele",
-        //"hoppersOpenedTele" : "Num Hoppers Opened Tele",
-        //"gearsPlacedByLiftTele" : "Gears Placed Tele",
-        //"didLiftoff" : "Did Liftoff",
-        //"highShotTimesForBoilerAuto" : "High Shots Made Auto",
-        //"hoppersOpenedAuto" : "Num Hoppers Opened Auto",
-        //"gearsPlacedByLiftAuto" : "Gears Placed Tele",
-        //"didReachBaselineAuto" : "Reached Baseline in Auto",
-        //"lowShotTimesForBoilerAuto" : "Low Shots Made Auto",
         "didPotentiallyConflictingAuto" : "Did a Potentially Conflicting Auto",
-        //"calculatedData.avgHoppersOpenedTele" : "Avg. Hoppers Opened Tele",
-        //"calculatedData.avgHoppersOpenedAuto" : "Avg. Hoppers Opened Auto",
-        //"calculatedData.avgGearGroundIntakesTele" : "Avg. Gears Ground Intaked Tele",
-        //"calculatedData.avgGearGroundIntakesAuto" : "Avg. Gears Ground Intaked Auto",
-        //"calculatedData.avgGearsFumbledTele" : "Avg. Gears Fumbled Tele",
-        //"calculatedData.avgGearsFumbledAuto" : "Avg. Gears Fumbled Auto",
-        //"calculatedData.avgGearsEjectedTele" : "Avg. Gears Ejected Tele",
-        //"calculatedData.avgGearsEjectedAuto" : "Avg. Gears Ejected Auto",
-        //"calculatedData.avgLoaderIntakesTele" : "Avg. Loader Intakes Tele",
-        //"calculatedData.avgLoaderIntakesAuto" : "Avg. Loader Intakes Auto",
-        //"calculatedData.sdGearsPlacedByLiftTele" : "σ Gears Placed Tele",
-        //"calculatedData.sdGearsPlacedByLiftAuto" : "σ Gears Placed Auto",
-        //"calculatedData.avgGearsPlacedByLiftAuto" : "Avg. Gears Placed Auto",
-        //"numHoppersOpenedAuto" : "Num Hoppers Opened Auto",
-        //"numHoppersOpenedTele" : "Num Hoppers Opened Tele",
-        //"gearsPlacedByLiftAuto.lift1" : "Gears Placed Auto (Lift 1)",
-        //"gearsPlacedByLiftAuto.lift2" : "Gears Placed Auto (Lift 2)",
-        //"gearsPlacedByLiftAuto.lift3" : "Gears Placed Auto (Lift 3)",
-        //"gearsPlacedByLiftTele.lift1" : "Gears Placed Tele (Lift 1)",
-        //"gearsPlacedByLiftTele.lift2" : "Gears Placed Tele (Lift 2)",
-        //"gearsPlacedByLiftTele.lift3" : "Gears Placed Tele (Lift 3)",
-        //"lowShotTimesForBoilerTele.numShots" : "Low Shots Made Tele",
-        //"lowShotTimesForBoilerAuto.numShots" : "Low Shots Made Auto",
-        //"highShotTimesForBoilerTele.numShots" : "High Shots Made Tele",
-        //"highShotTimesForBoilerAuto.numShots" : "High Shots Made Auto",
-        //"calculatedData.numLowShotsAuto" : "Low Shots Made Auto",
-        //"calculatedData.numGearsPlacedAuto" : "Num Gears Scored Auto",
-        //"calculatedData.numHighShotsAuto" : "High Shots Made Auto",
-        //"calculatedData.numGearsPlacedTele" : "Num Gears Scored Tele",
-        //"rankGearControl" : "Gear Control Rank",
-        //"calculatedData.avgGearsPlacedAuto" : "Avg. Total Gears Placed Auto",
-        //"calculatedData.sdGearsPlacedAuto" : "σ Gears Placed Auto",
-        //"calculatedData.avgGearsPlacedTele" : "Avg. Gears Placed Tele",
-        //"calculatedData.sdGearsPlacedTele" : "σ Gears Placed Tele",
-        //"calculatedData.avgHopperShotTime" : "Avg. Hopper Shooting Time",
-        "pitDriveTrain" : "Drive Train"
+        "pitDriveTrain" : "Drive Train",
+        "calculatedData.avgNumGroundPyramidIntakeAuto" : "Avg. Ground PY Intakes Auto",
+        "calculatedData.avgNumGroundPortalIntakeAuto" : "Avg. Ground PO Intakes Auto",
+        "calculatedData.avgNumElevatedPyramidIntakeAuto" : "Avg. Elevated PY Intakes Auto",
+        "calculatedData.avgNumCubesFumbledAuto" : "Avg. Cubes Fumbled in Auto",
+        "calculatedData.avgNumAlliancePlatformIntakeAuto" : "Avg. PZ Intakes Auto",
+        "calculatedData.avgNumCubesSpilledAuto" : "Avg. Cubes Spilled Auto",
+        "calculatedData.avgCubesPlacedInScaleAuto" : "Avg. Cubes in SC Auto",
+        "calculatedData.avgAllianceSwitchCubesAuto" : "Avg. Cubes in SW Auto",
+        "calculatedData.avgNumGroundPyramidIntakeTele" : "Avg. Ground PY Intakes Tele",
+        "calculatedData.avgNumGroundPortalIntakeTele" : "Avg. Ground PO Intakes Tele",
+        "calculatedData.avgNumElevatedPyramidIntakeTele" : "Avg. Elevated PY Intakes Tele",
+        "calculatedData.avgNumCubesFumbledTele" : "Avg. Cubes Fumbled in Tele",
+        "calculatedData.avgNumAlliancePlatformIntakeTele" : "Avg. PZ Intakes Tele",
+        "calculatedData.avgNumCubesSpilledTele" : "Avg. Cubes Spilled Tele",
+        "calculatedData.avgCubesPlacedInScaleTele" : "Avg. Cubes in SC Tele",
+        "calculatedData.avgAllianceSwitchCubesTele" : "Avg. Cubes in SW Tele",
+        "calculatedData.avgNumExchangeInputTele" : "Avg. EX Input Tele",
+        "calculatedData.autoRunPercentage" : "Auto Run Percentage",
+        "calculatedData.totalNumGoodDecisions" : "Total # of Good Decisions",
+        "calculatedData.totalNumBadDecisions" : "Total # of Bad Decisions",
+        "calculatedData.avgClimbTime" : "Avg. Climb Time",
+        "calculatedData.avgOpponentSwitchCubesTele" : "Avg. Cubes in SWO Tele",
+        "calculatedData.avgNumGroundIntakeTele" : "Avg. Ground Intakes Tele",
+        "calculatedData.avgNumPortalIntakeTele" : "Avg. PO Intakes Tele",
+        "calculatedData.switchFailPercentageTele" : "SW Fail Percentage Tele",
+        "calculatedData.scaleFailPercentageTele" : "SC Fail Percentage Tele",
+        "calculatedData.canScoreBothSwitchSidesAuto" : "Multi-Side Auto",
+        "didMakeAutoRun" : "Did Make Auto Run",
+        "calculatedData.switchFailPercentageAuto" : "SW Fail Percentage Auto",
+        "calculatedData.scaleFailPercentageAuto" : "SC Fail Percentage Auto",
+        "calculatedData.avgNumHumanPortalIntakeTele" : "Avg. Human PO Intakes Tele",
+        "calculatedData.climbPercentage" : "Climb Percentage",
+        "pitClimberType" : "Climber Type",
+        "calculatedData.avgCubesSpilledTele" : "Avg. Cubes Spilled Tele",
+        "didPark" : "Parked",
+        "climb" : "Climb",
+        "numHumanPortalIntakeTele" : "Human Portal Intakes Tele",
+        "numGoodDecisions" : "Good Decisions",
+        "numBadDecisions" : "Bad Decisions",
+        "numGroundIntakeTele" : "Ground Intakes Tele",
+        "numExchangeInput" : "EX Inputs",
+        "numCubesFumbledAuto" : "Cubes Fumbled Auto",
+        "didCrossAutoZone" : "Crossed Auto Zone",
+        //"didMakeAutoRun" : "Made Auto Run",
+        "calculatedData.numAllianceSwitchCubeSuccessAuto" : "Successful SW Cubes Auto",
+        "calculatedData.numScaleSuccessAuto" : "Successful SC Cubes Auto",
+        "calculatedData.numAllianceSwitchSuccessTele" : "Successful SW Cubes Tele",
+        "calculatedData.numScaleSuccessTele" : "Successful SC Cubes Tele",
+        "calculatedData.numOpponentSwitchSuccessTele" : "Successful SWO Cubes Tele",
     ]
     
     /**
