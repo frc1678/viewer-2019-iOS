@@ -84,7 +84,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     static let teamDetailsKeys = TeamDetailsKeys()
     struct TeamDetailsKeys {
         
-        let yesNoKeys : [String] = []
+        let yesNoKeys : [String] = [
+            "calculatedData.canScoreBothSwitchSidesAuto"
+        ]
         
         let abilityKeys = [
             "calculatedData.firstPickAbility",
@@ -168,7 +170,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "didGetDisabled",
             "wasIncapacitated",
             "calculatedData.didClimb",
-            "didPark"
+            "didPark",
+            "calculatedData.canScoreBothSwitchSidesAuto",
         ]
         
         
@@ -357,6 +360,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitDriveTrain",
             "pitClimberType",
             "pitAvailableWeight",
+            "pitMaxHeight",
             "pitProgrammingLanguage"
         ]
         
@@ -401,7 +405,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     static let statusKeys = ["uploadedData.incapacitated", "uploadedData.disabled"]
     static let miscKeys = ["uploadedData.miscellaneousNotes"]
     
-    
+    /** Keys that should be booleans in graphs */
+    static let boolGraphs = [
+        "calculatedData.climbPercentage",
+        "calculatedData.dysfunctionalPercentage",
+        //"calculatedData.park", //FALSE doesn't exist
+        "calculatedData.incapacitatedPercentage",
+        "calculatedData.disabledPercentage",
+    ]
     
     // MARK: TIMD keys
     /** Keys relating to the Autonomous period to be displayed in the TIMD view */
@@ -421,7 +432,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "numExchangeInput",
         "numGroundIntakeTele",
         "numHumanPortalIntakeTele",
-        "calculatedData.didClimb",
+        "climb",
+        //"calculatedData.didClimb",
         "didPark"
     ]
     
@@ -625,6 +637,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.numScaleSuccessTele" : "Successful SC Cubes Tele",
         "calculatedData.numOpponentSwitchSuccessTele" : "Successful SWO Cubes Tele",
         "calculatedData.didClimb" : "Climbed",
+        "pitMaxHeight" : "Max. Height",
     ]
     
     /**
@@ -632,7 +645,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
      - parameter value: Input value
      - parameter numDecimalPlaces: Number of decimal places
      */
-    class func roundValue(_ value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {
+    @objc class func roundValue(_ value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {
         let val = value as NSNumber
         let f = NumberFormatter()
         f.numberStyle = NumberFormatter.Style.decimal

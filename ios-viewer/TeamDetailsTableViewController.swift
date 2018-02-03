@@ -27,7 +27,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     @IBOutlet weak var seed: UILabel!
     @IBOutlet weak var predictedSeed: UILabel!
     
-    var team: Team? = nil {
+    @objc var team: Team? = nil {
         didSet {
             num = self.team?.number
             updateTitleAndTopInfo()
@@ -188,7 +188,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     }
     
     //Image is tapped
-    func didTapImage(_ recognizer: UITapGestureRecognizer) {
+    @objc func didTapImage(_ recognizer: UITapGestureRecognizer) {
         if recognizer.state == UIGestureRecognizerState.recognized {
             //navigate to image browser
             let nav = UINavigationController(rootViewController: self.photoBrowser)
@@ -352,6 +352,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         unrankedCell.detailLabel!.text! = (team?.pitProgrammingLanguage) ?? ""
                     } else if dataKey == "pitDriveTrain" {
                         unrankedCell.detailLabel!.text! = (team?.pitDriveTrain) ?? ""
+                    } else if dataKey == "pitClimberType" {
+                        unrankedCell.detailLabel!.text! = (team?.pitClimberType) ?? ""
+                    //uhhh what even is this?
                     } else if Utils.teamDetailsKeys.addCommasBetweenCapitals.contains(dataKey) {
                         unrankedCell.detailLabel.text = "\(insertCommasAndSpacesBetweenCapitalsInString(roundValue(dataPoint!, toDecimalPlaces: 2)))"
                     } else if Utils.teamDetailsKeys.boolValues.contains(dataKey) {
@@ -827,7 +830,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         
     }
     
-    func reloadTableView(_ note: Notification) {
+    @objc func reloadTableView(_ note: Notification) {
         if note.name.rawValue == "updateLeftTable" {
             if let t = note.object as? Team {
                 if t.number == team?.number {
@@ -840,7 +843,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     }
     
     //Rankable row has been long-pressed, perform segue
-    func rankingDetailsSegue(_ gesture: UIGestureRecognizer) {
+    @objc func rankingDetailsSegue(_ gesture: UIGestureRecognizer) {
         
         if(gesture.state == UIGestureRecognizerState.began) {
             let p = gesture.location(in: self.tableView)

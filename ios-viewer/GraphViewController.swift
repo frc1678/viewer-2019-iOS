@@ -110,10 +110,22 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
         //get title without certain key words
         let displayTitleWithoutAvg = displayTitle.replacingOccurrences(of: "Avg. ", with: "").replacingOccurrences(of: " Consistency", with: "").replacingOccurrences(of: " Percentage", with: "")
         if newValuesArray.count == 0 {
-            if !isPercentageGraph {
-                mainDisplayText = "\(displayTitleWithoutAvg)\(roundValue(values[Int(index)] as AnyObject?, toDecimalPlaces: 2))"
-            } else {
+            if isPercentageGraph {
                 mainDisplayText = "\(displayTitleWithoutAvg)\(percentageValueOf(values[Int(index)] as AnyObject?))"
+            } else if Utils.boolGraphs.contains(Utils.findKeyForValue(graphTitle)!) {
+                if Bool(truncating: Int(values[Int(index)]) as NSNumber) {
+                    mainDisplayText = "\(displayTitleWithoutAvg)Yes"
+                } else {
+                    mainDisplayText = "\(displayTitleWithoutAvg)No"
+                }
+            } else {
+                mainDisplayText = "\(displayTitleWithoutAvg)\(roundValue(values[Int(index)] as AnyObject?, toDecimalPlaces: 2))"
+            }
+        } else if Utils.boolGraphs.contains(Utils.findKeyForValue(graphTitle)!) {
+            if Bool(truncating: Int(newValuesArray[Int(index)]) as! NSNumber) {
+                mainDisplayText = "\(displayTitleWithoutAvg)Yes"
+            } else {
+                mainDisplayText = "\(displayTitleWithoutAvg)No"
             }
         } else {
             mainDisplayText = "\(displayTitleWithoutAvg)\(newValuesArray[Int(index)])"
@@ -150,7 +162,8 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
             let fraction = ((values.max()! - min(values.min()!, 0.0)) / (values[Int(index)] - min(values.min()!, 0.0)))
             return negativeColor.withAlphaComponent((fraction * 0.3 + 0.2) * CGFloat(negativeMultiplier))
         } else {
-            return color.withAlphaComponent(((values[Int(index)] - min(values.min()!, 0.0)) / (values.max()! - min(values.min()!, 0.0))) * 0.5 + 0.5)
+            let a = (values[Int(index)] - min(values.min()!, 0.0)) / (values.max()! - min(values.min()!, 0.0))
+            return color.withAlphaComponent(a * 0.5 + 0.5)
         }
     }
     

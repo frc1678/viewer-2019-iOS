@@ -41,7 +41,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     var NSCounter = -2
     var hasUpdatedMatchOnSetup = false
     var firstCurrentMatchUpdate = true
-    let currentMatchManager : CurrentMatchManager
+    @objc let currentMatchManager : CurrentMatchManager
     
     var matchCounter = 0
     var TIMDCounter = 0
@@ -57,13 +57,17 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     let devToken = "j1r2wo3RUPMeUZosxwvVSFEFVcrXuuMAGjk6uPOc"
     let stratDevToken = "IMXOxXD3FjOOUoMGJlkAK5pAtn89mGIWAEnaKJhP"
     //array of all matches
-    var matches = [Match]()
+    @objc var matches = [Match]()
     //array of all TIMDs
     var teamInMatches = [TeamInMatchData]()
     //image urls
     var imageUrls = [Int: String]()
     var allTheData = NSDictionary()
-    
+    //picklists
+    @objc var picklistPassword = ""
+    @objc var firstPicklist = [Int]()
+    var secondPicklist = [Int]()
+
     let firebase : DatabaseReference
     
     override init() {
@@ -78,10 +82,30 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         self.notificationManager.notifications.append(NotificationManager.Notification(name: "updateLeftTable"))
         //self.notificationManager.notifications.append(NotificationManager.Notification(name: "currentMatchUpdated"))
         
-       DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+        //retrieve data
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+            self.getPicks()
             self.getAllTheData()
         }
         
+    }
+    
+    /** Gets the picklist password. */
+    func getPicks() {
+        self.firebase.observeSingleEvent(of: .value, with: { (snapshot) -> Void in
+            if let password = snapshot.childSnapshot(forPath: "PicklistPassword").value as? String, snapshot.childSnapshot(forPath: "PicklistPassword").value as? String != "" {
+                self.picklistPassword = password
+                print("done: \(self.picklistPassword)")
+            } else {
+                self.firebase.child("PicklistPassword").setValue("password")
+            }
+            if let firstPicks = snapshot.childSnapshot(forPath: "FirstPicklist").value as? [Int] {
+                self.firstPicklist = firstPicks
+            }
+            if let secondPicks = snapshot.childSnapshot(forPath: "SecondPicklist").value as? [Int] {
+                self.secondPicklist = secondPicks
+            }
+        })
     }
     
     /** 
@@ -299,7 +323,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             
             let m : [String: Any] = ["num":self.currentMatchManager.currentMatch, "redTeams": currentMatchFetch?.redAllianceTeamNumbers ?? [0,0,0], "blueTeams": currentMatchFetch?.blueAllianceTeamNumbers ?? [0,0,0]]
             UserDefaults.standard.set(m, forKey: "match")
-            })
+        })
         
     }
     
@@ -337,7 +361,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         Gets team object given team number
         - parameter teamNum: Number of the team
     */
-    func getTeam(_ teamNum: Int) -> Team? {
+    @objc func getTeam(_ teamNum: Int) -> Team? {
         //filter to end up with only the team(s) with the given number
         let myTeams = teams.filter { $0.number == teamNum }
         if myTeams.count == 1 { return myTeams[0] }
@@ -371,7 +395,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         Gets an array of team objects
         - parameter teamNums: Array of team numbers
     */
-    func getTeamsFromNumbers(_ teamNums: [Int]?) -> [Team] {
+    @objc func getTeamsFromNumbers(_ teamNums: [Int]?) -> [Team] {
         var teams = [Team]()
         if teamNums != nil {
             for teamNum in teamNums! {
@@ -456,7 +480,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     // MARK: Rank
     /** Returns first pick list */
-    func getFirstPickList() -> [Team] {
+    @objc func getFirstPickList() -> [Team] {
         //sorts teams by first pick ability
         return teams.sorted { $0.calculatedData?.firstPickAbility > $1.calculatedData!.firstPickAbility }
     }
@@ -482,7 +506,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }*/
     
     /** Get list of teams sorted by seed */
-    func seedList() -> [Team] {
+    @objc func seedList() -> [Team] {
         return teams.sorted { $0.calculatedData!.actualSeed < $1.calculatedData!.actualSeed }
     }
     
@@ -510,7 +534,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         - parameter team: Team to find rank for
         - parameter withCharacteristic: Characteristic to rank by
     */
-    func rankOfTeam(_ team: Team, withCharacteristic: String) -> Int {
+    @objc func rankOfTeam(_ team: Team, withCharacteristic: String) -> Int {
         var counter = 0
         //sort teams by the characteristic
         let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic)
@@ -657,7 +681,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         Filters general searches
         - parameter searchString: String to filter results by
     */
-    func filteredTeamsForSearchString(_ searchString: String) -> [Team] {
+    @objc func filteredTeamsForSearchString(_ searchString: String) -> [Team] {
         var filteredTeams = [Team]()
         for team in self.teams {
             //if team number contains search field
@@ -918,7 +942,7 @@ class NotificationManager : NSObject {
         }
     }
     
-    func notify(_ timer : Timer) {
+    @objc func notify(_ timer : Timer) {
         for (noteName, specialObject) in self.notificationNamesToPost {
             postNotification(noteName, specialObject: specialObject)
         }
