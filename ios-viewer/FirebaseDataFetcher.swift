@@ -91,7 +91,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     /** Gets the picklist password. */
-    func getPicks() {
+    @objc func getPicks() {
         self.firebase.observeSingleEvent(of: .value, with: { (snapshot) -> Void in
             if let password = snapshot.childSnapshot(forPath: "PicklistPassword").value as? String, snapshot.childSnapshot(forPath: "PicklistPassword").value as? String != "" {
                 self.picklistPassword = password
@@ -99,11 +99,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             } else {
                 self.firebase.child("PicklistPassword").setValue("password")
             }
-            if let firstPicks = snapshot.childSnapshot(forPath: "FirstPicklist").value as? [Int] {
+            if let firstPicks = snapshot.childSnapshot(forPath: "picklist").value as? [Int] {
                 self.firstPicklist = firstPicks
             }
-            if let secondPicks = snapshot.childSnapshot(forPath: "SecondPicklist").value as? [Int] {
-                self.secondPicklist = secondPicks
+            for i in self.getOverallSecondPickList() {
+                self.secondPicklist.append(i.number)
             }
         })
     }
@@ -486,7 +486,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     /** Returns second pick list */
-    func getOverallSecondPickList() -> [Team] {
+    @objc func getOverallSecondPickList() -> [Team] {
         return self.teams.sorted { $0.calculatedData?.secondPickAbility > $1.calculatedData?.secondPickAbility }
     }
     
@@ -511,7 +511,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     /** Get list of teams sorted by predicted seed */
-    func predSeedList() -> [Team] {
+    @objc func predSeedList() -> [Team] {
         return teams.sorted { $0.calculatedData!.predictedSeed < $1.calculatedData!.predictedSeed }
     }
     
@@ -553,7 +553,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     /** See rankOfTeam, reverses */
-    func reverseRankOfTeam(_ team: Team, withCharacteristic:String) -> Int {
+    @objc func reverseRankOfTeam(_ team: Team, withCharacteristic:String) -> Int {
         var counter = 0
         let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic).reversed()
         
@@ -648,7 +648,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         Filters matches according to the search string when set to matches
         - parameter searchString: String to filter results by
     */
-    func filteredMatchesForMatchSearchString(_ searchString:String) -> [Match] {
+    @objc func filteredMatchesForMatchSearchString(_ searchString:String) -> [Match] {
         var filteredMatches = [Match]()
         for match in self.matches  {
             //if the match contains the search field

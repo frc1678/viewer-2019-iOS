@@ -123,8 +123,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "SW Fail Percentage Auto",
             "SC Fail Percentage Auto",
             "Multi-Side Auto",
-            "Total # of Good Decisions",
-            "Total # of Bad Decisions",
+            "Picklist Position",
         ]
         
         /** Values that should be displayed as long text cells */
@@ -138,7 +137,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         let unrankedCells = [
             "selectedImageURL",
-            "otherUrls"
+            "otherUrls",
+            "picklistPosition",
         ]
         
         /** Values to be displayed as percentages. */
@@ -201,7 +201,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             }
             return [
                 "Default",
-                //"High Level",
+                "High Level",
                 "Status",
                 "Autonomous",
                 "Teleoperated",
@@ -230,7 +230,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             }
             return [
                 defaultKeys,
-                //highLevel,
+                highLevel,
                 statusKeys,
                 autoKeys,
                 teleKeys,
@@ -248,11 +248,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "matchDatas"
         ]
         
-        let highLevel : [String] = [ //not needed
-            /*"calculatedData.firstPickAbility",
+        let highLevel : [String] = [ //needed
+            "calculatedData.firstPickAbility",
              "calculatedData.secondPickAbility",
-             "calculatedData.avgKeyShotTime",
-             "calculatedData.avgHopperShotTime"*/
+             "picklistPosition",
         ]
         
         //let autoKeysMini = [
@@ -324,7 +323,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "RScoreDefense" : "rankDefense",
             "RScoreSpeed" : "rankSpeed",
             "RScoreTorque" : "rankTorque",
- 
+            "totalNumGoodDecisions" : "numGoodDecisions",
+            "totalNumBadDecisions" : "numBadDecisions",
+
             //Misc
             "actualNumRPs" : "calculatedData.numRPs",
             "numAutoPoints" : "calculatedData.numAutoPoints",
@@ -476,6 +477,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.RScoreEvasion" : "calculatedData.avgEvasion",
         "calculatedData.RScoreTorque" : "calculatedData.avgTorque",
         //"rankBallControl" : "calculatedData.avgBallControl",
+        "calculatedData.totalNumGoodDecisions" : "numGoodDecisions",
+        "calculatedData.totalNumBadDecisions" : "numBadDecisions",
     ]
     
     /** Team Details keys? */
@@ -638,6 +641,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.numOpponentSwitchSuccessTele" : "Successful SWO Cubes Tele",
         "calculatedData.didClimb" : "Climbed",
         "pitMaxHeight" : "Max. Height",
+        "picklistPosition" : "Picklist Position",
     ]
     
     /**

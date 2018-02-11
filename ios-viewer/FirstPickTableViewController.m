@@ -23,22 +23,11 @@ NSString *fbpassword = @"";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.firebaseFetcher getPicks];
     self.firebaseFetcher = [AppDelegate getAppDelegate].firebaseFetcher;
     self.ref = [[FIRDatabase database] reference];
     fbpassword = self.firebaseFetcher.picklistPassword;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Picklist" style:UIBarButtonItemStylePlain target:self action:@selector(toggleInPicklist)];
-    if (self.firebaseFetcher.firstPicklist.count == 0) {
-        NSMutableArray<Team *> *tempPicklist = [NSMutableArray arrayWithArray:[self.firebaseFetcher getFirstPickList]];
-        firstPicklist = [NSMutableArray new];
-        for(int i = 0; i < [tempPicklist count]; i++) {
-            NSNumber *tempNum = @(tempPicklist[i].number);
-            [firstPicklist addObject:tempNum];
-            [[[[self.ref child:@"Teams"] child:[tempNum stringValue]] child:@"firstPicklistPosition"] setValue:[NSNumber numberWithInt:i]];
-        }
-        //[[self.ref child:@"FirstPicklist"] setValue:firstPicklist];
-    } else {
-        firstPicklist = self.firebaseFetcher.firstPicklist;
-    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -99,14 +88,15 @@ NSString *fbpassword = @"";
     NSNumber *movedObject = firstPicklist[sourceIndexPath.row];
     [firstPicklist removeObjectAtIndex: sourceIndexPath.row];
     [firstPicklist insertObject:movedObject atIndex:destinationIndexPath.row];
-    [[self.ref child:@"FirstPicklist"] setValue:firstPicklist];
+    self.firebaseFetcher.firstPicklist = firstPicklist;
+    [[self.ref child:@"picklist"] setValue:firstPicklist];
     if(sourceIndexPath.row > destinationIndexPath.row) {
         for(int j = destinationIndexPath.row; j <= sourceIndexPath.row; j++){
-            [[[[self.ref child:@"Teams"] child: [firstPicklist[j] stringValue]] child:@"firstPicklistPosition"] setValue:[NSNumber numberWithInteger:j]];
+            [[[[self.ref child:@"Teams"] child: [firstPicklist[j] stringValue]] child:@"picklistPosition"] setValue:[NSNumber numberWithInteger:j]];
         }
     } else {
         for(int j = sourceIndexPath.row; j <= destinationIndexPath.row; j++){
-            [[[[self.ref child:@"Teams"] child: [firstPicklist[j] stringValue]] child:@"firstPicklistPosition"] setValue:[NSNumber numberWithInteger:j]];
+            [[[[self.ref child:@"Teams"] child: [firstPicklist[j] stringValue]] child:@"picklistPosition"] setValue:[NSNumber numberWithInteger:j]];
         }
     }
     // NSLog("%@", "\(sourceIndexPath.row) => \(destinationIndexPath.row) \(secondPicklist)")
@@ -137,6 +127,7 @@ NSMutableArray<NSNumber *> *firstPicklist = nil;
 
 - (void)toggleInPicklist {
     if(!inPicklist){
+        [self.firebaseFetcher getPicks];
         fbpassword = self.firebaseFetcher.picklistPassword;
         if (self.firebaseFetcher.firstPicklist.count == 0) {
             NSMutableArray<Team *> *tempPicklist = [NSMutableArray arrayWithArray:[self.firebaseFetcher getFirstPickList]];
@@ -164,25 +155,46 @@ NSMutableArray<NSNumber *> *firstPicklist = nil;
                 [self.tableView setEditing:(BOOL *)inPicklist animated:false];
                 self.editing = inPicklist;
                 if(!inPicklist) {
-                    [[self.ref child:@"FirstPicklist"] setValue:firstPicklist];
+                    [[self.ref child:@"picklist"] setValue:firstPicklist];
                 }
                 self.dataArray = [self loadDataArray:false];
+                self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Reset" style:UIBarButtonItemStylePlain target:self action:@selector(clearPicklist)];
                 [self.tableView reloadData];
+                self.navigationItem.title = @"Live Picklist";
             }
             
         }]];
         [self presentViewController:ac animated:YES completion:nil];
+
     } else {
+        [self.firebaseFetcher getPicks];
         inPicklist = !inPicklist;
         [self.tableView setEditing:(BOOL *)inPicklist animated:false];
         self.editing = inPicklist;
         if(!inPicklist) {
-            [[self.ref child:@"FirstPicklist"] setValue:firstPicklist];
+            [[self.ref child:@"picklist"] setValue:firstPicklist];
         }
         self.dataArray = [self loadDataArray:false];
+        self.navigationItem.leftBarButtonItem = nil;
         [self.tableView reloadData];
+        self.navigationItem.title = @"First Pick";
     }
 }
 
+-(void)clearPicklist {
+    NSMutableArray<NSNumber *> *tempPicklist = [[NSMutableArray alloc] init];
+    for(Team *i in [self.firebaseFetcher getFirstPickList]) {
+        [tempPicklist addObject:[NSNumber numberWithInt:i.number]];
+    }
+    [[self.ref child:@"picklist"] setValue:tempPicklist];
+    self.firebaseFetcher.firstPicklist = tempPicklist;
+    firstPicklist = tempPicklist;
+    for(int i = 0; i < tempPicklist.count; i++) {
+        NSString* myNewString = [NSString stringWithFormat:@"%@", tempPicklist[i]];
+        [[[[self.ref child:@"Teams"] child: myNewString] child:@"picklistPosition"] setValue: [NSNumber numberWithInt:i]];
+    }
+    self.dataArray = [self loadDataArray:false];
+    [self.tableView reloadData];
+}
 
 @end

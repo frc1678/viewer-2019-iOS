@@ -72,15 +72,16 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                             }, couldNotFetch: {
                                 DispatchQueue.main.async(execute: { () -> Void in
                                     //team has images
-                                    if team.pitAllImageUrls != nil {
+                                    if team.pitAllImageURLs != nil {
                                         //team has selected image
                                         if team.pitSelectedImage != nil && team.pitSelectedImage != "" {
                                             //get url
-                                            let url = URL(string: (Array(Array(team.pitAllImageUrls!.values)).filter { $0.contains((team.pitSelectedImage!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!
+                                            let url = URL(string: (Array(Array(team.pitAllImageURLs!.values)).filter { $0.contains((team.pitSelectedImage!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!
                                             //set imageview
                                             imageView.hnk_setImageFromURL(url, success: { _ in
                                                 self.resetTableViewHeight()
-                                                })
+                                            })
+                                            
                                         }
                                     }
                                 })
@@ -88,25 +89,28 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     }
                     let noRobotPhoto = UIImage(named: "SorryNoRobotPhoto")
                     //if team has urls
-                    if let urls = self.team?.pitAllImageUrls {
+                    if let urls = self.team?.pitAllImageURLs {
                         //iterate thru urls
                         for url in urls.values {
                             //if not all photos are downloaded
-                            if self.photos.count < self.team!.pitAllImageUrls!.count {
+                            if self.photos.count < self.team!.pitAllImageURLs!.count {
                                 //add this photo
                                 self.photos.append(MWPhoto(url: URL(string: url)))
                             }
                         }
                     }
                 //if there's a selected image
-                if self.team?.pitSelectedImage != nil {
+                if self.team?.pitSelectedImage != nil && self.team?.pitSelectedImage != "string" {
                     //if photos are downloaded and image view is not the same as the image for the url
-                    if self.teamSelectedImageView.image != MWPhoto(url: URL(string: (self.team?.pitSelectedImage)!)) && self.photos.count > 0 {
+                    if self.teamSelectedImageView.image != MWPhoto(url: URL(string: (Array(Array(team.pitAllImageURLs!.values)).filter { $0.contains((team.pitSelectedImage!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!) && self.photos.count > 0 {
                         //if photos are downloaded and the first one is not a no robot photo and it's height is greater than 0
                         if self.photos.count > 0 && self.photos[0].underlyingImage != noRobotPhoto && (self.photos[0].underlyingImage ?? UIImage()).size.height > 0 {
                             DispatchQueue.main.async(execute: { () -> Void in
                                 //selected image is the first picture
-                                self.teamSelectedImageView.image = self.photos[0].underlyingImage
+                                let selImage = MWPhoto(url: URL(string: (Array(Array(team.pitAllImageURLs!.values)).filter { $0.contains((team.pitSelectedImage!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!)
+                                selImage?.loadUnderlyingImageAndNotify()
+                                self.teamSelectedImageView.image = selImage?.underlyingImage
+                                //self.teamSelectedImageView.hnk_setImageFromURL(URL(string: (Array(Array(team.pitAllImageURLs!.values)).filter { $0.contains((team.pitSelectedImage!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!)
                                 self.resetTableViewHeight()
                                
 
@@ -344,7 +348,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     //titleLabel is the humanReadable version of dataKey
                     unrankedCell.titleLabel.text = Utils.humanReadableNames[dataKey]
                     
-                    if "\(dataPoint)".isEmpty /*|| (dataPoint as? Float != nil && dataPoint as! Float == 0.0)*/ {
+                    if "\(String(describing: dataPoint))".isEmpty /*|| (dataPoint as? Float != nil && dataPoint as! Float == 0.0)*/ {
                         unrankedCell.detailLabel.text = ""
                        } /*else if dataKey == "pitOrganization" { //In the pit scout, the selector is indexed 0 to 4, this translates it back in to what those numbers mean.
                         unrankedCell.detailLabel!.text! = (team?.pitOrganization) ?? ""
@@ -713,7 +717,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         else if segue.identifier == "TGraph" {
             let graphViewController = segue.destination as! GraphViewController
             
-            if let teamNum = team?.number {
+            if (team?.number) != nil {
                 let indexPath = sender as! IndexPath
                 let cell = tableView.cellForRow(at: indexPath) as! MultiCellTableViewCell
                 graphViewController.graphTitle = "\(cell.teamLabel!.text!)"
