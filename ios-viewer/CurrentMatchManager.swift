@@ -41,9 +41,18 @@ class CurrentMatchManager: NSObject {
                 self.starredMatchesArray = [String]()
             }
         }
+        cache.fetch(key: "slackId").onSuccess { (d) -> () in
+            if let id = NSKeyedUnarchiver.unarchiveObject(with: d) as? String {
+                if self.slackId != id {
+                    self.slackId = id
+                }
+            } else {
+                self.slackId = nil
+            }
+        }
     }
     
-    var currentMatch = 0 {
+    @objc var currentMatch = 0 {
         didSet {
             if currentMatch != oldValue && currentMatch != -1 {
                 if let currentMatchFetch = AppDelegate.getAppDelegate().firebaseFetcher.getMatch(currentMatch) {
@@ -58,6 +67,18 @@ class CurrentMatchManager: NSObject {
     @objc var starredMatchesArray = [String]() {
         didSet {
             cache.set(value: NSKeyedArchiver.archivedData(withRootObject: starredMatchesArray), key: "starredMatches")
+        }
+    }
+    
+    var preNotify: Int? {
+        didSet {
+            cache.set(value: NSKeyedArchiver.archivedData(withRootObject: preNotify!), key: "preNotify")
+        }
+    }
+    
+    @objc var slackId: String? {
+        didSet {
+            cache.set(value: NSKeyedArchiver.archivedData(withRootObject: slackId!), key: "slackId")
         }
     }
     

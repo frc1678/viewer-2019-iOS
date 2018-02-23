@@ -25,6 +25,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Schedule" id="NKq-ai-GQN">
+                        <barButtonItem key="leftBarButtonItem" title="Slack" id="yJl-oP-clb" userLabel="Slack">
+                            <connections>
+                                <segue destination="adL-op-Chr" kind="show" identifier="slackSegue" id="BUD-kF-P9h"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="1678" id="05e-XD-yOJ">
                             <connections>
                                 <action selector="ourScheduleTapped:" destination="GTR-t1-4au" id="svP-S3-qJn"/>
@@ -499,6 +504,59 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nNz-IT-NPt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1797.5999999999999" y="-2553.3733133433284"/>
+        </scene>
+        <!--Slack-->
+        <scene sceneID="rjU-jZ-ce5">
+            <objects>
+                <tableViewController title="Slack" id="adL-op-Chr" customClass="SlackTableViewController" customModule="ios_viewer" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Xey-HJ-2SY">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="975"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="slackTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="slackTableViewCell" id="1T4-Ij-mPg" customClass="SlackTableViewCell" customModule="ios_viewer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1T4-Ij-mPg" id="JVd-od-l9f">
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DisplayName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ekL-3m-Ojs">
+                                            <rect key="frame" x="20" y="11" width="101" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QLS-YV-ScH">
+                                            <rect key="frame" x="654" y="11" width="94" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="QLS-YV-ScH" secondAttribute="trailing" constant="20" id="JDL-qo-cQy"/>
+                                        <constraint firstItem="QLS-YV-ScH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ekL-3m-Ojs" secondAttribute="trailing" constant="20" id="buj-Sx-QVr"/>
+                                        <constraint firstItem="QLS-YV-ScH" firstAttribute="centerY" secondItem="JVd-od-l9f" secondAttribute="centerY" id="fSO-b2-Qm1"/>
+                                        <constraint firstItem="ekL-3m-Ojs" firstAttribute="centerY" secondItem="JVd-od-l9f" secondAttribute="centerY" id="gNm-lw-VyB"/>
+                                        <constraint firstItem="ekL-3m-Ojs" firstAttribute="leading" secondItem="JVd-od-l9f" secondAttribute="leading" constant="20" id="uHD-ou-nWb"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="displayNameLabel" destination="ekL-3m-Ojs" id="Oel-q3-otg"/>
+                                    <outlet property="slackUsernameLabel" destination="QLS-YV-ScH" id="ycc-Go-3YI"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="adL-op-Chr" id="x41-pp-3JJ"/>
+                            <outlet property="delegate" destination="adL-op-Chr" id="wfB-SI-XvL"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bMf-7d-EQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="775.78125" y="-3445.3125"/>
         </scene>
         <!--Specific Team Schedule Table View Controller-->
         <scene sceneID="ihy-8G-753">

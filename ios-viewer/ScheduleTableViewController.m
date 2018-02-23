@@ -31,9 +31,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear: animated];
-    //get cached data, get app token
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *token = [defaults valueForKey:@"NotificationToken"];
     //if there are starred matches
     if(self.firebaseFetcher.currentMatchManager.starredMatchesArray != nil && [self.firebaseFetcher.currentMatchManager.starredMatchesArray count]){
         
@@ -43,14 +40,9 @@
             //add the match number
             [intMatches addObject:[NSNumber numberWithInt:[item integerValue]]];
         }
-        //if app token exists
-        if(token != nil) {
-            //remove all starred matches for this app on the firebase BUT WHY
-            [[[[[[FIRDatabase database] reference] child: @"AppTokens"] child:token] child: @"StarredMatches"] setValue:nil];
-        }
-        //add all of the starred matches back
-        for(NSNumber *item in intMatches) {
-            [[[[[[[FIRDatabase database] reference] child: @"AppTokens"] child:token] child: @"StarredMatches"] childByAutoId] setValue: item];
+        NSString *slackId = self.firebaseFetcher.currentMatchManager.slackId;
+        if(slackId != nil) {
+            [[[[[[FIRDatabase database] reference] child: @"slackProfiles"] child:slackId] child: @"starredMatches"] setValue:intMatches];
         }
     }
 
@@ -170,6 +162,9 @@
     if([segue.identifier  isEqual: @"citrusSchedule"]) {
         SpecificTeamScheduleTableViewController *dest = (SpecificTeamScheduleTableViewController *)segue.destinationViewController;
         dest.teamNumber = 1678;
+    } else if ([segue.identifier isEqual: @"slackSegue"]) {
+        SlackTableViewController *dest = (SlackTableViewController *)segue.destinationViewController;
+        //init dest
     } else {
     MatchTableViewCell *cell = sender;
     MatchDetailsViewController *detailController = (MatchDetailsViewController *)segue.destinationViewController;
@@ -241,12 +236,40 @@
     return @[@"One", @"Two", @"Three"];
 }
 
+//aha! new system is better
 -(void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender {
     if(UIGestureRecognizerStateBegan == sender.state) {
+        
         CGPoint p = [sender locationInView:self.tableView];
         NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
         MatchTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        if([self.firebaseFetcher.currentMatchManager.starredMatchesArray containsObject:cell.matchLabel.text]) {
+        NSString *slackId = self.firebaseFetcher.currentMatchManager.slackId;
+        if(slackId != nil) {
+            if([self.firebaseFetcher.currentMatchManager.starredMatchesArray containsObject:cell.matchLabel.text]) {
+                //Remove the star
+                NSMutableArray *a = [NSMutableArray arrayWithArray:self.firebaseFetcher.currentMatchManager.starredMatchesArray];
+            
+                [a removeObject:cell.matchLabel.text];
+                self.firebaseFetcher.currentMatchManager.starredMatchesArray = a;
+                cell.backgroundColor = [UIColor whiteColor];
+                [[[[[[FIRDatabase database] reference] child:@"slackProfiles"] child:slackId] child:@"starredMatches"] setValue:a];
+            } else {
+                //Create the star
+                cell.backgroundColor = [UIColor colorWithRed:1.0 green:0.64 blue:1.0 alpha:0.6];
+                self.firebaseFetcher.currentMatchManager.starredMatchesArray = [self.firebaseFetcher.currentMatchManager.starredMatchesArray arrayByAddingObjectsFromArray:@[cell.matchLabel.text]];
+                [[[[FIRDatabase database] reference] child:@"slackProfiles"] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                    [[[[[[[FIRDatabase database] reference] child:@"slackProfiles"] child:slackId] child:@"starredMatches"] child:[NSString stringWithFormat:@"%lu", (unsigned long)[[snapshot childSnapshotForPath:self.firebaseFetcher.currentMatchManager.slackId] childSnapshotForPath:@"starredMatches"].childrenCount]] setValue:[NSNumber numberWithInt:[cell.matchLabel.text integerValue]]];
+                }];
+            }
+        } else {
+            UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"Link Slack" message:@"Please link your slack account before you star matches." preferredStyle:UIAlertControllerStyleAlert];
+            
+            [ac addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                
+            }]];
+            [self presentViewController:ac animated:YES completion:nil];
+        }
+        /*if([self.firebaseFetcher.currentMatchManager.starredMatchesArray containsObject:cell.matchLabel.text]) {
             NSMutableArray *a = [NSMutableArray arrayWithArray:self.firebaseFetcher.currentMatchManager.starredMatchesArray];
     
             [a removeObject:cell.matchLabel.text];
@@ -256,15 +279,15 @@
             NSString *token = [defaults valueForKey:@"NotificationToken"];
             //NSPredicate *isStarred = [NSPredicate predicateWithFormat:@"self.firebaseFetcher.currentMatchManager.starredMatchesArray contains[c] 'SELF'"];
             NSMutableArray *starredMatches = [[NSMutableArray alloc] init];
-            [[[[[[FIRDatabase database] reference] child:@"AppTokens"] child:token] child:@"StarredMatches"] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            [[[[[[FIRDatabase database] reference] child:@"AppTokens"] child:token] child:@"starredMatches"] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
                 for (FIRDataSnapshot *item in [snapshot children]) {
                     if ([self.firebaseFetcher.currentMatchManager.starredMatchesArray containsObject: [NSString stringWithFormat: @"%@",item.value]]) {
                         [starredMatches addObject: [NSNumber numberWithInt:[(NSString *)item.value integerValue]]];
                     }
                 }
-                [[[[[[FIRDatabase database] reference] child:@"AppTokens"] child:token] child:@"StarredMatches"] setValue:nil];
+                [[[[[[FIRDatabase database] reference] child:@"AppTokens"] child:token] child:@"starredMatches"] setValue:nil];
                 for (NSNumber *item in starredMatches) {
-                    [[[[[[[FIRDatabase database] reference] child:@"AppTokens"] child:token] child:@"StarredMatches"] childByAutoId] setValue:item];
+                    [[[[[[[FIRDatabase database] reference] child:@"AppTokens"] child:token] child:@"starredMatches"] childByAutoId] setValue:item];
                 }
             }];
             
@@ -274,8 +297,8 @@
             self.firebaseFetcher.currentMatchManager.starredMatchesArray = [self.firebaseFetcher.currentMatchManager.starredMatchesArray arrayByAddingObjectsFromArray:@[cell.matchLabel.text]];
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             NSString *token = [defaults valueForKey:@"NotificationToken"];
-            [[[[[[[FIRDatabase database] reference] child:@"AppTokens"] child:token] child:@"StarredMatches"] childByAutoId] setValue: [NSNumber numberWithInt:[cell.matchLabel.text integerValue]]];
-        }
+            [[[[[[[FIRDatabase database] reference] child:@"AppTokens"] child:token] child:@"starredMatches"] childByAutoId] setValue: [NSNumber numberWithInt:[cell.matchLabel.text integerValue]]];
+        }*/
     }
 }
 

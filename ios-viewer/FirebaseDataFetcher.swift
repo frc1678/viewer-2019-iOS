@@ -67,6 +67,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     @objc var picklistPassword = ""
     @objc var firstPicklist = [Int]()
     var secondPicklist = [Int]()
+    var slackProfiles = [String:SlackProfile]()
 
     let firebase : DatabaseReference
     
@@ -84,10 +85,26 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         
         //retrieve data
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+            self.getSlackProfiles()
             self.getPicks()
             self.getAllTheData()
         }
         
+    }
+    
+    /** Gets the slack profiles on firebase. */
+    func getSlackProfiles() {
+        self.firebase.observeSingleEvent(of: .value, with: { (snapshot) -> Void in
+            var profiles : [String:SlackProfile] = [:]
+            for i in ((snapshot.childSnapshot(forPath: "slackProfiles").value as? [String:[String:Any]])?.values)! {
+                profiles[(snapshot.childSnapshot(forPath: "slackProfiles").value as? [String:[String:Any]] as NSDictionary?)?.allKeys(for: i)[0] as! String] = SlackProfile(json: JSON(snapshot.childSnapshot(forPath: "slackProfiles").childSnapshot(forPath: (snapshot.childSnapshot(forPath: "slackProfiles").value as? [String:[String:Any]] as NSDictionary?)?.allKeys(for: i)[0] as! String).value))
+            }
+            if profiles.count != 0 {
+                self.slackProfiles = profiles
+            } else {
+                print("Problem getting slack profiles: Profiles not castable")
+            }
+        })
     }
     
     /** Gets the picklist password. */
@@ -95,7 +112,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         self.firebase.observeSingleEvent(of: .value, with: { (snapshot) -> Void in
             if let password = snapshot.childSnapshot(forPath: "PicklistPassword").value as? String, snapshot.childSnapshot(forPath: "PicklistPassword").value as? String != "" {
                 self.picklistPassword = password
-                print("done: \(self.picklistPassword)")
+                print("Done getting picklist and password. Password is \(self.picklistPassword)")
             } else {
                 self.firebase.child("PicklistPassword").setValue("password")
             }
@@ -199,7 +216,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             matchReference.observe(.childAdded, with: { [unowned self] snapshot in
                 //appends a match for the current snapshot to the matches
                 self.matches.append(self.makeMatchFromSnapshot(snapshot))
-                //this line seems redundant but I don't have a lightning cable to test... test this, future me!
+                //this line seems redundant but I don't have a lightning cable to test... test this, future me! FUTURE ME: I think its to call didSet
                 self.currentMatchManager.currentMatch = self.currentMatchManager.currentMatch
                 if self.hasUpdatedMatchOnSetup == false {
                     self.hasUpdatedMatchOnSetup = true
@@ -210,7 +227,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             matchReference.observe(.childChanged, with: { [unowned self] snapshot in
                 //increase matchCounter
                 self.matchCounter += 1
-                print(self.currentMatchManager.currentMatch)
+                print("Current Match: \(self.currentMatchManager.currentMatch)")
                 //once again, future me: test commenting out this line
                 self.currentMatchManager.currentMatch = self.currentMatchManager.currentMatch
                 //gets the match number
@@ -332,7 +349,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         - parameter team: Team for which TIMDs are to be retrieved
     */
     func getTIMDataForTeam(_ team: Team) -> [TeamInMatchData] {
-        print(self.teamInMatches.filter { $0.teamNumber == team.number })
+        print("All TIMDs for our team: \(self.teamInMatches.filter { $0.teamNumber == team.number })")
         return self.teamInMatches.filter { $0.teamNumber == team.number }
     }
     
@@ -353,7 +370,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 return correctTIMDs[0]
             }
         }
-        print("Problem geting TIMData")
+        print("Problem geting TIMData. There was not exactly 1 match for the specifications.")
         return nil
     }
     
@@ -660,7 +677,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     /** Filters matches according to the search string when set to teams. See filteredMatchesForMatchSearchString */
-    func filteredMatchesforTeamSearchString(_ searchString: String) -> [Match] {
+    @objc func filteredMatchesforTeamSearchString(_ searchString: String) -> [Match] {
         var filteredMatches = [Match]()
         for match in self.matches  {
             for teamNum in match.redAllianceTeamNumbers! {
