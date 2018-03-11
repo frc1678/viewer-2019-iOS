@@ -28,6 +28,7 @@ NSString *fbpassword = @"";
     self.ref = [[FIRDatabase database] reference];
     fbpassword = self.firebaseFetcher.picklistPassword;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Picklist" style:UIBarButtonItemStylePlain target:self action:@selector(toggleInPicklist)];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView:) name:@"pickBoi" object:nil];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -44,8 +45,8 @@ NSString *fbpassword = @"";
         return tempFirstPick;
     }
     NSMutableArray *sortedTeams = [NSMutableArray new];
-    for(int i = 0; i < [firstPicklist count]; i++) {
-        [sortedTeams addObject:[self.firebaseFetcher getTeam:[firstPicklist[i] integerValue]]];
+    for(int i = 0; i < [self.firebaseFetcher.firstPicklist count]; i++) {
+        [sortedTeams addObject:[self.firebaseFetcher getTeam:[self.firebaseFetcher.firstPicklist[i] integerValue]]];
     }
     return (NSArray *)sortedTeams;
 }
@@ -103,6 +104,15 @@ NSString *fbpassword = @"";
     // To check for correctness enable: self.tableView.reloadData()
 }
 
+-(void)reloadTableView:(NSNotification *)note {
+    NSLog(@"A little birdie told me that we reloading");
+    NSLog(@"Picklist1: %@", self.firebaseFetcher.firstPicklist[0]);
+    self.dataArray = [self loadDataArray:false];
+    NSLog(@"Picklist2: %@", self.firebaseFetcher.firstPicklist[0]);
+    NSLog(@"DataArray: %ld", (long)((Team *)self.dataArray[0]).number);
+    [self.tableView reloadData];
+}
+
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     return UITableViewCellEditingStyleNone;
 }
@@ -126,8 +136,8 @@ NSMutableArray<NSNumber *> *firstPicklist = nil;
 }
 
 - (void)toggleInPicklist {
+    [self.firebaseFetcher getPicks];
     if(!inPicklist){
-        [self.firebaseFetcher getPicks];
         fbpassword = self.firebaseFetcher.picklistPassword;
         if (self.firebaseFetcher.firstPicklist.count == 0) {
             NSMutableArray<Team *> *tempPicklist = [NSMutableArray arrayWithArray:[self.firebaseFetcher getFirstPickList]];
@@ -167,13 +177,9 @@ NSMutableArray<NSNumber *> *firstPicklist = nil;
         [self presentViewController:ac animated:YES completion:nil];
 
     } else {
-        [self.firebaseFetcher getPicks];
         inPicklist = !inPicklist;
         [self.tableView setEditing:(BOOL *)inPicklist animated:false];
         self.editing = inPicklist;
-        if(!inPicklist) {
-            [[self.ref child:@"picklist"] setValue:firstPicklist];
-        }
         self.dataArray = [self loadDataArray:false];
         self.navigationItem.leftBarButtonItem = nil;
         [self.tableView reloadData];
