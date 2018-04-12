@@ -85,7 +85,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     struct TeamDetailsKeys {
         
         let yesNoKeys : [String] = [
-            "calculatedData.canScoreBothSwitchSidesAuto"
+            "calculatedData.canScoreBothSwitchSidesAuto",
+            "calculatedData.canPlaceHighLayerCube"
         ]
         
         let abilityKeys = [
@@ -118,14 +119,15 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "First Pick Ability",
             "Second Pick Ability",
             "Avg. Driving Ability",
-            "SW Fail Percentage Tele",
-            "SC Fail Percentage Tele",
-            "SW Fail Percentage Auto",
-            "SC Fail Percentage Auto",
-            "Multi-Side Auto",
+            "Tele SW Fail %",
+            "Tele SC Fail %",
+            "Auto SW Fail %",
+            "Auto SC Fail %",
+            "Auto Multi-Side",
             "Picklist Position",
             "Can Place High Layer Cube",
-            "SW Success % Auto",
+            "Auto SW Success %",
+            "Avg. Cubes Placed",
         ]
         
         /** Values that should be displayed as long text cells */
@@ -165,7 +167,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         let boolValues = [
             "calculatedData.disabledPercentage",
             "calculatedData.incapacitatedPercentage",
-            "pitCanCheesecake",
             "calculatedData.canScoreBothSwitchSidesAuto",
             "didMakeAutoRun",
             "crossedAutoZone",
@@ -175,6 +176,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "didPark",
             "calculatedData.canScoreBothSwitchSidesAuto",
             "calculatedData.canPlaceHighLayerCube",
+            "canPlaceHighLayerCube",
             "pitHasCamera",
         ]
         
@@ -273,6 +275,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgTimeToOwnAllianceSwitchAuto",
             "calculatedData.avgTimeToOwnScaleAuto",
             "calculatedData.allianceSwitchSuccessPercentageAuto",
+            "calculatedData.autoRunPercentage",
         ]
         
         let teleKeysMini : [String] = [
@@ -299,6 +302,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgNumAlliancePlatformIntakeTele",
             "calculatedData.avgNumOpponentPlatformIntakeTele",
             "calculatedData.avgCubesSpilledTele",
+            "calculatedData.totalCubesPlaced",
         ]
         
         /** Dict translating a key for a teamDetails datapoint to the key for the respective TIMD datapoint. Does not include "calculatedData." in the keys. */
@@ -322,7 +326,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "avgNumGroundPortalIntakeTele" : "numGroundPortalIntakeTele",
             "avgClimbTime" : "calculatedData.climbTime",
             "climbPercentage" : "calculatedData.didClimb",
-            "avgNumRobotsLifted" : "numRobotsLifted",
+            "avgNumRobotsLifted" : "calculatedData.numRobotsLifted",
+            "autoRunPercentage" : "didMakeAutoRun",
+            "avgNumAlliancePlatformIntakeTele" : "calculatedData.numAlliancePlatformIntakeTele",
+            "avgNumOpponentPlatformIntakeTele" : "calculatedData.numOpponentPlatformIntakeTele",
+            "avgNumCubesSpilledTele" : "numSpilledCubesTele",
             //super data
             "avgSpeed" : "rankSpeed",
             "avgAgility" : "rankAgility",
@@ -374,7 +382,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitDriveTrain",
             "pitClimberType",
             "pitAvailableWeight",
-            "pitRobotDimensions",
+            "pitRobotWidth",
+            "pitRobotLength",
             "pitProgrammingLanguage",
             "pitWheelDiameter",
             "pitHasCamera",
@@ -382,7 +391,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         /** Data collected by SEALS */
         let sealKeys = [
-            "pitCanCheesecake",
             "calculatedData.pitAvgDriveTime",
             "calculatedData.pitAvgRampTime",
             "pitSEALsNotes",
@@ -430,13 +438,13 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         //"calculatedData.park", //FALSE doesn't exist
         "calculatedData.incapacitatedPercentage",
         "calculatedData.disabledPercentage",
+        "calculatedData.autoRunPercentage"
     ]
     
     // MARK: TIMD keys
     /** Keys relating to the Autonomous period to be displayed in the TIMD view */
     static let TIMDAutoKeys : [String] = [
         "didMakeAutoRun",
-        "didCrossAutoZone",
         "numCubesFumbledAuto",
         "calculatedData.numAllianceSwitchCubeSuccessAuto",
         "calculatedData.numScaleSuccessAuto"
@@ -457,8 +465,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     
     /** Keys relating to the status of a robot to be displayed in the TIMD view */
     static let TIMDStatusKeys = [
-        "didStartDisabled",
-        "didBecomeIncapacitated"
+        "didGetDisabled",
+        "didGetIncapacitated"
     ]
     
     /** Keys relating to the data Super Scouts collect to be displayed in the TIMD view */
@@ -557,16 +565,16 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.actualSeed" : "Seed",
         "calculatedData.avgEvasion" : "Avg. Evasion",
         "calculatedData.avgTorque" : "Avg. Torque",
-        "calculatedData.disabledPercentage" : "Disabled Percentage",
-        "calculatedData.dysfunctionalPercentage" : "Dysfunctional Percentage",
+        "calculatedData.disabledPercentage" : "Disabled %",
+        "calculatedData.dysfunctionalPercentage" : "Dysfunctional %",
         "calculatedData.driverAbility" : "Driver Ability",
         "calculatedData.firstPickAbility" : "First Pick Ability",
-        "calculatedData.incapacitatedPercentage" : "Incapacitated Percentage",
+        "calculatedData.incapacitatedPercentage" : "Incapacitated %",
         "calculatedData.numRPs" : "Number of RPs",
         "calculatedData.actualNumRPs": "# of RPs",
         "calculatedData.predictedNumRPs" : "Predicted # of RPs",
         "calculatedData.predictedSeed" : "Predicted Seed",
-        "calculatedData.scalePercentage" : "Scale Percentage",
+        "calculatedData.scalePercentage" : "Scale %",
         "calculatedData.secondPickAbility" : "Second Pick Ability",
         "matchDatas" : "Matches",
         "TeamInMatchDatas" : "TIMDs",
@@ -607,72 +615,74 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "pitNumberOfWheels": "Number of Wheels",
         "didPotentiallyConflictingAuto" : "Did a Potentially Conflicting Auto",
         "pitDriveTrain" : "Drive Train",
-        "calculatedData.avgNumGroundPyramidIntakeAuto" : "Avg. Ground PY Intakes Auto",
-        "calculatedData.avgNumGroundPortalIntakeAuto" : "Avg. Ground PO Intakes Auto",
-        "calculatedData.avgNumElevatedPyramidIntakeAuto" : "Avg. Elevated PY Intakes Auto",
-        "calculatedData.avgNumCubesFumbledAuto" : "Avg. Cubes Fumbled in Auto",
-        "calculatedData.avgNumAlliancePlatformIntakeAuto" : "Avg. PZ Intakes Auto",
-        "calculatedData.avgNumCubesSpilledAuto" : "Avg. Cubes Spilled Auto",
-        "calculatedData.avgCubesPlacedInScaleAuto" : "Avg. Cubes in SC Auto",
-        "calculatedData.avgAllianceSwitchCubesAuto" : "Avg. Cubes in SW Auto",
-        "calculatedData.avgNumGroundPyramidIntakeTele" : "Avg. Ground PY Intakes Tele",
-        "calculatedData.avgNumGroundPortalIntakeTele" : "Avg. Ground PO Intakes Tele",
-        "calculatedData.avgNumElevatedPyramidIntakeTele" : "Avg. Elevated PY Intakes Tele",
-        "calculatedData.avgNumCubesFumbledTele" : "Avg. Cubes Fumbled in Tele",
-        "calculatedData.avgNumAlliancePlatformIntakeTele" : "Avg. PZ Intakes Tele",
-        "calculatedData.avgNumCubesSpilledTele" : "Avg. Cubes Spilled Tele",
-        "calculatedData.avgCubesPlacedInScaleTele" : "Avg. Cubes in SC Tele",
-        "calculatedData.avgAllianceSwitchCubesTele" : "Avg. Cubes in SW Tele",
-        "calculatedData.avgNumExchangeInputTele" : "Avg. EX Input Tele",
-        "calculatedData.autoRunPercentage" : "Auto Run Percentage",
+        "calculatedData.avgNumGroundPyramidIntakeAuto" : "Auto Avg. Ground PY Intakes",
+        "calculatedData.avgNumGroundPortalIntakeAuto" : "Auto Avg. Ground PO Intakes",
+        "calculatedData.avgNumElevatedPyramidIntakeAuto" : "Auto Avg. Elevated PY Intakes",
+        "calculatedData.avgNumCubesFumbledAuto" : "Auto Avg. Cubes Fumbled",
+        "calculatedData.avgNumAlliancePlatformIntakeAuto" : "Auto Avg. PZ Intakes",
+        "calculatedData.avgNumCubesSpilledAuto" : "Auto Avg. Cubes Spilled",
+        "calculatedData.avgCubesPlacedInScaleAuto" : "Auto Avg. Cubes in SC",
+        "calculatedData.avgAllianceSwitchCubesAuto" : "Auto Avg. Cubes in SW",
+        "calculatedData.avgNumGroundPyramidIntakeTele" : "Tele Avg. Ground PY Intakes",
+        "calculatedData.avgNumGroundPortalIntakeTele" : "Tele Avg. Ground PO Intakes",
+        "calculatedData.avgNumElevatedPyramidIntakeTele" : "Tele Avg. Elevated PY Intakes",
+        "calculatedData.avgNumCubesFumbledTele" : "Tele Avg. Cubes Fumbled",
+        "calculatedData.avgNumAlliancePlatformIntakeTele" : "Tele Avg. PZ Intakes",
+        "calculatedData.avgNumCubesSpilledTele" : "Tele Avg. Cubes Spilled",
+        "calculatedData.avgCubesPlacedInScaleTele" : "Tele Avg. Cubes in SC",
+        "calculatedData.avgAllianceSwitchCubesTele" : "Tele Avg. Cubes in SW",
+        "calculatedData.avgNumExchangeInputTele" : "Tele Avg. EX Input",
+        "calculatedData.autoRunPercentage" : "Auto Run %",
         "calculatedData.totalNumGoodDecisions" : "Total # of Good Decisions",
         "calculatedData.totalNumBadDecisions" : "Total # of Bad Decisions",
         "calculatedData.avgClimbTime" : "Avg. Climb Time",
-        "calculatedData.avgOpponentSwitchCubesTele" : "Avg. Cubes in SWO Tele",
-        "calculatedData.avgNumGroundIntakeTele" : "Avg. Ground Intakes Tele",
-        "calculatedData.avgNumPortalIntakeTele" : "Avg. PO Intakes Tele",
-        "calculatedData.switchFailPercentageTele" : "SW Fail Percentage Tele",
-        "calculatedData.scaleFailPercentageTele" : "SC Fail Percentage Tele",
-        "calculatedData.canScoreBothSwitchSidesAuto" : "Multi-Side Auto",
+        "calculatedData.avgOpponentSwitchCubesTele" : "Tele Avg. Cubes in SWO",
+        "calculatedData.avgNumGroundIntakeTele" : "Tele Avg. Ground Intakes",
+        "calculatedData.avgNumPortalIntakeTele" : "Tele Avg. PO Intakes",
+        "calculatedData.switchFailPercentageTele" : "Tele SW Fail %",
+        "calculatedData.scaleFailPercentageTele" : "Tele SC Fail %",
+        "calculatedData.canScoreBothSwitchSidesAuto" : "Auto Multi-Side",
         "didMakeAutoRun" : "Did Make Auto Run",
-        "calculatedData.switchFailPercentageAuto" : "SW Fail Percentage Auto",
-        "calculatedData.scaleFailPercentageAuto" : "SC Fail Percentage Auto",
-        "calculatedData.avgNumHumanPortalIntakeTele" : "Avg. Human PO Intakes Tele",
-        "calculatedData.climbPercentage" : "Climb Percentage",
+        "calculatedData.switchFailPercentageAuto" : "Auto SW Fail %",
+        "calculatedData.scaleFailPercentageAuto" : "Auto SC Fail %",
+        "calculatedData.avgNumHumanPortalIntakeTele" : "Tele Avg. Human PO Intakes",
+        "calculatedData.climbPercentage" : "Climb %",
         "pitClimberType" : "Climber Type",
-        "calculatedData.avgCubesSpilledTele" : "Avg. Cubes Spilled Tele",
+        "calculatedData.avgCubesSpilledTele" : "Tele Avg. Cubes Spilled",
         "didPark" : "Parked",
         "climb" : "Climb",
-        "numHumanPortalIntakeTele" : "Human Portal Intakes Tele",
+        "numHumanPortalIntakeTele" : "Tele Human Portal Intakes",
         "numGoodDecisions" : "Good Decisions",
         "numBadDecisions" : "Bad Decisions",
-        "numGroundIntakeTele" : "Ground Intakes Tele",
+        "numGroundIntakeTele" : "Tele Ground Intakes",
         "numExchangeInput" : "EX Inputs",
-        "numCubesFumbledAuto" : "Cubes Fumbled Auto",
+        "numCubesFumbledAuto" : "Auto Cubes Fumbled",
         "didCrossAutoZone" : "Crossed Auto Zone",
         //"didMakeAutoRun" : "Made Auto Run",
-        "calculatedData.numAllianceSwitchCubeSuccessAuto" : "Successful SW Cubes Auto",
-        "calculatedData.numScaleSuccessAuto" : "Successful SC Cubes Auto",
-        "calculatedData.numAllianceSwitchSuccessTele" : "Successful SW Cubes Tele",
-        "calculatedData.numScaleSuccessTele" : "Successful SC Cubes Tele",
-        "calculatedData.numOpponentSwitchSuccessTele" : "Successful SWO Cubes Tele",
+        "calculatedData.numAllianceSwitchCubeSuccessAuto" : "Auto Successful SW Cubes",
+        "calculatedData.numScaleSuccessAuto" : "Auto Successful SC Cubes",
+        "calculatedData.numAllianceSwitchSuccessTele" : "Tele Successful SW Cubes",
+        "calculatedData.numScaleSuccessTele" : "Tele Successful SC Cubes",
+        "calculatedData.numOpponentSwitchSuccessTele" : "Tele Successful SWO Cubes",
         "calculatedData.didClimb" : "Climbed",
-        "pitRobotDimensions" : "Robot Dimensions",
+        "pitRobotWidth" : "Robot Width",
+        "pitRobotLength" : "Robot Length",
         "picklistPosition" : "Picklist Position",
         "pitDriveTest" : "Pit Drive Test",
-        "calculatedData.avgTimeToOwnAllianceSwitchAuto" : "Avg. Time to Own SW Auto",
-        "calculatedData.avgTimeToOwnScaleAuto" : "Avg. Time to Own SC Auto",
-        "timeToOwnAllianceSwitchAuto" : "Time to Own SW Auto",
-        "timeToOwnScaleAuto" : "Time to Own SC Auto",
+        "calculatedData.avgTimeToOwnAllianceSwitchAuto" : "Auto Avg. Time to Own SW",
+        "calculatedData.avgTimeToOwnScaleAuto" : "Auto Avg. Time to Own SC",
+        "timeToOwnAllianceSwitchAuto" : "Auto Time to Own SW",
+        "timeToOwnScaleAuto" : "Auto Time to Own SC",
         "calculatedData.avgNumRobotsLifted" : "Avg. Num Robots Lifted",
         "numRobotsLifted" : "Num. Robots Lifted",
-        "calculatedData.avgNumOpponentPlatformIntakeTele" : "Avg. PZO Intakes Tele",
-        "calculatedData.allianceSwitchSuccessPercentageAuto" : "SW Success % Auto",
+        "calculatedData.avgNumOpponentPlatformIntakeTele" : "Tele Avg. PZO Intakes",
+        "calculatedData.allianceSwitchSuccessPercentageAuto" : "Auto SW Success %",
         "calculatedData.canPlaceHighLayerCube" : "Can Place High Layer Cube",
         "calculatedData.pitAvgDriveTime" : "Avg. Drive Time",
         "calculatedData.pitAvgRampTime" : "Avg. Ramp Time",
         "pitHasCamera" : "Has Camera",
         "pitWheelDiameter" : "Wheel Diameter",
+        "calculatedData.totalCubesPlaced" : "Avg. Cubes Placed",
     ]
     
     /**

@@ -45,10 +45,14 @@
         }
         NSString *slackId = self.firebaseFetcher.currentMatchManager.slackId;
         if(slackId != nil) {
-            [[[[[[FIRDatabase database] reference] child: @"slackProfiles"] child:slackId] child: @"starredMatches"] setValue:intMatches];
+            [[[[[[FIRDatabase database] reference] child: @"activeSlackProfiles"] child:slackId] child: @"starredMatches"] setValue:intMatches];
         }
     }
 
+}
+
+-(void) viewDidLayoutSubviews {
+    [self.searchController.searchBar sizeToFit];
 }
 
 - (void)viewDidLoad {
@@ -56,6 +60,21 @@
     self.cacheButton.enabled = NO;
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToCurrentMatch:) name:@"currentMatchUpdated" object:nil];
+    self.highlightDysfunc = NO;
+    UIPinchGestureRecognizer *pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+    [self.tableView addGestureRecognizer:pinchGestureRecognizer];
+}
+
+- (void)handlePinch:(UIPinchGestureRecognizer*)recognizer {
+    if(recognizer.state == UIGestureRecognizerStateEnded) {
+        NSLog(@"Ouch why did you pinch me");
+        [self toggleDysfuncHighlight];
+    }
+}
+
+- (void)toggleDysfuncHighlight {
+    self.highlightDysfunc = !self.highlightDysfunc;
+    [self.tableView reloadData];
 }
 
 - (void)scrollToCurrentMatch:(NSNotification*)note {
@@ -84,16 +103,17 @@
     
     //iterate thru 3 times
     for (int i = 0; i < 3; i++) {
+        //RED MATCH LABELS
         if(i < redTeams.count) {
             [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[redTeams objectAtIndex:i]).number]] forKeyPath:[NSString stringWithFormat:@"red%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
-            if(((Team *)[redTeams objectAtIndex:i]).calculatedData.dysfunctionalPercentage > 0) {
+            if(((Team *)[redTeams objectAtIndex:i]).calculatedData.dysfunctionalPercentage > 0 && self.highlightDysfunc) {
                 switch(i) {
                     case 0:
-                        matchCell.redOneLabel.backgroundColor = [UIColor greenColor];
+                        matchCell.redOneLabel.backgroundColor = [UIColor colorWithRed:0.00 green:0.75 blue:0.00 alpha:0.5];
                     case 1:
-                        matchCell.redTwoLabel.backgroundColor = [UIColor greenColor];
+                        matchCell.redTwoLabel.backgroundColor = [UIColor colorWithRed:0.00 green:0.75 blue:0.00 alpha:0.5];
                     case 2:
-                        matchCell.redThreeLabel.backgroundColor = [UIColor greenColor];
+                        matchCell.redThreeLabel.backgroundColor = [UIColor colorWithRed:0.00 green:0.75 blue:0.00 alpha:0.5];
                 }
             } else {
                 switch(i) {
@@ -109,16 +129,17 @@
             [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"???"]] forKeyPath:[NSString stringWithFormat:@"red%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
         }
         
+        //BLUE MATCH LABELS
         if(i < blueTeams.count) {
             [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[blueTeams objectAtIndex:i]).number]] forKeyPath:[NSString stringWithFormat:@"blue%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
-            if(((Team *)[blueTeams objectAtIndex:i]).calculatedData.dysfunctionalPercentage > 0) {
+            if(((Team *)[blueTeams objectAtIndex:i]).calculatedData.dysfunctionalPercentage > 0 && self.highlightDysfunc) {
                 switch(i) {
                     case 0:
-                        matchCell.blueOneLabel.backgroundColor = [UIColor greenColor];
+                        matchCell.blueOneLabel.backgroundColor = [UIColor colorWithRed:0.00 green:0.75 blue:0.00 alpha:0.5];
                     case 1:
-                        matchCell.blueTwoLabel.backgroundColor = [UIColor greenColor];
+                        matchCell.blueTwoLabel.backgroundColor = [UIColor colorWithRed:0.00 green:0.75 blue:0.00 alpha:0.5];
                     case 2:
-                        matchCell.blueThreeLabel.backgroundColor = [UIColor greenColor];
+                        matchCell.blueThreeLabel.backgroundColor = [UIColor colorWithRed:0.00 green:0.75 blue:0.00 alpha:0.5];
                 }
             } else {
                 switch(i) {
@@ -135,6 +156,7 @@
         }
     }
     
+    //SETTING SCORE LABELS
     //if the red team has a valid score
     if (match.redScore != -1 && match.redScore != nil) {
         //set the red score
@@ -143,7 +165,7 @@
         matchCell.redScoreLabel.alpha = 1;
     } else {
         if (match.calculatedData.predictedRedScore != -1.0) {
-            matchCell.redScoreLabel.text = [Utils roundValue: match.calculatedData.predictedRedScore toDecimalPlaces:1];
+            matchCell.redScoreLabel.text = [Utils roundValue: match.calculatedData.predictedRedScore toDecimalPlaces:0];
             matchCell.redScoreLabel.alpha = .3;
         } else {
             matchCell.redScoreLabel.text = @"?";
@@ -158,7 +180,7 @@
         matchCell.blueScoreLabel.alpha = 1;
     } else {
         if (match.calculatedData.predictedBlueScore != -1.0) {
-            matchCell.blueScoreLabel.text = [Utils roundValue: match.calculatedData.predictedBlueScore toDecimalPlaces:1];
+            matchCell.blueScoreLabel.text = [Utils roundValue: match.calculatedData.predictedBlueScore toDecimalPlaces:0];
         } else {
         matchCell.blueScoreLabel.text = @"?";
         }
@@ -169,6 +191,28 @@
             self.currentNumber = [matchCell.matchLabel.text integerValue];
         }
         //NSLog([NSString stringWithFormat:@"%ld",(long)self.currentNumber]);
+    }
+    
+    //EXTRA RP IMAGE VIEWS
+    if(match.redDidAutoQuest) {
+        matchCell.redAQ.alpha = 1.0;
+    } else {
+        matchCell.redAQ.alpha = 0.0;
+    }
+    if(match.blueDidAutoQuest) {
+        matchCell.blueAQ.alpha = 1.0;
+    } else {
+        matchCell.blueAQ.alpha = 0.0;
+    }
+    if(match.redDidFaceBoss) {
+        matchCell.redFTB.alpha = 1.0;
+    } else {
+        matchCell.redFTB.alpha = 0.0;
+    }
+    if(match.blueDidFaceBoss) {
+        matchCell.blueFTB.alpha = 1.0;
+    } else {
+        matchCell.blueFTB.alpha = 0.0;
     }
 }
 
@@ -186,7 +230,10 @@
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     MatchTableViewCell *matchCell = (MatchTableViewCell *)cell;
-    if([self.firebaseFetcher.currentMatchManager.starredMatchesArray containsObject:matchCell.matchLabel.text]) {
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    NSNumber *myNumber = [formatter numberFromString:matchCell.matchLabel.text];
+    //Highlight starred matches
+    if([self.firebaseFetcher.currentMatchManager.starredMatchesArray containsObject:myNumber]) {
         matchCell.backgroundColor = [UIColor colorWithRed:1.0 green:0.64 blue:1.0 alpha:0.6];
     }
     else {
@@ -286,20 +333,24 @@
         MatchTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         NSString *slackId = self.firebaseFetcher.currentMatchManager.slackId;
         if(slackId != nil) {
-            if([self.firebaseFetcher.currentMatchManager.starredMatchesArray containsObject:cell.matchLabel.text]) {
+            NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+            NSNumber *myNumber = [formatter numberFromString:cell.matchLabel.text];
+            if([self.firebaseFetcher.currentMatchManager.starredMatchesArray containsObject:myNumber]) {
                 //Remove the star
                 NSMutableArray *a = [NSMutableArray arrayWithArray:self.firebaseFetcher.currentMatchManager.starredMatchesArray];
             
-                [a removeObject:cell.matchLabel.text];
+                [a removeObject:myNumber];
                 self.firebaseFetcher.currentMatchManager.starredMatchesArray = a;
                 cell.backgroundColor = [UIColor whiteColor];
-                [[[[[[FIRDatabase database] reference] child:@"slackProfiles"] child:slackId] child:@"starredMatches"] setValue:a];
+                [[[[[[FIRDatabase database] reference] child:@"activeSlackProfiles"] child:slackId] child:@"starredMatches"] setValue:a];
             } else {
                 //Create the star
                 cell.backgroundColor = [UIColor colorWithRed:1.0 green:0.64 blue:1.0 alpha:0.6];
-                self.firebaseFetcher.currentMatchManager.starredMatchesArray = [self.firebaseFetcher.currentMatchManager.starredMatchesArray arrayByAddingObjectsFromArray:@[cell.matchLabel.text]];
-                [[[[FIRDatabase database] reference] child:@"slackProfiles"] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-                    [[[[[[[FIRDatabase database] reference] child:@"slackProfiles"] child:slackId] child:@"starredMatches"] child:[NSString stringWithFormat:@"%lu", (unsigned long)[[snapshot childSnapshotForPath:self.firebaseFetcher.currentMatchManager.slackId] childSnapshotForPath:@"starredMatches"].childrenCount]] setValue:[NSNumber numberWithInt:[cell.matchLabel.text integerValue]]];
+                NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+                NSNumber *myNumber = [formatter numberFromString:cell.matchLabel.text];
+                self.firebaseFetcher.currentMatchManager.starredMatchesArray = [self.firebaseFetcher.currentMatchManager.starredMatchesArray arrayByAddingObject:myNumber];
+                [[[[FIRDatabase database] reference] child:@"activeSlackProfiles"] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                    [[[[[[[FIRDatabase database] reference] child:@"activeSlackProfiles"] child:slackId] child:@"starredMatches"] child:[NSString stringWithFormat:@"%lu", (unsigned long)[[snapshot childSnapshotForPath:self.firebaseFetcher.currentMatchManager.slackId] childSnapshotForPath:@"starredMatches"].childrenCount]] setValue:[NSNumber numberWithInt:[cell.matchLabel.text integerValue]]];
                 }];
             }
         } else {

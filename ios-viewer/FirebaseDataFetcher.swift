@@ -68,6 +68,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     @objc var firstPicklist = [Int]()
     var secondPicklist = [Int]()
     var slackProfiles = [String:SlackProfile]()
+    var activeProfiles = [String:SlackProfile]()
 
     var firebase : DatabaseReference
     
@@ -108,6 +109,20 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             } else {
                 print("Problem getting slack profiles: Profiles really not castable (probably nil)")
             }
+            if let snappy = snapshot.childSnapshot(forPath: "activeSlackProfiles").value as? [String:[String:Any]] {
+                for i in snappy.values {
+                    profiles[(snappy as NSDictionary?)?.allKeys(for: i)[0] as! String]?.appToken = SlackProfile(json: JSON(snapshot.childSnapshot(forPath: "activeSlackProfiles").childSnapshot(forPath: (snapshot.childSnapshot(forPath: "activeSlackProfiles").value as? [String:[String:Any]] as NSDictionary?)?.allKeys(for: i)[0] as! String).value)).appToken
+                    profiles[(snappy as NSDictionary?)?.allKeys(for: i)[0] as! String]?.starredMatches = SlackProfile(json: JSON(snapshot.childSnapshot(forPath: "activeSlackProfiles").childSnapshot(forPath: (snapshot.childSnapshot(forPath: "activeSlackProfiles").value as? [String:[String:Any]] as NSDictionary?)?.allKeys(for: i)[0] as! String).value)).starredMatches
+                    profiles[(snappy as NSDictionary?)?.allKeys(for: i)[0] as! String]?.notifyInAdvance = SlackProfile(json: JSON(snapshot.childSnapshot(forPath: "activeSlackProfiles").childSnapshot(forPath: (snapshot.childSnapshot(forPath: "activeSlackProfiles").value as? [String:[String:Any]] as NSDictionary?)?.allKeys(for: i)[0] as! String).value)).notifyInAdvance
+                }
+                if profiles.count != 0 {
+                    self.activeProfiles = profiles
+                } else {
+                    print("Problem getting slack profiles: Profiles not castable")
+                }
+            } else {
+                print("Problem getting slack profiles: Profiles really not castable (probably nil)")
+            }
         })
     }
     
@@ -129,6 +144,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 }
                 print(thingArray)
                 self.firstPicklist = firstPicks
+            } else {
+                for i in self.getFirstPickList() {
+                    self.firstPicklist.append(i.number)
+                }
             }
             for i in self.getOverallSecondPickList() {
                 self.secondPicklist.append(i.number)
@@ -821,9 +840,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             var value : Any?
             if path.contains("calculatedData") {
                 value = (TIMD.calculatedData!.dictionaryRepresentation() as NSDictionary).object(forKey: path.replacingOccurrences(of: "calculatedData.", with: ""))
-            } /*else if path.contains("gearsPlacedByLiftAuto") {
-                value = TIMD.gearsPlacedByLiftAuto?[path.components(separatedBy: ".")[1]]
-            } */else {
+            } else {
                 value = (TIMD.dictionaryRepresentation() as NSDictionary).object(forKey: path)
             }
             if value != nil {

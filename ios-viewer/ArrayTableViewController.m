@@ -118,6 +118,10 @@
     
 }
 
+- (void) viewDidLayoutSubview {
+    [self.searchController.searchBar sizeToFit];
+}
+
 - (void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -128,8 +132,6 @@
     
     
 }
-
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.

@@ -45,7 +45,7 @@ class SlackTableViewController: ArrayTableViewController {
     }
     
     override func filteredArray(forSearchText text: String!, inScope scope: Int) -> [Any]! {
-        let filtered = self.firebaseFetcher?.slackProfiles.filter({ (p) -> Bool in
+        let filtered = self.firebaseFetcher?.activeProfiles.filter({ (p) -> Bool in
             if p.value.name?.lowercased().range(of: text.lowercased()) != nil { return true }
             if p.value.tag?.lowercased().range(of: text.lowercased()) != nil { return true }
             return false
@@ -65,17 +65,18 @@ class SlackTableViewController: ArrayTableViewController {
         let defaults = UserDefaults.standard
         let token = defaults.value(forKey: "NotificationToken")
         var existingSlack : String?
-        for i in 0..<Array(self.firebaseFetcher!.slackProfiles.values).count {
-            if Array(self.firebaseFetcher!.slackProfiles.values)[i].appToken == token as? String {
+        for i in 0..<Array(self.firebaseFetcher!.activeProfiles.values).count {
+            if Array(self.firebaseFetcher!.activeProfiles.values)[i].appToken == token as? String {
                 //this is really ugly and it will probably crash...
-                existingSlack = (self.firebaseFetcher?.slackProfiles as! NSDictionary).allKeys(for: Array(self.firebaseFetcher!.slackProfiles.values)[i])[0] as? String
+                existingSlack = (self.firebaseFetcher?.activeProfiles as! NSDictionary).allKeys(for: Array(self.firebaseFetcher!.activeProfiles.values)[i])[0] as? String
             }
         }
         var newSlack: String? = ""
         if self.filteredArray != nil {
-            newSlack = (self.firebaseFetcher?.slackProfiles as! NSDictionary).allKeys(for: self.filteredArray[indexPath.row])[0] as? String
+            print(((self.firebaseFetcher?.activeProfiles as! NSDictionary)["U2VQ5NU83"] as? SlackProfile) == (self.filteredArray[indexPath.row] as? SlackProfile))
+            newSlack = (self.firebaseFetcher?.activeProfiles as! NSDictionary).allKeys(for: self.filteredArray[indexPath.row])[0] as? String
         } else {
-            newSlack = (self.firebaseFetcher?.slackProfiles as! NSDictionary).allKeys(for: Array(self.firebaseFetcher!.slackProfiles.values)[indexPath.row])[0] as? String
+            newSlack = (self.firebaseFetcher?.activeProfiles as! NSDictionary).allKeys(for: Array(self.firebaseFetcher!.activeProfiles.values)[indexPath.row])[0] as? String
         }
         self.firebaseFetcher?.currentMatchManager.slackId = newSlack
         let preAlert = UIAlertController(title: "Notified in Advance", message: "How many matches in advance do you want to be notified?", preferredStyle: .alert)
@@ -85,19 +86,25 @@ class SlackTableViewController: ArrayTableViewController {
         preAlert.addAction(UIAlertAction(title:"Submit",style:.default,handler: { (action) in
             self.firebaseFetcher?.currentMatchManager.preNotify = Int((preAlert.textFields?[0].text)!) ?? 0
             if existingSlack == nil {
-                self.firebase.child("slackProfiles").child(newSlack!).child("appToken").setValue(token)
-                self.firebase.child("slackProfiles").child(newSlack!).child("notifyInAdvance").setValue(self.firebaseFetcher?.currentMatchManager.preNotify)
+                self.firebase.child("activeSlackProfiles").child(newSlack!).child("appToken").setValue(token)
+                self.firebase.child("activeSlackProfiles").child(newSlack!).child("notifyInAdvance").setValue(self.firebaseFetcher?.currentMatchManager.preNotify)
             } else {
-                self.firebase.child("slackProfiles").child(existingSlack!).child("appToken").setValue(nil)
-                self.firebase.child("slackProfiles").child(newSlack!).child("appToken").setValue(token)
-                self.firebase.child("slackProfiles").child(newSlack!).child("notifyInAdvance").setValue(self.firebaseFetcher?.currentMatchManager.preNotify)
+                self.firebase.child("activeSlackProfiles").child(existingSlack!).setValue(nil)
+                self.firebase.child("activeSlackProfiles").child(newSlack!).child("appToken").setValue(token)
+                self.firebase.child("activeSlackProfiles").child(newSlack!).child("notifyInAdvance").setValue(self.firebaseFetcher?.currentMatchManager.preNotify)
             }
             self.firebaseFetcher?.getSlackProfiles()
-            self.firebase.child("slackProfiles").child(newSlack!).observeSingleEvent(of: .value, with: { (snap) in
+            self.searchController.searchBar.text = ""
+            self.searchController.dismiss(animated: true, completion: {() in
+                //nada
+            })
+            self.dataArray = self.loadDataArray(false)
+            self.reloadTableView(Notification(name: Notification.Name(rawValue: "boi")))
+            self.firebase.child("activeSlackProfiles").child(newSlack!).observeSingleEvent(of: .value, with: { (snap) in
                 if let arrayThing = snap.childSnapshot(forPath: "starredMatches").value as? [Int] {
-                    var array2 : [String] = []
+                    var array2 : [Int] = []
                     for i in arrayThing {
-                        array2.append(String(describing: i))
+                        array2.append(i)
                     }
                     self.firebaseFetcher.currentMatchManager.starredMatchesArray = array2
                 } else {

@@ -78,7 +78,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                                             //get url
                                             let url = URL(string: (Array(Array(team.pitAllImageURLs!)).filter { $0.contains((team.pitSelectedImage!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!
                                             //set imageview
-                                            imageView.hnk_setImageFromURL(url, success: { _ in
+                                            imageView.hnk_setImageFromURL(url, failure: { _ in
+                                                print("<reloadImage()> Failed to load image")
+                                            }, success: { _ in
+                                                print("<reloadImage()> Loaded image, reseting height...")
                                                 self.resetTableViewHeight()
                                             })
                                             
@@ -291,10 +294,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if !Utils.teamDetailsKeys.defaultKeys.contains(dataKey) { //Default keys are currently just 'matchDatas' and 'TeamInMatchDatas'... if NOT a default key
                 var dataPoint = AnyObject?.init(nilLiteral: ())
                 var secondDataPoint = AnyObject?.init(nilLiteral: ())
-                /*if dataKey.contains("calculatedData.avgGearsPlacedByLiftAuto") {
-                    //This is not really used, not one of the keys
-                    dataPoint = team?.calculatedData?.avgGearsPlacedByLiftAuto?[dataKey.components(separatedBy: ".")[2]] as AnyObject
-                } else */if dataKey.contains("calculatedData") {
+                if dataKey.contains("calculatedData") {
                     dataPoint = team!.value(forKeyPath: dataKey) as AnyObject
                 } else {
                     dataPoint = (team!.dictionaryRepresentation() as NSDictionary).object(forKey: dataKey) as AnyObject
@@ -348,11 +348,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     //titleLabel is the humanReadable version of dataKey
                     unrankedCell.titleLabel.text = Utils.humanReadableNames[dataKey]
                     
-                    if "\(String(describing: dataPoint))".isEmpty /*|| (dataPoint as? Float != nil && dataPoint as! Float == 0.0)*/ {
+                    if "\(String(describing: dataPoint))".isEmpty {
                         unrankedCell.detailLabel.text = ""
-                       } /*else if dataKey == "pitOrganization" { //In the pit scout, the selector is indexed 0 to 4, this translates it back in to what those numbers mean.
-                        unrankedCell.detailLabel!.text! = (team?.pitOrganization) ?? ""
-                    } */else if dataKey == "pitProgrammingLanguage" { //JUST WANNA SAY this sucks
+                    } else if dataKey == "pitProgrammingLanguage" { //JUST WANNA SAY this sucks
                         unrankedCell.detailLabel!.text! = (team?.pitProgrammingLanguage) ?? ""
                     } else if dataKey == "pitDriveTrain" {
                         unrankedCell.detailLabel!.text! = (team?.pitDriveTrain) ?? ""
@@ -360,9 +358,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         unrankedCell.detailLabel!.text! = (team?.pitClimberType) ?? ""
                     } else if dataKey == "pitWheelDiameter" {
                         unrankedCell.detailLabel!.text! = (team?.pitWheelDiameter) ?? ""
-                    } else if dataKey == "pitRobotDimensions" {
-                        unrankedCell.detailLabel!.text! = (team?.pitRobotDimensions) ?? ""
-                    //uhhh what even is this?
+                    } else if dataKey == "pitRobotWidth" {
+                        unrankedCell.detailLabel!.text! = String(describing: team!.pitRobotWidth ?? 0)
+                    } else if dataKey == "pitRobotLength" {
+                        unrankedCell.detailLabel!.text! = String(describing: team!.pitRobotLength ?? 0)
                     } else if Utils.teamDetailsKeys.addCommasBetweenCapitals.contains(dataKey) {
                         unrankedCell.detailLabel.text = "\(insertCommasAndSpacesBetweenCapitalsInString(roundValue(dataPoint!, toDecimalPlaces: 2)))"
                     } else if Utils.teamDetailsKeys.boolValues.contains(dataKey) {
@@ -456,7 +455,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     let matchesUntilNextMatch : String = firebaseFetcher?.matchesUntilTeamNextMatch((team?.number)!) ?? "NA"
                     
                     //label: "Matches - #  Remaining
-                    unrankedCell.titleLabel.text = (unrankedCell.titleLabel.text)! + " - (\(matchesUntilNextMatch))  Remaining: \(Utils.sp(thing: firebaseFetcher?.remainingMatchesForTeam((team?.number)!)))"
+                    unrankedCell.titleLabel.text = (unrankedCell.titleLabel.text)! + ": \(Utils.sp(thing: firebaseFetcher?.remainingMatchesForTeam((team?.number)!))) Left - Next in \(matchesUntilNextMatch)"
                 }
                 cell = unrankedCell
             }
@@ -527,19 +526,19 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 let nameText: String
                 switch (team?.number, team?.name) {
                 case (.some(let num), .some(let name)):
-                    title = "\(num)"
+                    title = "\(num) - \(name)"
                     numText = "\(num)"
                     nameText = "\(name)"
                 case (.some(let num), .none):
-                    title = "\(num)"
+                    title = "\(num) - ???"
                     numText = "\(num)"
                     nameText = "Unknown name..."
                 case (.none, .some(let name)):
-                    title = "Unkown Number"
+                    title = "??? - \(name)"
                     numText = "????"
                     nameText = "\(name)"
                 default:
-                    title = "Unknown Number"
+                    title = "??? - ???"
                     numText = "????"
                     nameText = "Unknown name..."
                 }
