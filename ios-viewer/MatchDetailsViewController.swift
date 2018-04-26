@@ -26,7 +26,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
     let mapping = ["1", "2", "3"]
     
     //keys for the tables
-    let tableKeys = ["avgAllianceSwitchCubesAuto", "avgCubesPlacedInScaleAuto", "avgAllianceSwitchCubesTele","avgCubesPlacedInScaleTele", "autoRunPercentage", "climbPercentage", "avgNumExchangeInputTele", "avgCubesSpilledTele", "dysfunctionalPercentage",]
+    let tableKeys = ["avgAllianceSwitchCubesAuto", "avgCubesPlacedInScaleAuto", "avgAllianceSwitchCubesTele","avgCubesPlacedInScaleTele", "autoRunPercentage", "avgAllVaultTime", "avgNumExchangeInputTele", "avgCubesSpilledTele", "dysfunctionalPercentage","avgScaleCubesBy100s"]
     
     
     //score labels
@@ -70,11 +70,17 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         }
         
         //setup the label stuff
-        cell.datapointLabel.font = cell.datapointLabel.font.withSize(12)
-        cell.team1.font = cell.team1.font.withSize(12)
-        cell.team2.font = cell.team2.font.withSize(12)
-        cell.team3.font = cell.team3.font.withSize(12) // or NSLineBreakMode.ByWordWrapping
-        cell.datapointLabel.numberOfLines = 1
+        var size: CGFloat = CGFloat(12)
+        var numLines = 1
+        if (firebaseFetcher?.currentMatchManager.matchDetailsScroll ?? false) {
+            size = CGFloat(18)
+            numLines = 0
+        }
+        cell.datapointLabel.font = cell.datapointLabel.font.withSize(size)
+        cell.team1.font = cell.team1.font.withSize(size)
+        cell.team2.font = cell.team2.font.withSize(size)
+        cell.team3.font = cell.team3.font.withSize(size) // or NSLineBreakMode.ByWordWrapping
+        cell.datapointLabel.numberOfLines = numLines
         cell.team1.lineBreakMode = .byWordWrapping // or NSLineBreakMode.ByWordWrapping
         cell.team2.lineBreakMode = .byWordWrapping
         cell.team3.lineBreakMode = .byWordWrapping
@@ -202,11 +208,30 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     //how many rows are there (all the keys and (currently not) future match status)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (firebaseFetcher?.currentMatchManager.matchDetailsScroll ?? false) {
+            tableView.isScrollEnabled = true
+        } else {
+            tableView.isScrollEnabled = false
+        }
         return tableKeys.count// + 1 (for future match status)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (firebaseFetcher?.currentMatchManager.matchDetailsScroll ?? false) {
+            return CGFloat(44)
+        } else {
+            return CGFloat(14)
+        }
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        redTableView.reloadData()
+        blueTableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -215,7 +240,6 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         NotificationCenter.default.addObserver(self, selector: #selector(MatchDetailsViewController.checkRes(_:)), name: NSNotification.Name(rawValue: "updateLeftTable"), object: nil)
         
         updateUI()
-       // print(self.match)
         //register table views
         self.redTableView.register(UINib(nibName: "MatchDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: "MatchDetailsCell")
         self.blueTableView.register(UINib(nibName: "MatchDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: "MatchDetailsCell")
@@ -224,6 +248,8 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         self.redTableView.dataSource = self
         self.blueTableView.delegate = self
         self.blueTableView.dataSource = self
+        blueTableView.reloadData()
+        redTableView.reloadData()
     }
     
     fileprivate func updateUI() {
@@ -312,7 +338,6 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
             if (blueTeams?.count)! > 0 {
                 for index in 1...(blueTeams?.count)! {
                     if index <= 3 {
-                        //print(blueTeams[index].number)
                         //setting team button titles
                         (value(forKey: "b\(mapping[index - 1])Button") as! UIButton).setTitle("\(match.blueAllianceTeamNumbers![index - 1])", for: UIControlState())
                     }
@@ -440,7 +465,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         return nil
     }
     @objc func checkRes(_ notification:Notification) {
-        if notification.name._rawValue == "updateLeftTable" {
+        if notification.name.rawValue == "updateLeftTable" {
             if self.match == nil {
                 self.match = self.firebaseFetcher?.matches[self.matchNumber - 2] //Why the -2???
             }

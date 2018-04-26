@@ -302,7 +302,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgNumAlliancePlatformIntakeTele",
             "calculatedData.avgNumOpponentPlatformIntakeTele",
             "calculatedData.avgCubesSpilledTele",
-            "calculatedData.totalCubesPlaced",
+            "calculatedData.avgTotalCubesPlaced",
+            "calculatedData.avgScaleCubesBy100s",
+            "calculatedData.avgScaleCubesBy110s",
         ]
         
         /** Dict translating a key for a teamDetails datapoint to the key for the respective TIMD datapoint. Does not include "calculatedData." in the keys. */
@@ -331,6 +333,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "avgNumAlliancePlatformIntakeTele" : "calculatedData.numAlliancePlatformIntakeTele",
             "avgNumOpponentPlatformIntakeTele" : "calculatedData.numOpponentPlatformIntakeTele",
             "avgNumCubesSpilledTele" : "numSpilledCubesTele",
+            "avgScaleCubesBy100s" : "calculatedData.numCubesScaleAt100s",
+            "avgScaleCubesBy110s" : "calculatedData.numCubesScaleAt110s",
             //super data
             "avgSpeed" : "rankSpeed",
             "avgAgility" : "rankAgility",
@@ -504,6 +508,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         //"rankBallControl" : "calculatedData.avgBallControl",
         "calculatedData.totalNumGoodDecisions" : "numGoodDecisions",
         "calculatedData.totalNumBadDecisions" : "numBadDecisions",
+        "calculatedData.avgScaleCubesBy100s" : "calculatedData.numCubesScaleAt100s",
+        "calculatedData.avgScaleCubesBy110s" : "calculatedData.numCubesScaleAt110s",
     ]
     
     /** Team Details keys? */
@@ -682,7 +688,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.pitAvgRampTime" : "Avg. Ramp Time",
         "pitHasCamera" : "Has Camera",
         "pitWheelDiameter" : "Wheel Diameter",
-        "calculatedData.totalCubesPlaced" : "Avg. Cubes Placed",
+        "calculatedData.avgTotalCubesPlaced" : "Avg. Cubes Placed",
+        "calculatedData.avgAllVaultTime" : "Time to fill Vault",
+        "calculatedData.avgScaleCubesBy100s" : "Avg. Scale Cubes by 100",
+        "calculatedData.avgScaleCubesBy110s" : "Avg. Scale Cubes by 110",
+        "calculatedData.numCubesScaleAt100s" : "Scale Cubes by 100",
+        "calculatedData.numCubesScaleAt110s" : "Scale Cubes by 110",
     ]
     
     /**

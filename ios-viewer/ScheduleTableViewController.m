@@ -62,13 +62,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToCurrentMatch:) name:@"currentMatchUpdated" object:nil];
     self.highlightDysfunc = NO;
     UIPinchGestureRecognizer *pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+    [self.searchController.searchBar setKeyboardType:UIKeyboardTypeDefault];
     [self.tableView addGestureRecognizer:pinchGestureRecognizer];
 }
 
+//This used to be used for Dysfunc Highlighting, but on options page now. I'll leave this here in case we want to pinch things in the future.
 - (void)handlePinch:(UIPinchGestureRecognizer*)recognizer {
     if(recognizer.state == UIGestureRecognizerStateEnded) {
         NSLog(@"Ouch why did you pinch me");
-        [self toggleDysfuncHighlight];
     }
 }
 
@@ -106,7 +107,7 @@
         //RED MATCH LABELS
         if(i < redTeams.count) {
             [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[redTeams objectAtIndex:i]).number]] forKeyPath:[NSString stringWithFormat:@"red%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
-            if(((Team *)[redTeams objectAtIndex:i]).calculatedData.dysfunctionalPercentage > 0 && self.highlightDysfunc) {
+            if(((Team *)[redTeams objectAtIndex:i]).calculatedData.dysfunctionalPercentage > 0 && self.firebaseFetcher.currentMatchManager.highlightDysfunc) {
                 switch(i) {
                     case 0:
                         matchCell.redOneLabel.backgroundColor = [UIColor colorWithRed:0.00 green:0.75 blue:0.00 alpha:0.5];
@@ -132,7 +133,7 @@
         //BLUE MATCH LABELS
         if(i < blueTeams.count) {
             [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[blueTeams objectAtIndex:i]).number]] forKeyPath:[NSString stringWithFormat:@"blue%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
-            if(((Team *)[blueTeams objectAtIndex:i]).calculatedData.dysfunctionalPercentage > 0 && self.highlightDysfunc) {
+            if(((Team *)[blueTeams objectAtIndex:i]).calculatedData.dysfunctionalPercentage > 0 && self.firebaseFetcher.currentMatchManager.highlightDysfunc) {
                 switch(i) {
                     case 0:
                         matchCell.blueOneLabel.backgroundColor = [UIColor colorWithRed:0.00 green:0.75 blue:0.00 alpha:0.5];
@@ -190,29 +191,35 @@
         if ([matchCell.matchLabel.text integerValue] > self.currentNumber) {
             self.currentNumber = [matchCell.matchLabel.text integerValue];
         }
-        //NSLog([NSString stringWithFormat:@"%ld",(long)self.currentNumber]);
     }
     
     //EXTRA RP IMAGE VIEWS
-    if(match.redDidAutoQuest) {
-        matchCell.redAQ.alpha = 1.0;
-    } else {
-        matchCell.redAQ.alpha = 0.0;
-    }
-    if(match.blueDidAutoQuest) {
-        matchCell.blueAQ.alpha = 1.0;
+    if(self.firebaseFetcher.currentMatchManager.showRP) {
+        if(match.redDidAutoQuest) {
+            matchCell.redAQ.alpha = 1.0;
+        } else {
+            matchCell.redAQ.alpha = 0.0;
+        }
+        if(match.blueDidAutoQuest) {
+            matchCell.blueAQ.alpha = 1.0;
+        } else {
+            matchCell.blueAQ.alpha = 0.0;
+        }
+        if(match.redDidFaceBoss) {
+            matchCell.redFTB.alpha = 1.0;
+        } else {
+            matchCell.redFTB.alpha = 0.0;
+        }
+        if(match.blueDidFaceBoss) {
+            matchCell.blueFTB.alpha = 1.0;
+        } else {
+            matchCell.blueFTB.alpha = 0.0;
+        }
     } else {
         matchCell.blueAQ.alpha = 0.0;
-    }
-    if(match.redDidFaceBoss) {
-        matchCell.redFTB.alpha = 1.0;
-    } else {
-        matchCell.redFTB.alpha = 0.0;
-    }
-    if(match.blueDidFaceBoss) {
-        matchCell.blueFTB.alpha = 1.0;
-    } else {
         matchCell.blueFTB.alpha = 0.0;
+        matchCell.redAQ.alpha = 0.0;
+        matchCell.redFTB.alpha = 0.0;
     }
 }
 
@@ -223,7 +230,6 @@
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
     NSArray *returnData = self.firebaseFetcher.matches;
     
-    //NSLog(@"%lu", (unsigned long)returnData.count);
     //[self.tableView setUserInteractionEnabled:YES];
     return returnData;
 }
@@ -256,7 +262,6 @@
     } else {
     MatchTableViewCell *cell = sender;
     MatchDetailsViewController *detailController = (MatchDetailsViewController *)segue.destinationViewController;
-    //NSLog([NSString stringWithFormat:@"%lu",(unsigned long)self.firebaseFetcher.matches.count]);
     detailController.match = [self.firebaseFetcher.matches objectAtIndex:cell.matchLabel.text.integerValue-1];
     detailController.matchNumber = cell.matchLabel.text.integerValue;
     }
@@ -292,21 +297,37 @@
 }
 
 - (NSAttributedString *)textForScheduleLabelForType:(NSInteger)type forString:(NSString *)string {
+    int bad = 0;
+    UIColor *thing;
+    NSArray *bois = [[self highlightedStringForScope] componentsSeparatedByString:@","];
+    NSAttributedString *highlighted = [[NSAttributedString alloc] initWithString:string];
     if (type != [self currentScope] && type == 1) {
-        return [self textForLabelForString:string highlightOccurencesOfString:[self highlightedStringForScope]];
-    } else if (type != [self currentScope] && type == 0) {
-        if ([string rangeOfString:[self highlightedStringForScope]].location == 0) {
-            return [self textForLabelForString:string highlightOccurencesOfString:[self highlightedStringForScope]];
+        for(NSString *boi in bois) {
+            if(![boi isEqual: @""]) {
+                if(bad==0) {thing=[UIColor greenColor];}else if(bad==1){thing=[UIColor yellowColor];} else if(bad==2) {thing=[UIColor orangeColor];} else {thing=[UIColor magentaColor];}
+                highlighted = [self textForLabelForString:highlighted highlightOccurencesOfString:boi color:thing];
+            }
+            bad += 1;
         }
+        return highlighted;
+    } else if (type != [self currentScope] && type == 0) {
+        for(NSString *boi in bois) {
+            if(![boi isEqual: @""]) {
+                if(bad==0) {thing=[UIColor greenColor];}else if(bad==1){thing=[UIColor yellowColor];} else if(bad==2) {thing=[UIColor orangeColor];} else {thing=[UIColor magentaColor];}
+                highlighted = [self textForLabelForString:highlighted highlightOccurencesOfString:boi color:thing];
+            }
+            bad += 1;
+        }
+        return highlighted;
     }
     
     return [[NSAttributedString alloc] initWithString:string];
 }
 
-- (NSAttributedString *)textForLabelForString:(NSString *)string highlightOccurencesOfString:(NSString *)highlightString {
-    NSMutableAttributedString *mutAttribString = [[NSMutableAttributedString alloc] initWithString:string];
+- (NSAttributedString *)textForLabelForString:(NSAttributedString *)string highlightOccurencesOfString:(NSString *)highlightString color:(UIColor *)color {
+    NSMutableAttributedString *mutAttribString = [[NSMutableAttributedString alloc] initWithAttributedString:string];
     if (highlightString) {
-        [mutAttribString addAttribute:NSBackgroundColorAttributeName value:[UIColor yellowColor] range:[string rangeOfString:highlightString]];
+        [mutAttribString addAttribute:NSBackgroundColorAttributeName value:color range:[[string string] rangeOfString:highlightString]];
     }
     
     return mutAttribString;

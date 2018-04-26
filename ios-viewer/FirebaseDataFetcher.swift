@@ -111,14 +111,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             }
             if let snappy = snapshot.childSnapshot(forPath: "activeSlackProfiles").value as? [String:[String:Any]] {
                 for i in snappy.values {
-                    profiles[(snappy as NSDictionary?)?.allKeys(for: i)[0] as! String]?.appToken = SlackProfile(json: JSON(snapshot.childSnapshot(forPath: "activeSlackProfiles").childSnapshot(forPath: (snapshot.childSnapshot(forPath: "activeSlackProfiles").value as? [String:[String:Any]] as NSDictionary?)?.allKeys(for: i)[0] as! String).value)).appToken
-                    profiles[(snappy as NSDictionary?)?.allKeys(for: i)[0] as! String]?.starredMatches = SlackProfile(json: JSON(snapshot.childSnapshot(forPath: "activeSlackProfiles").childSnapshot(forPath: (snapshot.childSnapshot(forPath: "activeSlackProfiles").value as? [String:[String:Any]] as NSDictionary?)?.allKeys(for: i)[0] as! String).value)).starredMatches
-                    profiles[(snappy as NSDictionary?)?.allKeys(for: i)[0] as! String]?.notifyInAdvance = SlackProfile(json: JSON(snapshot.childSnapshot(forPath: "activeSlackProfiles").childSnapshot(forPath: (snapshot.childSnapshot(forPath: "activeSlackProfiles").value as? [String:[String:Any]] as NSDictionary?)?.allKeys(for: i)[0] as! String).value)).notifyInAdvance
-                }
-                if profiles.count != 0 {
-                    self.activeProfiles = profiles
-                } else {
-                    print("Problem getting slack profiles: Profiles not castable")
+                    self.activeProfiles[(snappy as NSDictionary?)?.allKeys(for: i)[0] as! String] = SlackProfile(json: JSON(i))
+                    /*self.activeProfiles[(snappy as NSDictionary?)?.allKeys(for: i)[0] as! String]?.appToken = SlackProfile(json: JSON(snapshot.childSnapshot(forPath: "activeSlackProfiles").childSnapshot(forPath: (snapshot.childSnapshot(forPath: "activeSlackProfiles").value as? [String:[String:Any]] as NSDictionary?)?.allKeys(for: i)[0] as! String).value)).appToken
+                    self.activeProfiles[(snappy as NSDictionary?)?.allKeys(for: i)[0] as! String]?.starredMatches = SlackProfile(json: JSON(snapshot.childSnapshot(forPath: "activeSlackProfiles").childSnapshot(forPath: (snapshot.childSnapshot(forPath: "activeSlackProfiles").value as? [String:[String:Any]] as NSDictionary?)?.allKeys(for: i)[0] as! String).value)).starredMatches
+                    self.activeProfiles[(snappy as NSDictionary?)?.allKeys(for: i)[0] as! String]?.notifyInAdvance = SlackProfile(json: JSON(snapshot.childSnapshot(forPath: "activeSlackProfiles").childSnapshot(forPath: (snapshot.childSnapshot(forPath: "activeSlackProfiles").value as? [String:[String:Any]] as NSDictionary?)?.allKeys(for: i)[0] as! String).value)).notifyInAdvance*/
                 }
             } else {
                 print("Problem getting slack profiles: Profiles really not castable (probably nil)")
@@ -142,7 +138,6 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 for i in thingENum {
                     thingArray.append((i as! DataSnapshot).value as! Int)
                 }
-                print(thingArray)
                 self.firstPicklist = firstPicks
             } else {
                 for i in self.getFirstPickList() {
@@ -258,7 +253,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             matchReference.observe(.childChanged, with: { [unowned self] snapshot in
                 //increase matchCounter
                 self.matchCounter += 1
-                print("Current Match: \(self.currentMatchManager.currentMatch)")
+                print("Current Match Updated. New: \(self.currentMatchManager.currentMatch)")
                 //once again, future me: test commenting out this line
                 self.currentMatchManager.currentMatch = self.currentMatchManager.currentMatch
                 //gets the match number
@@ -555,7 +550,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     /** Get list of teams sorted by seed */
     @objc func seedList() -> [Team] {
-        return teams.sorted { $0.calculatedData!.actualSeed < $1.calculatedData!.actualSeed }
+        return (teams.sorted { $0.calculatedData!.actualSeed < $1.calculatedData!.actualSeed }).filter { $0.calculatedData?.actualSeed != 0 }
     }
     
     /** Get list of teams sorted by predicted seed */
@@ -603,7 +598,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     /** See rankOfTeam, reverses */
     @objc func reverseRankOfTeam(_ team: Team, withCharacteristic:String) -> Int {
         var counter = 0
-        let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic).reversed()
+        let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic).reversed().filter { $0.calculatedData?.actualSeed != 0 }
         
         for loopTeam in sortedTeams {
             counter += 1
@@ -698,10 +693,25 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     */
     @objc func filteredMatchesForMatchSearchString(_ searchString:String) -> [Match] {
         var filteredMatches = [Match]()
+        var searchArray: [String] = []
+        var tempWord = ""
+        for char in searchString {
+            if char != "," {
+                tempWord.append(char)
+            } else {
+                searchArray.append(tempWord)
+                tempWord = ""
+            }
+        }
+        searchArray.append(tempWord)
         for match in self.matches  {
-            //if the match contains the search field
-            if String(describing: match.number).range(of: searchString) != nil {
-                filteredMatches.append(match)
+            for i in searchArray {
+                if !filteredMatches.contains(match) {
+                    //if the match contains the search field
+                    if String(describing: match.number).range(of: i) != nil {
+                        filteredMatches.append(match)
+                    }
+                }
             }
         }
         return filteredMatches
@@ -710,15 +720,32 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     /** Filters matches according to the search string when set to teams. See filteredMatchesForMatchSearchString */
     @objc func filteredMatchesforTeamSearchString(_ searchString: String) -> [Match] {
         var filteredMatches = [Match]()
-        for match in self.matches  {
-            for teamNum in match.redAllianceTeamNumbers! {
-                if String(describing: teamNum).range(of: searchString) != nil {
-                    filteredMatches.append(match)
-                }
+        var searchArray: [String] = []
+        var tempWord = ""
+        for char in searchString {
+            if char != "," {
+                tempWord.append(char)
+            } else {
+                searchArray.append(tempWord)
+                tempWord = ""
             }
-            for teamNum in match.blueAllianceTeamNumbers! {
-                if String(describing: teamNum).range(of: searchString) != nil {
-                    filteredMatches.append(match)
+        }
+        searchArray.append(tempWord)
+        for match in self.matches  {
+            for i in searchArray {
+                for teamNum in match.redAllianceTeamNumbers! {
+                    if filteredMatches.contains(match) != true {
+                        if String(describing: teamNum).range(of: i) != nil || String(describing: getTeam(teamNum)?.name).range(of: i) != nil {
+                            filteredMatches.append(match)
+                        }
+                    }
+                }
+                for teamNum in match.blueAllianceTeamNumbers! {
+                    if filteredMatches.contains(match) != true {
+                        if String(describing: teamNum).range(of: i) != nil || String(describing: getTeam(teamNum)?.name).range(of: i) != nil {
+                            filteredMatches.append(match)
+                        }
+                    }
                 }
             }
         }
