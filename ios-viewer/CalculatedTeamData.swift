@@ -53,7 +53,6 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     static let avgNumGroundPortalIntakeTele = "avgNumGroundPortalIntakeTele"
     static let avgNumElevatedPyramidIntakeTele = "avgNumElevatedPyramidIntakeTele"
     static let avgNumGroundPyramidIntakeTele = "avgNumGroundPyramidIntakeTele"
-    static let numMatchesPlayed = "numMatchesPlayed"
     static let avgNumGroundPyramidIntakeAuto = "avgNumGroundPyramidIntakeAuto"
     static let avgSpeed = "avgSpeed"
     static let firstPickAbility = "firstPickAbility"
@@ -164,7 +163,6 @@ public final class CalculatedTeamData: NSObject, NSCoding {
   @objc public var avgNumGroundPortalIntakeTele: Float = -1.0
   @objc public var avgNumElevatedPyramidIntakeTele: Float = -1.0
   @objc public var avgNumGroundPyramidIntakeTele: Float = -1.0
-  public var numMatchesPlayed: Int?
   @objc public var avgNumGroundPyramidIntakeAuto: Float = -1.0
   @objc public var avgSpeed: Float = -1.0
   @objc public var firstPickAbility: Float = -1.0
@@ -290,7 +288,6 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     avgNumGroundPortalIntakeTele = json[SerializationKeys.avgNumGroundPortalIntakeTele].floatValue
     avgNumElevatedPyramidIntakeTele = json[SerializationKeys.avgNumElevatedPyramidIntakeTele].floatValue
     avgNumGroundPyramidIntakeTele = json[SerializationKeys.avgNumGroundPyramidIntakeTele].floatValue
-    numMatchesPlayed = json[SerializationKeys.numMatchesPlayed].int
     avgNumGroundPyramidIntakeAuto = json[SerializationKeys.avgNumGroundPyramidIntakeAuto].floatValue
     avgSpeed = json[SerializationKeys.avgSpeed].floatValue
     firstPickAbility = json[SerializationKeys.firstPickAbility].floatValue
@@ -406,7 +403,6 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     dictionary[SerializationKeys.avgNumElevatedPyramidIntakeAuto] = avgNumElevatedPyramidIntakeAuto
     dictionary[SerializationKeys.avgNumElevatedPyramidIntakeTele] = avgNumElevatedPyramidIntakeTele
     dictionary[SerializationKeys.avgNumGroundPyramidIntakeTele] = avgNumGroundPyramidIntakeTele
-    if let value = numMatchesPlayed { dictionary[SerializationKeys.numMatchesPlayed] = value }
     dictionary[SerializationKeys.avgNumGroundPyramidIntakeAuto] = avgNumGroundPyramidIntakeAuto
 
     dictionary[SerializationKeys.avgSpeed] = avgSpeed
@@ -520,7 +516,6 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     self.avgNumGroundPortalIntakeTele = aDecoder.decodeFloat(forKey: SerializationKeys.avgNumGroundPortalIntakeTele)
     self.avgNumElevatedPyramidIntakeTele = aDecoder.decodeFloat(forKey: SerializationKeys.avgNumElevatedPyramidIntakeTele)
     self.avgNumGroundPyramidIntakeTele = aDecoder.decodeFloat(forKey: SerializationKeys.avgNumGroundPyramidIntakeTele)
-    self.numMatchesPlayed = aDecoder.decodeObject(forKey: SerializationKeys.numMatchesPlayed) as? Int
     self.avgNumGroundPyramidIntakeAuto = aDecoder.decodeFloat(forKey: SerializationKeys.avgNumGroundPyramidIntakeAuto)
     self.avgSpeed = aDecoder.decodeFloat(forKey: SerializationKeys.avgSpeed)
     self.firstPickAbility = aDecoder.decodeFloat(forKey: SerializationKeys.firstPickAbility)
@@ -631,7 +626,6 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     aCoder.encode(avgNumGroundPortalIntakeTele, forKey: SerializationKeys.avgNumGroundPortalIntakeTele)
     aCoder.encode(avgNumElevatedPyramidIntakeTele, forKey: SerializationKeys.avgNumElevatedPyramidIntakeTele)
     aCoder.encode(avgNumGroundPyramidIntakeTele, forKey: SerializationKeys.avgNumGroundPyramidIntakeTele)
-    aCoder.encode(numMatchesPlayed, forKey: SerializationKeys.numMatchesPlayed)
     aCoder.encode(avgNumGroundPyramidIntakeAuto, forKey: SerializationKeys.avgNumGroundPyramidIntakeAuto)
     aCoder.encode(avgSpeed, forKey: SerializationKeys.avgSpeed)
     aCoder.encode(firstPickAbility, forKey: SerializationKeys.firstPickAbility)

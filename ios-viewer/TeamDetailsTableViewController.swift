@@ -302,16 +302,16 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         unrankedCell.detailLabel.text = ""
                     } else if dataKey == "pitProgrammingLanguage" { //JUST WANNA SAY this sucks
                         unrankedCell.detailLabel!.text! = (team?.pitProgrammingLanguage) ?? ""
-                    } else if dataKey == "pitDriveTrain" {
-                        unrankedCell.detailLabel!.text! = (team?.pitDriveTrain) ?? ""
-                    } else if dataKey == "pitClimberType" {
-                        unrankedCell.detailLabel!.text! = (team?.pitClimberType) ?? ""
+                    } else if dataKey == "pitDrivetrain" {
+                        unrankedCell.detailLabel!.text! = (team?.pitDrivetrain) ?? ""
+                    } else if dataKey == "pitClimbType" {
+                        unrankedCell.detailLabel!.text! = /*(team?.pitClimbType) ?? */"" //More complex now
                     } else if dataKey == "pitWheelDiameter" {
                         unrankedCell.detailLabel!.text! = (team?.pitWheelDiameter) ?? ""
-                    } else if dataKey == "pitRobotWidth" {
-                        unrankedCell.detailLabel!.text! = String(describing: team!.pitRobotWidth ?? 0)
-                    } else if dataKey == "pitRobotLength" {
-                        unrankedCell.detailLabel!.text! = String(describing: team!.pitRobotLength ?? 0)
+                    } else if dataKey == "pitWidth" {
+                        unrankedCell.detailLabel!.text! = String(describing: team!.pitWidth ?? 0)
+                    } else if dataKey == "pitLength" {
+                        unrankedCell.detailLabel!.text! = String(describing: team!.pitLength ?? 0)
                     } else if Utils.teamDetailsKeys.addCommasBetweenCapitals.contains(dataKey) {
                         unrankedCell.detailLabel.text = "\(insertCommasAndSpacesBetweenCapitalsInString(roundValue(dataPoint!, toDecimalPlaces: 2)))"
                     } else if Utils.teamDetailsKeys.boolValues.contains(dataKey) {
