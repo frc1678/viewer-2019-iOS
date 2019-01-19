@@ -30,7 +30,7 @@ class SpecificTeamScheduleTableViewController : ScheduleTableViewController {
             var teamMatchNums: [Int] = []
             for i in self.dataArray {
                 if let j = i as? Match {
-                    teamMatchNums.append(j.number!)
+                    teamMatchNums.append(j.number)
                 }
             }
             if Set(teamMatchNums).isSubset(of: Set(starredMatches)) {

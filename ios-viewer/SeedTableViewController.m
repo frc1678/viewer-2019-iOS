@@ -32,9 +32,9 @@
     }
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
     
-    if(team.calculatedData.actualNumRPs != -1.0) {
+    if(team.actualRPs != -1.0) {
         //score label is average number of rps
-        multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@", [Utils roundValue:team.calculatedData.actualNumRPs toDecimalPlaces:2]]; // Actually is average Num RPs
+        multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@", [Utils roundValue:team.actualRPs toDecimalPlaces:2]]; // Actually is average Num RPs
     } else {
         multiCell.scoreLabel.text = @"";
     }

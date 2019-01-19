@@ -137,11 +137,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 self.firstPicklist = firstPicks
             } else {
                 for i in self.getFirstPickList() {
-                    self.firstPicklist.append(i.number!)
+                    self.firstPicklist.append(i.number)
                 }
             }
             for i in self.getOverallSecondPickList() {
-                self.secondPicklist.append(i.number!)
+                self.secondPicklist.append(i.number)
             }
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pickBoi"), object:self)
         })
@@ -212,7 +212,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     func updateCacheIfNeeded(_ snap : DataSnapshot, team : Team) {
         let defaults = UserDefaults.standard
         //check if the user wants to aggressively download
-        let shouldAggressivelyDownload = defaults.bool(forKey: "predownloadPreference")
+        /*let shouldAggressivelyDownload = defaults.bool(forKey: "predownloadPreference")
         if shouldAggressivelyDownload {
             //look for the selected image url on firebase
             if let newURL = snap.childSnapshot(forPath: "selectedImageURL").value {
@@ -222,7 +222,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     cacheImage(snap.childSnapshot(forPath: "number").value as! Int, url: newURL as? String)
                 }
             }
-        }
+        }*/
     }
     
     // MARK: Data Fetching
@@ -489,7 +489,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     */
     func matchNumbersForTeamNumber(_ number: Int) -> [Int] {
         func matchNum(_ match : Match) -> Int {
-            return match.number!
+            return match.number
         }
         return self.getMatchesForTeamWithNumber(number).map(matchNum)
     }
@@ -786,15 +786,15 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
      - returns: The second value in the tuple is the alternate value mapping. E.g. Yes and No instead of 1 and 0
      */
     func getMatchDataValuesForTeamForPath(_ path: String, forTeam: Team) -> ([Float], [CGFloat : String]?) {
-        let matches = getMatchesForTeam(forTeam.number!)
+        let matches = getMatchesForTeam(forTeam.number)
         var valueArray = [Float]()
         var altValueMapping : [CGFloat : String]?
         
         for match in matches {
             let value : AnyObject?
             var newPath = path
-            if path == "calculatedData.predictedNumRPs" {
-                newPath = predictedRPsKeyForTeamNum(forTeam.number!, matchNum: match.number!)
+            if path == "calculatedData.predictedRPs" {
+                newPath = predictedRPsKeyForTeamNum(forTeam.number, matchNum: match.number)
             }
             value = match.value(forKeyPath: newPath) as AnyObject?
             

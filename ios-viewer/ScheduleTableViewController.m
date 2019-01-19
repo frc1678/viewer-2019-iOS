@@ -115,7 +115,7 @@
         //RED MATCH LABELS
         if(i < redTeams.count) {
             [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[redTeams objectAtIndex:i]).number]] forKeyPath:[NSString stringWithFormat:@"red%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
-            if(((Team *)[redTeams objectAtIndex:i]).calculatedData.dysfunctionalPercentage > 0 && self.firebaseFetcher.currentMatchManager.highlightDysfunc) {
+            if(((Team *)[redTeams objectAtIndex:i]).calculatedData.percentIncap > 0 && self.firebaseFetcher.currentMatchManager.highlightDysfunc) {
                 switch(i) {
                     case 0:
                         matchCell.redOneLabel.backgroundColor = [UIColor colorWithRed:0.00 green:0.75 blue:0.00 alpha:0.5];
@@ -141,7 +141,7 @@
         //BLUE MATCH LABELS
         if(i < blueTeams.count) {
             [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[blueTeams objectAtIndex:i]).number]] forKeyPath:[NSString stringWithFormat:@"blue%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
-            if(((Team *)[blueTeams objectAtIndex:i]).calculatedData.dysfunctionalPercentage > 0 && self.firebaseFetcher.currentMatchManager.highlightDysfunc) {
+            if(((Team *)[blueTeams objectAtIndex:i]).calculatedData.percentIncap > 0 && self.firebaseFetcher.currentMatchManager.highlightDysfunc) {
                 switch(i) {
                     case 0:
                         matchCell.blueOneLabel.backgroundColor = [UIColor colorWithRed:0.00 green:0.75 blue:0.00 alpha:0.5];
@@ -169,7 +169,7 @@
     //if the red team has a valid score
     if (match.redActualScore != -1 && match.redActualScore != nil) {
         //set the red score
-        matchCell.redActualScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.redActualScore];
+        matchCell.redScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.redActualScore];
         matchCell.slash.alpha = 1;
         matchCell.redScoreLabel.alpha = 1;
     } else {
@@ -203,22 +203,22 @@
     
     //EXTRA RP IMAGE VIEWS
     if(self.firebaseFetcher.currentMatchManager.showRP) {
-        if(match.redDidAutoQuest) {
+        if(match.redDidRocketRP) {
             matchCell.redAQ.alpha = 1.0;
         } else {
             matchCell.redAQ.alpha = 0.0;
         }
-        if(match.blueDidAutoQuest) {
+        if(match.blueDidRocketRP) {
             matchCell.blueAQ.alpha = 1.0;
         } else {
             matchCell.blueAQ.alpha = 0.0;
         }
-        if(match.redDidFaceBoss) {
+        if(match.redDidClimbRP) {
             matchCell.redFTB.alpha = 1.0;
         } else {
             matchCell.redFTB.alpha = 0.0;
         }
-        if(match.blueDidFaceBoss) {
+        if(match.blueDidClimbRP) {
             matchCell.blueFTB.alpha = 1.0;
         } else {
             matchCell.blueFTB.alpha = 0.0;

@@ -93,7 +93,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgSpeed",
             "calculatedData.avgDefense",
             "calculatedData.actualNumRPs",
-            "calculatedData.predictedNumRPs"
+            "calculatedData.predictedRPs"
         ]
         
         let allTeamKeys = [
@@ -124,7 +124,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.totalSuperNotes",
             "calculatedData.predictedSeed",
             "calculatedData.actualSeed",
-            "calculatedData.predictedNumRPs",
+            "calculatedData.predictedRPs",
             "calculatedData.predictedTotalNumRPs",
             "calculatedData.totalNumRPs",
             "calculatedData.actualNumRPs",
@@ -368,7 +368,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "avgSpeed",
         "firstPickAbility",
         "actualNumRPs",
-        "predictedNumRPs",
+        "predictedRPs",
         "predictedSeed",
         "secondPickAbility",
     ]
@@ -389,7 +389,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.firstPickAbility" : "First Pick Ability",
         "calculatedData.numRPs" : "Number of RPs",
         "calculatedData.actualNumRPs": "# of RPs",
-        "calculatedData.predictedNumRPs" : "Predicted # of RPs",
+        "calculatedData.predictedRPs" : "Predicted # of RPs",
         "calculatedData.predictedSeed" : "Predicted Seed",
         "calculatedData.secondPickAbility" : "Second Pick Ability",
         "matchDatas" : "Matches",

@@ -281,7 +281,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         //get our matches
         let ourMatches = firebaseFetcher?.getMatchesForTeam(1678)
         //get rid of already played matches
-        let futureMatches = ourMatches?.filter { $0.number! >= firebaseFetcher?.currentMatchManager.currentMatch ?? 0 }
+        let futureMatches = ourMatches?.filter { $0.number >= firebaseFetcher?.currentMatchManager.currentMatch ?? 0 }
         //iterate thru unplayed matches
         for match in futureMatches! {
             //if we're on red and they're on red, play with them. if we're on red and they're on blue, play against them.
