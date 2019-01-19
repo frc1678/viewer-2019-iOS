@@ -56,9 +56,9 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //get red teams
-        let redTeams = firebaseFetcher?.getTeamsFromNumbers(match?.redAllianceTeamNumbers!)
+        let redTeams = firebaseFetcher?.getTeamsFromNumbers(match?.redTeams!)
         //get blue teams
-        let blueTeams = firebaseFetcher?.getTeamsFromNumbers(match?.blueAllianceTeamNumbers!)
+        let blueTeams = firebaseFetcher?.getTeamsFromNumbers(match?.blueTeams!)
         
         //get cell
         let cell : MatchDetailsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MatchDetailsCell", for: indexPath) as! MatchDetailsTableViewCell
@@ -201,23 +201,23 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
             }
             if let cd = match.calculatedData {
                 //setting labels
-                redOfficialScoreLabel.text = "Score: \(getLabelTitle(match.redScore))"
-                redPredictedScoreLabel.text = "Pred. Score: \(getLabelTitle(cd.predictedRedScore))"
-                if match.calculatedData?.redWinChance != nil {
-                    redWinPercentage.text = "Win Chance: \(roundValue(((match.calculatedData?.redWinChance)! * 100) as AnyObject, toDecimalPlaces: 0))%"
+                redOfficialScoreLabel.text = "Score: \(getLabelTitle(match.redActualScore))"
+                redPredictedScoreLabel.text = "Pred. Score: \(getLabelTitle(cd.redPredictedScore))"
+                if match.calculatedData?.redChanceWin != nil {
+                    redWinPercentage.text = "Win Chance: \(roundValue(((match.calculatedData?.redChanceWin)! * 100) as AnyObject, toDecimalPlaces: 0))%"
                 } else {
                     redWinPercentage.text = "Win Chance: 0%"
                 }
             }
             //get red teams from match
-            let redTeams = firebaseFetcher?.getTeamsFromNumbers(match.redAllianceTeamNumbers!)
+            let redTeams = firebaseFetcher?.getTeamsFromNumbers(match.redTeams!)
             if (redTeams?.count)! > 0 {
                 //Index goes from 1 to 3, because thats the way the ui labels are named.
                 for index in 1...(redTeams?.count)! {
                     if index <= 3 {
                         //setting the titles of the team button numbers. V Sketch
-                        (value(forKey: "r\(mapping[index-1])Button") as! UIButton).setTitle("\(match.redAllianceTeamNumbers![index-1])", for: UIControlState())
-                        if ((redTeams![index-1]).calculatedData?.dysfunctionalPercentage)! > Float(0.0) {
+                        (value(forKey: "r\(mapping[index-1])Button") as! UIButton).setTitle("\(match.redTeams![index-1])", for: UIControlState())
+                        if ((redTeams![index-1]).calculatedData?.percentIncap)! > 0 {
                             switch index {
                             case 1:
                                 self.r1Button.backgroundColor = UIColor.green
@@ -235,22 +235,22 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
             }
             
             //setting labels
-            blueOfficialScoreLabel.text = "Score: \(getLabelTitle(match.blueScore))"
-            bluePredictedScoreLabel.text = "Pred. Score: \(getLabelTitle(match.calculatedData?.predictedBlueScore))"
-            if match.calculatedData?.blueWinChance != nil {
-                blueWinPercentage.text = "Win Chance: \(roundValue(((match.calculatedData?.blueWinChance)! * 100) as AnyObject, toDecimalPlaces: 0))%"
+            blueOfficialScoreLabel.text = "Score: \(getLabelTitle(match.blueActualScore))"
+            bluePredictedScoreLabel.text = "Pred. Score: \(getLabelTitle(match.calculatedData?.bluePredictedScore))"
+            if match.calculatedData?.blueChanceWin != nil {
+                blueWinPercentage.text = "Win Chance: \(roundValue(((match.calculatedData?.blueChanceWin)! * 100) as AnyObject, toDecimalPlaces: 0))%"
             } else {
                 blueWinPercentage.text = "Win Chance: 0%"
             }
             
-            let blueTeams = firebaseFetcher?.getTeamsFromNumbers(match.blueAllianceTeamNumbers)
+            let blueTeams = firebaseFetcher?.getTeamsFromNumbers(match.blueTeams)
             if (blueTeams?.count)! > 0 {
                 for index in 1...(blueTeams?.count)! {
                     if index <= 3 {
                         //setting team button titles
-                        (value(forKey: "b\(mapping[index - 1])Button") as! UIButton).setTitle("\(match.blueAllianceTeamNumbers![index - 1])", for: UIControlState())
+                        (value(forKey: "b\(mapping[index - 1])Button") as! UIButton).setTitle("\(match.blueTeams![index - 1])", for: UIControlState())
                     }
-                    if ((blueTeams![index-1]).calculatedData?.dysfunctionalPercentage)! > Float(0.0) {
+                    if ((blueTeams![index-1]).calculatedData?.percentIncap)! > 0 {
                         switch index {
                         case 1:
                             self.b1Button.backgroundColor = UIColor.green
@@ -281,21 +281,21 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         //get our matches
         let ourMatches = firebaseFetcher?.getMatchesForTeam(1678)
         //get rid of already played matches
-        let futureMatches = ourMatches?.filter { $0.number >= firebaseFetcher?.currentMatchManager.currentMatch ?? 0 }
+        let futureMatches = ourMatches?.filter { $0.number! >= firebaseFetcher?.currentMatchManager.currentMatch ?? 0 }
         //iterate thru unplayed matches
         for match in futureMatches! {
             //if we're on red and they're on red, play with them. if we're on red and they're on blue, play against them.
-            if (match.redAllianceTeamNumbers?.contains(1678))! {
-                if (match.redAllianceTeamNumbers?.contains(number))! {
+            if (match.redTeams?.contains(1678))! {
+                if (match.redTeams?.contains(number))! {
                     playWith = true
-                } else if (match.blueAllianceTeamNumbers?.contains(number))! {
+                } else if (match.blueTeams?.contains(number))! {
                     playAgainst = true
                 }
             //if we're on blue and they're on blue, play with them. if we're on blue and they're on red, play against them.
-            } else if (match.blueAllianceTeamNumbers?.contains(1678))! {
-                if (match.blueAllianceTeamNumbers?.contains(number))! {
+            } else if (match.blueTeams?.contains(1678))! {
+                if (match.blueTeams?.contains(number))! {
                     playWith = true
-                } else if (match.redAllianceTeamNumbers?.contains(number))! {
+                } else if (match.redTeams?.contains(number))! {
                     playAgainst = true
                 }
             }

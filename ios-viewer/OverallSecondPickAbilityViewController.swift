@@ -27,7 +27,7 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
         firebase = Database.database().reference()
         if firebaseFetcher.secondPicklist == [] {
             for i in self.firebaseFetcher.getOverallSecondPickList() {
-                self.secondPicklist.append(i.number)
+                self.secondPicklist.append(i.number!)
             }
         } else {
             self.secondPicklist = firebaseFetcher.secondPicklist
@@ -71,7 +71,7 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
             multiCell!.teamLabel!.text = String(describing: team!.number)
         }
         if team!.calculatedData?.secondPickAbility != nil {
-            multiCell!.scoreLabel!.text = String(Utils.roundValue(Float(team!.calculatedData!.secondPickAbility), toDecimalPlaces: 2)
+            multiCell!.scoreLabel!.text = String(Utils.roundValue(Float(team!.calculatedData!.secondPickAbility!), toDecimalPlaces: 2)
             )
         } else {
             multiCell!.scoreLabel!.text = ""
@@ -118,7 +118,7 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
                 let aSecondPicklist = self.firebaseFetcher.getOverallSecondPickList()
                 self.secondPicklist = []
                 for i in aSecondPicklist {
-                    self.secondPicklist.append(i.number)
+                    self.secondPicklist.append(i.number!)
                 }
             } else {
                 self.secondPicklist = firebaseFetcher.secondPicklist
@@ -144,7 +144,7 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
     @objc func clearPicklist() {
         var tempPicklist : [Int] = []
         for i in self.firebaseFetcher.getOverallSecondPickList() {
-            tempPicklist.append(i.number)
+            tempPicklist.append(i.number!)
         }
         self.firebaseFetcher.secondPicklist = tempPicklist
         self.secondPicklist = tempPicklist

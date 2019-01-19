@@ -61,8 +61,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             if let currentMatchNum = snap.childSnapshot(forPath: "currentMatchNum").value as? Int {
                 //match is the match with the number currentMatchNum as a NSDictionary
                 if let match = snap.childSnapshot(forPath: "Matches").childSnapshot(forPath: String(currentMatchNum)).value as? NSDictionary {
-                    let redTeamNumbers = match["redAllianceTeamNumbers"] as? [Int]
-                    let blueTeamNumbers = match["blueAllianceTeamNumbers"] as? [Int]
+                    let redTeamNumbers = match["redTeams"] as? [Int]
+                    let blueTeamNumbers = match["blueTeams"] as? [Int]
                     self.updateCurrentMatch(currentMatchNum, redTeams: redTeamNumbers, blueTeams: blueTeamNumbers)
                 } else {
                     self.updateCurrentMatch(00, redTeams: [0000,0000,0000], blueTeams: [0000,0000,0000])
@@ -70,8 +70,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             } else if let currentMatchNum = snap.childSnapshot(forPath: "currentMatchNumber").value as? Int {
                 //inconsistancies in the firebase
                 if let match = snap.childSnapshot(forPath: "Matches").childSnapshot(forPath: String(currentMatchNum)).value as? NSDictionary {
-                    let redTeamNumbers = match["redAllianceTeamNumbers"] as! [Int]
-                    let blueTeamNumbers = match["blueAllianceTeamNumbers"] as! [Int]
+                    let redTeamNumbers = match["redTeams"] as! [Int]
+                    let blueTeamNumbers = match["blueTeams"] as! [Int]
                     self.updateCurrentMatch(currentMatchNum, redTeams: redTeamNumbers, blueTeams: blueTeamNumbers)
                 } else {
                     self.updateCurrentMatch(00, redTeams: [0000,0000,0000], blueTeams: [0000,0000,0000])
