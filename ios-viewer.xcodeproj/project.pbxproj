@@ -52,14 +52,14 @@
 		8C0A5D092082A65600AC1BB2 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A5D082082A65500AC1BB2 /* OptionsViewController.swift */; };
 		8C10DE96206C0A670084DC25 /* MatchDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10DE94206C0A670084DC25 /* MatchDetailsTableViewCell.swift */; };
 		8C10DE97206C0A670084DC25 /* MatchDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C10DE95206C0A670084DC25 /* MatchDetailsTableViewCell.xib */; };
-		8C53B43421F392B80081E6EC /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C53B42621F392B70081E6EC /* Timeline.swift */; };
-		8C53B43521F392B80081E6EC /* CalculatedMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C53B42721F392B70081E6EC /* CalculatedMatchData.swift */; };
-		8C53B43821F392B80081E6EC /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C53B42A21F392B70081E6EC /* Match.swift */; };
-		8C53B43921F392B80081E6EC /* CalculatedTeamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C53B42B21F392B80081E6EC /* CalculatedTeamData.swift */; };
-		8C53B43A21F392B80081E6EC /* CalculatedTeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C53B42C21F392B80081E6EC /* CalculatedTeamInMatchData.swift */; };
-		8C53B43C21F392B80081E6EC /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C53B42E21F392B80081E6EC /* Team.swift */; };
-		8C53B43D21F392B80081E6EC /* TeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C53B42F21F392B80081E6EC /* TeamInMatchData.swift */; };
-		8C53B44021F392B80081E6EC /* CargoShipPreload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C53B43221F392B80081E6EC /* CargoShipPreload.swift */; };
+		8C3F16A021F3ED7E0046E4CD /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F169821F3ED7E0046E4CD /* Timeline.swift */; };
+		8C3F16A121F3ED7E0046E4CD /* TeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F169921F3ED7E0046E4CD /* TeamInMatchData.swift */; };
+		8C3F16A221F3ED7E0046E4CD /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F169A21F3ED7E0046E4CD /* Team.swift */; };
+		8C3F16A321F3ED7E0046E4CD /* CalculatedMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F169B21F3ED7E0046E4CD /* CalculatedMatchData.swift */; };
+		8C3F16A421F3ED7E0046E4CD /* CalculatedTeamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F169C21F3ED7E0046E4CD /* CalculatedTeamData.swift */; };
+		8C3F16A521F3ED7E0046E4CD /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F169D21F3ED7E0046E4CD /* Match.swift */; };
+		8C3F16A621F3ED7E0046E4CD /* CargoShipPreload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F169E21F3ED7E0046E4CD /* CargoShipPreload.swift */; };
+		8C3F16A721F3ED7E0046E4CD /* CalculatedTeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F169F21F3ED7E0046E4CD /* CalculatedTeamInMatchData.swift */; };
 		8C5868711E34254E0056EA17 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C58686C1E34254E0056EA17 /* Storyboard.storyboard */; };
 		8CA0E2102038A335002EFB02 /* SlackTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0E20F2038A335002EFB02 /* SlackTableViewController.swift */; };
 		8CA0E2132038A5F3002EFB02 /* SlackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0E2112038A5F3002EFB02 /* SlackTableViewCell.swift */; };
@@ -166,14 +166,14 @@
 		8C0A5D082082A65500AC1BB2 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		8C10DE94206C0A670084DC25 /* MatchDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		8C10DE95206C0A670084DC25 /* MatchDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchDetailsTableViewCell.xib; sourceTree = "<group>"; };
-		8C53B42621F392B70081E6EC /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = ../../../Timeline.swift; sourceTree = "<group>"; };
-		8C53B42721F392B70081E6EC /* CalculatedMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculatedMatchData.swift; path = ../../../CalculatedMatchData.swift; sourceTree = "<group>"; };
-		8C53B42A21F392B70081E6EC /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Match.swift; path = ../../../Match.swift; sourceTree = "<group>"; };
-		8C53B42B21F392B80081E6EC /* CalculatedTeamData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculatedTeamData.swift; path = ../../../CalculatedTeamData.swift; sourceTree = "<group>"; };
-		8C53B42C21F392B80081E6EC /* CalculatedTeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculatedTeamInMatchData.swift; path = ../../../CalculatedTeamInMatchData.swift; sourceTree = "<group>"; };
-		8C53B42E21F392B80081E6EC /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Team.swift; path = ../../../Team.swift; sourceTree = "<group>"; };
-		8C53B42F21F392B80081E6EC /* TeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeamInMatchData.swift; path = ../../../TeamInMatchData.swift; sourceTree = "<group>"; };
-		8C53B43221F392B80081E6EC /* CargoShipPreload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CargoShipPreload.swift; path = ../../../CargoShipPreload.swift; sourceTree = "<group>"; };
+		8C3F169821F3ED7E0046E4CD /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = SOURCE_ROOT; };
+		8C3F169921F3ED7E0046E4CD /* TeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInMatchData.swift; sourceTree = SOURCE_ROOT; };
+		8C3F169A21F3ED7E0046E4CD /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = SOURCE_ROOT; };
+		8C3F169B21F3ED7E0046E4CD /* CalculatedMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedMatchData.swift; sourceTree = SOURCE_ROOT; };
+		8C3F169C21F3ED7E0046E4CD /* CalculatedTeamData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedTeamData.swift; sourceTree = SOURCE_ROOT; };
+		8C3F169D21F3ED7E0046E4CD /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = SOURCE_ROOT; };
+		8C3F169E21F3ED7E0046E4CD /* CargoShipPreload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoShipPreload.swift; sourceTree = SOURCE_ROOT; };
+		8C3F169F21F3ED7E0046E4CD /* CalculatedTeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedTeamInMatchData.swift; sourceTree = SOURCE_ROOT; };
 		8C58686D1E34254E0056EA17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Storyboard.storyboard; sourceTree = "<group>"; };
 		8C58687E1E3426200056EA17 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		8C58688C1E3426970056EA17 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -339,14 +339,14 @@
 		19B0383B1E2DD7A3006E25A2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8C53B42721F392B70081E6EC /* CalculatedMatchData.swift */,
-				8C53B42B21F392B80081E6EC /* CalculatedTeamData.swift */,
-				8C53B42C21F392B80081E6EC /* CalculatedTeamInMatchData.swift */,
-				8C53B43221F392B80081E6EC /* CargoShipPreload.swift */,
-				8C53B42A21F392B70081E6EC /* Match.swift */,
-				8C53B42E21F392B80081E6EC /* Team.swift */,
-				8C53B42F21F392B80081E6EC /* TeamInMatchData.swift */,
-				8C53B42621F392B70081E6EC /* Timeline.swift */,
+				8C3F169F21F3ED7E0046E4CD /* CalculatedTeamInMatchData.swift */,
+				8C3F169E21F3ED7E0046E4CD /* CargoShipPreload.swift */,
+				8C3F169B21F3ED7E0046E4CD /* CalculatedMatchData.swift */,
+				8C3F169C21F3ED7E0046E4CD /* CalculatedTeamData.swift */,
+				8C3F169D21F3ED7E0046E4CD /* Match.swift */,
+				8C3F169A21F3ED7E0046E4CD /* Team.swift */,
+				8C3F169921F3ED7E0046E4CD /* TeamInMatchData.swift */,
+				8C3F169821F3ED7E0046E4CD /* Timeline.swift */,
 				8CA0E2152039ECD1002EFB02 /* SlackProfile.swift */,
 				19B037FC1E2C5891006E25A2 /* Reflectable.swift */,
 			);
@@ -660,7 +660,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C53B44021F392B80081E6EC /* CargoShipPreload.swift in Sources */,
 				8CA0E2162039ECD1002EFB02 /* SlackProfile.swift in Sources */,
 				19B038131E2C5891006E25A2 /* GraphViewController.swift in Sources */,
 				19B038151E2C5891006E25A2 /* ArrayTableViewController.m in Sources */,
@@ -668,18 +667,20 @@
 				19B037E81E2C586C006E25A2 /* SpecificTeamScheduleTableViewController.swift in Sources */,
 				8CA0E2132038A5F3002EFB02 /* SlackTableViewCell.swift in Sources */,
 				190DFE4A1E308B7700477B6D /* TIMDScheduleViewController.swift in Sources */,
+				8C3F16A221F3ED7E0046E4CD /* Team.swift in Sources */,
 				8CB334EC20A3E3A100AB66E3 /* MatchDatapointsViewController.swift in Sources */,
 				8CA0E2102038A335002EFB02 /* SlackTableViewController.swift in Sources */,
 				19B037EE1E2C586C006E25A2 /* OverallSecondPickAbilityViewController.swift in Sources */,
 				190DFE4E1E308BDC00477B6D /* TIMDTableViewCell.swift in Sources */,
+				8C3F16A321F3ED7E0046E4CD /* CalculatedMatchData.swift in Sources */,
 				19B037E91E2C586C006E25A2 /* MatchTableViewCell.m in Sources */,
 				8C10DE96206C0A670084DC25 /* MatchDetailsTableViewCell.swift in Sources */,
 				19B0382A1E2C58D3006E25A2 /* MechanismTableViewCell.swift in Sources */,
-				8C53B43921F392B80081E6EC /* CalculatedTeamData.swift in Sources */,
-				8C53B43C21F392B80081E6EC /* Team.swift in Sources */,
 				19B038141E2C5891006E25A2 /* CurrentMatchManager.swift in Sources */,
+				8C3F16A021F3ED7E0046E4CD /* Timeline.swift in Sources */,
 				19B038171E2C5891006E25A2 /* NotesTableViewController.swift in Sources */,
 				19B038161E2C5891006E25A2 /* SortedRankTableViewController.swift in Sources */,
+				8C3F16A421F3ED7E0046E4CD /* CalculatedTeamData.swift in Sources */,
 				19B0380A1E2C5891006E25A2 /* Utils.swift in Sources */,
 				19B0382E1E2C58D3006E25A2 /* UIColor+HexString.m in Sources */,
 				19B038111E2C5891006E25A2 /* Reflectable.swift in Sources */,
@@ -689,19 +690,18 @@
 				190DFE4C1E308BBD00477B6D /* TIMDDetailsViewController.swift in Sources */,
 				19B038261E2C58D3006E25A2 /* ResizableNotesTableViewCell.swift in Sources */,
 				8C0A5D092082A65600AC1BB2 /* OptionsViewController.swift in Sources */,
+				8C3F16A621F3ED7E0046E4CD /* CargoShipPreload.swift in Sources */,
 				19B0382D1E2C58D3006E25A2 /* UINavigationController+SGProgress.m in Sources */,
-				8C53B43A21F392B80081E6EC /* CalculatedTeamInMatchData.swift in Sources */,
 				19B037EC1E2C586C006E25A2 /* PredictedSeedTableViewController.m in Sources */,
 				19B038271E2C58D3006E25A2 /* UnrankedTableViewCell.swift in Sources */,
 				19B037E71E2C586C006E25A2 /* ScheduleTableViewController.m in Sources */,
-				8C53B43821F392B80081E6EC /* Match.swift in Sources */,
 				19B037ED1E2C586C006E25A2 /* FirstPickTableViewController.m in Sources */,
-				8C53B43421F392B80081E6EC /* Timeline.swift in Sources */,
 				19B038281E2C58D3006E25A2 /* MultiCellTableViewCell.m in Sources */,
 				19B038081E2C5891006E25A2 /* MatchDetailsViewController.swift in Sources */,
-				8C53B43D21F392B80081E6EC /* TeamInMatchData.swift in Sources */,
+				8C3F16A521F3ED7E0046E4CD /* Match.swift in Sources */,
+				8C3F16A721F3ED7E0046E4CD /* CalculatedTeamInMatchData.swift in Sources */,
+				8C3F16A121F3ED7E0046E4CD /* TeamInMatchData.swift in Sources */,
 				19B038061E2C5891006E25A2 /* TeamDetailsTableViewController.swift in Sources */,
-				8C53B43521F392B80081E6EC /* CalculatedMatchData.swift in Sources */,
 				19B038331E2C5919006E25A2 /* main.m in Sources */,
 				19B038321E2C5919006E25A2 /* AppDelegate.m in Sources */,
 			);
