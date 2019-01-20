@@ -27,7 +27,7 @@ public final class Match: NSObject, NSCoding {
     static let redDidRocketRP = "redDidRocketRP"
     static let cargoShipPreload = "cargoShipPreload"
     static let noShowTeams = "noShowTeams"
-    static let number = "number"
+    static let matchNumber = "matchNumber"
   }
 
   // MARK: Properties
@@ -46,7 +46,7 @@ public final class Match: NSObject, NSCoding {
   @objc public var redDidRocketRP: Bool = false
     public var cargoShipPreload: [String:String]?
     public var noShowTeams: [Int]?
-    @objc public var number: Int = -1
+    @objc public var matchNumber: Int = -1
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -76,7 +76,7 @@ public final class Match: NSObject, NSCoding {
     redDidRocketRP = json[SerializationKeys.redDidRocketRP].boolValue
     cargoShipPreload = json[SerializationKeys.cargoShipPreload].dictionaryObject as! [String : String]
     if let items = json[SerializationKeys.noShowTeams].array { noShowTeams = items.map { $0.intValue } }
-    number = json[SerializationKeys.number].intValue
+    matchNumber = json[SerializationKeys.matchNumber].intValue
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -99,7 +99,7 @@ public final class Match: NSObject, NSCoding {
     dictionary[SerializationKeys.redDidRocketRP] = redDidRocketRP
     if let value = cargoShipPreload { dictionary[SerializationKeys.cargoShipPreload] = value }
     if let value = noShowTeams { dictionary[SerializationKeys.noShowTeams] = value }
-    dictionary[SerializationKeys.number] = number
+    dictionary[SerializationKeys.matchNumber] = matchNumber
     return dictionary
   }
 
@@ -120,7 +120,7 @@ public final class Match: NSObject, NSCoding {
     self.redDidRocketRP = aDecoder.decodeBool(forKey: SerializationKeys.redDidRocketRP)
     self.cargoShipPreload = aDecoder.decodeObject(forKey: SerializationKeys.cargoShipPreload) as? [String:String]
     self.noShowTeams = aDecoder.decodeObject(forKey: SerializationKeys.noShowTeams) as? [Int]
-    self.number = aDecoder.decodeInteger(forKey: SerializationKeys.number)
+    self.matchNumber = aDecoder.decodeInteger(forKey: SerializationKeys.matchNumber)
   }
 
   public func encode(with aCoder: NSCoder) {
@@ -139,7 +139,7 @@ public final class Match: NSObject, NSCoding {
     aCoder.encode(redDidRocketRP, forKey: SerializationKeys.redDidRocketRP)
     aCoder.encode(cargoShipPreload, forKey: SerializationKeys.cargoShipPreload)
     aCoder.encode(noShowTeams, forKey: SerializationKeys.noShowTeams)
-    aCoder.encode(number, forKey: SerializationKeys.number)
+    aCoder.encode(matchNumber, forKey: SerializationKeys.matchNumber)
   }
 
 }

@@ -193,9 +193,9 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         
         //if match exists
         if let match = match {
-            if match.number != -1 {
+            if match.matchNumber != -1 {
                 //setting title
-                title = "Q\(String(describing: match.number))"
+                title = "Q\(String(describing: match.matchNumber))"
             } else {
                 title = "???"
             }
@@ -281,7 +281,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         //get our matches
         let ourMatches = firebaseFetcher?.getMatchesForTeam(1678)
         //get rid of already played matches
-        let futureMatches = ourMatches?.filter { $0.number >= firebaseFetcher?.currentMatchManager.currentMatch ?? 0 }
+        let futureMatches = ourMatches?.filter { $0.matchNumber >= firebaseFetcher?.currentMatchManager.currentMatch ?? 0 }
         //iterate thru unplayed matches
         for match in futureMatches! {
             //if we're on red and they're on red, play with them. if we're on red and they're on blue, play against them.

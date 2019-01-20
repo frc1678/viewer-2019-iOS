@@ -237,7 +237,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             matchReference.observe(.childAdded, with: { [unowned self] snapshot in
                 //appends a match for the current snapshot to the matches
                 let tempMatch = self.makeMatchFromSnapshot(snapshot)
-                if (self.currentMatchManager.matches.filter { $0.number == tempMatch.number }).count == 0 {
+                if (self.currentMatchManager.matches.filter { $0.matchNumber == tempMatch.matchNumber }).count == 0 {
                     self.currentMatchManager.matches.append(tempMatch)
                 }
                 self.currentMatchManager.currentMatch = self.currentMatchManager.currentMatch
@@ -254,10 +254,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 //once again, future me: test commenting out this line
                 self.currentMatchManager.currentMatch = self.currentMatchManager.currentMatch
                 //gets the match number
-                let number = (snapshot.childSnapshot(forPath: "number").value as? Int)!
+                let number = (snapshot.childSnapshot(forPath: "matchNumber").value as? Int)!
                 for matchIndex in 0..<self.currentMatchManager.matches.count {
                     let match = self.currentMatchManager.matches[matchIndex]
-                    if match.number == number {
+                    if match.matchNumber == number {
                         //update the appropriate match
                         self.currentMatchManager.matches[matchIndex] = self.makeMatchFromSnapshot(snapshot)
                         
@@ -386,7 +386,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         //if the team has timds
         if TIMData.count > 0 {
             //filter to get the timd with the match number of inMatch
-            let correctTIMDs = TIMData.filter { $0.matchNumber == inMatch.number} //Hopefully there is exactly one
+            let correctTIMDs = TIMData.filter { $0.matchNumber == inMatch.matchNumber} //Hopefully there is exactly one
             
             if correctTIMDs.count == 1 {
                 return correctTIMDs[0]
@@ -419,7 +419,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     */
     func getMatch(_ matchNum: Int) -> Match? {
         //filter to get the match(es) with the given number
-        let myMatches = self.currentMatchManager.matches.filter { $0.number == matchNum }
+        let myMatches = self.currentMatchManager.matches.filter { $0.matchNumber == matchNum }
         if myMatches.count == 1 { return myMatches[0] }
         else if myMatches.count > 1 {
             print("More than 1 match with number \(matchNum)")
@@ -480,7 +480,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             }
         }
         //sort array by # and return it
-        return array.sorted { $0.number < $1.number }
+        return array.sorted { $0.matchNumber < $1.matchNumber }
     }
     
     /**
@@ -489,7 +489,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     */
     func matchNumbersForTeamNumber(_ number: Int) -> [Int] {
         func matchNum(_ match : Match) -> Int {
-            return match.number
+            return match.matchNumber
         }
         return self.getMatchesForTeamWithNumber(number).map(matchNum)
     }
@@ -511,7 +511,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             }
         }
         //sort
-        importantMatches.sort { $0.number > $1.number }
+        importantMatches.sort { $0.matchNumber > $1.matchNumber }
         //return
         return importantMatches
     }
@@ -666,7 +666,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             for i in searchArray {
                 if !filteredMatches.contains(match) {
                     //if the match contains the search field
-                    if String(describing: match.number).range(of: i) != nil {
+                    if String(describing: match.matchNumber).range(of: i) != nil {
                         filteredMatches.append(match)
                     }
                 }
@@ -794,7 +794,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             let value : AnyObject?
             var newPath = path
             if path == "calculatedData.predictedRPs" {
-                newPath = predictedRPsKeyForTeamNum(forTeam.number, matchNum: match.number)
+                newPath = predictedRPsKeyForTeamNum(forTeam.number, matchNum: match.matchNumber)
             }
             value = match.value(forKeyPath: newPath) as AnyObject?
             
@@ -867,7 +867,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     */
     func matchesUntilTeamNextMatch(_ teamNumber : Int) -> String? {
         //sort matches by match num
-        let sortedMatches = self.currentMatchManager.matches.sorted { $0.number < $1.number }
+        let sortedMatches = self.currentMatchManager.matches.sorted { $0.matchNumber < $1.matchNumber }
         //if currentmatch is a real match
         if self.currentMatchManager.currentMatch < sortedMatches.count {
             //get the index of the current match. In theory, this should just be currentMatch - 1, right???
@@ -897,7 +897,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         var remainingArray = [Match]()
         for match in matchArray {
             //if match hasn't happened
-            if match.number > self.currentMatchManager.currentMatch {
+            if match.matchNumber > self.currentMatchManager.currentMatch {
                 //append match
                 remainingArray.append(match)
             }

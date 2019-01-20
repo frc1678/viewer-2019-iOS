@@ -149,16 +149,9 @@ class CurrentMatchManager: NSObject {
     }
     
     var defaultMatchDetailsDatapoints: [String] = [
-        "calculatedData.avgAllianceSwitchCubesAuto",
-        "calculatedData.avgCubesPlacedInScaleAuto",
-        "calculatedData.avgAllianceSwitchCubesTele",
-        "calculatedData.avgCubesPlacedInScaleTele",
-        "calculatedData.autoRunPercentage",
-        "calculatedData.avgAllVaultTime",
-        "calculatedData.avgNumExchangeInputTele",
-        "calculatedData.avgCubesSpilledTele",
-        "calculatedData.dysfunctionalPercentage",
-        "calculatedData.avgScaleCubesBy100s",
+        "calculatedData.hasOrangeGroundIntake",
+        "calculatedData.percentIncap",
+        "calculatedData.orangeCycleAll",
     ]
     
     @objc var matchDetailsDatapoints = [String]() {
