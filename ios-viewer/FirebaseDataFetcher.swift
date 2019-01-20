@@ -277,7 +277,6 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     let team = self.makeTeamFromSnapshot(snapshot)
                     //if the team is a real team
                     if team.number != -1 && (self.currentMatchManager.teams.filter { $0.number == team.number }).count == 0 {
-                        print(self.currentMatchManager.teams)
                         //update cache
                         self.updateCacheIfNeeded(snapshot, team: team)
                         DispatchQueue.main.async {
