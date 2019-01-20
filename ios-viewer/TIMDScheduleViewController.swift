@@ -28,7 +28,10 @@ class TIMDScheduleViewController: UITableViewController {
         //deselect the row
         tableView.deselectRow(at: indexPath, animated: true)
         //segue to the TIMD
-        self.performSegue(withIdentifier: "TIMDDetails", sender: tableView.cellForRow(at: indexPath))
+        let selectedCell = tableView.cellForRow(at: indexPath)
+        if firebaseFetcher?.getTIMDataForTeamInMatch((firebaseFetcher?.getTeam(self.teamNumber))!, inMatch: (firebaseFetcher?.getMatch(Int((selectedCell?.textLabel?.text?.replacingOccurrences(of: "Q", with: ""))!)!))!) != nil {
+            self.performSegue(withIdentifier: "TIMDDetails", sender: tableView.cellForRow(at: indexPath))
+        }
     }
     
     //gives info for a specific cell
@@ -51,6 +54,11 @@ class TIMDScheduleViewController: UITableViewController {
             //set cell label to "Q##"
             cell.textLabel?.text = "Q\(String(describing: match!.matchNumber))"
         }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        let selectedCell = sender as? UITableViewCell
+        return firebaseFetcher?.getTIMDataForTeamInMatch((firebaseFetcher?.getTeam(self.teamNumber))!, inMatch: (firebaseFetcher?.getMatch(Int((selectedCell?.textLabel?.text?.replacingOccurrences(of: "Q", with: ""))!)!))!) != nil
     }
     
     //when you click on a cell, this function is called. see tableView didSelectRowAt
