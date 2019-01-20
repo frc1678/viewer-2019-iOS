@@ -87,7 +87,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             self.getSlackProfiles()
             self.getPicks()
-            self.getAllTheData()
+            self.currentMatchManager.cache_wait.notify(queue: .main) {
+                self.getAllTheData()
+            }
         }
         
     }
@@ -251,7 +253,6 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 //increase matchCounter
                 self.matchCounter += 1
                 print("Current Match Updated. New: \(self.currentMatchManager.currentMatch)")
-                //once again, future me: test commenting out this line
                 self.currentMatchManager.currentMatch = self.currentMatchManager.currentMatch
                 //gets the match number
                 let number = (snapshot.childSnapshot(forPath: "matchNumber").value as? Int)!
@@ -276,6 +277,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     let team = self.makeTeamFromSnapshot(snapshot)
                     //if the team is a real team
                     if team.number != -1 && (self.currentMatchManager.teams.filter { $0.number == team.number }).count == 0 {
+                        print(self.currentMatchManager.teams)
                         //update cache
                         self.updateCacheIfNeeded(snapshot, team: team)
                         DispatchQueue.main.async {

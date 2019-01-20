@@ -18,10 +18,11 @@ class CurrentMatchManager: NSObject {
     let notificationManager : NotificationManager
     let cache = Shared.dataCache
     let firebase: DatabaseReference
+    var cache_wait = DispatchGroup()
     
     override init() {
         firebase = Database.database().reference()
-        
+        cache_wait.enter()
         self.notificationManager = NotificationManager(secsBetweenUpdates: 5, notifications: [])
         self.showRP = false
         self.highlightDysfunc = false
@@ -35,6 +36,27 @@ class CurrentMatchManager: NSObject {
     }
     
     func setUp() {
+        cache.fetch(key: "teams").onSuccess { (d) -> () in
+            if let id = NSKeyedUnarchiver.unarchiveObject(with: d) as? [Team] {
+                if self.teams != id {
+                    self.teams = id
+                }
+            } else {
+                self.teams = []
+            }
+            self.cache_wait.leave()
+            }.onFailure { (d) in
+                self.cache_wait.leave()
+        }
+        cache.fetch(key: "matches").onSuccess { (d) -> () in
+            if let id = NSKeyedUnarchiver.unarchiveObject(with: d) as? [Match] {
+                if self.matches != id {
+                    self.matches = id
+                }
+            } else {
+                self.matches = []
+            }
+        }
         cache.fetch(key: "starredMatches").onSuccess { (d) -> () in
             if let starred = NSKeyedUnarchiver.unarchiveObject(with: d) as? [Int] {
                 if self.starredMatchesArray != starred {
@@ -78,24 +100,6 @@ class CurrentMatchManager: NSObject {
                 }
             } else {
                 self.highlightDysfunc = false
-            }
-        }
-        cache.fetch(key: "teams").onSuccess { (d) -> () in
-            if let id = NSKeyedUnarchiver.unarchiveObject(with: d) as? [Team] {
-                if self.teams != id {
-                    self.teams = id
-                }
-            } else {
-                self.teams = []
-            }
-        }
-        cache.fetch(key: "matches").onSuccess { (d) -> () in
-            if let id = NSKeyedUnarchiver.unarchiveObject(with: d) as? [Match] {
-                if self.matches != id {
-                    self.matches = id
-                }
-            } else {
-                self.matches = []
             }
         }
         cache.fetch(key: "matchDetailsDatapoints").onSuccess { (d) -> () in
