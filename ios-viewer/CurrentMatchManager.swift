@@ -44,9 +44,6 @@ class CurrentMatchManager: NSObject {
             } else {
                 self.teams = []
             }
-            self.cache_wait.leave()
-            }.onFailure { (d) in
-                self.cache_wait.leave()
         }
         cache.fetch(key: "matches").onSuccess { (d) -> () in
             if let id = NSKeyedUnarchiver.unarchiveObject(with: d) as? [Match] {
@@ -56,6 +53,9 @@ class CurrentMatchManager: NSObject {
             } else {
                 self.matches = []
             }
+            self.cache_wait.leave()
+        }.onFailure { (d) in
+                self.cache_wait.leave()
         }
         cache.fetch(key: "starredMatches").onSuccess { (d) -> () in
             if let starred = NSKeyedUnarchiver.unarchiveObject(with: d) as? [Int] {
