@@ -94,12 +94,12 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path forData:(id)data inTableView:(UITableView *)tableView {
     
     Match *match = data;
-    NSArray *redTeams = [self.firebaseFetcher getTeamsFromNumbers:match.redAllianceTeamNumbers];
-    NSArray *blueTeams = [self.firebaseFetcher getTeamsFromNumbers:match.blueAllianceTeamNumbers];
+    NSArray *redTeams = [self.firebaseFetcher getTeamsFromNumbers:match.redTeams];
+    NSArray *blueTeams = [self.firebaseFetcher getTeamsFromNumbers:match.blueTeams];
     
     MatchTableViewCell *matchCell = (MatchTableViewCell *)cell;
     //set matchNum label
-    matchCell.matchLabel.attributedText = [self textForScheduleLabelForType:0 forString:[NSString stringWithFormat:@"%ld", (long)match.number]];
+    matchCell.matchLabel.attributedText = [self textForScheduleLabelForType:0 forString:[NSString stringWithFormat:@"%ld", (long)match.matchNumber]];
     
     matchCell.redOneLabel.font = [matchCell.redOneLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     matchCell.redTwoLabel.font = [matchCell.redTwoLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
@@ -115,7 +115,7 @@
         //RED MATCH LABELS
         if(i < redTeams.count) {
             [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[redTeams objectAtIndex:i]).number]] forKeyPath:[NSString stringWithFormat:@"red%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
-            if(((Team *)[redTeams objectAtIndex:i]).calculatedData.dysfunctionalPercentage > 0 && self.firebaseFetcher.currentMatchManager.highlightDysfunc) {
+            if(((Team *)[redTeams objectAtIndex:i]).calculatedData.percentIncap > 0 && self.firebaseFetcher.currentMatchManager.highlightDysfunc) {
                 switch(i) {
                     case 0:
                         matchCell.redOneLabel.backgroundColor = [UIColor colorWithRed:0.00 green:0.75 blue:0.00 alpha:0.5];
@@ -141,7 +141,7 @@
         //BLUE MATCH LABELS
         if(i < blueTeams.count) {
             [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[blueTeams objectAtIndex:i]).number]] forKeyPath:[NSString stringWithFormat:@"blue%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
-            if(((Team *)[blueTeams objectAtIndex:i]).calculatedData.dysfunctionalPercentage > 0 && self.firebaseFetcher.currentMatchManager.highlightDysfunc) {
+            if(((Team *)[blueTeams objectAtIndex:i]).calculatedData.percentIncap > 0 && self.firebaseFetcher.currentMatchManager.highlightDysfunc) {
                 switch(i) {
                     case 0:
                         matchCell.blueOneLabel.backgroundColor = [UIColor colorWithRed:0.00 green:0.75 blue:0.00 alpha:0.5];
@@ -167,14 +167,14 @@
     
     //SETTING SCORE LABELS
     //if the red team has a valid score
-    if (match.redScore != -1 && match.redScore != nil) {
+    if (match.redActualScore != -1 && match.redActualScore != nil) {
         //set the red score
-        matchCell.redScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.redScore];
+        matchCell.redScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.redActualScore];
         matchCell.slash.alpha = 1;
         matchCell.redScoreLabel.alpha = 1;
     } else {
-        if (match.calculatedData.predictedRedScore != -1.0) {
-            matchCell.redScoreLabel.text = [Utils roundValue: match.calculatedData.predictedRedScore toDecimalPlaces:0];
+        if (match.calculatedData.redPredictedScore != -1.0) {
+            matchCell.redScoreLabel.text = [Utils roundValue: match.calculatedData.redPredictedScore toDecimalPlaces:0];
             matchCell.redScoreLabel.alpha = .3;
         } else {
             matchCell.redScoreLabel.text = @"?";
@@ -183,13 +183,13 @@
         matchCell.slash.alpha = .3;
     }
     
-    if (match.blueScore != -1 && match.blueScore != nil) {
-        matchCell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.blueScore];
+    if (match.blueActualScore != -1 && match.blueActualScore != nil) {
+        matchCell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.blueActualScore];
         matchCell.slash.alpha = 1;
         matchCell.blueScoreLabel.alpha = 1;
     } else {
-        if (match.calculatedData.predictedBlueScore != -1.0) {
-            matchCell.blueScoreLabel.text = [Utils roundValue: match.calculatedData.predictedBlueScore toDecimalPlaces:0];
+        if (match.calculatedData.bluePredictedScore != -1.0) {
+            matchCell.blueScoreLabel.text = [Utils roundValue: match.calculatedData.bluePredictedScore toDecimalPlaces:0];
         } else {
         matchCell.blueScoreLabel.text = @"?";
         }
@@ -203,22 +203,22 @@
     
     //EXTRA RP IMAGE VIEWS
     if(self.firebaseFetcher.currentMatchManager.showRP) {
-        if(match.redDidAutoQuest) {
+        if(match.redDidRocketRP) {
             matchCell.redAQ.alpha = 1.0;
         } else {
             matchCell.redAQ.alpha = 0.0;
         }
-        if(match.blueDidAutoQuest) {
+        if(match.blueDidRocketRP) {
             matchCell.blueAQ.alpha = 1.0;
         } else {
             matchCell.blueAQ.alpha = 0.0;
         }
-        if(match.redDidFaceBoss) {
+        if(match.redDidClimbRP) {
             matchCell.redFTB.alpha = 1.0;
         } else {
             matchCell.redFTB.alpha = 0.0;
         }
-        if(match.blueDidFaceBoss) {
+        if(match.blueDidClimbRP) {
             matchCell.blueFTB.alpha = 1.0;
         } else {
             matchCell.blueFTB.alpha = 0.0;

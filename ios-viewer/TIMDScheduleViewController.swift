@@ -28,7 +28,10 @@ class TIMDScheduleViewController: UITableViewController {
         //deselect the row
         tableView.deselectRow(at: indexPath, animated: true)
         //segue to the TIMD
-        self.performSegue(withIdentifier: "TIMDDetails", sender: tableView.cellForRow(at: indexPath))
+        let selectedCell = tableView.cellForRow(at: indexPath)
+        if firebaseFetcher?.getTIMDataForTeamInMatch((firebaseFetcher?.getTeam(self.teamNumber))!, inMatch: (firebaseFetcher?.getMatch(Int((selectedCell?.textLabel?.text?.replacingOccurrences(of: "Q", with: ""))!)!))!) != nil {
+            self.performSegue(withIdentifier: "TIMDDetails", sender: tableView.cellForRow(at: indexPath))
+        }
     }
     
     //gives info for a specific cell
@@ -37,9 +40,9 @@ class TIMDScheduleViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         //gets match
         let match = matches[indexPath.row]
-        if match.number != -1 {
+        if match.matchNumber != -1 {
             //Cell label: "Q#"
-            cell.textLabel?.text = "Q\(String(describing: match.number))"
+            cell.textLabel?.text = "Q\(String(describing: match.matchNumber))"
         }
         return cell
     }
@@ -47,10 +50,15 @@ class TIMDScheduleViewController: UITableViewController {
     //sets values for a given cell
     func configureCell(_ cell: UITableViewCell!, at path: IndexPath!, forData data: Any!, in tableView: UITableView!) {
         let match = data as? Match
-        if match?.number != nil {
+        if match?.matchNumber != nil {
             //set cell label to "Q##"
-            cell.textLabel?.text = "Q\(String(describing: match!.number))"
+            cell.textLabel?.text = "Q\(String(describing: match!.matchNumber))"
         }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        let selectedCell = sender as? UITableViewCell
+        return firebaseFetcher?.getTIMDataForTeamInMatch((firebaseFetcher?.getTeam(self.teamNumber))!, inMatch: (firebaseFetcher?.getMatch(Int((selectedCell?.textLabel?.text?.replacingOccurrences(of: "Q", with: ""))!)!))!) != nil
     }
     
     //when you click on a cell, this function is called. see tableView didSelectRowAt

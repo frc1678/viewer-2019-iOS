@@ -47,14 +47,14 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 tableView?.reloadData()
                 self.updateTitleAndTopInfo()
                 
-                self.reloadImage()
+                //self.reloadImage()
             }
         }
         
     }
     
     //sets selectedImage
-    func reloadImage() {
+    /*func reloadImage() {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             //if team exists, if imageView exists
             if let team = self.team,
@@ -124,7 +124,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             }
         }
         self.resetTableViewHeight()
-    }
+    }*/
     
     //reset the height of the table so info doesn't go off
     func resetTableViewHeight() {
@@ -171,7 +171,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     override func viewDidAppear(_ animated: Bool) {
         //self.reload()
-        reloadImage()
+        //reloadImage()
 
     }
     
@@ -302,16 +302,16 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         unrankedCell.detailLabel.text = ""
                     } else if dataKey == "pitProgrammingLanguage" { //JUST WANNA SAY this sucks
                         unrankedCell.detailLabel!.text! = (team?.pitProgrammingLanguage) ?? ""
-                    } else if dataKey == "pitDriveTrain" {
-                        unrankedCell.detailLabel!.text! = (team?.pitDriveTrain) ?? ""
-                    } else if dataKey == "pitClimberType" {
-                        unrankedCell.detailLabel!.text! = (team?.pitClimberType) ?? ""
+                    } else if dataKey == "pitDrivetrain" {
+                        unrankedCell.detailLabel!.text! = (team?.pitDrivetrain) ?? ""
+                    } else if dataKey == "pitClimbType" {
+                        unrankedCell.detailLabel!.text! = /*(team?.pitClimbType) ?? */"" //More complex now
                     } else if dataKey == "pitWheelDiameter" {
                         unrankedCell.detailLabel!.text! = (team?.pitWheelDiameter) ?? ""
-                    } else if dataKey == "pitRobotWidth" {
-                        unrankedCell.detailLabel!.text! = String(describing: team!.pitRobotWidth ?? 0)
-                    } else if dataKey == "pitRobotLength" {
-                        unrankedCell.detailLabel!.text! = String(describing: team!.pitRobotLength ?? 0)
+                    } else if dataKey == "pitWidth" {
+                        unrankedCell.detailLabel!.text! = String(describing: team!.pitWidth ?? 0)
+                    } else if dataKey == "pitLength" {
+                        unrankedCell.detailLabel!.text! = String(describing: team!.pitLength ?? 0)
                     } else if Utils.teamDetailsKeys.addCommasBetweenCapitals.contains(dataKey) {
                         unrankedCell.detailLabel.text = "\(insertCommasAndSpacesBetweenCapitalsInString(roundValue(dataPoint!, toDecimalPlaces: 2)))"
                     } else if Utils.teamDetailsKeys.boolValues.contains(dataKey) {
@@ -546,8 +546,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     
                     var values: [Float]
                     let altMapping : [CGFloat: String]?
-                    //if the key is predictedNumRPs
-                    if key == "calculatedData.predictedNumRPs" {
+                    //if the key is predictedRPs
+                    if key == "calculatedData.predictedRPs" {
                         //do stuff... we don't really use this?
                         (values, altMapping) = (firebaseFetcher!.getMatchDataValuesForTeamForPath(key!, forTeam: team!))
                     } else {

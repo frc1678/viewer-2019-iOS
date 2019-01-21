@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		190DFE3E1E30697500477B6D /* CalculatedTeamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190DFE3D1E30697500477B6D /* CalculatedTeamData.swift */; };
-		190DFE441E306A1700477B6D /* CalculatedMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190DFE431E306A1700477B6D /* CalculatedMatchData.swift */; };
-		190DFE461E30703E00477B6D /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190DFE451E30703E00477B6D /* Match.swift */; };
-		190DFE481E3079D000477B6D /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190DFE471E3079D000477B6D /* Team.swift */; };
 		190DFE4A1E308B7700477B6D /* TIMDScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190DFE491E308B7700477B6D /* TIMDScheduleViewController.swift */; };
 		190DFE4C1E308BBD00477B6D /* TIMDDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190DFE4B1E308BBD00477B6D /* TIMDDetailsViewController.swift */; };
 		190DFE4E1E308BDC00477B6D /* TIMDTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190DFE4D1E308BDC00477B6D /* TIMDTableViewCell.swift */; };
@@ -52,24 +48,23 @@
 		19B0382E1E2C58D3006E25A2 /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B038241E2C58D3006E25A2 /* UIColor+HexString.m */; };
 		19B038321E2C5919006E25A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B038301E2C5919006E25A2 /* AppDelegate.m */; };
 		19B038331E2C5919006E25A2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B038311E2C5919006E25A2 /* main.m */; };
-		19B0384B1E2DE55B006E25A2 /* TeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B038481E2DE55B006E25A2 /* TeamInMatchData.swift */; };
 		20B97B0927CBDC12735F6F22 /* Pods_Current_Match.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0394ACA1B0BF4AF13EA11B /* Pods_Current_Match.framework */; };
-		8C0200B52011987C00A75272 /* Attempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0200B42011987B00A75272 /* Attempt.swift */; };
-		8C0200B72011988600A75272 /* Climb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0200B62011988600A75272 /* Climb.swift */; };
 		8C0A5D092082A65600AC1BB2 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A5D082082A65500AC1BB2 /* OptionsViewController.swift */; };
 		8C10DE96206C0A670084DC25 /* MatchDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10DE94206C0A670084DC25 /* MatchDetailsTableViewCell.swift */; };
 		8C10DE97206C0A670084DC25 /* MatchDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C10DE95206C0A670084DC25 /* MatchDetailsTableViewCell.xib */; };
-		8C25A7CC1E33F2790012A23E /* CalculatedTeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25A7CB1E33F2790012A23E /* CalculatedTeamInMatchData.swift */; };
+		8C3F16A021F3ED7E0046E4CD /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F169821F3ED7E0046E4CD /* Timeline.swift */; };
+		8C3F16A121F3ED7E0046E4CD /* TeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F169921F3ED7E0046E4CD /* TeamInMatchData.swift */; };
+		8C3F16A221F3ED7E0046E4CD /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F169A21F3ED7E0046E4CD /* Team.swift */; };
+		8C3F16A321F3ED7E0046E4CD /* CalculatedMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F169B21F3ED7E0046E4CD /* CalculatedMatchData.swift */; };
+		8C3F16A421F3ED7E0046E4CD /* CalculatedTeamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F169C21F3ED7E0046E4CD /* CalculatedTeamData.swift */; };
+		8C3F16A521F3ED7E0046E4CD /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F169D21F3ED7E0046E4CD /* Match.swift */; };
+		8C3F16A621F3ED7E0046E4CD /* CargoShipPreload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F169E21F3ED7E0046E4CD /* CargoShipPreload.swift */; };
+		8C3F16A721F3ED7E0046E4CD /* CalculatedTeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F169F21F3ED7E0046E4CD /* CalculatedTeamInMatchData.swift */; };
 		8C5868711E34254E0056EA17 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C58686C1E34254E0056EA17 /* Storyboard.storyboard */; };
 		8CA0E2102038A335002EFB02 /* SlackTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0E20F2038A335002EFB02 /* SlackTableViewController.swift */; };
 		8CA0E2132038A5F3002EFB02 /* SlackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0E2112038A5F3002EFB02 /* SlackTableViewCell.swift */; };
 		8CA0E2142038A5F3002EFB02 /* SlackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CA0E2122038A5F3002EFB02 /* SlackTableViewCell.xib */; };
 		8CA0E2162039ECD1002EFB02 /* SlackProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0E2152039ECD1002EFB02 /* SlackProfile.swift */; };
-		8CA2B79E201E41360074DF21 /* SoloClimb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2B79D201E41350074DF21 /* SoloClimb.swift */; };
-		8CA2B7A2201E41510074DF21 /* ActiveLift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2B79F201E41500074DF21 /* ActiveLift.swift */; };
-		8CA2B7A3201E41510074DF21 /* PassiveClimb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2B7A0201E41510074DF21 /* PassiveClimb.swift */; };
-		8CA2B7A4201E41510074DF21 /* AssistedLift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2B7A1201E41510074DF21 /* AssistedLift.swift */; };
-		8CA2B7A6201E54FE0074DF21 /* ClimbParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2B7A5201E54FD0074DF21 /* ClimbParent.swift */; };
 		8CB334E8209BF25D00AB66E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CB334E7209BF25C00AB66E3 /* GoogleService-Info.plist */; };
 		8CB334EA209BF26400AB66E3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CB334E9209BF26400AB66E3 /* GoogleService-Info.plist */; };
 		8CB334EC20A3E3A100AB66E3 /* MatchDatapointsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB334EB20A3E3A100AB66E3 /* MatchDatapointsViewController.swift */; };
@@ -111,10 +106,6 @@
 		0562B80EE4C07093F7297E43 /* Pods-Current Match.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Current Match.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Current Match/Pods-Current Match.debug.xcconfig"; sourceTree = "<group>"; };
 		0A86C1ECE77EE7246AFCE4A8 /* Pods_CurrentMatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CurrentMatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		17C3CB7B0693450E7F32640F /* Pods-ios-viewer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-viewer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios-viewer/Pods-ios-viewer.debug.xcconfig"; sourceTree = "<group>"; };
-		190DFE3D1E30697500477B6D /* CalculatedTeamData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedTeamData.swift; sourceTree = "<group>"; };
-		190DFE431E306A1700477B6D /* CalculatedMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedMatchData.swift; sourceTree = "<group>"; };
-		190DFE451E30703E00477B6D /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
-		190DFE471E3079D000477B6D /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		190DFE491E308B7700477B6D /* TIMDScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TIMDScheduleViewController.swift; sourceTree = "<group>"; };
 		190DFE4B1E308BBD00477B6D /* TIMDDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TIMDDetailsViewController.swift; sourceTree = "<group>"; };
 		190DFE4D1E308BDC00477B6D /* TIMDTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TIMDTableViewCell.swift; sourceTree = "<group>"; };
@@ -171,14 +162,18 @@
 		19B0382F1E2C5919006E25A2 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		19B038301E2C5919006E25A2 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		19B038311E2C5919006E25A2 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		19B038481E2DE55B006E25A2 /* TeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInMatchData.swift; sourceTree = "<group>"; };
 		763F6CE09D211CAEC3E4C000 /* Pods-CurrentMatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrentMatch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CurrentMatch/Pods-CurrentMatch.debug.xcconfig"; sourceTree = "<group>"; };
-		8C0200B42011987B00A75272 /* Attempt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attempt.swift; sourceTree = "<group>"; };
-		8C0200B62011988600A75272 /* Climb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Climb.swift; sourceTree = "<group>"; };
 		8C0A5D082082A65500AC1BB2 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		8C10DE94206C0A670084DC25 /* MatchDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		8C10DE95206C0A670084DC25 /* MatchDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchDetailsTableViewCell.xib; sourceTree = "<group>"; };
-		8C25A7CB1E33F2790012A23E /* CalculatedTeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedTeamInMatchData.swift; sourceTree = "<group>"; };
+		8C3F169821F3ED7E0046E4CD /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = SOURCE_ROOT; };
+		8C3F169921F3ED7E0046E4CD /* TeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInMatchData.swift; sourceTree = SOURCE_ROOT; };
+		8C3F169A21F3ED7E0046E4CD /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = SOURCE_ROOT; };
+		8C3F169B21F3ED7E0046E4CD /* CalculatedMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedMatchData.swift; sourceTree = SOURCE_ROOT; };
+		8C3F169C21F3ED7E0046E4CD /* CalculatedTeamData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedTeamData.swift; sourceTree = SOURCE_ROOT; };
+		8C3F169D21F3ED7E0046E4CD /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = SOURCE_ROOT; };
+		8C3F169E21F3ED7E0046E4CD /* CargoShipPreload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoShipPreload.swift; sourceTree = SOURCE_ROOT; };
+		8C3F169F21F3ED7E0046E4CD /* CalculatedTeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedTeamInMatchData.swift; sourceTree = SOURCE_ROOT; };
 		8C58686D1E34254E0056EA17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Storyboard.storyboard; sourceTree = "<group>"; };
 		8C58687E1E3426200056EA17 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		8C58688C1E3426970056EA17 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -188,11 +183,6 @@
 		8CA0E2122038A5F3002EFB02 /* SlackTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SlackTableViewCell.xib; sourceTree = "<group>"; };
 		8CA0E2152039ECD1002EFB02 /* SlackProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlackProfile.swift; sourceTree = "<group>"; };
 		8CA2B79C201D13320074DF21 /* Current Match.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Current Match.entitlements"; sourceTree = "<group>"; };
-		8CA2B79D201E41350074DF21 /* SoloClimb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoloClimb.swift; sourceTree = "<group>"; };
-		8CA2B79F201E41500074DF21 /* ActiveLift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveLift.swift; sourceTree = "<group>"; };
-		8CA2B7A0201E41510074DF21 /* PassiveClimb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassiveClimb.swift; sourceTree = "<group>"; };
-		8CA2B7A1201E41510074DF21 /* AssistedLift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssistedLift.swift; sourceTree = "<group>"; };
-		8CA2B7A5201E54FD0074DF21 /* ClimbParent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClimbParent.swift; sourceTree = "<group>"; };
 		8CB334E7209BF25C00AB66E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8CB334E9209BF26400AB66E3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8CB334EB20A3E3A100AB66E3 /* MatchDatapointsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDatapointsViewController.swift; sourceTree = "<group>"; };
@@ -349,19 +339,14 @@
 		19B0383B1E2DD7A3006E25A2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8C0200B42011987B00A75272 /* Attempt.swift */,
-				8C25A7CB1E33F2790012A23E /* CalculatedTeamInMatchData.swift */,
-				190DFE3D1E30697500477B6D /* CalculatedTeamData.swift */,
-				190DFE431E306A1700477B6D /* CalculatedMatchData.swift */,
-				8CA2B7A5201E54FD0074DF21 /* ClimbParent.swift */,
-				8C0200B62011988600A75272 /* Climb.swift */,
-				8CA2B79F201E41500074DF21 /* ActiveLift.swift */,
-				8CA2B7A1201E41510074DF21 /* AssistedLift.swift */,
-				8CA2B7A0201E41510074DF21 /* PassiveClimb.swift */,
-				8CA2B79D201E41350074DF21 /* SoloClimb.swift */,
-				190DFE451E30703E00477B6D /* Match.swift */,
-				19B038481E2DE55B006E25A2 /* TeamInMatchData.swift */,
-				190DFE471E3079D000477B6D /* Team.swift */,
+				8C3F169F21F3ED7E0046E4CD /* CalculatedTeamInMatchData.swift */,
+				8C3F169E21F3ED7E0046E4CD /* CargoShipPreload.swift */,
+				8C3F169B21F3ED7E0046E4CD /* CalculatedMatchData.swift */,
+				8C3F169C21F3ED7E0046E4CD /* CalculatedTeamData.swift */,
+				8C3F169D21F3ED7E0046E4CD /* Match.swift */,
+				8C3F169A21F3ED7E0046E4CD /* Team.swift */,
+				8C3F169921F3ED7E0046E4CD /* TeamInMatchData.swift */,
+				8C3F169821F3ED7E0046E4CD /* Timeline.swift */,
 				8CA0E2152039ECD1002EFB02 /* SlackProfile.swift */,
 				19B037FC1E2C5891006E25A2 /* Reflectable.swift */,
 			);
@@ -676,30 +661,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CA0E2162039ECD1002EFB02 /* SlackProfile.swift in Sources */,
-				190DFE3E1E30697500477B6D /* CalculatedTeamData.swift in Sources */,
 				19B038131E2C5891006E25A2 /* GraphViewController.swift in Sources */,
-				8CA2B7A4201E41510074DF21 /* AssistedLift.swift in Sources */,
 				19B038151E2C5891006E25A2 /* ArrayTableViewController.m in Sources */,
 				19B038051E2C5891006E25A2 /* FirebaseDataFetcher.swift in Sources */,
 				19B037E81E2C586C006E25A2 /* SpecificTeamScheduleTableViewController.swift in Sources */,
-				19B0384B1E2DE55B006E25A2 /* TeamInMatchData.swift in Sources */,
 				8CA0E2132038A5F3002EFB02 /* SlackTableViewCell.swift in Sources */,
 				190DFE4A1E308B7700477B6D /* TIMDScheduleViewController.swift in Sources */,
-				8CA2B79E201E41360074DF21 /* SoloClimb.swift in Sources */,
+				8C3F16A221F3ED7E0046E4CD /* Team.swift in Sources */,
 				8CB334EC20A3E3A100AB66E3 /* MatchDatapointsViewController.swift in Sources */,
-				190DFE481E3079D000477B6D /* Team.swift in Sources */,
 				8CA0E2102038A335002EFB02 /* SlackTableViewController.swift in Sources */,
-				8CA2B7A3201E41510074DF21 /* PassiveClimb.swift in Sources */,
 				19B037EE1E2C586C006E25A2 /* OverallSecondPickAbilityViewController.swift in Sources */,
-				8C25A7CC1E33F2790012A23E /* CalculatedTeamInMatchData.swift in Sources */,
 				190DFE4E1E308BDC00477B6D /* TIMDTableViewCell.swift in Sources */,
+				8C3F16A321F3ED7E0046E4CD /* CalculatedMatchData.swift in Sources */,
 				19B037E91E2C586C006E25A2 /* MatchTableViewCell.m in Sources */,
 				8C10DE96206C0A670084DC25 /* MatchDetailsTableViewCell.swift in Sources */,
 				19B0382A1E2C58D3006E25A2 /* MechanismTableViewCell.swift in Sources */,
 				19B038141E2C5891006E25A2 /* CurrentMatchManager.swift in Sources */,
+				8C3F16A021F3ED7E0046E4CD /* Timeline.swift in Sources */,
 				19B038171E2C5891006E25A2 /* NotesTableViewController.swift in Sources */,
 				19B038161E2C5891006E25A2 /* SortedRankTableViewController.swift in Sources */,
-				8CA2B7A6201E54FE0074DF21 /* ClimbParent.swift in Sources */,
+				8C3F16A421F3ED7E0046E4CD /* CalculatedTeamData.swift in Sources */,
 				19B0380A1E2C5891006E25A2 /* Utils.swift in Sources */,
 				19B0382E1E2C58D3006E25A2 /* UIColor+HexString.m in Sources */,
 				19B038111E2C5891006E25A2 /* Reflectable.swift in Sources */,
@@ -707,22 +688,21 @@
 				8CD8FA6C1E5A4474004C2825 /* NSData+NSData_HexString.m in Sources */,
 				19B037EB1E2C586C006E25A2 /* SeedTableViewController.m in Sources */,
 				190DFE4C1E308BBD00477B6D /* TIMDDetailsViewController.swift in Sources */,
-				8C0200B72011988600A75272 /* Climb.swift in Sources */,
 				19B038261E2C58D3006E25A2 /* ResizableNotesTableViewCell.swift in Sources */,
 				8C0A5D092082A65600AC1BB2 /* OptionsViewController.swift in Sources */,
+				8C3F16A621F3ED7E0046E4CD /* CargoShipPreload.swift in Sources */,
 				19B0382D1E2C58D3006E25A2 /* UINavigationController+SGProgress.m in Sources */,
 				19B037EC1E2C586C006E25A2 /* PredictedSeedTableViewController.m in Sources */,
 				19B038271E2C58D3006E25A2 /* UnrankedTableViewCell.swift in Sources */,
 				19B037E71E2C586C006E25A2 /* ScheduleTableViewController.m in Sources */,
-				8C0200B52011987C00A75272 /* Attempt.swift in Sources */,
-				190DFE461E30703E00477B6D /* Match.swift in Sources */,
 				19B037ED1E2C586C006E25A2 /* FirstPickTableViewController.m in Sources */,
 				19B038281E2C58D3006E25A2 /* MultiCellTableViewCell.m in Sources */,
 				19B038081E2C5891006E25A2 /* MatchDetailsViewController.swift in Sources */,
+				8C3F16A521F3ED7E0046E4CD /* Match.swift in Sources */,
+				8C3F16A721F3ED7E0046E4CD /* CalculatedTeamInMatchData.swift in Sources */,
+				8C3F16A121F3ED7E0046E4CD /* TeamInMatchData.swift in Sources */,
 				19B038061E2C5891006E25A2 /* TeamDetailsTableViewController.swift in Sources */,
-				190DFE441E306A1700477B6D /* CalculatedMatchData.swift in Sources */,
 				19B038331E2C5919006E25A2 /* main.m in Sources */,
-				8CA2B7A2201E41510074DF21 /* ActiveLift.swift in Sources */,
 				19B038321E2C5919006E25A2 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

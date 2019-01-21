@@ -18,10 +18,11 @@ class CurrentMatchManager: NSObject {
     let notificationManager : NotificationManager
     let cache = Shared.dataCache
     let firebase: DatabaseReference
+    var cache_wait = DispatchGroup()
     
     override init() {
         firebase = Database.database().reference()
-        
+        cache_wait.enter()
         self.notificationManager = NotificationManager(secsBetweenUpdates: 5, notifications: [])
         self.showRP = false
         self.highlightDysfunc = false
@@ -35,6 +36,27 @@ class CurrentMatchManager: NSObject {
     }
     
     func setUp() {
+        cache.fetch(key: "teams").onSuccess { (d) -> () in
+            if let id = NSKeyedUnarchiver.unarchiveObject(with: d) as? [Team] {
+                if self.teams != id {
+                    self.teams = id
+                }
+            } else {
+                self.teams = []
+            }
+        }
+        cache.fetch(key: "matches").onSuccess { (d) -> () in
+            if let id = NSKeyedUnarchiver.unarchiveObject(with: d) as? [Match] {
+                if self.matches != id {
+                    self.matches = id
+                }
+            } else {
+                self.matches = []
+            }
+            self.cache_wait.leave()
+        }.onFailure { (d) in
+                self.cache_wait.leave()
+        }
         cache.fetch(key: "starredMatches").onSuccess { (d) -> () in
             if let starred = NSKeyedUnarchiver.unarchiveObject(with: d) as? [Int] {
                 if self.starredMatchesArray != starred {
@@ -80,24 +102,6 @@ class CurrentMatchManager: NSObject {
                 self.highlightDysfunc = false
             }
         }
-        cache.fetch(key: "teams").onSuccess { (d) -> () in
-            if let id = NSKeyedUnarchiver.unarchiveObject(with: d) as? [Team] {
-                if self.teams != id {
-                    self.teams = id
-                }
-            } else {
-                self.teams = []
-            }
-        }
-        cache.fetch(key: "matches").onSuccess { (d) -> () in
-            if let id = NSKeyedUnarchiver.unarchiveObject(with: d) as? [Match] {
-                if self.matches != id {
-                    self.matches = id
-                }
-            } else {
-                self.matches = []
-            }
-        }
         cache.fetch(key: "matchDetailsDatapoints").onSuccess { (d) -> () in
             if let id = NSKeyedUnarchiver.unarchiveObject(with: d) as? [String] {
                 if self.matchDetailsDatapoints != id {
@@ -140,7 +144,7 @@ class CurrentMatchManager: NSObject {
         didSet {
             if currentMatch != oldValue && currentMatch != -1 {
                 if let currentMatchFetch = AppDelegate.getAppDelegate().firebaseFetcher.getMatch(currentMatch) {
-                    let m : [String: AnyObject] = ["num":currentMatch as AnyObject, "redTeams": currentMatchFetch.redAllianceTeamNumbers! as AnyObject, "blueTeams": currentMatchFetch.blueAllianceTeamNumbers! as AnyObject]
+                    let m : [String: AnyObject] = ["num":currentMatch as AnyObject, "redTeams": currentMatchFetch.redTeams! as AnyObject, "blueTeams": currentMatchFetch.blueTeams! as AnyObject]
                     UserDefaults.standard.set(m, forKey: "match")
                     notifyIfNeeded()
                 }
@@ -149,16 +153,9 @@ class CurrentMatchManager: NSObject {
     }
     
     var defaultMatchDetailsDatapoints: [String] = [
-        "calculatedData.avgAllianceSwitchCubesAuto",
-        "calculatedData.avgCubesPlacedInScaleAuto",
-        "calculatedData.avgAllianceSwitchCubesTele",
-        "calculatedData.avgCubesPlacedInScaleTele",
-        "calculatedData.autoRunPercentage",
-        "calculatedData.avgAllVaultTime",
-        "calculatedData.avgNumExchangeInputTele",
-        "calculatedData.avgCubesSpilledTele",
-        "calculatedData.dysfunctionalPercentage",
-        "calculatedData.avgScaleCubesBy100s",
+        "calculatedData.hasOrangeGroundIntake",
+        "calculatedData.percentIncap",
+        "calculatedData.orangeCycleAll",
     ]
     
     @objc var matchDetailsDatapoints = [String]() {
