@@ -378,35 +378,35 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.firstPickAbility",
              "calculatedData.secondPickAbility",
              "picklistPosition",
-             “number”,
-             “name”,
-             “actualRPs”,
-             “matchesPlayed”,
-             “actualSeed”,
-             “predictedRPs”,
-             “avgGoodDecisions”,
-             “avgBadDecisions”,
-             “predictedSoloPoints”,
-             “firstPickAbility”,
-             “secondPickAbility”,
+             "number",
+             "name",
+             "actualRPs",
+             "matchesPlayed",
+             "actualSeed",
+             "predictedRPs",
+             "avgGoodDecisions",
+             "avgBadDecisions",
+             "predictedSoloPoints",
+             "firstPickAbility",
+             "secondPickAbility",
 
         ]
         
         /** Keys relating to autonomous to be displayed on teamDetails. */
         let autoKeys: [String] = [
         //Some stuff is not needed
-             “habLineSuccessL1”,
-             “habLineSuccessL2”,
+             "habLineSuccessL1",
+             "habLineSuccessL2",
         ]
         
         /** Keys relating to Teleoperated to be displayed on teamDetails */
         let teleKeys: [String] = [
-             “hasOrangeGroundIntake”,
-             “hasLemonGroundIntake”,
-             “avgOrangesScored”,
-             “avgLemonsScored”,
-             “avgOrangeFouls”,
-             “avgLemonsSpilled”,
+             "hasOrangeGroundIntake",
+             "hasLemonGroundIntake",
+             "avgOrangesScored",
+             "avgLemonsScored",
+             "avgOrangeFouls",
+             "avgLemonsSpilled",
         ]
         
         /** Dict translating a key for a teamDetails datapoint to the key for the respective TIMD datapoint. Does not include "calculatedData." in the keys. */
@@ -434,15 +434,15 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         /** Keys relating to the portions of the game that occur in the end (climbing, challenging, etc) */
         let endGame : [String] = [
-             “avgTimeClimbing”
+             "avgTimeClimbing"
         ]
         
         /** Keys relating to the status of a robot to be displayed on teamDetails */
         let statusKeys : [String] = [
-             “avgTimeIncap”,
-             “percentIncap”,
-             “percentImpaired”,
-             “percentNoShow”,
+             "avgTimeIncap",
+             "percentIncap",
+             "percentImpaired",
+             "percentNoShow",
         ]
         
         /** Keys relating to the data the pit scout collects to be displayed on teamDetails */
@@ -453,20 +453,20 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitProgrammingLanguage",
             "pitWheelDiameter",
             "pitHasCamera",
-             “pitWeight”,
-             “pitWheelDiameter”,
-             “pitDrivetrain”,
-             “pitProgrammingLanguage”,
-             “pitClimbType”,
-             “pitHasCamera”,
-             “pitHasVision”,
-             “pitHasPid”,
-             “pitHasGyro”,
-             “pitMinHeight”,
-             “pitMaxHeight”,
-             “pitHasEncoders”,
-             “pitCanBuddyStartLevel2”,
-             “pitSandstormNavigationType”,
+             "pitWeight",
+             "pitWheelDiameter",
+             "pitDrivetrain",
+             "pitProgrammingLanguage",
+             "pitClimbType",
+             "pitHasCamera",
+             "pitHasVision",
+             "pitHasPid",
+             "pitHasGyro",
+             "pitMinHeight",
+             "pitMaxHeight",
+             "pitHasEncoders",
+             "pitCanBuddyStartLevel2",
+             "pitSandstormNavigationType",
        ]
         
         /** Data collected by SEALS */
@@ -764,7 +764,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
       "preload" : "Preloaded Gamepiece",
       "driverStation" : "Driver Station",
       "isNoShow" : "No Show",
-      ”calculatedData.orangesScored" : "Cargo Scored",
+      "calculatedData.orangesScored" : "Cargo Scored",
       "calculatedData.lemonsScored" : "Panels Scored",
       "calculatedData.orangeFouls" : "Cargo Fouls",
       "calculatedData.lemonLoadSuccess" : "Panel Loading Success",
