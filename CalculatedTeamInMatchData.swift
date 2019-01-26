@@ -39,6 +39,7 @@ public final class CalculatedTeamInMatchData: NSCoding {
     static let lemonSuccessDefended = "lemonSuccessDefended"
     static let orangeSuccessL1 = "orangeSuccessL1"
     static let orangeSuccessUndefended = "orangeSuccessUndefended"
+    static let lemonsSpilled = "lemonsSpilled"
   }
 
   // MARK: Properties
@@ -68,7 +69,8 @@ public final class CalculatedTeamInMatchData: NSCoding {
   public var lemonLoadSuccess: Int?
   public var lemonSuccessDefended: Int?
   public var orangeSuccessL1: Int?
-  public var orangeSuccessUndefended: Int?
+    public var orangeSuccessUndefended: Int?
+    public var lemonsSpilled: Int?
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -110,6 +112,7 @@ public final class CalculatedTeamInMatchData: NSCoding {
     lemonSuccessDefended = json[SerializationKeys.lemonSuccessDefended].int
     orangeSuccessL1 = json[SerializationKeys.orangeSuccessL1].int
     orangeSuccessUndefended = json[SerializationKeys.orangeSuccessUndefended].int
+    lemonsSpilled = json[SerializationKeys.lemonsSpilled].int
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -144,6 +147,7 @@ public final class CalculatedTeamInMatchData: NSCoding {
     if let value = lemonSuccessDefended { dictionary[SerializationKeys.lemonSuccessDefended] = value }
     if let value = orangeSuccessL1 { dictionary[SerializationKeys.orangeSuccessL1] = value }
     if let value = orangeSuccessUndefended { dictionary[SerializationKeys.orangeSuccessUndefended] = value }
+    if let value = lemonsSpilled { dictionary[SerializationKeys.lemonsSpilled] = value }
     return dictionary
   }
 
@@ -176,6 +180,7 @@ public final class CalculatedTeamInMatchData: NSCoding {
     self.lemonSuccessDefended = aDecoder.decodeObject(forKey: SerializationKeys.lemonSuccessDefended) as? Int
     self.orangeSuccessL1 = aDecoder.decodeObject(forKey: SerializationKeys.orangeSuccessL1) as? Int
     self.orangeSuccessUndefended = aDecoder.decodeObject(forKey: SerializationKeys.orangeSuccessUndefended) as? Int
+    self.lemonsSpilled = aDecoder.decodeObject(forKey: SerializationKeys.lemonsSpilled) as? Int
   }
 
   public func encode(with aCoder: NSCoder) {
@@ -206,6 +211,7 @@ public final class CalculatedTeamInMatchData: NSCoding {
     aCoder.encode(lemonSuccessDefended, forKey: SerializationKeys.lemonSuccessDefended)
     aCoder.encode(orangeSuccessL1, forKey: SerializationKeys.orangeSuccessL1)
     aCoder.encode(orangeSuccessUndefended, forKey: SerializationKeys.orangeSuccessUndefended)
+    aCoder.encode(lemonsSpilled, forKey: SerializationKeys.lemonsSpilled)
   }
 
 }

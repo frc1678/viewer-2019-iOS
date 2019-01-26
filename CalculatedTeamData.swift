@@ -166,6 +166,10 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     static let p75avgGoodDecisions = "p75avgGoodDecisions"
     static let firstPickAbility = "firstPickAbility"
     static let lfmAvgOrangeFouls = "lfmAvgOrangeFouls"
+    static let avgLemonsSpilled = "avgLemonsSpilled"
+    static let p75avgLemonsSpilled = "p75avgLemonsSpilled"
+    static let lfmAvgLemonsSpilled = "lfmAvgLemonsSpilled"
+    static let sdAvgLemonsSpilled = "sdAvgLemonsSpilled"
   }
 
   // MARK: Properties
@@ -322,7 +326,11 @@ public final class CalculatedTeamData: NSObject, NSCoding {
   @objc public var sdLemonSuccessAll: Int = -1
   @objc public var p75avgGoodDecisions: Float = -1.0
   @objc public var firstPickAbility: Float = -1.0
-  @objc public var lfmAvgOrangeFouls: Float = -1.0
+    @objc public var lfmAvgOrangeFouls: Float = -1.0
+    @objc public var avgLemonsSpilled: Float = -1.0
+    @objc public var p75avgLemonsSpilled: Float = -1.0
+    @objc public var lfmAvgLemonsSpilled: Float = -1.0
+    @objc public var sdAvgLemonsSpilled: Float = -1.0
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -491,6 +499,10 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     p75avgGoodDecisions = json[SerializationKeys.p75avgGoodDecisions].floatValue
     firstPickAbility = json[SerializationKeys.firstPickAbility].floatValue
     lfmAvgOrangeFouls = json[SerializationKeys.lfmAvgOrangeFouls].floatValue
+    avgLemonsSpilled = json[SerializationKeys.avgLemonsSpilled].floatValue
+    p75avgLemonsSpilled = json[SerializationKeys.p75avgLemonsSpilled].floatValue
+    lfmAvgLemonsSpilled = json[SerializationKeys.lfmAvgLemonsSpilled].floatValue
+    sdAvgLemonsSpilled = json[SerializationKeys.sdAvgLemonsSpilled].floatValue
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -658,6 +670,10 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     dictionary[SerializationKeys.sdLemonSuccessAll] = sdLemonSuccessAll
     dictionary[SerializationKeys.p75avgGoodDecisions] = p75avgGoodDecisions
     dictionary[SerializationKeys.lfmAvgOrangeFouls] = lfmAvgOrangeFouls
+    dictionary[SerializationKeys.avgLemonsSpilled] = avgLemonsSpilled
+    dictionary[SerializationKeys.p75avgLemonsSpilled] = p75avgLemonsSpilled
+    dictionary[SerializationKeys.lfmAvgLemonsSpilled] = lfmAvgLemonsSpilled
+    dictionary[SerializationKeys.sdAvgLemonsSpilled] = sdAvgLemonsSpilled
     return dictionary
   }
 
@@ -817,6 +833,10 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     self.p75avgGoodDecisions = aDecoder.decodeFloat(forKey: SerializationKeys.p75avgGoodDecisions)
     self.firstPickAbility = aDecoder.decodeFloat(forKey: SerializationKeys.firstPickAbility)
     self.lfmAvgOrangeFouls = aDecoder.decodeFloat(forKey: SerializationKeys.lfmAvgOrangeFouls)
+    self.avgLemonsSpilled = aDecoder.decodeFloat(forKey: SerializationKeys.avgLemonsSpilled)
+    self.p75avgLemonsSpilled = aDecoder.decodeFloat(forKey: SerializationKeys.p75avgLemonsSpilled)
+    self.lfmAvgLemonsSpilled = aDecoder.decodeFloat(forKey: SerializationKeys.lfmAvgLemonsSpilled)
+    self.sdAvgLemonsSpilled = aDecoder.decodeFloat(forKey: SerializationKeys.sdAvgLemonsSpilled)
   }
 
   public func encode(with aCoder: NSCoder) {
@@ -974,6 +994,10 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     aCoder.encode(p75avgGoodDecisions, forKey: SerializationKeys.p75avgGoodDecisions)
     aCoder.encode(firstPickAbility, forKey: SerializationKeys.firstPickAbility)
     aCoder.encode(lfmAvgOrangeFouls, forKey: SerializationKeys.lfmAvgOrangeFouls)
+    aCoder.encode(avgLemonsSpilled, forKey: SerializationKeys.avgLemonsSpilled)
+    aCoder.encode(p75avgLemonsSpilled, forKey: SerializationKeys.p75avgLemonsSpilled)
+    aCoder.encode(lfmAvgLemonsSpilled, forKey: SerializationKeys.lfmAvgLemonsSpilled)
+    aCoder.encode(sdAvgLemonsSpilled, forKey: SerializationKeys.sdAvgLemonsSpilled)
   }
 
 }
