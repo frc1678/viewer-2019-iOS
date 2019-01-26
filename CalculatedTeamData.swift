@@ -674,6 +674,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     dictionary[SerializationKeys.p75avgLemonsSpilled] = p75avgLemonsSpilled
     dictionary[SerializationKeys.lfmAvgLemonsSpilled] = lfmAvgLemonsSpilled
     dictionary[SerializationKeys.sdAvgLemonsSpilled] = sdAvgLemonsSpilled
+    dictionary[SerializationKeys.avgOrangesScored] = avgOrangesScored
     return dictionary
   }
 
