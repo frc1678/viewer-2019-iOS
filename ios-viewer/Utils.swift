@@ -374,8 +374,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.firstPickAbility",
              "calculatedData.secondPickAbility",
              "picklistPosition",
-             "calculatedData.predictedSoloPoints",
-
         ]
         
         /** Keys relating to autonomous to be displayed on teamDetails. */
@@ -393,8 +391,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
              "calculatedData.avgLemonsScored",
              "calculatedData.avgOrangeFouls",
              "calculatedData.avgLemonsSpilled",
-             "avgGoodDecisions",
-             "avgBadDecisions",
+             "calculatedData.avgGoodDecisions",
+             "calculatedData.avgBadDecisions",
         ]
         
         /** Dict translating a key for a teamDetails datapoint to the key for the respective TIMD datapoint. Does not include "calculatedData." in the keys. */
