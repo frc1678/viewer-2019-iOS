@@ -49,6 +49,7 @@
 		19B038321E2C5919006E25A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B038301E2C5919006E25A2 /* AppDelegate.m */; };
 		19B038331E2C5919006E25A2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B038311E2C5919006E25A2 /* main.m */; };
 		20B97B0927CBDC12735F6F22 /* Pods_Current_Match.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0394ACA1B0BF4AF13EA11B /* Pods_Current_Match.framework */; };
+		72355EB32203F99800DA63E5 /* Gallery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72355EB22203F99800DA63E5 /* Gallery.storyboard */; };
 		8C0A5D092082A65600AC1BB2 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A5D082082A65500AC1BB2 /* OptionsViewController.swift */; };
 		8C10DE96206C0A670084DC25 /* MatchDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C10DE94206C0A670084DC25 /* MatchDetailsTableViewCell.swift */; };
 		8C10DE97206C0A670084DC25 /* MatchDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C10DE95206C0A670084DC25 /* MatchDetailsTableViewCell.xib */; };
@@ -162,6 +163,7 @@
 		19B0382F1E2C5919006E25A2 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		19B038301E2C5919006E25A2 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		19B038311E2C5919006E25A2 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		72355EB22203F99800DA63E5 /* Gallery.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Gallery.storyboard; sourceTree = "<group>"; };
 		763F6CE09D211CAEC3E4C000 /* Pods-CurrentMatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrentMatch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CurrentMatch/Pods-CurrentMatch.debug.xcconfig"; sourceTree = "<group>"; };
 		8C0A5D082082A65500AC1BB2 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		8C10DE94206C0A670084DC25 /* MatchDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDetailsTableViewCell.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				19B037C11E2C5739006E25A2 /* LaunchScreen.storyboard */,
+				72355EB22203F99800DA63E5 /* Gallery.storyboard */,
 				19B037CB1E2C581C006E25A2 /* Main.storyboard */,
 				19B037CC1E2C581C006E25A2 /* FirstPick.storyboard */,
 				19B037CE1E2C581C006E25A2 /* Schedule.storyboard */,
@@ -549,6 +552,7 @@
 				19B037D81E2C581C006E25A2 /* ThirdPick.storyboard in Resources */,
 				19B0382B1E2C58D3006E25A2 /* MechanismTableViewCell.xib in Resources */,
 				19B038291E2C58D3006E25A2 /* MultiCellTableViewCell.xib in Resources */,
+				72355EB32203F99800DA63E5 /* Gallery.storyboard in Resources */,
 				8C5868711E34254E0056EA17 /* Storyboard.storyboard in Resources */,
 				19B037D21E2C581C006E25A2 /* Main.storyboard in Resources */,
 				19B037C31E2C5739006E25A2 /* LaunchScreen.storyboard in Resources */,
