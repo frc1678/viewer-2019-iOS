@@ -48,6 +48,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 self.updateTitleAndTopInfo()
                 
                 //self.reloadImage()
+                self.resetTableViewHeight()
             }
         }
         
@@ -258,10 +259,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 if Utils.teamDetailsKeys.TIMDLongTextCells.contains(dataKey) {
                     //get cell
                     let notesCell: ResizableNotesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailStringCell", for: indexPath) as! ResizableNotesTableViewCell
-                    
                     //set title
-                    notesCell.titleLabel?.text = Utils.humanReadableNames[dataKey]
-                    
+                        notesCell.titleLabel?.text = Utils.humanReadableNames[dataKey]
                     //get and sort timds by match num
                     let TIMDs = firebaseFetcher?.getTIMDataForTeam(self.team!).sorted { $0.matchNumber! < $1.matchNumber! }
                     var datas = [String]()
@@ -274,6 +273,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                             datas.append(dataString)
                         }
                     }
+ 
                     //consolidate into a single string file like so:
                     /*
                      Q#: Notes
@@ -288,7 +288,12 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 } else if Utils.teamDetailsKeys.longTextCells.contains(dataKey) {
                     let notesCell: ResizableNotesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailStringCell", for: indexPath) as! ResizableNotesTableViewCell
                     notesCell.titleLabel?.text = Utils.humanReadableNames[dataKey]
-                    notesCell.notesLabel.text = team!.pitSEALsNotes
+                    if dataKey == "pitSEALsNotes" {
+                         notesCell.notesLabel.text = team!.pitSEALsNotes
+                    }
+                    else if dataKey == "pitClimbType" {
+                        notesCell.notesLabel!.text! = "Self:  \(team!.pitClimbType!["self"]!) , Robot 1:  \(team!.pitClimbType!["robot1"]!) , Robot 2:  \(team!.pitClimbType!["robot2"]!)"
+                    }
                     notesCell.selectionStyle = UITableViewCellSelectionStyle.none
                     cell = notesCell
                 } else if Utils.teamDetailsKeys.unrankedCells.contains(dataKey) || dataKey.contains("pit") { //pit keys
@@ -304,14 +309,14 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         unrankedCell.detailLabel!.text! = (team?.pitProgrammingLanguage) ?? ""
                     } else if dataKey == "pitDrivetrain" {
                         unrankedCell.detailLabel!.text! = (team?.pitDrivetrain) ?? ""
-                    } else if dataKey == "pitClimbType" {
-                        unrankedCell.detailLabel!.text! = /*(team?.pitClimbType) ?? */"" //More complex now
                     } else if dataKey == "pitWheelDiameter" {
                         unrankedCell.detailLabel!.text! = (team?.pitWheelDiameter) ?? ""
                     } else if dataKey == "pitWidth" {
                         unrankedCell.detailLabel!.text! = String(describing: team!.pitWidth ?? 0)
                     } else if dataKey == "pitLength" {
                         unrankedCell.detailLabel!.text! = String(describing: team!.pitLength ?? 0)
+                    } else if dataKey == "pitSandstormNavigationType" {
+                        unrankedCell.detailLabel!.text! = (team?.pitSandstormNavigationType) ?? ""
                     } else if Utils.teamDetailsKeys.addCommasBetweenCapitals.contains(dataKey) {
                         unrankedCell.detailLabel.text = "\(insertCommasAndSpacesBetweenCapitalsInString(roundValue(dataPoint!, toDecimalPlaces: 2)))"
                     } else if Utils.teamDetailsKeys.boolValues.contains(dataKey) {
@@ -322,6 +327,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     
                     unrankedCell.selectionStyle = UITableViewCellSelectionStyle.none
                     cell = unrankedCell
+                    
                 } else {
                     //get cell
                     let multiCell: MultiCellTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MultiCellTableViewCell", for: indexPath) as! MultiCellTableViewCell
@@ -581,7 +587,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         graphViewController.subValuesLeft.remove(at: i)
                     }
                     //replace with altmapping
-                    if altMapping != nil {
+                   if altMapping != nil {
                         graphViewController.zeroAndOneReplacementValues = altMapping!
                     }
                     //set title

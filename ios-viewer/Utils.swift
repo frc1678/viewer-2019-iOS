@@ -85,6 +85,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     struct TeamDetailsKeys {
         
         let yesNoKeys : [String] = [
+            "pitHasCamera",
+            "pitHasVision",
+            "pitHasPid",
+            "pitHasGyro",
+            "pitHasEncoders",
+            "pitCanBuddyStartLevel2",
+            "calculatedData.hasOrangeGroundIntake",
+            "calculatedData.hasLemonGroundIntake"
         ]
         
         let abilityKeys = [
@@ -118,6 +126,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "name",
             "actualRPs",
             "matchesPlayed",
+            "calculatedData.totalSuperNotes",
             "calculatedData.actualSeed",
             "calculatedData.predictedRPs",
             "calculatedData.predictedSeed",
@@ -128,6 +137,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgOrangesScored",
             "calculatedData.avgLemonsScored",
             "calculatedData.avgOrangeFouls",
+            "calculatedData.avgLemonsSpilled",
             "calculatedData.lemonLoadSuccess",
             "calculatedData.orangeCycleAll",
             "calculatedData.orangeCycleL1",
@@ -170,6 +180,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.lfmAvgOrangesScored",
             "calculatedData.lfmAvgLemonsScored",
             "calculatedData.lfmAvgOrangeFouls",
+            "calculatedData.lfmAvgLemonsSpilled",
             "calculatedData.lfmLemonLoadSuccess",
             "calculatedData.lfmOrangeCycleAll",
             "calculatedData.lfmOrangeCycleL1",
@@ -205,6 +216,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.sdAvgOrangesScored",
             "calculatedData.sdAvgLemonsScored",
             "calculatedData.sdAvgOrangeFouls",
+            "calculatedData.sdAvgLemonsSpilled",
             "calculatedData.sdLemonLoadSuccess",
             "calculatedData.sdOrangeCycleAll",
             "calculatedData.sdOrangeCycleL1",
@@ -240,6 +252,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.p75avgOrangesScored",
             "calculatedData.p75avgLemonsScored",
             "calculatedData.p75avgOrangeFouls",
+            "calculatedData.p75avgLemonsSpilled",
             "calculatedData.p75lemonLoadSuccess",
             "calculatedData.p75orangeCycleAll",
             "calculatedData.p75orangeCycleL1",
@@ -271,7 +284,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.p75avgTimeClimbing",
             "calculatedData.p75percentIncap",
             "calculatedData.p75percentImpaired",
-            "calculatedData.p75percentNoShow",
+            "calculatedData.p75percentNoShow"
         ]
         
         /**
@@ -282,21 +295,27 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "Second Pick Ability",
             "Avg. Driving Ability",
             "Picklist Position",
+            "Percent Incap",
+            "Percent Impaired",
+            "Cargo Ground Intake",
+            "Panel Ground Intake",
+            "Avg. Good Decisions",
+            "Avg. Bad Decisions"
         ]
         
         /** Values that should be displayed as long text cells */
         let TIMDLongTextCells : [String] = [
-            "superNotes"
+            "superNotes",
         ]
         
         let longTextCells : [String] = [
-            "pitSEALsNotes"
+            "pitSEALsNotes",
+            "pitClimbType"
         ]
         
         let unrankedCells = [
             "selectedImageURL",
-            "otherUrls",
-            "picklistPosition",
+            "otherUrls"
         ]
         
         /** Values to be displayed as percentages. */
@@ -307,6 +326,13 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         let boolValues = [
             "pitHasCamera",
+            "pitHasVision",
+            "pitHasPid",
+            "pitHasGyro",
+            "pitHasEncoders",
+            "pitCanBuddyStartLevel2",
+            "calculatedData.hasOrangeGroundIntake",
+            "calculatedData.hasLemonGroundIntake"
         ]
         
         
@@ -317,7 +343,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "TeleOp",
             "Percentages",
             "Pit Scouting / Robot Design",
-            "Additional Info",
+            "Additional Info"
             ]
         // MARK: KeySets, TeamDetails keys.
         func keySetNames(_ minimalist : Bool) -> [String] {
@@ -328,7 +354,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
                     "Autonomous",
                     "Teleoperated",
                     "Siege",
-                    "Status",
+                    "Status"
                     //superKeys,
                     //pitKeys,
                     //"SEALS"
@@ -372,15 +398,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         let highLevel : [String] = [ //needed
             "calculatedData.firstPickAbility",
-             "calculatedData.secondPickAbility",
-             "picklistPosition",
+             "calculatedData.secondPickAbility"
         ]
         
         /** Keys relating to autonomous to be displayed on teamDetails. */
         let autoKeys: [String] = [
         //Some stuff is not needed
-             "habLineSuccessL1",
-             "habLineSuccessL2",
+             "calculatedData.habLineSuccessL1",
+             "calculatedData.habLineSuccessL2"
         ]
         
         /** Keys relating to Teleoperated to be displayed on teamDetails */
@@ -392,13 +417,22 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
              "calculatedData.avgOrangeFouls",
              "calculatedData.avgLemonsSpilled",
              "calculatedData.avgGoodDecisions",
-             "calculatedData.avgBadDecisions",
              ]
         
         /** Dict translating a key for a teamDetails datapoint to the key for the respective TIMD datapoint. Does not include "calculatedData." in the keys. */
         let teamDetailsToTIMD = [
             //status
+            "avgTimeIncap" : "calculatedData.timeIncap",
+            "percentNoShow" : "isNoShow",
             //scoring stuff
+            "avgOrangesScored" : "calculatedData.orangesScored",
+            "avgLemonsScored" : "calculatedData.lemonsScored",
+            "avgOrangeFouls" : "calculatedData.orangeFouls",
+            "avgLemonsSpilled" : "calculatedData.lemonsSpilled",
+            "habLineSuccessL1" : "crossedHabLine",
+            "habLineSuccessL2" : "crossedHabLine",
+            "avgTimeClimbing" : "calculatedData.timeClimbing",
+
             //super data
             "avgSpeed" : "rankSpeed",
             "avgAgility" : "rankAgility",
@@ -414,7 +448,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
 
             //Misc
             "actualNumRPs" : "calculatedData.numRPs",
-            "numAutoPoints" : "calculatedData.numAutoPoints",
+            "numAutoPoints" : "calculatedData.numAutoPoints"
             
             ]
         
@@ -425,10 +459,17 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         /** Keys relating to the status of a robot to be displayed on teamDetails */
         let statusKeys : [String] = [
+<<<<<<< HEAD
              "avgTimeIncap",
              "percentIncap",
              "percentImpaired",
              "percentNoShow",
+=======
+             "calculatedData.avgTimeIncap",
+             "calculatedData.percentIncap",
+             "calculatedData.percentImpaired",
+             "calculatedData.percentNoShow"
+>>>>>>> adcde75... Fix datapoint display issues
         ]
         
         /** Keys relating to the data the pit scout collects to be displayed on teamDetails */
@@ -452,7 +493,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
              "pitMaxHeight",
              "pitHasEncoders",
              "pitCanBuddyStartLevel2",
-             "pitSandstormNavigationType",
+             "pitSandstormNavigationType"
        ]
         
         /** Data collected by SEALS */
@@ -477,12 +518,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     static let superKeys = [
         //superNotes- They're in TIMDs, so see TeamDetails for more info
         "superNotes",
-        "calculatedData.avgDrivingAbility",
-        "calculatedData.avgSpeed",
-        "calculatedData.avgAgility",
-        "calculatedData.avgDefense",
-        "calculatedData.totalNumGoodDecisions",
-        "calculatedData.totalNumBadDecisions"
+        //"calculatedData.avgDrivingAbility",
+        //"calculatedData.avgSpeed",
+        //"calculatedData.avgAgility",
+        //"calculatedData.avgDefense",
+        //"calculatedData.totalNumGoodDecisions",
+        //"calculatedData.totalNumBadDecisions"
     ]
     static let statusKeys : [String] = []
     static let miscKeys = ["uploadedData.miscellaneousNotes"]
@@ -526,7 +567,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     static let graphTitleSwitch = [
         "calculatedData.RScoreSpeed" : "calculatedData.avgSpeed",
         "calculatedData.totalNumGoodDecisions" : "numGoodDecisions",
-        "calculatedData.totalNumBadDecisions" : "numBadDecisions",
+        "calculatedData.totalNumBadDecisions" : "numBadDecisions"
     ]
     
     /** Team Details keys? */
@@ -538,18 +579,19 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "actualNumRPs",
         "predictedRPs",
         "predictedSeed",
-        "secondPickAbility",
+        "secondPickAbility"
     ]
     
     /** Calculated TIMD keys */
     static let calculatedTeamInMatchDataKeys = [
         "calculatedData.firstPickAbility",
         "calculatedData.numRPs",
-        "calculatedData.secondPickAbility",
+        "calculatedData.secondPickAbility"
     ]
     
     /** A dictionary with datapoints as keys and Human Readable versions as values */
     static let humanReadableNames = [
+<<<<<<< HEAD
       "pitWidth" : "Robot Width",
       "pitLength" : "Robot Length",
       "pitMinHeight" : "Min. Height",
@@ -808,6 +850,252 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
       "calculatedData.redChanceWin" : "Red Win Chance",
       "calculatedData.bluePredictedClimbPoints" : "Blue Predicted Climb Points",
       "calculatedData.redPredictedClimbPoints" : "Red Predicted Climb Points",
+=======
+        "pitWidth" : "Robot Width",
+        "pitLength" : "Robot Length",
+        "pitMinHeight" : "Min. Height",
+        "pitMaxHeight" : "Max. Height",
+        "pitWeight" : "Robot Weight",
+        "pitWheelDiameter" : "Wheel Diameter",
+        "pitDrivetrain" : "Drive Train",
+        "pitProgrammingLanguage" : "Programming Language",
+        "pitClimbType" : "Climb Type",
+        "pitHasCamera" : "Has Camera",
+        "pitHasVision" : "Has Vision",
+        "pitHasPid" : "Has PID",
+        "pitHasGyro" : "Has Gyro",
+        "pitHasEncoders" : "Has Encoders",
+        "pitCanBuddyStartLevel2" : "Buddy Start L2",
+        "pitSandstormNavigationType" : "Sandstorm Nav.",
+        "pitHasOrangeShooter" : "Cargo Shooter",
+        "number" : "Number",
+        "name" : "Name",
+        "actualRPs" : "Avg. RPs",
+        "matchesPlayed" : "Matches Played",
+        "matchDatas" : "Matches",
+        "TeamInMatchDatas" : "TIMDs",
+        "calculatedData" : "Calculated Data",
+        "calculatedData.totalSuperNotes" : "All Super Notes",
+        "calculatedData.actualSeed" : "Seed",
+        "calculatedData.predictedRPs" : "Predicted RPs",
+        "calculatedData.predictedSeed" : "Predicted Seed",
+        "calculatedData.hasOrangeGroundIntake" : "Cargo Ground Intake",
+        "calculatedData.hasLemonGroundIntake" : "Panel Ground Intake",
+        "calculatedData.didPreloadOrange" : "Has Preloaded Cargo",
+        "calculatedData.didPreloadLemon" : "Has Preloaded Panel",
+        "calculatedData.avgOrangesScored" : "Avg. Cargo Scored",
+        "calculatedData.avgLemonsScored" : "Avg. Panels Scored",
+        "calculatedData.avgOrangeFouls" : "Avg. Cargo Fouls",
+        "calculatedData.avgLemonsSpilled" : "Avg. Panel Spills",
+        "calculatedData.lemonLoadSuccess" : "Panel Loading Success",
+        "calculatedData.orangeCycleAll" : "Cargo Cycle Times",
+        "calculatedData.orangeCycleL1" : "Cargo Cycle L1",
+        "calculatedData.orangeCycleL2" : "Cargo Cycle L2",
+        "calculatedData.orangeCycleL3" : "Cargo Cycle L3",
+        "calculatedData.lemonCycleAll" : "Panel Cycle Times",
+        "calculatedData.lemonCycleL1" : "Panel Cycle L1",
+        "calculatedData.lemonCycleL2" : "Panel Cycle L2",
+        "calculatedData.lemonCycleL3" : "Panel Cycle L3",
+        "calculatedData.orangeSuccessAll" : "Cargo Success",
+        "calculatedData.orangeSuccessDefended" : "Cargo Defended Success",
+        "calculatedData.orangeSuccessUndefended" : "Cargo Undefended Success",
+        "calculatedData.orangeSuccessL1" : "Cargo Success L1",
+        "calculatedData.orangeSuccessL2" : "Cargo Success L2",
+        "calculatedData.orangeSuccessL3" : "Cargo Success L3",
+        "calculatedData.lemonSuccessAll" : "Panel Success",
+        "calculatedData.lemonSuccessDefended" : "Panel Defended Success",
+        "calculatedData.lemonSuccessUndefended" : "Panel Undefended Success",
+        "calculatedData.lemonSuccessL1" : "Panel Success L1",
+        "calculatedData.lemonSuccessL2" : "Panel Success L2",
+        "calculatedData.lemonSuccessL3" : "Panel Success L3",
+        "calculatedData.lemonSuccessFromSide" : "Panel Side Success",
+        "calculatedData.habLineSuccessL1" : "Hab Line Success L1",
+        "calculatedData.habLineSuccessL2" : "Hab Line Success L2",
+        "calculatedData.avgGoodDecisions" : "Avg. Good Decisions",
+        "calculatedData.avgBadDecisions" : "Avg. Bad Decisions",
+        "calculatedData.avgTimeIncap" : "Avg. Time Incap",
+        "calculatedData.avgTimeImpaired" : "Avg. Time Impaired",
+        "calculatedData.avgTimeClimbing" : "Avg. Time Climbing",
+        "calculatedData.percentIncap" : "Percent Incap",
+        "calculatedData.percentImpaired" : "Percent Impaired",
+        "calculatedData.percentNoShow" : "Percent No Show",
+        "calculatedData.predictedDedicatedLemonCycles" : "Predicted Panel Cycle Time",
+        "calculatedData.predictedDedicatedOrangeCycles" : "Predicted Orange Cycle Time",
+        "calculatedData.predictedSoloPoints" : "Predicted Solo Points",
+        "calculatedData.orangeAbility" : "Cargo Ability",
+        "calculatedData.lemonAbility" : "Panel Ability",
+        "calculatedData.firstPickAbility" : "First Pick Ability",
+        "calculatedData.secondPickAbility" : "Second Pick Ability",
+        "calculatedData.lfmAvgOrangesScored" : "LFM Avg. Cargo Scored",
+        "calculatedData.lfmAvgLemonsScored" : "LFM Avg. Panels Scored",
+        "calculatedData.lfmAvgOrangeFouls" : "LFM Avg. Cargo Fouls",
+        "calculatedData.lfmAvgLemonsSpilled" : "LFM Avg. Panel Spills",
+        "calculatedData.lfmLemonLoadSuccess" : "LFM Panel Loading Success",
+        "calculatedData.lfmOrangeCycleAll" : "LFM Cargo Cycle Times",
+        "calculatedData.lfmOrangeCycleL1" : "LFM Cargo Cycle L1",
+        "calculatedData.lfmOrangeCycleL2" : "LFM Cargo Cycle L2",
+        "calculatedData.lfmOrangeCycleL3" : "LFM Cargo Cycle L3",
+        "calculatedData.lfmLemonCycleAll" : "LFM Panel Cycle",
+        "calculatedData.lfmLemonCycleL1" : "LFM Panel Cycle L1",
+        "calculatedData.lfmLemonCycleL2" : "LFM Panel Cycle L2",
+        "calculatedData.lfmLemonCycleL3" : "LFM Panel Cycle L3",
+        "calculatedData.lfmOrangeSuccessAll" : "LFM Cargo Success",
+        "calculatedData.lfmOrangeSuccessDefended" : "LFM Defended Cargo Success",
+        "calculatedData.lfmOrangeSuccessUndefended" : "LFM Undefended Cargo Success",
+        "calculatedData.lfmOrangeSuccessL1" : "LFM Cargo Success L1",
+        "calculatedData.lfmOrangeSuccessL2" : "LFM Cargo Success L2",
+        "calculatedData.lfmOrangeSuccessL3" : "LFM Cargo Success L3",
+        "calculatedData.lfmLemonSuccessAll" : "LFM Panel Success",
+        "calculatedData.lfmLemonSuccessDefended" : "LFM Defended Panel Success",
+        "calculatedData.lfmLemonSuccessUndefended" : "LFM Undefended Panel Success",
+        "calculatedData.lfmLemonSuccessL1" : "LFM Panel Success L1",
+        "calculatedData.lfmLemonSuccessL2" : "LFM Panel Success L2",
+        "calculatedData.lfmLemonSuccessL3" : "LFM Panel Success L3",
+        "calculatedData.lfmLemonSuccessFromSide" : "LFM Panel Side Success",
+        "calculatedData.lfmHabLineSuccessL1" : "LFM Hab Line Success L1",
+        "calculatedData.lfmHabLineSuccessL2" : "LFM Hab Line Success L2",
+        "calculatedData.lfmAvgGoodDecisions" : "LFM Avg. Good Decisions",
+        "calculatedData.lfmAvgBadDecisions" : "LFM Avg. Bad Decisions",
+        "calculatedData.lfmAvgTimeIncap" : "LFM Avg. Time Incap",
+        "calculatedData.lfmAvgTimeImpaired" : "LFM Avg. Time Impaired",
+        "calculatedData.lfmAvgTimeClimbing" : "LFM Avg. Time Climbing",
+        "calculatedData.lfmPercentIncap" : "LFM Percent Incap",
+        "calculatedData.lfmPercentImpaired" : "LFM Percent Impaired",
+        "calculatedData.lfmPercentNoShow" : "LFM Percent No Show",
+        "calculatedData.sdAvgOrangesScored" : "σ Cargo Scored",
+        "calculatedData.sdAvgLemonsScored" : "σ Panels Scored",
+        "calculatedData.sdAvgOrangeFouls" : "σ Cargo Fouls",
+        "calculatedData.sdAvgLemonsSpilled" : "σ Lemon Spills",
+        "calculatedData.sdLemonLoadSuccess" : "σ Panel Loading Success",
+        "calculatedData.sdOrangeCycleAll" : "σ Cargo Cycle Times",
+        "calculatedData.sdOrangeCycleL1" : "σ Cargo Cycle L1",
+        "calculatedData.sdOrangeCycleL2" : "σ Cargo Cycle L2",
+        "calculatedData.sdOrangeCycleL3" : "σ Cargo Cycle L3",
+        "calculatedData.sdLemonCycleAll" : "σ Panel Cycle Times",
+        "calculatedData.sdLemonCycleL1" : "σ Panel Cycle L1",
+        "calculatedData.sdLemonCycleL2" : "σ Panel Cycle L2",
+        "calculatedData.sdLemonCycleL3" : "σ Panel Cycle L3",
+        "calculatedData.sdOrangeSuccessAll" : "σ Cargo Success",
+        "calculatedData.sdOrangeSuccessDefended" : "σ Defended Cargo Success",
+        "calculatedData.sdOrangeSuccessUndefended" : "σ Undefended Cargo Success",
+        "calculatedData.sdOrangeSuccessL1" : "σ Cargo Success L1",
+        "calculatedData.sdOrangeSuccessL2" : "σ Cargo Success L2",
+        "calculatedData.sdOrangeSuccessL3" : "σ Cargo Success L3",
+        "calculatedData.sdLemonSuccessAll" : "σ Panel Success",
+        "calculatedData.sdLemonSuccessDefended" : "σ Defended Panel Success",
+        "calculatedData.sdLemonSuccessUndefended" : "σ Undefended Panel Success",
+        "calculatedData.sdLemonSuccessL1" : "σ Panel Success L1",
+        "calculatedData.sdLemonSuccessL2" : "σ Panel Success L2",
+        "calculatedData.sdLemonSuccessL3" : "σ Panel Success L3",
+        "calculatedData.sdLemonSuccessFromSide" : "σ Panel Side Success",
+        "calculatedData.sdHabLineSuccessL1" : "σ Hab Line Success L1",
+        "calculatedData.sdHabLineSuccessL2" : "σ Hab Line Success L2",
+        "calculatedData.sdAvgGoodDecisions" : "σ Good Decisions",
+        "calculatedData.sdAvgBadDecisions" : "σ Bad Decisions",
+        "calculatedData.sdAvgTimeIncap" : "σ Time Incap",
+        "calculatedData.sdAvgTimeImpaired" : "σ Time Impaired",
+        "calculatedData.sdAvgTimeClimbing" : "σ Time Climbing",
+        "calculatedData.sdPercentIncap" : "σ Percent Incap",
+        "calculatedData.sdPercentImpaired" : "σ Percent Impaired",
+        "calculatedData.sdPercentNoShow" : "σ Percent No Show",
+        "calculatedData.p75avgOrangesScored" : "75% Avg. Cargo Scored",
+        "calculatedData.p75avgLemonsScored" : "75% Avg. Panels Scored",
+        "calculatedData.p75avgOrangeFouls" : "75% Avg. Cargo Fouls",
+        "calculatedData.p75avgLemonsSpilled" : "75% Avg. Panel Spills",
+        "calculatedData.p75lemonLoadSuccess" : "75% Panel Loading Success",
+        "calculatedData.p75orangeCycleAll" : "75% Cargo Cycle Times",
+        "calculatedData.p75orangeCycleL1" : "75% Cargo Cycle L1",
+        "calculatedData.p75orangeCycleL2" : "75% Cargo Cycle L2",
+        "calculatedData.p75orangeCycleL3" : "75% Cargo Cycle L3",
+        "calculatedData.p75lemonCycleAll" : "75% Panel Cycle Times",
+        "calculatedData.p75lemonCycleL1" : "75% Panel Cycle L1",
+        "calculatedData.p75lemonCycleL2" : "75% Panel Cycle L2",
+        "calculatedData.p75lemonCycleL3" : "75% Panel Cycle L3",
+        "calculatedData.p75orangeSuccessAll" : "75% Cargo Success",
+        "calculatedData.p75orangeSuccessDefended" : "75% Defended Cargo Success",
+        "calculatedData.p75orangeSuccessUndefended" : "75% Undefended Cargo Success",
+        "calculatedData.p75orangeSuccessL1" : "75% Cargo Success L1",
+        "calculatedData.p75orangeSuccessL2" : "75% Cargo Success L2",
+        "calculatedData.p75orangeSuccessL3" : "75% Cargo Success L3",
+        "calculatedData.p75lemonSuccessAll" : "75% Panel Success",
+        "calculatedData.p75lemonSuccessDefended" : "75% Defended Panel Success",
+        "calculatedData.p75lemonSuccessUndefended" : "75% Undefended Panel Success",
+        "calculatedData.p75lemonSuccessL1" : "75% Panel Success L1",
+        "calculatedData.p75lemonSuccessL2" : "75% Panel Success L2",
+        "calculatedData.p75lemonSuccessL3" : "75% Panel Success L3",
+        "calculatedData.p75lemonSuccessFromSide" : "75% Panel Side Success",
+        "calculatedData.p75habLineSuccessL1" : "75% Hab Line Success L1",
+        "calculatedData.p75habLineSuccessL2" : "75% Hab Line Success L2",
+        "calculatedData.p75avgGoodDecisions" : "75% Avg. Good Decisions",
+        "calculatedData.p75avgBadDecisions" : "75% Avg. Bad Decisions",
+        "calculatedData.p75avgTimeIncap" : "75% Avg. Time Incap",
+        "calculatedData.p75avgTimeImpaired" : "75% Avg. Time Impaired",
+        "calculatedData.p75avgTimeClimbing" : "75% Avg. Time Climbing",
+        "calculatedData.p75percentIncap" : "75% Percent Incap",
+        "calculatedData.p75percentImpaired" : "75% Percent Impaired",
+        "calculatedData.p75percentNoShow" : "75% Percent No Show",
+        "timeline" : "Timeline",
+        "type" : "Type of Action",
+        "time" : "Time",
+        "piece" : "Piece",
+        "location" : "Location",
+        "didSucceed" : "Success",
+        "wasDefended" : "Defended",
+        "structure" : "Structure",
+        "side" : "Side",
+        "level" : "Level",
+        "cause" : "Cause",
+        "attempted" : "Attempted Climb",
+        "self" : "Self",
+        "robot1" : "Robot 1",
+        "robot2" : "Robot 2",
+        "actual" : "Actual Climb",
+        "teamNumber" : "Team Number",
+        "startingLevel" : "Starting Level",
+        "crossedHabLine" : "Crossed Hab Line",
+        "startingLocation" : "Starting Location",
+        "preload" : "Preloaded Gamepiece",
+        "driverStation" : "Driver Station",
+        "isNoShow" : "No Show",
+        "calculatedData.orangesScored" : "Cargo Scored",
+        "calculatedData.lemonsScored" : "Panels Scored",
+        "calculatedData.orangeFouls" : "Cargo Fouls",
+        "calculatedData.lemonsSpilled" : "Panel Spills",
+        "calculatedData.timeIncap" : "Time Incap",
+        "calculatedData.timeImpaired" : "Time Impaired",
+        "calculatedData.timeClimbing" : "Time Climbing",
+        "cargoShipPreload" : "Cargo Ship Preload",
+        "leftNear" : "Left-Near",
+        "leftMid" : "Left-Mid",
+        "leftFar" : "Left-Right",
+        "rightNear" : "Right-Near",
+        "rightMid" : "Right-Mid",
+        "rightFar" : "Right-Far",
+        "matchNumber" : "Match Number",
+        "blueTeams" : "Blue Teams",
+        "redTeams" : "Red Teams",
+        "noShowTeams" : "No Show Teams",
+        "blueActualScore" : "Blue Score",
+        "redActualScore" : "Red Score",
+        "blueFoulPoints" : "Blue Fouls",
+        "redFoulPoints" : "Red Fouls",
+        "blueActualRPs" : "Blue RPs",
+        "redActualRPs" : "Red RPs",
+        "blueDidRocketRP" : "Blue Rocket RP",
+        "redDidRocketRP" : "Red Rocket RP",
+        "blueDidClimbRP" : "Blue Climb RP",
+        "redDidClimbRP" : "Red Climb RP",
+        "calculatedData.blueChanceRocketRP" : "Blue Rocket RP Chance",
+        "calculatedData.redChanceRocketRP" : "Red Rocket RP Chance",
+        "calculatedData.blueChanceClimbRP" : "Blue Climb RP Chance",
+        "calculatedData.redChanceClimbRP" : "Red Climb RP Chance",
+        "calculatedData.bluePredictedScore" : "Blue Predicted Score",
+        "calculatedData.redPredictedScore" : "Red Predicted Score",
+        "calculatedData.blueChanceWin" : "Blue Win Chance",
+        "calculatedData.redChanceWin" : "Red Win Chance",
+        "calculatedData.bluePredictedClimbPoints" : "Blue Predicted Climb Points",
+        "calculatedData.redPredictedClimbPoints" : "Red Predicted Climb Points"
+>>>>>>> adcde75... Fix datapoint display issues
     ]
     
     /**
