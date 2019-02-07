@@ -85,6 +85,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     struct TeamDetailsKeys {
         
         let yesNoKeys : [String] = [
+            "pitHasCamera",
+            "pitHasVision",
+            "pitHasPid",
+            "pitHasGyro",
+            "pitHasEncoders",
+            "pitCanBuddyStartLevel2",
+            "calculatedData.hasOrangeGroundIntake",
+            "calculatedData.hasLemonGroundIntake"
         ]
         
         let abilityKeys = [
@@ -118,6 +126,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "name",
             "actualRPs",
             "matchesPlayed",
+            "calculatedData.totalSuperNotes",
             "calculatedData.actualSeed",
             "calculatedData.predictedRPs",
             "calculatedData.predictedSeed",
@@ -128,6 +137,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgOrangesScored",
             "calculatedData.avgLemonsScored",
             "calculatedData.avgOrangeFouls",
+            "calculatedData.avgLemonsSpilled",
             "calculatedData.lemonLoadSuccess",
             "calculatedData.orangeCycleAll",
             "calculatedData.orangeCycleL1",
@@ -170,6 +180,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.lfmAvgOrangesScored",
             "calculatedData.lfmAvgLemonsScored",
             "calculatedData.lfmAvgOrangeFouls",
+            "calculatedData.lfmAvgLemonsSpilled",
             "calculatedData.lfmLemonLoadSuccess",
             "calculatedData.lfmOrangeCycleAll",
             "calculatedData.lfmOrangeCycleL1",
@@ -205,6 +216,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.sdAvgOrangesScored",
             "calculatedData.sdAvgLemonsScored",
             "calculatedData.sdAvgOrangeFouls",
+            "calculatedData.sdAvgLemonsSpilled",
             "calculatedData.sdLemonLoadSuccess",
             "calculatedData.sdOrangeCycleAll",
             "calculatedData.sdOrangeCycleL1",
@@ -240,6 +252,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.p75avgOrangesScored",
             "calculatedData.p75avgLemonsScored",
             "calculatedData.p75avgOrangeFouls",
+            "calculatedData.p75avgLemonsSpilled",
             "calculatedData.p75lemonLoadSuccess",
             "calculatedData.p75orangeCycleAll",
             "calculatedData.p75orangeCycleL1",
@@ -271,7 +284,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.p75avgTimeClimbing",
             "calculatedData.p75percentIncap",
             "calculatedData.p75percentImpaired",
-            "calculatedData.p75percentNoShow",
+            "calculatedData.p75percentNoShow"
         ]
         
         /**
@@ -282,21 +295,27 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "Second Pick Ability",
             "Avg. Driving Ability",
             "Picklist Position",
+            "Percent Incap",
+            "Percent Impaired",
+            "Cargo Ground Intake",
+            "Panel Ground Intake",
+            "Avg. Good Decisions",
+            "Avg. Bad Decisions"
         ]
         
         /** Values that should be displayed as long text cells */
         let TIMDLongTextCells : [String] = [
-            "superNotes"
+            "superNotes",
         ]
         
         let longTextCells : [String] = [
-            "pitSEALsNotes"
+            "pitSEALsNotes",
+            "pitClimbType"
         ]
         
         let unrankedCells = [
             "selectedImageURL",
-            "otherUrls",
-            "picklistPosition",
+            "otherUrls"
         ]
         
         /** Values to be displayed as percentages. */
@@ -307,6 +326,13 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         let boolValues = [
             "pitHasCamera",
+            "pitHasVision",
+            "pitHasPid",
+            "pitHasGyro",
+            "pitHasEncoders",
+            "pitCanBuddyStartLevel2",
+            "calculatedData.hasOrangeGroundIntake",
+            "calculatedData.hasLemonGroundIntake"
         ]
         
         
@@ -317,7 +343,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "TeleOp",
             "Percentages",
             "Pit Scouting / Robot Design",
-            "Additional Info",
+            "Additional Info"
             ]
         // MARK: KeySets, TeamDetails keys.
         func keySetNames(_ minimalist : Bool) -> [String] {
@@ -328,7 +354,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
                     "Autonomous",
                     "Teleoperated",
                     "Siege",
-                    "Status",
+                    "Status"
                     //superKeys,
                     //pitKeys,
                     //"SEALS"
@@ -372,15 +398,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         let highLevel : [String] = [ //needed
             "calculatedData.firstPickAbility",
-             "calculatedData.secondPickAbility",
-             "picklistPosition",
+             "calculatedData.secondPickAbility"
         ]
         
         /** Keys relating to autonomous to be displayed on teamDetails. */
         let autoKeys: [String] = [
         //Some stuff is not needed
              "calculatedData.habLineSuccessL1",
-             "calculatedData.habLineSuccessL2",
+             "calculatedData.habLineSuccessL2"
         ]
         
         /** Keys relating to Teleoperated to be displayed on teamDetails */
@@ -392,13 +417,23 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
              "calculatedData.avgOrangeFouls",
              "calculatedData.avgLemonsSpilled",
              "calculatedData.avgGoodDecisions",
-             "calculatedData.avgBadDecisions",
+             "calculatedData.avgBadDecisions"
         ]
         
         /** Dict translating a key for a teamDetails datapoint to the key for the respective TIMD datapoint. Does not include "calculatedData." in the keys. */
         let teamDetailsToTIMD = [
             //status
+            "avgTimeIncap" : "calculatedData.timeIncap",
+            "percentNoShow" : "isNoShow",
             //scoring stuff
+            "avgOrangesScored" : "calculatedData.orangesScored",
+            "avgLemonsScored" : "calculatedData.lemonsScored",
+            "avgOrangeFouls" : "calculatedData.orangeFouls",
+            "avgLemonsSpilled" : "calculatedData.lemonsSpilled",
+            "habLineSuccessL1" : "crossedHabLine",
+            "habLineSuccessL2" : "crossedHabLine",
+            "avgTimeClimbing" : "calculatedData.timeClimbing",
+
             //super data
             "avgSpeed" : "rankSpeed",
             "avgAgility" : "rankAgility",
@@ -414,7 +449,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
 
             //Misc
             "actualNumRPs" : "calculatedData.numRPs",
-            "numAutoPoints" : "calculatedData.numAutoPoints",
+            "numAutoPoints" : "calculatedData.numAutoPoints"
             
             ]
         
@@ -428,7 +463,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
              "calculatedData.avgTimeIncap",
              "calculatedData.percentIncap",
              "calculatedData.percentImpaired",
-             "calculatedData.percentNoShow",
+             "calculatedData.percentNoShow"
         ]
         
         /** Keys relating to the data the pit scout collects to be displayed on teamDetails */
@@ -448,7 +483,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
              "pitMaxHeight",
              "pitHasEncoders",
              "pitCanBuddyStartLevel2",
-             "pitSandstormNavigationType",
+             "pitSandstormNavigationType"
        ]
         
         /** Data collected by SEALS */
@@ -473,12 +508,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     static let superKeys = [
         //superNotes- They're in TIMDs, so see TeamDetails for more info
         "superNotes",
-        "calculatedData.avgDrivingAbility",
-        "calculatedData.avgSpeed",
-        "calculatedData.avgAgility",
-        "calculatedData.avgDefense",
-        "calculatedData.totalNumGoodDecisions",
-        "calculatedData.totalNumBadDecisions"
+        //"calculatedData.avgDrivingAbility",
+        //"calculatedData.avgSpeed",
+        //"calculatedData.avgAgility",
+        //"calculatedData.avgDefense",
+        //"calculatedData.totalNumGoodDecisions",
+        //"calculatedData.totalNumBadDecisions"
     ]
     static let statusKeys : [String] = []
     static let miscKeys = ["uploadedData.miscellaneousNotes"]
@@ -522,7 +557,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     static let graphTitleSwitch = [
         "calculatedData.RScoreSpeed" : "calculatedData.avgSpeed",
         "calculatedData.totalNumGoodDecisions" : "numGoodDecisions",
-        "calculatedData.totalNumBadDecisions" : "numBadDecisions",
+        "calculatedData.totalNumBadDecisions" : "numBadDecisions"
     ]
     
     /** Team Details keys? */
@@ -534,14 +569,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "actualNumRPs",
         "predictedRPs",
         "predictedSeed",
-        "secondPickAbility",
+        "secondPickAbility"
     ]
     
     /** Calculated TIMD keys */
     static let calculatedTeamInMatchDataKeys = [
         "calculatedData.firstPickAbility",
         "calculatedData.numRPs",
-        "calculatedData.secondPickAbility",
+        "calculatedData.secondPickAbility"
     ]
     
     /** A dictionary with datapoints as keys and Human Readable versions as values */
@@ -567,7 +602,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "name" : "Name",
         "actualRPs" : "Avg. RPs",
         "matchesPlayed" : "Matches Played",
+        "matchDatas" : "Matches",
+        "TeamInMatchDatas" : "TIMDs",
         "calculatedData" : "Calculated Data",
+        "calculatedData.totalSuperNotes" : "All Super Notes",
         "calculatedData.actualSeed" : "Seed",
         "calculatedData.predictedRPs" : "Predicted RPs",
         "calculatedData.predictedSeed" : "Predicted Seed",
@@ -578,6 +616,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.avgOrangesScored" : "Avg. Cargo Scored",
         "calculatedData.avgLemonsScored" : "Avg. Panels Scored",
         "calculatedData.avgOrangeFouls" : "Avg. Cargo Fouls",
+        "calculatedData.avgLemonsSpilled" : "Avg. Panel Spills",
         "calculatedData.lemonLoadSuccess" : "Panel Loading Success",
         "calculatedData.orangeCycleAll" : "Cargo Cycle Times",
         "calculatedData.orangeCycleL1" : "Cargo Cycle L1",
@@ -620,6 +659,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.lfmAvgOrangesScored" : "LFM Avg. Cargo Scored",
         "calculatedData.lfmAvgLemonsScored" : "LFM Avg. Panels Scored",
         "calculatedData.lfmAvgOrangeFouls" : "LFM Avg. Cargo Fouls",
+        "calculatedData.lfmAvgLemonsSpilled" : "LFM Avg. Panel Spills",
         "calculatedData.lfmLemonLoadSuccess" : "LFM Panel Loading Success",
         "calculatedData.lfmOrangeCycleAll" : "LFM Cargo Cycle Times",
         "calculatedData.lfmOrangeCycleL1" : "LFM Cargo Cycle L1",
@@ -655,15 +695,16 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.sdAvgOrangesScored" : "σ Cargo Scored",
         "calculatedData.sdAvgLemonsScored" : "σ Panels Scored",
         "calculatedData.sdAvgOrangeFouls" : "σ Cargo Fouls",
+        "calculatedData.sdAvgLemonsSpilled" : "σ Lemon Spills",
         "calculatedData.sdLemonLoadSuccess" : "σ Panel Loading Success",
         "calculatedData.sdOrangeCycleAll" : "σ Cargo Cycle Times",
         "calculatedData.sdOrangeCycleL1" : "σ Cargo Cycle L1",
         "calculatedData.sdOrangeCycleL2" : "σ Cargo Cycle L2",
         "calculatedData.sdOrangeCycleL3" : "σ Cargo Cycle L3",
-        "calculatedData.sdLemonCycleAll" : "σ Panel Cycle L1",
+        "calculatedData.sdLemonCycleAll" : "σ Panel Cycle Times",
         "calculatedData.sdLemonCycleL1" : "σ Panel Cycle L1",
-        "calculatedData.sdLemonCycleL2" : "σ Panel Cycle L1",
-        "calculatedData.sdLemonCycleL3" : "σ Panel Cycle L1",
+        "calculatedData.sdLemonCycleL2" : "σ Panel Cycle L2",
+        "calculatedData.sdLemonCycleL3" : "σ Panel Cycle L3",
         "calculatedData.sdOrangeSuccessAll" : "σ Cargo Success",
         "calculatedData.sdOrangeSuccessDefended" : "σ Defended Cargo Success",
         "calculatedData.sdOrangeSuccessUndefended" : "σ Undefended Cargo Success",
@@ -690,6 +731,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.p75avgOrangesScored" : "75% Avg. Cargo Scored",
         "calculatedData.p75avgLemonsScored" : "75% Avg. Panels Scored",
         "calculatedData.p75avgOrangeFouls" : "75% Avg. Cargo Fouls",
+        "calculatedData.p75avgLemonsSpilled" : "75% Avg. Panel Spills",
         "calculatedData.p75lemonLoadSuccess" : "75% Panel Loading Success",
         "calculatedData.p75orangeCycleAll" : "75% Cargo Cycle Times",
         "calculatedData.p75orangeCycleL1" : "75% Cargo Cycle L1",
@@ -748,6 +790,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.orangesScored" : "Cargo Scored",
         "calculatedData.lemonsScored" : "Panels Scored",
         "calculatedData.orangeFouls" : "Cargo Fouls",
+        "calculatedData.lemonsSpilled" : "Panel Spills",
         "calculatedData.timeIncap" : "Time Incap",
         "calculatedData.timeImpaired" : "Time Impaired",
         "calculatedData.timeClimbing" : "Time Climbing",
@@ -781,7 +824,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.blueChanceWin" : "Blue Win Chance",
         "calculatedData.redChanceWin" : "Red Win Chance",
         "calculatedData.bluePredictedClimbPoints" : "Blue Predicted Climb Points",
-        "calculatedData.redPredictedClimbPoints" : "Red Predicted Climb Points",
+        "calculatedData.redPredictedClimbPoints" : "Red Predicted Climb Points"
     ]
     
     /**
