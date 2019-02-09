@@ -101,7 +101,6 @@
     //set matchNum label
     matchCell.matchLabel.attributedText = [self textForScheduleLabelForType:0 forString:[NSString stringWithFormat:@"%ld", (long)match.matchNumber]];
     matchCell.matchLabel.font = [matchCell.matchLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
-    
     matchCell.redOneLabel.font = [matchCell.redOneLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     matchCell.redTwoLabel.font = [matchCell.redTwoLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     matchCell.redThreeLabel.font = [matchCell.redThreeLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];

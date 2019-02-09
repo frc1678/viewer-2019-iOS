@@ -65,10 +65,13 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
     }
     
     override func configureCell(_ cell: UITableViewCell!, at path: IndexPath!, forData data: Any!, in tableView: UITableView!) {
+        var size: CGFloat = CGFloat((firebaseFetcher?.currentMatchManager.textSize)!)
         let multiCell = cell as? MultiCellTableViewCell
+        multiCell!.scoreLabel.font = multiCell!.scoreLabel.font.withSize(size)
         let team = data as? Team
         if team!.number != -1 {
             multiCell!.teamLabel!.text = String(describing: team!.number)
+            multiCell!.teamLabel.font = multiCell!.teamLabel.font.withSize(size)
         }
         if team!.calculatedData?.secondPickAbility != nil {
             multiCell!.scoreLabel!.text = String(Utils.roundValue(Float(team!.calculatedData!.secondPickAbility), toDecimalPlaces: 2)
@@ -81,6 +84,7 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
         } else {
             multiCell!.rankLabel!.text = "\(self.firebaseFetcher.rankOfTeam(team!, withCharacteristic: "calculatedData.secondPickAbility"))"
         }
+        multiCell!.rankLabel!.font = multiCell!.rankLabel!.font.withSize(size)
     }
    
     
@@ -98,8 +102,7 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? TeamDetailsTableViewController {
             let selectedCell = sender as? MultiCellTableViewCell
-            dest.team = firebaseFetcher.getTeam(Int((selectedCell?.teamLabel!.text)!)!)
-        }
+            dest.team = firebaseFetcher.getTeam(Int((selectedCell?.teamLabel!.text)!)!)        }
     }
     
     override func cellIdentifier() -> String! {
