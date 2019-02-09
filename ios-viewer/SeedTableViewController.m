@@ -23,6 +23,10 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path forData:(id)data inTableView:(UITableView *)tableView {
     Team *team = data;
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
+    // text size for seed (rankLabel, teamLabel, and scoreLabel)
+    multiCell.rankLabel.font = [multiCell.rankLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
+    multiCell.teamLabel.font = [multiCell.teamLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
+    multiCell.scoreLabel.font = [multiCell.scoreLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     
     if(team.calculatedData.actualSeed != nil){
         //get the rank where higher numbers are on the top
