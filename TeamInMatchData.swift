@@ -22,6 +22,7 @@ public final class TeamInMatchData: NSObject, NSCoding {
     static let isNoShow = "isNoShow"
     static let teamNumber = "teamNumber"
     static let matchNumber = "matchNumber"
+    static let superNotes = "superNotes"
   }
 
   // MARK: Properties
@@ -35,6 +36,7 @@ public final class TeamInMatchData: NSObject, NSCoding {
   public var isNoShow: Bool? = false
     public var teamNumber: Int?
     public var matchNumber: Int?
+    public var superNotes: String?
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -59,6 +61,7 @@ public final class TeamInMatchData: NSObject, NSCoding {
     isNoShow = json[SerializationKeys.isNoShow].boolValue
     teamNumber = json[SerializationKeys.teamNumber].int
     matchNumber = json[SerializationKeys.matchNumber].int
+    superNotes = json[SerializationKeys.superNotes].string
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -76,6 +79,7 @@ public final class TeamInMatchData: NSObject, NSCoding {
     dictionary[SerializationKeys.isNoShow] = isNoShow
     if let value = teamNumber { dictionary[SerializationKeys.teamNumber] = value }
     if let value = matchNumber { dictionary[SerializationKeys.matchNumber] = value }
+    if let value = startingLocation { dictionary[SerializationKeys.startingLocation] = value }
     return dictionary
   }
 
@@ -91,6 +95,7 @@ public final class TeamInMatchData: NSObject, NSCoding {
     self.isNoShow = aDecoder.decodeBool(forKey: SerializationKeys.isNoShow)
     self.teamNumber = aDecoder.decodeObject(forKey: SerializationKeys.teamNumber) as? Int
     self.matchNumber = aDecoder.decodeObject(forKey: SerializationKeys.matchNumber) as? Int
+    self.superNotes = aDecoder.decodeObject(forKey: SerializationKeys.superNotes) as? String
   }
 
   public func encode(with aCoder: NSCoder) {
@@ -104,6 +109,7 @@ public final class TeamInMatchData: NSObject, NSCoding {
     aCoder.encode(isNoShow, forKey: SerializationKeys.isNoShow)
     aCoder.encode(teamNumber, forKey: SerializationKeys.teamNumber)
     aCoder.encode(matchNumber, forKey: SerializationKeys.matchNumber)
+    aCoder.encode(superNotes, forKey: SerializationKeys.superNotes)
   }
 
 }

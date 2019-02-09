@@ -9,7 +9,7 @@
 import UIKit
 import MWPhotoBrowser
 import SDWebImage
-import Haneke
+import Haneke      
 
 //TableViewDataSource/Delegate allows vc to contain a table view/pass in info.
 class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, UIDocumentInteractionControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate {
