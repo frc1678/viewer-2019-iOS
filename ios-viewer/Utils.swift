@@ -487,10 +487,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
              "pitClimbType",
              "pitHasCamera",
              "pitHasVision",
-             "pitHasPid",
              "pitHasGyro",
-             "pitMinHeight",
-             "pitMaxHeight",
              "pitHasEncoders",
              "pitCanBuddyStartLevel2",
              "pitSandstormNavigationType"
