@@ -31,7 +31,7 @@ public final class Match: NSObject, NSCoding {
   }
 
   // MARK: Properties
-  public var blueTeams: [Int]?
+  @objc public var blueTeams: [Int]?
   public var blueActualRPs: Int?
   @objc public var redDidClimbRP: Bool = false
   @objc public var calculatedData: CalculatedMatchData?
@@ -40,7 +40,7 @@ public final class Match: NSObject, NSCoding {
   @objc public var blueActualScore: Int = -1
   public var blueFoulPoints: Int?
   @objc public var blueDidRocketRP: Bool = false
-  public var redTeams: [Int]?
+  @objc public var redTeams: [Int]?
   @objc public var redActualScore: Int = -1
   @objc public var blueDidClimbRP: Bool = false
   @objc public var redDidRocketRP: Bool = false

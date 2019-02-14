@@ -79,7 +79,7 @@ public final class TeamInMatchData: NSObject, NSCoding {
     dictionary[SerializationKeys.isNoShow] = isNoShow
     if let value = teamNumber { dictionary[SerializationKeys.teamNumber] = value }
     if let value = matchNumber { dictionary[SerializationKeys.matchNumber] = value }
-    if let value = startingLocation { dictionary[SerializationKeys.startingLocation] = value }
+    if let value = superNotes { dictionary[SerializationKeys.superNotes] = value }
     return dictionary
   }
 
