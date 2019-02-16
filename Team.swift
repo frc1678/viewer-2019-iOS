@@ -60,7 +60,7 @@ public final class Team: NSObject, NSCoding {
   public var pitWheelDiameter: String?
     public var pitClimbType: [String:Int]?
     public var pitSEALsNotes: String?
-  public var calculatedData: CalculatedTeamData?
+  @objc public var calculatedData: CalculatedTeamData?
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
