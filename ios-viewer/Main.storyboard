@@ -527,36 +527,6 @@
             </objects>
             <point key="canvasLocation" x="204" y="-1164"/>
         </scene>
-<<<<<<< Updated upstream
-=======
-        <!--Gallery-->
-        <scene sceneID="40y-z2-xl5">
-            <objects>
-                <navigationController title="Gallery" id="bk7-S9-8d3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Gallery" image="iconCamera.png" id="rEa-ih-qew"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="AoJ-cl-gMM">
-                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="TdD-VA-p3D" kind="relationship" relationship="rootViewController" id="ICm-2F-hic"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YbZ-07-yGl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3" y="-2508"/>
-        </scene>
-        <!--Gallery-->
-        <scene sceneID="yIP-tq-4Rl">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Gallery" id="TdD-VA-p3D" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="3Zy-6F-IRi"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="StY-XZ-GdW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="607" y="-2922"/>
-        </scene>
->>>>>>> Stashed changes
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -573,12 +543,7 @@
                         <segue destination="n2d-MX-8J8" kind="relationship" relationship="viewControllers" id="blC-kd-gIF"/>
                         <segue destination="mf1-jP-Bbe" kind="relationship" relationship="viewControllers" id="RiZ-9O-Vnc"/>
                         <segue destination="Epm-UU-UBU" kind="relationship" relationship="viewControllers" id="xgP-6t-Gs5"/>
-<<<<<<< Updated upstream
                         <segue destination="myG-dI-XsJ" kind="relationship" relationship="viewControllers" id="PAR-xv-OQB"/>
-=======
-                        <segue destination="bk7-S9-8d3" kind="relationship" relationship="viewControllers" id="IZr-oH-JJZ"/>
-                        <segue destination="myG-dI-XsJ" kind="relationship" relationship="viewControllers" id="g9S-st-iV8"/>
->>>>>>> Stashed changes
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -1042,7 +1007,6 @@
     <resources>
         <image name="SorryNoRobotPhoto" width="3024" height="1596"/>
         <image name="firstPick" width="30" height="30"/>
-        <image name="iconCamera.png" width="23" height="18"/>
         <image name="options" width="30" height="30"/>
         <image name="secondPick" width="30" height="30"/>
     </resources>
