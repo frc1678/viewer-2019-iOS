@@ -25,7 +25,8 @@ public final class Match: NSObject, NSCoding {
     static let redActualScore = "redActualScore"
     static let blueDidClimbRP = "blueDidClimbRP"
     static let redDidRocketRP = "redDidRocketRP"
-    static let cargoShipPreload = "cargoShipPreload"
+    static let blueCargoShipPreload = "blueCargoShipPreload"
+    static let redCargoShipPreload = "redCargoShipPreload"
     static let noShowTeams = "noShowTeams"
     static let matchNumber = "matchNumber"
   }
@@ -44,7 +45,8 @@ public final class Match: NSObject, NSCoding {
   @objc public var redActualScore: Int = -1
   @objc public var blueDidClimbRP: Bool = false
   @objc public var redDidRocketRP: Bool = false
-    public var cargoShipPreload: [String:String]?
+    public var blueCargoShipPreload: [String:String]?
+    public var redCargoShipPreload: [String:String]?
     public var noShowTeams: [Int]?
     @objc public var matchNumber: Int = -1
 
@@ -74,7 +76,8 @@ public final class Match: NSObject, NSCoding {
     redActualScore = json[SerializationKeys.redActualScore].intValue
     blueDidClimbRP = json[SerializationKeys.blueDidClimbRP].boolValue
     redDidRocketRP = json[SerializationKeys.redDidRocketRP].boolValue
-    cargoShipPreload = json[SerializationKeys.cargoShipPreload].dictionaryObject as! [String : String]
+    blueCargoShipPreload = json[SerializationKeys.blueCargoShipPreload].dictionaryObject as! [String : String]
+    redCargoShipPreload = json[SerializationKeys.redCargoShipPreload].dictionaryObject as! [String: String]
     if let items = json[SerializationKeys.noShowTeams].array { noShowTeams = items.map { $0.intValue } }
     matchNumber = json[SerializationKeys.matchNumber].intValue
   }
@@ -97,7 +100,8 @@ public final class Match: NSObject, NSCoding {
     dictionary[SerializationKeys.redActualScore] = redActualScore
     dictionary[SerializationKeys.blueDidClimbRP] = blueDidClimbRP
     dictionary[SerializationKeys.redDidRocketRP] = redDidRocketRP
-    if let value = cargoShipPreload { dictionary[SerializationKeys.cargoShipPreload] = value }
+    if let value = blueCargoShipPreload { dictionary[SerializationKeys.blueCargoShipPreload] = value }
+    if let value = redCargoShipPreload { dictionary[SerializationKeys.redCargoShipPreload] = value}
     if let value = noShowTeams { dictionary[SerializationKeys.noShowTeams] = value }
     dictionary[SerializationKeys.matchNumber] = matchNumber
     return dictionary
@@ -118,7 +122,8 @@ public final class Match: NSObject, NSCoding {
     self.redActualScore = aDecoder.decodeInteger(forKey: SerializationKeys.redActualScore)
     self.blueDidClimbRP = aDecoder.decodeBool(forKey: SerializationKeys.blueDidClimbRP)
     self.redDidRocketRP = aDecoder.decodeBool(forKey: SerializationKeys.redDidRocketRP)
-    self.cargoShipPreload = aDecoder.decodeObject(forKey: SerializationKeys.cargoShipPreload) as? [String:String]
+    self.blueCargoShipPreload = aDecoder.decodeObject(forKey: SerializationKeys.blueCargoShipPreload) as? [String:String]
+    self.redCargoShipPreload = aDecoder.decodeObject(forKey: SerializationKeys.redCargoShipPreload) as? [String:String]
     self.noShowTeams = aDecoder.decodeObject(forKey: SerializationKeys.noShowTeams) as? [Int]
     self.matchNumber = aDecoder.decodeInteger(forKey: SerializationKeys.matchNumber)
   }
@@ -137,7 +142,8 @@ public final class Match: NSObject, NSCoding {
     aCoder.encode(redActualScore, forKey: SerializationKeys.redActualScore)
     aCoder.encode(blueDidClimbRP, forKey: SerializationKeys.blueDidClimbRP)
     aCoder.encode(redDidRocketRP, forKey: SerializationKeys.redDidRocketRP)
-    aCoder.encode(cargoShipPreload, forKey: SerializationKeys.cargoShipPreload)
+    aCoder.encode(blueCargoShipPreload, forKey: SerializationKeys.blueCargoShipPreload)
+    aCoder.encode(redCargoShipPreload, forKey: SerializationKeys.redCargoShipPreload)
     aCoder.encode(noShowTeams, forKey: SerializationKeys.noShowTeams)
     aCoder.encode(matchNumber, forKey: SerializationKeys.matchNumber)
   }
