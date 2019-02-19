@@ -604,7 +604,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
       "pitClimbType" : "Climb Type",
       "pitHasCamera" : "Has Camera",
       "pitHasVision" : "Has Vision",
-      "pitHasPid" : "Has PID",
       "pitHasGyro" : "Has Gyro",
       "pitHasEncoders" : "Has Encoders",
       "pitCanBuddyStartLevel2" : "Buddy Start L2",
