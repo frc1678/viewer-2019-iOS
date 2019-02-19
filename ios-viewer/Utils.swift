@@ -87,10 +87,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         let yesNoKeys : [String] = [
             "pitHasCamera",
             "pitHasVision",
-<<<<<<< HEAD
-=======
-            "pitHasPid",
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
             "pitHasGyro",
             "pitHasEncoders",
             "pitCanBuddyStartLevel2",
@@ -130,11 +126,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.totalSuperNotes",
             "calculatedData.actualSeed",
             "calculatedData.predictedRPs",
-<<<<<<< HEAD
             "calculatedData.redActualRPs",
             "calculatedData.blueActualRPs",
-=======
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
             "calculatedData.predictedSeed",
             "calculatedData.hasOrangeGroundIntake",
             "calculatedData.hasLemonGroundIntake",
@@ -142,11 +135,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.didPreloadLemon",
             "calculatedData.avgOrangesScored",
             "calculatedData.avgLemonsScored",
-<<<<<<< HEAD
             "calculatedData.avgOrangesSpilled",
-=======
-            "calculatedData.avgOrangeFouls",
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
             "calculatedData.avgLemonsSpilled",
             "calculatedData.lemonLoadSuccess",
             "calculatedData.orangeCycleAll",
@@ -178,11 +167,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgTimeImpaired",
             "calculatedData.avgTimeClimbing",
             "calculatedData.percentIncap",
-<<<<<<< HEAD
             "calculatedData.isIncapEntireMatch",
             "calculatedData.percentIncapEntireMatch",
-=======
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
             "calculatedData.percentImpaired",
             "calculatedData.percentNoShow",
             "calculatedData.predictedDedicatedLemonCycles",
@@ -194,11 +180,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.secondPickAbility",
             "calculatedData.lfmAvgOrangesScored",
             "calculatedData.lfmAvgLemonsScored",
-<<<<<<< HEAD
             "calculatedData.lfmAvgOrangesSpilled",
-=======
-            "calculatedData.lfmAvgOrangeFouls",
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
             "calculatedData.lfmAvgLemonsSpilled",
             "calculatedData.lfmLemonLoadSuccess",
             "calculatedData.lfmOrangeCycleAll",
@@ -230,19 +212,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.lfmAvgTimeImpaired",
             "calculatedData.lfmAvgTimeClimbing",
             "calculatedData.lfmPercentIncap",
-<<<<<<< HEAD
             "calculatedData.lfmPercentIncapEntireMatch",
-=======
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
             "calculatedData.lfmPercentImpaired",
             "calculatedData.lfmPercentNoShow",
             "calculatedData.sdAvgOrangesScored",
             "calculatedData.sdAvgLemonsScored",
-<<<<<<< HEAD
             "calculatedData.sdAvgOrangesSpilled",
-=======
-            "calculatedData.sdAvgOrangeFouls",
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
             "calculatedData.sdAvgLemonsSpilled",
             "calculatedData.sdLemonLoadSuccess",
             "calculatedData.sdOrangeCycleAll",
@@ -274,19 +249,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.sdAvgTimeImpaired",
             "calculatedData.sdAvgTimeClimbing",
             "calculatedData.sdPercentIncap",
-<<<<<<< HEAD
-            "calculatedData.sdPercentIncap",
-=======
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
+            "calculatedData.sdPercentIncapEntireMatch",
             "calculatedData.sdPercentImpaired",
             "calculatedData.sdPercentNoShow",
             "calculatedData.p75avgOrangesScored",
             "calculatedData.p75avgLemonsScored",
-<<<<<<< HEAD
             "calculatedData.p75avgOrangesSpilled",
-=======
-            "calculatedData.p75avgOrangeFouls",
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
             "calculatedData.p75avgLemonsSpilled",
             "calculatedData.p75lemonLoadSuccess",
             "calculatedData.p75orangeCycleAll",
@@ -318,10 +286,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.p75avgTimeImpaired",
             "calculatedData.p75avgTimeClimbing",
             "calculatedData.p75percentIncap",
-<<<<<<< HEAD
-            "calculatedData.p75percentIncap",
-=======
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
+            "calculatedData.p75percentIncapEntireMatch",
             "calculatedData.p75percentImpaired",
             "calculatedData.p75percentNoShow"
         ]
@@ -452,19 +417,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
              "calculatedData.hasLemonGroundIntake",
              "calculatedData.avgOrangesScored",
              "calculatedData.avgLemonsScored",
-<<<<<<< HEAD
              "calculatedData.avgOrangesSpilled",
              "calculatedData.avgLemonsSpilled",
              "calculatedData.avgGoodDecisions",
-             ]
-=======
              "calculatedData.avgOrangeFouls",
              "calculatedData.avgLemonsSpilled",
              "calculatedData.avgGoodDecisions",
              "calculatedData.avgBadDecisions"
         ]
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
-        
         /** Dict translating a key for a teamDetails datapoint to the key for the respective TIMD datapoint. Does not include "calculatedData." in the keys. */
         let teamDetailsToTIMD = [
             //status
@@ -473,11 +433,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             //scoring stuff
             "avgOrangesScored" : "calculatedData.orangesScored",
             "avgLemonsScored" : "calculatedData.lemonsScored",
-<<<<<<< HEAD
             "avgOrangesSpilled" : "calculatedData.orangesSpilled",
-=======
-            "avgOrangeFouls" : "calculatedData.orangeFouls",
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
             "avgLemonsSpilled" : "calculatedData.lemonsSpilled",
             "habLineSuccessL1" : "crossedHabLine",
             "habLineSuccessL2" : "crossedHabLine",
@@ -504,34 +460,21 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         /** Keys relating to the portions of the game that occur in the end (climbing, challenging, etc) */
         let endGame : [String] = [
-<<<<<<< HEAD
-             "avgTimeClimbing"
-=======
              "calculatedData.avgTimeClimbing"
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
         ]
         
         /** Keys relating to the status of a robot to be displayed on teamDetails */
         let statusKeys : [String] = [
-<<<<<<< HEAD
-<<<<<<< HEAD
              "avgTimeIncap",
              "percentIncap",
              "percentImpaired",
              "percentNoShow",
-=======
              "calculatedData.avgTimeIncap",
              "calculatedData.percentIncap",
              "calculatedData.percentIncapEntireMatch",
              "calculatedData.percentImpaired",
-             "calculatedData.percentNoShow"
->>>>>>> adcde75... Fix datapoint display issues
-=======
-             "calculatedData.avgTimeIncap",
-             "calculatedData.percentIncap",
+             "calculatedData.percentNoShow",
              "calculatedData.percentImpaired",
-             "calculatedData.percentNoShow"
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
         ]
         
         /** Keys relating to the data the pit scout collects to be displayed on teamDetails */
@@ -543,15 +486,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitWheelDiameter",
             "pitHasCamera",
              "pitWeight",
-<<<<<<< HEAD
              "pitWheelDiameter",
              "pitDrivetrain",
              "pitProgrammingLanguage",
              "pitClimbType",
              "pitHasCamera",
-=======
-             "pitClimbType",
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
              "pitHasVision",
              "pitHasGyro",
              "pitHasEncoders",
@@ -654,8 +593,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     
     /** A dictionary with datapoints as keys and Human Readable versions as values */
     static let humanReadableNames = [
-<<<<<<< HEAD
-<<<<<<< HEAD
       "pitWidth" : "Robot Width",
       "pitLength" : "Robot Length",
       "pitMinHeight" : "Min. Height",
@@ -914,9 +851,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
       "calculatedData.redChanceWin" : "Red Win Chance",
       "calculatedData.bluePredictedClimbPoints" : "Blue Predicted Climb Points",
       "calculatedData.redPredictedClimbPoints" : "Red Predicted Climb Points",
-=======
-=======
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
         "pitWidth" : "Robot Width",
         "pitLength" : "Robot Length",
         "pitMinHeight" : "Min. Height",
@@ -928,23 +862,13 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "pitClimbType" : "Climb Type",
         "pitHasCamera" : "Has Camera",
         "pitHasVision" : "Has Vision",
-<<<<<<< HEAD
-=======
-        "pitHasPid" : "Has PID",
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
         "pitHasGyro" : "Has Gyro",
         "pitHasEncoders" : "Has Encoders",
         "pitCanBuddyStartLevel2" : "Buddy Start L2",
         "pitSandstormNavigationType" : "Sandstorm Nav.",
         "pitHasOrangeShooter" : "Cargo Shooter",
-<<<<<<< HEAD
         "teamNumber" : "Team Number",
         "name" : "Name",
-=======
-        "number" : "Number",
-        "name" : "Name",
-        "actualRPs" : "Avg. RPs",
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
         "matchesPlayed" : "Matches Played",
         "matchDatas" : "Matches",
         "pitSEALsNotes" : "SEALs Notes",
@@ -954,11 +878,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.totalSuperNotes" : "All Super Notes",
         "calculatedData.actualSeed" : "Seed",
         "calculatedData.predictedRPs" : "Predicted RPs",
-<<<<<<< HEAD
         "calculatedData.redActualRPs" : "Red Avg. RPs",
         "calculatedData.blueActualRPs" : "Blue Avg. RPs",
-=======
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
         "calculatedData.predictedSeed" : "Predicted Seed",
         "calculatedData.hasOrangeGroundIntake" : "Cargo Ground Intake",
         "calculatedData.hasLemonGroundIntake" : "Panel Ground Intake",
@@ -966,11 +887,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.didPreloadLemon" : "Has Preloaded Panel",
         "calculatedData.avgOrangesScored" : "Avg. Cargo Scored",
         "calculatedData.avgLemonsScored" : "Avg. Panels Scored",
-<<<<<<< HEAD
         "calculatedData.avgOrangesSpilled" : "Avg. Cargo Spills",
-=======
-        "calculatedData.avgOrangeFouls" : "Avg. Cargo Fouls",
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
         "calculatedData.avgLemonsSpilled" : "Avg. Panel Spills",
         "calculatedData.lemonLoadSuccess" : "Panel Loading Success",
         "calculatedData.orangeCycleAll" : "Cargo Cycle Times",
@@ -1002,10 +919,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.avgTimeImpaired" : "Avg. Time Impaired",
         "calculatedData.avgTimeClimbing" : "Avg. Time Climbing",
         "calculatedData.percentIncap" : "Percent Incap",
-<<<<<<< HEAD
         "calculatedData.percentIncap" : "Percent of Matches Spent Incap",
-=======
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
         "calculatedData.percentImpaired" : "Percent Impaired",
         "calculatedData.percentNoShow" : "Percent No Show",
         "calculatedData.predictedDedicatedLemonCycles" : "Predicted Panel Cycle Time",
@@ -1017,11 +931,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.secondPickAbility" : "Second Pick Ability",
         "calculatedData.lfmAvgOrangesScored" : "LFM Avg. Cargo Scored",
         "calculatedData.lfmAvgLemonsScored" : "LFM Avg. Panels Scored",
-<<<<<<< HEAD
         "calculatedData.lfmAvgOrangesSpilled" : "LFM Avg. Cargo Spills",
-=======
-        "calculatedData.lfmAvgOrangeFouls" : "LFM Avg. Cargo Fouls",
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
         "calculatedData.lfmAvgLemonsSpilled" : "LFM Avg. Panel Spills",
         "calculatedData.lfmLemonLoadSuccess" : "LFM Panel Loading Success",
         "calculatedData.lfmOrangeCycleAll" : "LFM Cargo Cycle Times",
@@ -1053,19 +963,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.lfmAvgTimeImpaired" : "LFM Avg. Time Impaired",
         "calculatedData.lfmAvgTimeClimbing" : "LFM Avg. Time Climbing",
         "calculatedData.lfmPercentIncap" : "LFM Percent Incap",
-<<<<<<< HEAD
         "calculatedData.lfmPercentIncapEntireMatch" : "LFM Percent of Matches Spent Incap",
-=======
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
         "calculatedData.lfmPercentImpaired" : "LFM Percent Impaired",
         "calculatedData.lfmPercentNoShow" : "LFM Percent No Show",
         "calculatedData.sdAvgOrangesScored" : "σ Cargo Scored",
         "calculatedData.sdAvgLemonsScored" : "σ Panels Scored",
-<<<<<<< HEAD
         "calculatedData.sdAvgOrangesSpilled" : "σ Cargo Spilled",
-=======
-        "calculatedData.sdAvgOrangeFouls" : "σ Cargo Fouls",
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
         "calculatedData.sdAvgLemonsSpilled" : "σ Lemon Spills",
         "calculatedData.sdLemonLoadSuccess" : "σ Panel Loading Success",
         "calculatedData.sdOrangeCycleAll" : "σ Cargo Cycle Times",
@@ -1097,19 +1000,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.sdAvgTimeImpaired" : "σ Time Impaired",
         "calculatedData.sdAvgTimeClimbing" : "σ Time Climbing",
         "calculatedData.sdPercentIncap" : "σ Percent Incap",
-<<<<<<< HEAD
         "calculatedData.sdPercentIncap" : "σ Percent of Matches Spent Incap",
-=======
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
         "calculatedData.sdPercentImpaired" : "σ Percent Impaired",
         "calculatedData.sdPercentNoShow" : "σ Percent No Show",
         "calculatedData.p75avgOrangesScored" : "75% Avg. Cargo Scored",
         "calculatedData.p75avgLemonsScored" : "75% Avg. Panels Scored",
-<<<<<<< HEAD
         "calculatedData.p75avgOrangesSpilled" : "75% Avg. Cargo Spills",
-=======
-        "calculatedData.p75avgOrangeFouls" : "75% Avg. Cargo Fouls",
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
         "calculatedData.p75avgLemonsSpilled" : "75% Avg. Panel Spills",
         "calculatedData.p75lemonLoadSuccess" : "75% Panel Loading Success",
         "calculatedData.p75orangeCycleAll" : "75% Cargo Cycle Times",
@@ -1141,10 +1037,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.p75avgTimeImpaired" : "75% Avg. Time Impaired",
         "calculatedData.p75avgTimeClimbing" : "75% Avg. Time Climbing",
         "calculatedData.p75percentIncap" : "75% Percent Incap",
-<<<<<<< HEAD
         "calculatedData.p75percentIncap" : "75% Percent of Matches Spent Incap",
-=======
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
         "calculatedData.p75percentImpaired" : "75% Percent Impaired",
         "calculatedData.p75percentNoShow" : "75% Percent No Show",
         "timeline" : "Timeline",
@@ -1172,21 +1065,13 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "isNoShow" : "No Show",
         "calculatedData.orangesScored" : "Cargo Scored",
         "calculatedData.lemonsScored" : "Panels Scored",
-<<<<<<< HEAD
         "calculatedData.orangesSpilled" : "Cargo Spills",
-=======
-        "calculatedData.orangeFouls" : "Cargo Fouls",
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
         "calculatedData.lemonsSpilled" : "Panel Spills",
         "calculatedData.timeIncap" : "Time Incap",
         "calculatedData.timeImpaired" : "Time Impaired",
         "calculatedData.timeClimbing" : "Time Climbing",
-<<<<<<< HEAD
         "redCargoShipPreload" : "Red Cargo Ship Preload",
         "blueCargoShipPreload" : "Blue Cargo Ship Preload",
-=======
-        "cargoShipPreload" : "Cargo Ship Preload",
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
         "leftNear" : "Left-Near",
         "leftMid" : "Left-Mid",
         "leftFar" : "Left-Right",
@@ -1196,12 +1081,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "matchNumber" : "Match Number",
         "blueTeams" : "Blue Teams",
         "redTeams" : "Red Teams",
-<<<<<<< HEAD
         "redNoShowTeams" : "Red No Show Teams",
         "blueNoShowTeams" : "Blue No Show Teams",
-=======
-        "noShowTeams" : "No Show Teams",
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
         "blueActualScore" : "Blue Score",
         "redActualScore" : "Red Score",
         "blueFoulPoints" : "Blue Fouls",
@@ -1222,10 +1103,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.redChanceWin" : "Red Win Chance",
         "calculatedData.bluePredictedClimbPoints" : "Blue Predicted Climb Points",
         "calculatedData.redPredictedClimbPoints" : "Red Predicted Climb Points"
-<<<<<<< HEAD
->>>>>>> adcde75... Fix datapoint display issues
-=======
->>>>>>> c77c2ef... Schema implementation and fix long text (#5)
     ]
     
     /**
