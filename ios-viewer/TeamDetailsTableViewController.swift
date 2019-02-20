@@ -380,6 +380,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 unrankedCell.titleLabel.text = Utils.humanReadableNames[dataKey]
                 
                 unrankedCell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+
+                if dataKey == "TeamInMatchDatas"{
+                    unrankedCell.titleLabel.text = "TIMDs"
+                }
                 
                 if dataKey == "matchDatas" {
                     let matchesUntilNextMatch : String = firebaseFetcher?.matchesUntilTeamNextMatch((team?.number)!) ?? "NA"
