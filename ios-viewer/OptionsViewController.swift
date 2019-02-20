@@ -30,6 +30,7 @@ class OptionsViewController: UIViewController, UITableViewDelegate {
         }
         if let textSize = firebaseFetcher?.currentMatchManager.textSize {
             self.textSizeSlider.value = Float(textSize)
+            textSizeSlider.minimumValue = 15;
         }
     }
     

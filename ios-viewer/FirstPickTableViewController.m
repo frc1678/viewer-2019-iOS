@@ -69,9 +69,12 @@ FIRDatabaseReference *firebase;
     Team *team = data;
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
     multiCell.showsReorderControl = YES;
-    
     multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)[self.firebaseFetcher rankOfTeam:team withCharacteristic:@"calculatedData.firstPickAbility"]];
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
+    // text size for first pick (rankLabel, teamLabel, and scoreLabel)
+    multiCell.rankLabel.font = [multiCell.rankLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
+    multiCell.teamLabel.font = [multiCell.teamLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
+    multiCell.scoreLabel.font = [multiCell.scoreLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     if(team.calculatedData.firstPickAbility != -1.0) {
         multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
                                      [Utils roundValue:team.calculatedData.firstPickAbility toDecimalPlaces:2]];
