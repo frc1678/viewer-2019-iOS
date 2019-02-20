@@ -100,13 +100,19 @@
     MatchTableViewCell *matchCell = (MatchTableViewCell *)cell;
     //set matchNum label
     matchCell.matchLabel.attributedText = [self textForScheduleLabelForType:0 forString:[NSString stringWithFormat:@"%ld", (long)match.matchNumber]];
-    
+    matchCell.matchLabel.font = [matchCell.matchLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     matchCell.redOneLabel.font = [matchCell.redOneLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     matchCell.redTwoLabel.font = [matchCell.redTwoLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     matchCell.redThreeLabel.font = [matchCell.redThreeLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     matchCell.blueOneLabel.font = [matchCell.blueOneLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     matchCell.blueTwoLabel.font = [matchCell.blueTwoLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     matchCell.blueThreeLabel.font = [matchCell.blueThreeLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
+    // predicted scores
+     matchCell.redScoreLabel.font = [matchCell.redScoreLabel.font                          fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
+    matchCell.blueScoreLabel.font = [matchCell.blueScoreLabel.font                          fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
+    // actual scores
+    matchCell.redScoreLabel.font = [matchCell.redScoreLabel.font                          fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
+    matchCell.blueScoreLabel.font = [matchCell.blueScoreLabel.font                          fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     
     // = (2 * self.firebaseFetcher.currentMatchManager.textSize) + 12;
     
@@ -271,10 +277,10 @@
         SlackTableViewController *dest = (SlackTableViewController *)segue.destinationViewController;
         //init dest
     } else {
-    MatchTableViewCell *cell = sender;
-    MatchDetailsViewController *detailController = (MatchDetailsViewController *)segue.destinationViewController;
-    detailController.match = [self.firebaseFetcher.currentMatchManager.matches objectAtIndex:cell.matchLabel.text.integerValue-1];
-    detailController.matchNumber = cell.matchLabel.text.integerValue;
+        MatchTableViewCell *cell = sender;
+        MatchDetailsViewController *detailController = (MatchDetailsViewController* )segue.destinationViewController;
+        detailController.match = [self.firebaseFetcher.currentMatchManager.matches objectAtIndex:cell.matchLabel.text.integerValue-1];
+        detailController.matchNumber = cell.matchLabel.text.integerValue;
     }
 }
 

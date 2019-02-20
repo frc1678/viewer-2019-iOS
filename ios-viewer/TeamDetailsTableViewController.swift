@@ -15,7 +15,6 @@ import Haneke
 class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, UIDocumentInteractionControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate {
     
     var firebaseFetcher = AppDelegate.getAppDelegate().firebaseFetcher
-    
     //setup visuals
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
@@ -348,6 +347,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         
                         if Utils.teamDetailsKeys.percentageValues.contains(dataKey) {
                             //value needs to be displayed as a percentage
+                             var size: CGFloat = CGFloat((firebaseFetcher?.currentMatchManager.textSize)!)
+                            multiCell.scoreLabel.font = multiCell.scoreLabel.font.withSize(size)
                             multiCell.scoreLabel!.text = "\(percentageValueOf(dataPoint!))"
                         } else {
                             if dataPoint as? String != "" {

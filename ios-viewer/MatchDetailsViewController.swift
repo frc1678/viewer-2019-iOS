@@ -67,7 +67,6 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         if indexPath.row != tableKeys.count {
             cell.datapointLabel.text = Utils.humanReadableNames[tableKeys[indexPath.row]]
         }
-        
         //setup the label stuff
         var size: CGFloat = CGFloat((firebaseFetcher?.currentMatchManager.textSize)!)
         var numLines = 1
@@ -144,7 +143,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         }
         return tableKeys.count
     }
-    
+    //boi?
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (firebaseFetcher?.currentMatchManager.matchDetailsScroll ?? false) {
             let boi = CGFloat(Double((firebaseFetcher?.currentMatchManager.textSize)!) * (Double((firebaseFetcher?.currentMatchManager.matchDetailsDatapoints[indexPath.row].count)!)/10.0))
