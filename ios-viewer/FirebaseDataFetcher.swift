@@ -139,11 +139,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 self.firstPicklist = firstPicks
             } else {
                 for i in self.getFirstPickList() {
-                    self.firstPicklist.append(i.number)
+                    self.firstPicklist.append(i.teamNumber)
                 }
             }
             for i in self.getOverallSecondPickList() {
-                self.secondPicklist.append(i.number)
+                self.secondPicklist.append(i.teamNumber)
             }
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pickBoi"), object:self)
         })
@@ -276,7 +276,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     //makes a team
                     let team = self.makeTeamFromSnapshot(snapshot)
                     //if the team is a real team
-                    if team.number != -1 && (self.currentMatchManager.teams.filter { $0.number == team.number }).count == 0 {
+                    if team.teamNumber != -1 && (self.currentMatchManager.teams.filter { $0.teamNumber == team.teamNumber }).count == 0 {
                         //update cache
                         self.updateCacheIfNeeded(snapshot, team: team)
                         DispatchQueue.main.async {
@@ -296,13 +296,13 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     //make a team out of the snapshot
                     let team = self.makeTeamFromSnapshot(snapshot)
                     //if the team's real
-                    if team.number != -1 {
+                    if team.teamNumber != -1 {
                         //update cache (images)
                         self.updateCacheIfNeeded(snapshot, team: team)
                         DispatchQueue.main.async {
                             //filter the teams to find the changed team
                             let te = self.currentMatchManager.teams.filter({ (t) -> Bool in
-                                if t.number == team.number { return true }
+                                if t.teamNumber == team.teamNumber { return true }
                                 return false
                             })
                             if te.count > 0 {
@@ -372,8 +372,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         - parameter team: Team for which TIMDs are to be retrieved
     */
     func getTIMDataForTeam(_ team: Team) -> [TeamInMatchData] {
-        print("All TIMDs for our team: \(self.teamInMatches.filter { $0.teamNumber == team.number })")
-        return self.teamInMatches.filter { $0.teamNumber == team.number }
+        print("All TIMDs for our team: \(self.teamInMatches.filter { $0.teamNumber == team.teamNumber })")
+        return self.teamInMatches.filter { $0.teamNumber == team.teamNumber }
     }
     
     /**
@@ -403,7 +403,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     */
     @objc func getTeam(_ teamNum: Int) -> Team? {
         //filter to end up with only the team(s) with the given number
-        let myTeams = self.currentMatchManager.teams.filter { $0.number == teamNum }
+        let myTeams = self.currentMatchManager.teams.filter { $0.teamNumber == teamNum }
         if myTeams.count == 1 { return myTeams[0] }
         else if myTeams.count > 1 {
             print("More than 1 team with number \(teamNum)")
@@ -569,7 +569,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             //increase the counter
             counter += 1
             //if team is found
-            if loopTeam.number == team.number {
+            if loopTeam.teamNumber == team.teamNumber {
                 //return rank (how many teams it went thru before it got this team)
                 return counter
             }
@@ -584,7 +584,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         
         for loopTeam in sortedTeams {
             counter += 1
-            if loopTeam.number == team.number {
+            if loopTeam.teamNumber == team.teamNumber {
                 return counter
             }
         }
@@ -719,7 +719,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         var filteredTeams = [Team]()
         for team in self.currentMatchManager.teams {
             //if team number contains search field
-            if String(describing: team.number).range(of: searchString) != nil {
+            if String(describing: team.teamNumber).range(of: searchString) != nil {
                 filteredTeams.append(team)
             }
         }
@@ -787,7 +787,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
      - returns: The second value in the tuple is the alternate value mapping. E.g. Yes and No instead of 1 and 0
      */
     func getMatchDataValuesForTeamForPath(_ path: String, forTeam: Team) -> ([Float], [CGFloat : String]?) {
-        let matches = getMatchesForTeam(forTeam.number)
+        let matches = getMatchesForTeam(forTeam.teamNumber)
         var valueArray = [Float]()
         var altValueMapping : [CGFloat : String]?
         
@@ -795,7 +795,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             let value : AnyObject?
             var newPath = path
             if path == "calculatedData.predictedRPs" {
-                newPath = predictedRPsKeyForTeamNum(forTeam.number, matchNum: match.matchNumber)
+                newPath = predictedRPsKeyForTeamNum(forTeam.teamNumber, matchNum: match.matchNumber)
             }
             value = match.value(forKeyPath: newPath) as AnyObject?
             
