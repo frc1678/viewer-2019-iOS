@@ -120,7 +120,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitCanBuddyStartLevel2",
             "pitSandstormNavigationType",
             "pitHasOrangeShooter",
-            "number",
+            "teamNumber",
             "name",
             "matchesPlayed",
             "calculatedData.totalSuperNotes",
