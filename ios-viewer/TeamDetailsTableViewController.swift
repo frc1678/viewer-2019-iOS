@@ -28,7 +28,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     @objc var team: Team? = nil {
         didSet {
-            num = self.team?.number
+            num = self.team?.teamNumber
             updateTitleAndTopInfo()
             reload()
         }
@@ -42,7 +42,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     func reload() {
         if team != nil {
-            if team?.number != nil {
+            if team?.teamNumber != nil {
                 tableView?.reloadData()
                 self.updateTitleAndTopInfo()
                 
@@ -232,7 +232,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         //if team exists
         if team != nil {
             //if team is not real (team number)
-            if team!.number == -1 {
+            if team!.teamNumber == -1 {
                 //no team number
                 cell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailStringCell", for: indexPath)
                 cell.textLabel?.text = "No team yet..."
@@ -387,10 +387,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 }
                 
                 if dataKey == "matchDatas" {
-                    let matchesUntilNextMatch : String = firebaseFetcher?.matchesUntilTeamNextMatch((team?.number)!) ?? "NA"
+                    let matchesUntilNextMatch : String = firebaseFetcher?.matchesUntilTeamNextMatch((team?.teamNumber)!) ?? "NA"
                     
                     //label: "Matches - #  Remaining
-                    unrankedCell.titleLabel.text = (unrankedCell.titleLabel.text)! + ": \(Utils.sp(thing: firebaseFetcher?.remainingMatchesForTeam((team?.number)!))) Left - Next in \(matchesUntilNextMatch)"
+                    unrankedCell.titleLabel.text = (unrankedCell.titleLabel.text)! + ": \(Utils.sp(thing: firebaseFetcher?.remainingMatchesForTeam((team?.teamNumber)!))) Left - Next in \(matchesUntilNextMatch)"
                 }
                 cell = unrankedCell
             }
@@ -435,7 +435,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if self.teamNameLabel.text == "" || self.teamNameLabel.text == "Unknown name..." {
                 let numText: String
                 let nameText: String
-                switch (team?.number, team?.name) {
+                switch (team?.teamNumber, team?.name) {
                 case (.some(let num), .some(let name)):
                     title = "\(num) - \(name)"
                     numText = "\(num)"
@@ -524,7 +524,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             let matchesForTeamController = segue.destination as! SpecificTeamScheduleTableViewController
             
             //if team exists
-            if let teamNum = team?.number {
+            if let teamNum = team?.teamNumber {
                 //set team number
                 matchesForTeamController.teamNumber = teamNum
             }
@@ -533,7 +533,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             let TIMDScheduleForTeamController = segue.destination as! TIMDScheduleViewController
             
             //if team exists
-            if let teamNum = team?.number {
+            if let teamNum = team?.teamNumber {
                 //set team number
                 TIMDScheduleForTeamController.teamNumber = teamNum
             }
@@ -541,7 +541,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             //this is called for every timd graph, not just ctimds
             let graphViewController = segue.destination as! GraphViewController
             //if team number is not nil
-            if let teamNum = team?.number {
+            if let teamNum = team?.teamNumber {
                 //get indexpath
                 let indexPath = sender as! IndexPath
                 //if the cell exists
@@ -588,7 +588,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     //set left title
                     graphViewController.subDisplayLeftTitle = "Match: "
                     //set values
-                    graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher!.matchNumbersForTeamNumber((team?.number)!) as [NSNumber]) as [AnyObject]
+                    graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher!.matchNumbersForTeamNumber((team?.teamNumber)!) as [NSNumber]) as [AnyObject]
                     //iterate thru the values for the subvalues and remove empties
                     for i in nilValueIndecies.reversed() {
                         graphViewController.subValuesLeft.remove(at: i)
@@ -609,7 +609,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         else if segue.identifier == "TGraph" {
             let graphViewController = segue.destination as! GraphViewController
             
-            if (team?.number) != nil {
+            if (team?.teamNumber) != nil {
                 let indexPath = sender as! IndexPath
                 let cell = tableView.cellForRow(at: indexPath) as! MultiCellTableViewCell
                 graphViewController.graphTitle = "\(cell.teamLabel!.text!)"
@@ -682,7 +682,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     @objc func reloadTableView(_ note: Notification) {
         if note.name.rawValue == "updateLeftTable" {
             if let t = note.object as? Team {
-                if t.number == team?.number {
+                if t.teamNumber == team?.teamNumber {
                     self.team = t
                     self.reload()
                 }
