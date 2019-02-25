@@ -28,7 +28,7 @@
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
     //get rank of team when the highest number is on the top
     multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)([self.firebaseFetcher reverseRankOfTeam:team withCharacteristic:@"calculatedData.predictedSeed"])];
-    multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
+    multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.teamNumber];
     // text size for predicted seed (rankLabel, teamLabel, and scoreLabel)
     multiCell.rankLabel.font = [multiCell.rankLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     multiCell.teamLabel.font = [multiCell.teamLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];

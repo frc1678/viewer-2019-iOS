@@ -633,7 +633,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     dictionary[SerializationKeys.p75avgOrangesScored] = p75avgOrangesScored
     dictionary[SerializationKeys.sdAvgOrangesScored] = sdAvgOrangesScored
     dictionary[SerializationKeys.lfmOrangeSuccessL1] = lfmOrangeSuccessL1
-    //dictionary[SerializationKeys.orangesSpilled] = orangesSpilled
+    dictionary[SerializationKeys.avgOrangesSpilled] = avgOrangesSpilled
     dictionary[SerializationKeys.sdAvgOrangesSpilled] = sdAvgOrangesSpilled
     dictionary[SerializationKeys.lemonLoadSuccess] = lemonLoadSuccess
     dictionary[SerializationKeys.p75orangeCycleL2] = p75orangeCycleL2
@@ -736,7 +736,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     self.lfmAvgTimeClimbing = aDecoder.decodeFloat(forKey: SerializationKeys.lfmAvgTimeClimbing)
     self.p75habLineSuccessL1 = aDecoder.decodeInteger(forKey: SerializationKeys.p75habLineSuccessL1)
     self.lemonSuccessUndefended = aDecoder.decodeInteger(forKey: SerializationKeys.lemonSuccessUndefended)
-    //self.p75orangesSpilled = aDecoder.decodeFloat(forKey: SerializationKeys.p75orangesSpilled)
+    self.p75avgOrangesSpilled = aDecoder.decodeFloat(forKey: SerializationKeys.p75avgOrangesSpilled)
     self.orangeSuccessL2 = aDecoder.decodeInteger(forKey: SerializationKeys.orangeSuccessL2)
     self.p75orangeSuccessAll = aDecoder.decodeInteger(forKey: SerializationKeys.p75orangeSuccessAll)
     self.p75orangeCycleAll = aDecoder.decodeFloat(forKey: SerializationKeys.p75orangeCycleAll)
@@ -963,7 +963,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     aCoder.encode(p75avgOrangesScored, forKey: SerializationKeys.p75avgOrangesScored)
     aCoder.encode(sdAvgOrangesScored, forKey: SerializationKeys.sdAvgOrangesScored)
     aCoder.encode(lfmOrangeSuccessL1, forKey: SerializationKeys.lfmOrangeSuccessL1)
-    //aCoder.encode(orangesSpilled, forKey: SerializationKeys.orangesSpilled)
+    aCoder.encode(avgOrangesSpilled, forKey: SerializationKeys.avgOrangesSpilled)
     aCoder.encode(sdAvgOrangesSpilled, forKey: SerializationKeys.sdAvgOrangesSpilled)
     aCoder.encode(lemonLoadSuccess, forKey: SerializationKeys.lemonLoadSuccess)
     aCoder.encode(p75orangeCycleL2, forKey: SerializationKeys.p75orangeCycleL2)
