@@ -75,6 +75,7 @@ FIRDatabaseReference *firebase;
     multiCell.rankLabel.font = [multiCell.rankLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     multiCell.teamLabel.font = [multiCell.teamLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     multiCell.scoreLabel.font = [multiCell.scoreLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
+
     if(team.calculatedData.firstPickAbility != -1.0) {
         multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
                                      [Utils roundValue:team.calculatedData.firstPickAbility toDecimalPlaces:2]];
