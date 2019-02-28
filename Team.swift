@@ -95,7 +95,7 @@ public final class Team: NSObject, NSCoding {
     pitSandstormNavigationType = json[SerializationKeys.pitSandstormNavigationType].string
     pitMaxHeight = json[SerializationKeys.pitMaxHeight].int
     pitWheelDiameter = json[SerializationKeys.pitWheelDiameter].string
-    pitClimbType = (json[SerializationKeys.pitClimbType].dictionaryObject as! [String:Int])
+    pitClimbType = (json[SerializationKeys.pitClimbType].dictionaryObject as? [String:Int])
     pitSEALsNotes = json[SerializationKeys.pitSEALsNotes].string
     calculatedData = CalculatedTeamData(json: json[SerializationKeys.calculatedData])
   }

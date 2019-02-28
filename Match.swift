@@ -76,8 +76,8 @@ public final class Match: NSObject, NSCoding {
     redActualScore = json[SerializationKeys.redActualScore].intValue
     blueDidClimbRP = json[SerializationKeys.blueDidClimbRP].boolValue
     redDidRocketRP = json[SerializationKeys.redDidRocketRP].boolValue
-    blueCargoShipPreloads = json[SerializationKeys.blueCargoShipPreloads].dictionaryObject as! [String : String]
-    redCargoShipPreloads = json[SerializationKeys.redCargoShipPreloads].dictionaryObject as! [String: String]
+    blueCargoShipPreloads = json[SerializationKeys.blueCargoShipPreloads].dictionaryObject as? [String : String]
+    redCargoShipPreloads = json[SerializationKeys.redCargoShipPreloads].dictionaryObject as? [String: String]
     if let items = json[SerializationKeys.noShowTeams].array { noShowTeams = items.map { $0.intValue } }
     matchNumber = json[SerializationKeys.matchNumber].intValue
   }
