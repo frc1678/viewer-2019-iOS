@@ -798,7 +798,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     self.p75avgOrangesScored = aDecoder.decodeFloat(forKey: SerializationKeys.p75avgOrangesScored)
     self.sdAvgOrangesScored = aDecoder.decodeFloat(forKey: SerializationKeys.sdAvgOrangesScored)
     self.lfmOrangeSuccessL1 = aDecoder.decodeInteger(forKey: SerializationKeys.lfmOrangeSuccessL1)
-    //self.avgOrangesSpilled = aDecoder.decodeFloat(forKey: SerializationKeys.orangesSpilled)
+    self.avgOrangesSpilled = aDecoder.decodeFloat(forKey: SerializationKeys.avgOrangesSpilled)
     self.sdAvgOrangesSpilled = aDecoder.decodeFloat(forKey: SerializationKeys.sdAvgOrangesSpilled)
     self.lemonLoadSuccess = aDecoder.decodeInteger(forKey: SerializationKeys.lemonLoadSuccess)
     self.p75orangeCycleL2 = aDecoder.decodeFloat(forKey: SerializationKeys.p75orangeCycleL2)
