@@ -13,13 +13,14 @@ public final class Team: NSObject, NSCoding {
   // MARK: Declaration for string constants to be used to decode and also serialize.
   private struct SerializationKeys {
     static let name = "name"
+    static let redActualRPs = "redActualRPs"
+    static let blueActualRPs = "blueActualRPs"
     static let actualRPs = "actualRPs"
     static let pitMinHeight = "pitMinHeight"
     static let pitHasVision = "pitHasVision"
     static let teamNumber = "teamNumber"
     static let pitHasCamera = "pitHasCamera"
     static let pitHasGyro = "pitHasGyro"
-    static let pitHasPid = "pitHasPid"
     static let pitCanBuddyStartLevel2 = "pitCanBuddyStartLevel2"
     static let pitWidth = "pitWidth"
     static let pitWeight = "pitWeight"
@@ -39,13 +40,14 @@ public final class Team: NSObject, NSCoding {
 
   // MARK: Properties
   public var name: String?
+  @objc public var redActualRPs: Int = -1
+  @objc public var blueActualRPs: Int = -1
   @objc public var actualRPs: Int = -1
   public var pitMinHeight: Int?
   public var pitHasVision: Bool? = false
   @objc public var teamNumber: Int = -1
   public var pitHasCamera: Bool? = false
   public var pitHasGyro: Bool? = false
-  public var pitHasPid: Bool? = false
   public var pitCanBuddyStartLevel2: Bool? = false
   public var pitWidth: Int?
   public var pitWeight: Int?
@@ -76,13 +78,14 @@ public final class Team: NSObject, NSCoding {
   /// - parameter json: JSON object from SwiftyJSON.
   public required init(json: JSON) {
     name = json[SerializationKeys.name].string
+    redActualRPs = json[SerializationKeys.redActualRPs].intValue
+    blueActualRPs = json[SerializationKeys.blueActualRPs].intValue
     actualRPs = json[SerializationKeys.actualRPs].intValue
     pitMinHeight = json[SerializationKeys.pitMinHeight].int
     pitHasVision = json[SerializationKeys.pitHasVision].boolValue
     teamNumber = json[SerializationKeys.teamNumber].intValue
     pitHasCamera = json[SerializationKeys.pitHasCamera].boolValue
     pitHasGyro = json[SerializationKeys.pitHasGyro].boolValue
-    pitHasPid = json[SerializationKeys.pitHasPid].boolValue
     pitCanBuddyStartLevel2 = json[SerializationKeys.pitCanBuddyStartLevel2].boolValue
     pitWidth = json[SerializationKeys.pitWidth].int
     pitWeight = json[SerializationKeys.pitWeight].int
@@ -106,13 +109,14 @@ public final class Team: NSObject, NSCoding {
   public func dictionaryRepresentation() -> [String: Any] {
     var dictionary: [String: Any] = [:]
     if let value = name { dictionary[SerializationKeys.name] = value }
+    dictionary[SerializationKeys.redActualRPs] = redActualRPs
+    dictionary[SerializationKeys.blueActualRPs] = blueActualRPs
     dictionary[SerializationKeys.actualRPs] = actualRPs
     if let value = pitMinHeight { dictionary[SerializationKeys.pitMinHeight] = value }
     dictionary[SerializationKeys.pitHasVision] = pitHasVision
     dictionary[SerializationKeys.teamNumber] = teamNumber
     dictionary[SerializationKeys.pitHasCamera] = pitHasCamera
     dictionary[SerializationKeys.pitHasGyro] = pitHasGyro
-    dictionary[SerializationKeys.pitHasPid] = pitHasPid
     dictionary[SerializationKeys.pitCanBuddyStartLevel2] = pitCanBuddyStartLevel2
     if let value = pitWidth { dictionary[SerializationKeys.pitWidth] = value }
     if let value = pitWeight { dictionary[SerializationKeys.pitWeight] = value }
@@ -134,13 +138,14 @@ public final class Team: NSObject, NSCoding {
   // MARK: NSCoding Protocol
   required public init(coder aDecoder: NSCoder) {
     self.name = aDecoder.decodeObject(forKey: SerializationKeys.name) as? String
+    self.redActualRPs = aDecoder.decodeInteger(forKey: SerializationKeys.redActualRPs)
+    self.blueActualRPs = aDecoder.decodeInteger(forKey: SerializationKeys.blueActualRPs)
     self.actualRPs = aDecoder.decodeInteger(forKey: SerializationKeys.actualRPs)
     self.pitMinHeight = aDecoder.decodeObject(forKey: SerializationKeys.pitMinHeight) as? Int
     self.pitHasVision = aDecoder.decodeObject(forKey: SerializationKeys.pitHasVision) as? Bool
     self.teamNumber = aDecoder.decodeInteger(forKey: SerializationKeys.teamNumber)
     self.pitHasCamera = aDecoder.decodeObject(forKey: SerializationKeys.pitHasCamera) as? Bool
     self.pitHasGyro = aDecoder.decodeObject(forKey: SerializationKeys.pitHasGyro) as? Bool
-    self.pitHasPid = aDecoder.decodeObject(forKey: SerializationKeys.pitHasPid) as? Bool
     self.pitCanBuddyStartLevel2 = aDecoder.decodeObject(forKey: SerializationKeys.pitCanBuddyStartLevel2) as? Bool
     self.pitWidth = aDecoder.decodeObject(forKey: SerializationKeys.pitWidth) as? Int
     self.pitWeight = aDecoder.decodeObject(forKey: SerializationKeys.pitWeight) as? Int
@@ -160,13 +165,14 @@ public final class Team: NSObject, NSCoding {
 
   public func encode(with aCoder: NSCoder) {
     aCoder.encode(name, forKey: SerializationKeys.name)
+    aCoder.encode(redActualRPs, forKey: SerializationKeys.redActualRPs)
+    aCoder.encode(blueActualRPs, forKey: SerializationKeys.redActualRPs)
     aCoder.encode(actualRPs, forKey: SerializationKeys.actualRPs)
     aCoder.encode(pitMinHeight, forKey: SerializationKeys.pitMinHeight)
     aCoder.encode(pitHasVision, forKey: SerializationKeys.pitHasVision)
     aCoder.encode(teamNumber, forKey: SerializationKeys.teamNumber)
     aCoder.encode(pitHasCamera, forKey: SerializationKeys.pitHasCamera)
     aCoder.encode(pitHasGyro, forKey: SerializationKeys.pitHasGyro)
-    aCoder.encode(pitHasPid, forKey: SerializationKeys.pitHasPid)
     aCoder.encode(pitCanBuddyStartLevel2, forKey: SerializationKeys.pitCanBuddyStartLevel2)
     aCoder.encode(pitWidth, forKey: SerializationKeys.pitWidth)
     aCoder.encode(pitWeight, forKey: SerializationKeys.pitWeight)
