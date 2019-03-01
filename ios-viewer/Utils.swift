@@ -287,7 +287,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.p75percentIncap",
             "calculatedData.p75percentIncapEntireMatch",
             "calculatedData.p75percentImpaired",
-            "calculatedData.p75percentNoShow"
+            "calculatedData.p75percentNoShow",
+            "calculatedData.climbSuccessL1",
+            "calculatedData.climbSuccessL2",
+            "calculatedData.climbSuccessL3"
         ]
         
         /**
@@ -455,7 +458,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         /** Keys relating to the portions of the game that occur in the end (climbing, challenging, etc) */
         let endGame : [String] = [
-            "calculatedData.avgTimeClimbing"
+            "calculatedData.avgTimeClimbing",
+            "calculatedData.climbSuccessL1",
+            "calculatedData.climbSuccessL2",
+            "calculatedData.climbSuccessL3"
         ]
         
         /** Keys relating to the status of a robot to be displayed on teamDetails */
@@ -654,7 +660,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.secondPickAbility" : "Second Pick Ability",
         "calculatedData.lfmAvgOrangesScored" : "LFM Avg. Cargo Scored",
         "calculatedData.lfmAvgLemonsScored" : "LFM Avg. Panels Scored",
-        "calculatedData.lfmAvgOrangeSpilled" : "LFM Avg. Cargo Spills",
+        "calculatedData.lfmAvgOrangesSpilled" : "LFM Avg. Cargo Spills",
         "calculatedData.lfmAvgLemonsSpilled" : "LFM Avg. Panel Spills",
         "calculatedData.lfmLemonLoadSuccess" : "LFM Panel Loading Success",
         "calculatedData.lfmOrangeCycleAll" : "LFM Cargo Cycle Times",
@@ -825,6 +831,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.redChanceWin" : "Red Win Chance",
         "calculatedData.bluePredictedClimbPoints" : "Blue Predicted Climb Points",
         "calculatedData.redPredictedClimbPoints" : "Red Predicted Climb Points",
+        "calculatedData.climbSuccessL1" : "Level 1 Climb Success",
+        "calculatedData.climbSuccessL2" : "Level 2 Climb Success",
+        "calculatedData.climbSuccessL3" : "Level 3 Climb Success"
     ]
     
     /**

@@ -174,6 +174,10 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     static let p75avgLemonsSpilled = "p75avgLemonsSpilled"
     static let lfmAvgLemonsSpilled = "lfmAvgLemonsSpilled"
     static let sdAvgLemonsSpilled = "sdAvgLemonsSpilled"
+    static let climbSuccessL1 = "climbSuccessL1"
+    static let climbSuccessL2 = "climbSuccessL2"
+    static let climbSuccessL3 = " climbSuccessL3"
+    
   }
 
   // MARK: Properties
@@ -339,6 +343,9 @@ public final class CalculatedTeamData: NSObject, NSCoding {
   @objc public var p75avgLemonsSpilled: Float = -1.0
   @objc public var lfmAvgLemonsSpilled: Float = -1.0
   @objc public var sdAvgLemonsSpilled: Float = -1.0
+  @objc public var climbSuccessL1: Int = -1
+  @objc public var climbSuccessL2 : Int = -1
+  @objc public var climbSuccessL3: Int = -1
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -515,6 +522,9 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     p75avgLemonsSpilled = json[SerializationKeys.p75avgLemonsSpilled].floatValue
     lfmAvgLemonsSpilled = json[SerializationKeys.lfmAvgLemonsSpilled].floatValue
     sdAvgLemonsSpilled = json[SerializationKeys.sdAvgLemonsSpilled].floatValue
+    climbSuccessL1 = json[SerializationKeys.climbSuccessL1].intValue
+    climbSuccessL2 = json[SerializationKeys.climbSuccessL2].intValue
+    climbSuccessL3 = json[SerializationKeys.climbSuccessL3].intValue
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -523,22 +533,14 @@ public final class CalculatedTeamData: NSObject, NSCoding {
   public func dictionaryRepresentation() -> [String: Any] {
     var dictionary: [String: Any] = [:]
     dictionary[SerializationKeys.hasLemonGroundIntake] = hasLemonGroundIntake
-    
     dictionary[SerializationKeys.predictedRPs] = predictedRPs
-    
     dictionary[SerializationKeys.actualSeed] = actualSeed
-    
     dictionary[SerializationKeys.percentIncap] = percentIncap
-    
     dictionary[SerializationKeys.percentIncapEntireMatch] = percentIncapEntireMatch
-    
     dictionary[SerializationKeys.hasOrangeGroundIntake] = hasOrangeGroundIntake
-    
     dictionary[SerializationKeys.didPreloadLemon] = didPreloadLemon
-    
     dictionary[SerializationKeys.didPreloadOrange] = didPreloadOrange
     dictionary[SerializationKeys.firstPickAbility] = firstPickAbility
-    
     dictionary[SerializationKeys.predictedDedicatedLemonCycles] = predictedDedicatedLemonCycles
     dictionary[SerializationKeys.avgTimeIncap] = avgTimeIncap
     dictionary[SerializationKeys.sdLemonSuccessFromSide] = sdLemonSuccessFromSide
@@ -692,6 +694,9 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     dictionary[SerializationKeys.lfmAvgLemonsSpilled] = lfmAvgLemonsSpilled
     dictionary[SerializationKeys.sdAvgLemonsSpilled] = sdAvgLemonsSpilled
     dictionary[SerializationKeys.avgOrangesScored] = avgOrangesScored
+    dictionary[SerializationKeys.climbSuccessL1] = climbSuccessL1
+    dictionary[SerializationKeys.climbSuccessL2] = climbSuccessL2
+    dictionary[SerializationKeys.climbSuccessL3] = climbSuccessL3
     return dictionary
   }
 
@@ -859,6 +864,9 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     self.p75avgLemonsSpilled = aDecoder.decodeFloat(forKey: SerializationKeys.p75avgLemonsSpilled)
     self.lfmAvgLemonsSpilled = aDecoder.decodeFloat(forKey: SerializationKeys.lfmAvgLemonsSpilled)
     self.sdAvgLemonsSpilled = aDecoder.decodeFloat(forKey: SerializationKeys.sdAvgLemonsSpilled)
+    self.climbSuccessL1 = aDecoder.decodeInteger(forKey: SerializationKeys.climbSuccessL1)
+    self.climbSuccessL2 = aDecoder.decodeInteger(forKey: SerializationKeys.climbSuccessL2)
+    self.climbSuccessL3 = aDecoder.decodeInteger(forKey: SerializationKeys.climbSuccessL3)
   }
 
   public func encode(with aCoder: NSCoder) {
@@ -1024,6 +1032,9 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     aCoder.encode(p75avgLemonsSpilled, forKey: SerializationKeys.p75avgLemonsSpilled)
     aCoder.encode(lfmAvgLemonsSpilled, forKey: SerializationKeys.lfmAvgLemonsSpilled)
     aCoder.encode(sdAvgLemonsSpilled, forKey: SerializationKeys.sdAvgLemonsSpilled)
+    aCoder.encode(climbSuccessL1, forKey: SerializationKeys.climbSuccessL1)
+    aCoder.encode(climbSuccessL2, forKey: SerializationKeys.climbSuccessL2)
+    aCoder.encode(climbSuccessL3, forKey: SerializationKeys.climbSuccessL3)
   }
 
 }
