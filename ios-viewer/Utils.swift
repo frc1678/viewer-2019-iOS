@@ -421,6 +421,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
 
             //status
             "avgTimeIncap" : "calculatedData.timeIncap",
+            "avgTimeImpaired" : "calculatedData.timeImpaired",
             "percentNoShow" : "isNoShow",
 
             //scoring stuff
@@ -599,7 +600,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "teamNumber" : "Team Number",
         "name" : "Name",
         "matchesPlayed" : "Matches Played",
-        "actualRPs" : "RPs",
+        "actualRPs" : "Avg. RPs",
         "matchDatas" : "Matches",
         "calculatedData" : "Calculated Data",
         "calculatedData.actualSeed" : "Seed",
