@@ -298,6 +298,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "Picklist Position",
             "Percent Incap",
             "Percent Impaired",
+            "Percent Entirely Incap Matches",
             "Cargo Ground Intake",
             "Panel Ground Intake",
             "Avg. Good Decisions",
