@@ -27,7 +27,7 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
         firebase = Database.database().reference()
         if firebaseFetcher.secondPicklist == [] {
             for i in self.firebaseFetcher.getOverallSecondPickList() {
-                self.secondPicklist.append(i.number)
+                self.secondPicklist.append(i.teamNumber)
             }
         } else {
             self.secondPicklist = firebaseFetcher.secondPicklist
@@ -69,8 +69,8 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
         let multiCell = cell as? MultiCellTableViewCell
         multiCell!.scoreLabel.font = multiCell!.scoreLabel.font.withSize(size)
         let team = data as? Team
-        if team!.number != -1 {
-            multiCell!.teamLabel!.text = String(describing: team!.number)
+        if team!.teamNumber != -1 {
+            multiCell!.teamLabel!.text = String(describing: team!.teamNumber)
             multiCell!.teamLabel.font = multiCell!.teamLabel.font.withSize(size)
         }
         if team!.calculatedData?.secondPickAbility != nil {
@@ -122,7 +122,7 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
                 let aSecondPicklist = self.firebaseFetcher.getOverallSecondPickList()
                 self.secondPicklist = []
                 for i in aSecondPicklist {
-                    self.secondPicklist.append(i.number)
+                    self.secondPicklist.append(i.teamNumber)
                 }
             } else {
                 self.secondPicklist = firebaseFetcher.secondPicklist
@@ -148,7 +148,7 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
     @objc func clearPicklist() {
         var tempPicklist : [Int] = []
         for i in self.firebaseFetcher.getOverallSecondPickList() {
-            tempPicklist.append(i.number)
+            tempPicklist.append(i.teamNumber)
         }
         self.firebaseFetcher.secondPicklist = tempPicklist
         self.secondPicklist = tempPicklist

@@ -20,6 +20,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     static let percentImpaired = "percentImpaired"
     static let p75lemonLoadSuccess = "p75lemonLoadSuccess"
     static let p75percentIncap = "p75percentIncap"
+    static let p75percentIncapEntireMatch = "p75PercentIncapEntireMatch"
     static let orangeSuccessL3 = "orangeSuccessL3"
     static let lemonCycleL2 = "lemonCycleL2"
     static let p75avgTimeImpaired = "p75avgTimeImpaired"
@@ -50,7 +51,6 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     static let lfmAvgTimeClimbing = "lfmAvgTimeClimbing"
     static let p75habLineSuccessL1 = "p75habLineSuccessL1"
     static let lemonSuccessUndefended = "lemonSuccessUndefended"
-    static let p75avgOrangeFouls = "p75avgOrangeFouls"
     static let orangeSuccessL2 = "orangeSuccessL2"
     static let p75orangeSuccessAll = "p75orangeSuccessAll"
     static let p75orangeCycleAll = "p75orangeCycleAll"
@@ -67,6 +67,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     static let lemonSuccessL2 = "lemonSuccessL2"
     static let lfmOrangeSuccessDefended = "lfmOrangeSuccessDefended"
     static let percentIncap = "percentIncap"
+    static let percentIncapEntireMatch = "percentIncapEntireMatch"
     static let p75lemonSuccessDefended = "p75lemonSuccessDefended"
     static let sdHabLineSuccessL2 = "sdHabLineSuccessL2"
     static let sdAvgTimeClimbing = "sdAvgTimeClimbing"
@@ -111,8 +112,6 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     static let p75avgOrangesScored = "p75avgOrangesScored"
     static let sdAvgOrangesScored = "sdAvgOrangesScored"
     static let lfmOrangeSuccessL1 = "lfmOrangeSuccessL1"
-    static let avgOrangeFouls = "avgOrangeFouls"
-    static let sdAvgOrangeFouls = "sdAvgOrangeFouls"
     static let lemonLoadSuccess = "lemonLoadSuccess"
     static let p75orangeCycleL2 = "p75orangeCycleL2"
     static let lemonSuccessDefended = "lemonSuccessDefended"
@@ -125,6 +124,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     static let lfmAvgTimeImpaired = "lfmAvgTimeImpaired"
     static let didPreloadLemon = "didPreloadLemon"
     static let sdPercentIncap = "sdPercentIncap"
+    static let sdPercentIncapEntireMatch = "sdPercentIncapEntireMatch"
     static let orangeSuccessDefended = "orangeSuccessDefended"
     static let lfmLemonCycleL2 = "lfmLemonCycleL2"
     static let lemonCycleAll = "lemonCycleAll"
@@ -149,6 +149,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     static let p75percentImpaired = "p75percentImpaired"
     static let p75avgBadDecisions = "p75avgBadDecisions"
     static let lfmPercentIncap = "lfmPercentIncap"
+    static let lfmPercentIncapEntireMatch = "lfmPercentIncapEntireMatch"
     static let lemonSuccessAll = "lemonSuccessAll"
     static let p75lemonSuccessUndefended = "p75lemonSuccessUndefended"
     static let lfmLemonSuccessL1 = "lfmLemonSuccessL1"
@@ -165,11 +166,14 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     static let sdLemonSuccessAll = "sdLemonSuccessAll"
     static let p75avgGoodDecisions = "p75avgGoodDecisions"
     static let firstPickAbility = "firstPickAbility"
-    static let lfmAvgOrangeFouls = "lfmAvgOrangeFouls"
     static let avgLemonsSpilled = "avgLemonsSpilled"
     static let p75avgLemonsSpilled = "p75avgLemonsSpilled"
     static let lfmAvgLemonsSpilled = "lfmAvgLemonsSpilled"
     static let sdAvgLemonsSpilled = "sdAvgLemonsSpilled"
+    static let climbSuccessL1 = "climbSuccessL1"
+    static let climbSuccessL2 = "climbSuccessL2"
+    static let climbSuccessL3 = " climbSuccessL3"
+    
   }
 
   // MARK: Properties
@@ -181,6 +185,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
   @objc public var percentImpaired: Int = -1
   @objc public var p75lemonLoadSuccess: Int = -1
   @objc public var p75percentIncap: Int = -1
+  @objc public var p75percentIncapEntireMatch: Int = -1
   @objc public var orangeSuccessL3: Int = -1
   @objc public var lemonCycleL2: Float = -1.0
   @objc public var p75avgTimeImpaired: Float = -1.0
@@ -211,7 +216,6 @@ public final class CalculatedTeamData: NSObject, NSCoding {
   @objc public var lfmAvgTimeClimbing:  Float = -1.0
   @objc public var p75habLineSuccessL1: Int = -1
   @objc public var lemonSuccessUndefended: Int = -1
-  @objc public var p75avgOrangeFouls: Float = -1.0
   @objc public var orangeSuccessL2: Int = -1
   @objc public var p75orangeSuccessAll: Int = -1
   @objc public var p75orangeCycleAll: Float = -1.0
@@ -228,6 +232,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
   @objc public var lemonSuccessL2: Int = -1
   @objc public var lfmOrangeSuccessDefended: Int = -1
   @objc public var percentIncap: Int = -1
+  @objc public var percentIncapEntireMatch: Int = -1
   @objc public var p75lemonSuccessDefended: Int = -1
   @objc public var sdHabLineSuccessL2: Int = -1
   @objc public var sdAvgTimeClimbing: Float = -1.0
@@ -272,8 +277,6 @@ public final class CalculatedTeamData: NSObject, NSCoding {
   @objc public var p75avgOrangesScored: Float = -1.0
   @objc public var sdAvgOrangesScored: Float = -1.0
   @objc public var lfmOrangeSuccessL1: Int = -1
-  @objc public var avgOrangeFouls: Float = -1.0
-  @objc public var sdAvgOrangeFouls: Float = -1.0
   @objc public var lemonLoadSuccess: Int = -1
   @objc public var p75orangeCycleL2: Float = -1.0
   @objc public var lemonSuccessDefended: Int = -1
@@ -286,6 +289,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
   @objc public var lfmAvgTimeImpaired: Float = -1.0
   @objc public var didPreloadLemon: Bool = false
   @objc public var sdPercentIncap: Int = -1
+  @objc public var sdPercentIncapEntireMatch: Int = -1
   @objc public var orangeSuccessDefended: Int = -1
   @objc public var lfmLemonCycleL2: Float = -1.0
   @objc public var lemonCycleAll: Float = -1.0
@@ -310,6 +314,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
   @objc public var p75percentImpaired: Int = -1
   @objc public var p75avgBadDecisions: Float = -1.0
   @objc public var lfmPercentIncap: Int = -1
+  @objc public var lfmPercentIncapEntireMatch: Int = -1
   @objc public var lemonSuccessAll: Int = -1
   @objc public var p75lemonSuccessUndefended: Int = -1
   @objc public var lfmLemonSuccessL1: Int = -1
@@ -326,11 +331,13 @@ public final class CalculatedTeamData: NSObject, NSCoding {
   @objc public var sdLemonSuccessAll: Int = -1
   @objc public var p75avgGoodDecisions: Float = -1.0
   @objc public var firstPickAbility: Float = -1.0
-    @objc public var lfmAvgOrangeFouls: Float = -1.0
-    @objc public var avgLemonsSpilled: Float = -1.0
-    @objc public var p75avgLemonsSpilled: Float = -1.0
-    @objc public var lfmAvgLemonsSpilled: Float = -1.0
-    @objc public var sdAvgLemonsSpilled: Float = -1.0
+  @objc public var avgLemonsSpilled: Float = -1.0
+  @objc public var p75avgLemonsSpilled: Float = -1.0
+  @objc public var lfmAvgLemonsSpilled: Float = -1.0
+  @objc public var sdAvgLemonsSpilled: Float = -1.0
+  @objc public var climbSuccessL1: Int = -1
+  @objc public var climbSuccessL2 : Int = -1
+  @objc public var climbSuccessL3: Int = -1
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -353,6 +360,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     percentImpaired = json[SerializationKeys.percentImpaired].intValue
     p75lemonLoadSuccess = json[SerializationKeys.p75lemonLoadSuccess].intValue
     p75percentIncap = json[SerializationKeys.p75percentIncap].intValue
+    p75percentIncapEntireMatch = json[SerializationKeys.p75percentIncapEntireMatch].intValue
     orangeSuccessL3 = json[SerializationKeys.orangeSuccessL3].intValue
     lemonCycleL2 = json[SerializationKeys.lemonCycleL2].floatValue
     p75avgTimeImpaired = json[SerializationKeys.p75avgTimeImpaired].floatValue
@@ -383,7 +391,6 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     lfmAvgTimeClimbing = json[SerializationKeys.lfmAvgTimeClimbing].floatValue
     p75habLineSuccessL1 = json[SerializationKeys.p75habLineSuccessL1].intValue
     lemonSuccessUndefended = json[SerializationKeys.lemonSuccessUndefended].intValue
-    p75avgOrangeFouls = json[SerializationKeys.p75avgOrangeFouls].floatValue
     orangeSuccessL2 = json[SerializationKeys.orangeSuccessL2].intValue
     p75orangeSuccessAll = json[SerializationKeys.p75orangeSuccessAll].intValue
     p75orangeCycleAll = json[SerializationKeys.p75orangeCycleAll].floatValue
@@ -400,6 +407,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     lemonSuccessL2 = json[SerializationKeys.lemonSuccessL2].intValue
     lfmOrangeSuccessDefended = json[SerializationKeys.lfmOrangeSuccessDefended].intValue
     percentIncap = json[SerializationKeys.percentIncap].intValue
+    percentIncapEntireMatch = json[SerializationKeys.percentIncapEntireMatch].intValue
     p75lemonSuccessDefended = json[SerializationKeys.p75lemonSuccessDefended].intValue
     sdHabLineSuccessL2 = json[SerializationKeys.sdHabLineSuccessL2].intValue
     sdAvgTimeClimbing = json[SerializationKeys.sdAvgTimeClimbing].floatValue
@@ -444,8 +452,6 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     p75avgOrangesScored = json[SerializationKeys.p75avgOrangesScored].floatValue
     sdAvgOrangesScored = json[SerializationKeys.sdAvgOrangesScored].floatValue
     lfmOrangeSuccessL1 = json[SerializationKeys.lfmOrangeSuccessL1].intValue
-    avgOrangeFouls = json[SerializationKeys.avgOrangeFouls].floatValue
-    sdAvgOrangeFouls = json[SerializationKeys.sdAvgOrangeFouls].floatValue
     lemonLoadSuccess = json[SerializationKeys.lemonLoadSuccess].intValue
     p75orangeCycleL2 = json[SerializationKeys.p75orangeCycleL2].floatValue
     lemonSuccessDefended = json[SerializationKeys.lemonSuccessDefended].intValue
@@ -458,6 +464,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     lfmAvgTimeImpaired = json[SerializationKeys.lfmAvgTimeImpaired].floatValue
     didPreloadLemon = json[SerializationKeys.didPreloadLemon].boolValue
     sdPercentIncap = json[SerializationKeys.sdPercentIncap].intValue
+    sdPercentIncapEntireMatch = json[SerializationKeys.sdPercentIncapEntireMatch].intValue
     orangeSuccessDefended = json[SerializationKeys.orangeSuccessDefended].intValue
     lfmLemonCycleL2 = json[SerializationKeys.lfmLemonCycleL2].floatValue
     lemonCycleAll = json[SerializationKeys.lemonCycleAll].floatValue
@@ -482,6 +489,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     p75percentImpaired = json[SerializationKeys.p75percentImpaired].intValue
     p75avgBadDecisions = json[SerializationKeys.p75avgBadDecisions].floatValue
     lfmPercentIncap = json[SerializationKeys.lfmPercentIncap].intValue
+    lfmPercentIncapEntireMatch = json[SerializationKeys.lfmPercentIncapEntireMatch].intValue
     lemonSuccessAll = json[SerializationKeys.lemonSuccessAll].intValue
     p75lemonSuccessUndefended = json[SerializationKeys.p75lemonSuccessUndefended].intValue
     lfmLemonSuccessL1 = json[SerializationKeys.lfmLemonSuccessL1].intValue
@@ -498,11 +506,13 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     sdLemonSuccessAll = json[SerializationKeys.sdLemonSuccessAll].intValue
     p75avgGoodDecisions = json[SerializationKeys.p75avgGoodDecisions].floatValue
     firstPickAbility = json[SerializationKeys.firstPickAbility].floatValue
-    lfmAvgOrangeFouls = json[SerializationKeys.lfmAvgOrangeFouls].floatValue
     avgLemonsSpilled = json[SerializationKeys.avgLemonsSpilled].floatValue
     p75avgLemonsSpilled = json[SerializationKeys.p75avgLemonsSpilled].floatValue
     lfmAvgLemonsSpilled = json[SerializationKeys.lfmAvgLemonsSpilled].floatValue
     sdAvgLemonsSpilled = json[SerializationKeys.sdAvgLemonsSpilled].floatValue
+    climbSuccessL1 = json[SerializationKeys.climbSuccessL1].intValue
+    climbSuccessL2 = json[SerializationKeys.climbSuccessL2].intValue
+    climbSuccessL3 = json[SerializationKeys.climbSuccessL3].intValue
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -511,26 +521,21 @@ public final class CalculatedTeamData: NSObject, NSCoding {
   public func dictionaryRepresentation() -> [String: Any] {
     var dictionary: [String: Any] = [:]
     dictionary[SerializationKeys.hasLemonGroundIntake] = hasLemonGroundIntake
-    
     dictionary[SerializationKeys.predictedRPs] = predictedRPs
-    
     dictionary[SerializationKeys.actualSeed] = actualSeed
-    
     dictionary[SerializationKeys.percentIncap] = percentIncap
-    
+    dictionary[SerializationKeys.percentIncapEntireMatch] = percentIncapEntireMatch
     dictionary[SerializationKeys.hasOrangeGroundIntake] = hasOrangeGroundIntake
-    
     dictionary[SerializationKeys.didPreloadLemon] = didPreloadLemon
-    
     dictionary[SerializationKeys.didPreloadOrange] = didPreloadOrange
     dictionary[SerializationKeys.firstPickAbility] = firstPickAbility
-    
     dictionary[SerializationKeys.predictedDedicatedLemonCycles] = predictedDedicatedLemonCycles
     dictionary[SerializationKeys.avgTimeIncap] = avgTimeIncap
     dictionary[SerializationKeys.sdLemonSuccessFromSide] = sdLemonSuccessFromSide
     dictionary[SerializationKeys.percentImpaired] = percentImpaired
     dictionary[SerializationKeys.p75lemonLoadSuccess] = p75lemonLoadSuccess
     dictionary[SerializationKeys.p75percentIncap] = p75percentIncap
+    dictionary[SerializationKeys.p75percentIncapEntireMatch] = p75percentIncapEntireMatch
     dictionary[SerializationKeys.orangeSuccessL3] = orangeSuccessL3
     dictionary[SerializationKeys.lemonCycleL2] = lemonCycleL2
     dictionary[SerializationKeys.p75avgTimeImpaired] = p75avgTimeImpaired
@@ -560,7 +565,6 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     dictionary[SerializationKeys.lfmAvgTimeClimbing] = lfmAvgTimeClimbing
     dictionary[SerializationKeys.p75habLineSuccessL1] = p75habLineSuccessL1
     dictionary[SerializationKeys.lemonSuccessUndefended] = lemonSuccessUndefended
-    dictionary[SerializationKeys.p75avgOrangeFouls] = p75avgOrangeFouls
     dictionary[SerializationKeys.orangeSuccessL2] = orangeSuccessL2
     dictionary[SerializationKeys.p75orangeSuccessAll] = p75orangeSuccessAll
     dictionary[SerializationKeys.p75orangeCycleAll] = p75orangeCycleAll
@@ -618,8 +622,6 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     dictionary[SerializationKeys.p75avgOrangesScored] = p75avgOrangesScored
     dictionary[SerializationKeys.sdAvgOrangesScored] = sdAvgOrangesScored
     dictionary[SerializationKeys.lfmOrangeSuccessL1] = lfmOrangeSuccessL1
-    dictionary[SerializationKeys.avgOrangeFouls] = avgOrangeFouls
-    dictionary[SerializationKeys.sdAvgOrangeFouls] = sdAvgOrangeFouls
     dictionary[SerializationKeys.lemonLoadSuccess] = lemonLoadSuccess
     dictionary[SerializationKeys.p75orangeCycleL2] = p75orangeCycleL2
     dictionary[SerializationKeys.lemonSuccessDefended] = lemonSuccessDefended
@@ -631,6 +633,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     dictionary[SerializationKeys.p75lemonSuccessL1] = p75lemonSuccessL1
     dictionary[SerializationKeys.lfmAvgTimeImpaired] = lfmAvgTimeImpaired
     dictionary[SerializationKeys.sdPercentIncap] = sdPercentIncap
+    dictionary[SerializationKeys.sdPercentIncapEntireMatch] = sdPercentIncapEntireMatch
     dictionary[SerializationKeys.orangeSuccessDefended] = orangeSuccessDefended
     dictionary[SerializationKeys.lfmLemonCycleL2] = lfmLemonCycleL2
     dictionary[SerializationKeys.lemonCycleAll] = lemonCycleAll
@@ -655,6 +658,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     dictionary[SerializationKeys.p75percentImpaired] = p75percentImpaired
     dictionary[SerializationKeys.p75avgBadDecisions] = p75avgBadDecisions
     dictionary[SerializationKeys.lfmPercentIncap] = lfmPercentIncap
+    dictionary[SerializationKeys.lfmPercentIncapEntireMatch] = lfmPercentIncapEntireMatch
     dictionary[SerializationKeys.lemonSuccessAll] = lemonSuccessAll
     dictionary[SerializationKeys.p75lemonSuccessUndefended] = p75lemonSuccessUndefended
     dictionary[SerializationKeys.lfmLemonSuccessL1] = lfmLemonSuccessL1
@@ -669,12 +673,14 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     dictionary[SerializationKeys.lfmOrangeSuccessAll] = lfmOrangeSuccessAll
     dictionary[SerializationKeys.sdLemonSuccessAll] = sdLemonSuccessAll
     dictionary[SerializationKeys.p75avgGoodDecisions] = p75avgGoodDecisions
-    dictionary[SerializationKeys.lfmAvgOrangeFouls] = lfmAvgOrangeFouls
     dictionary[SerializationKeys.avgLemonsSpilled] = avgLemonsSpilled
     dictionary[SerializationKeys.p75avgLemonsSpilled] = p75avgLemonsSpilled
     dictionary[SerializationKeys.lfmAvgLemonsSpilled] = lfmAvgLemonsSpilled
     dictionary[SerializationKeys.sdAvgLemonsSpilled] = sdAvgLemonsSpilled
     dictionary[SerializationKeys.avgOrangesScored] = avgOrangesScored
+    dictionary[SerializationKeys.climbSuccessL1] = climbSuccessL1
+    dictionary[SerializationKeys.climbSuccessL2] = climbSuccessL2
+    dictionary[SerializationKeys.climbSuccessL3] = climbSuccessL3
     return dictionary
   }
 
@@ -688,6 +694,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     self.percentImpaired = aDecoder.decodeInteger(forKey: SerializationKeys.percentImpaired)
     self.p75lemonLoadSuccess = aDecoder.decodeInteger(forKey: SerializationKeys.p75lemonLoadSuccess)
     self.p75percentIncap = aDecoder.decodeInteger(forKey: SerializationKeys.p75percentIncap)
+    self.p75percentIncapEntireMatch = aDecoder.decodeInteger(forKey: SerializationKeys.p75percentIncapEntireMatch)
     self.orangeSuccessL3 = aDecoder.decodeInteger(forKey: SerializationKeys.orangeSuccessL3)
     self.lemonCycleL2 = aDecoder.decodeFloat(forKey: SerializationKeys.lemonCycleL2)
     self.p75avgTimeImpaired = aDecoder.decodeFloat(forKey: SerializationKeys.p75avgTimeImpaired)
@@ -718,7 +725,6 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     self.lfmAvgTimeClimbing = aDecoder.decodeFloat(forKey: SerializationKeys.lfmAvgTimeClimbing)
     self.p75habLineSuccessL1 = aDecoder.decodeInteger(forKey: SerializationKeys.p75habLineSuccessL1)
     self.lemonSuccessUndefended = aDecoder.decodeInteger(forKey: SerializationKeys.lemonSuccessUndefended)
-    self.p75avgOrangeFouls = aDecoder.decodeFloat(forKey: SerializationKeys.p75avgOrangeFouls)
     self.orangeSuccessL2 = aDecoder.decodeInteger(forKey: SerializationKeys.orangeSuccessL2)
     self.p75orangeSuccessAll = aDecoder.decodeInteger(forKey: SerializationKeys.p75orangeSuccessAll)
     self.p75orangeCycleAll = aDecoder.decodeFloat(forKey: SerializationKeys.p75orangeCycleAll)
@@ -735,6 +741,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     self.lemonSuccessL2 = aDecoder.decodeInteger(forKey: SerializationKeys.lemonSuccessL2)
     self.lfmOrangeSuccessDefended = aDecoder.decodeInteger(forKey: SerializationKeys.lfmOrangeSuccessDefended)
     self.percentIncap = aDecoder.decodeInteger(forKey: SerializationKeys.percentIncap)
+    self.percentIncapEntireMatch = aDecoder.decodeInteger(forKey: SerializationKeys.percentIncapEntireMatch)
     self.p75lemonSuccessDefended = aDecoder.decodeInteger(forKey: SerializationKeys.p75lemonSuccessDefended)
     self.sdHabLineSuccessL2 = aDecoder.decodeInteger(forKey: SerializationKeys.sdHabLineSuccessL2)
     self.sdAvgTimeClimbing = aDecoder.decodeFloat(forKey: SerializationKeys.sdAvgTimeClimbing)
@@ -779,8 +786,6 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     self.p75avgOrangesScored = aDecoder.decodeFloat(forKey: SerializationKeys.p75avgOrangesScored)
     self.sdAvgOrangesScored = aDecoder.decodeFloat(forKey: SerializationKeys.sdAvgOrangesScored)
     self.lfmOrangeSuccessL1 = aDecoder.decodeInteger(forKey: SerializationKeys.lfmOrangeSuccessL1)
-    self.avgOrangeFouls = aDecoder.decodeFloat(forKey: SerializationKeys.avgOrangeFouls)
-    self.sdAvgOrangeFouls = aDecoder.decodeFloat(forKey: SerializationKeys.sdAvgOrangeFouls)
     self.lemonLoadSuccess = aDecoder.decodeInteger(forKey: SerializationKeys.lemonLoadSuccess)
     self.p75orangeCycleL2 = aDecoder.decodeFloat(forKey: SerializationKeys.p75orangeCycleL2)
     self.lemonSuccessDefended = aDecoder.decodeInteger(forKey: SerializationKeys.lemonSuccessDefended)
@@ -793,6 +798,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     self.lfmAvgTimeImpaired = aDecoder.decodeFloat(forKey: SerializationKeys.lfmAvgTimeImpaired)
     self.didPreloadLemon = aDecoder.decodeBool(forKey: SerializationKeys.didPreloadLemon)
     self.sdPercentIncap = aDecoder.decodeInteger(forKey: SerializationKeys.sdPercentIncap)
+    self.sdPercentIncapEntireMatch = aDecoder.decodeInteger(forKey: SerializationKeys.sdPercentIncapEntireMatch)
     self.orangeSuccessDefended = aDecoder.decodeInteger(forKey: SerializationKeys.orangeSuccessDefended)
     self.lfmLemonCycleL2 = aDecoder.decodeFloat(forKey: SerializationKeys.lfmLemonCycleL2)
     self.lemonCycleAll = aDecoder.decodeFloat(forKey: SerializationKeys.lemonCycleAll)
@@ -817,6 +823,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     self.p75percentImpaired = aDecoder.decodeInteger(forKey: SerializationKeys.p75percentImpaired)
     self.p75avgBadDecisions = aDecoder.decodeFloat(forKey: SerializationKeys.p75avgBadDecisions)
     self.lfmPercentIncap = aDecoder.decodeInteger(forKey: SerializationKeys.lfmPercentIncap)
+    self.lfmPercentIncapEntireMatch = aDecoder.decodeInteger(forKey: SerializationKeys.lfmPercentIncapEntireMatch)
     self.lemonSuccessAll = aDecoder.decodeInteger(forKey: SerializationKeys.lemonSuccessAll)
     self.p75lemonSuccessUndefended = aDecoder.decodeInteger(forKey: SerializationKeys.p75lemonSuccessUndefended)
     self.lfmLemonSuccessL1 = aDecoder.decodeInteger(forKey: SerializationKeys.lfmLemonSuccessL1)
@@ -833,11 +840,13 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     self.sdLemonSuccessAll = aDecoder.decodeInteger(forKey: SerializationKeys.sdLemonSuccessAll)
     self.p75avgGoodDecisions = aDecoder.decodeFloat(forKey: SerializationKeys.p75avgGoodDecisions)
     self.firstPickAbility = aDecoder.decodeFloat(forKey: SerializationKeys.firstPickAbility)
-    self.lfmAvgOrangeFouls = aDecoder.decodeFloat(forKey: SerializationKeys.lfmAvgOrangeFouls)
     self.avgLemonsSpilled = aDecoder.decodeFloat(forKey: SerializationKeys.avgLemonsSpilled)
     self.p75avgLemonsSpilled = aDecoder.decodeFloat(forKey: SerializationKeys.p75avgLemonsSpilled)
     self.lfmAvgLemonsSpilled = aDecoder.decodeFloat(forKey: SerializationKeys.lfmAvgLemonsSpilled)
     self.sdAvgLemonsSpilled = aDecoder.decodeFloat(forKey: SerializationKeys.sdAvgLemonsSpilled)
+    self.climbSuccessL1 = aDecoder.decodeInteger(forKey: SerializationKeys.climbSuccessL1)
+    self.climbSuccessL2 = aDecoder.decodeInteger(forKey: SerializationKeys.climbSuccessL2)
+    self.climbSuccessL3 = aDecoder.decodeInteger(forKey: SerializationKeys.climbSuccessL3)
   }
 
   public func encode(with aCoder: NSCoder) {
@@ -849,6 +858,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     aCoder.encode(percentImpaired, forKey: SerializationKeys.percentImpaired)
     aCoder.encode(p75lemonLoadSuccess, forKey: SerializationKeys.p75lemonLoadSuccess)
     aCoder.encode(p75percentIncap, forKey: SerializationKeys.p75percentIncap)
+    aCoder.encode(p75percentIncapEntireMatch, forKey: SerializationKeys.p75percentIncapEntireMatch)
     aCoder.encode(orangeSuccessL3, forKey: SerializationKeys.orangeSuccessL3)
     aCoder.encode(lemonCycleL2, forKey: SerializationKeys.lemonCycleL2)
     aCoder.encode(p75avgTimeImpaired, forKey: SerializationKeys.p75avgTimeImpaired)
@@ -879,7 +889,6 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     aCoder.encode(lfmAvgTimeClimbing, forKey: SerializationKeys.lfmAvgTimeClimbing)
     aCoder.encode(p75habLineSuccessL1, forKey: SerializationKeys.p75habLineSuccessL1)
     aCoder.encode(lemonSuccessUndefended, forKey: SerializationKeys.lemonSuccessUndefended)
-    aCoder.encode(p75avgOrangeFouls, forKey: SerializationKeys.p75avgOrangeFouls)
     aCoder.encode(orangeSuccessL2, forKey: SerializationKeys.orangeSuccessL2)
     aCoder.encode(p75orangeSuccessAll, forKey: SerializationKeys.p75orangeSuccessAll)
     aCoder.encode(p75orangeCycleAll, forKey: SerializationKeys.p75orangeCycleAll)
@@ -896,6 +905,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     aCoder.encode(lemonSuccessL2, forKey: SerializationKeys.lemonSuccessL2)
     aCoder.encode(lfmOrangeSuccessDefended, forKey: SerializationKeys.lfmOrangeSuccessDefended)
     aCoder.encode(percentIncap, forKey: SerializationKeys.percentIncap)
+    aCoder.encode(percentIncapEntireMatch, forKey: SerializationKeys.percentIncapEntireMatch)
     aCoder.encode(p75lemonSuccessDefended, forKey: SerializationKeys.p75lemonSuccessDefended)
     aCoder.encode(sdHabLineSuccessL2, forKey: SerializationKeys.sdHabLineSuccessL2)
     aCoder.encode(sdAvgTimeClimbing, forKey: SerializationKeys.sdAvgTimeClimbing)
@@ -940,8 +950,6 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     aCoder.encode(p75avgOrangesScored, forKey: SerializationKeys.p75avgOrangesScored)
     aCoder.encode(sdAvgOrangesScored, forKey: SerializationKeys.sdAvgOrangesScored)
     aCoder.encode(lfmOrangeSuccessL1, forKey: SerializationKeys.lfmOrangeSuccessL1)
-    aCoder.encode(avgOrangeFouls, forKey: SerializationKeys.avgOrangeFouls)
-    aCoder.encode(sdAvgOrangeFouls, forKey: SerializationKeys.sdAvgOrangeFouls)
     aCoder.encode(lemonLoadSuccess, forKey: SerializationKeys.lemonLoadSuccess)
     aCoder.encode(p75orangeCycleL2, forKey: SerializationKeys.p75orangeCycleL2)
     aCoder.encode(lemonSuccessDefended, forKey: SerializationKeys.lemonSuccessDefended)
@@ -954,6 +962,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     aCoder.encode(lfmAvgTimeImpaired, forKey: SerializationKeys.lfmAvgTimeImpaired)
     aCoder.encode(didPreloadLemon, forKey: SerializationKeys.didPreloadLemon)
     aCoder.encode(sdPercentIncap, forKey: SerializationKeys.sdPercentIncap)
+    aCoder.encode(sdPercentIncapEntireMatch, forKey: SerializationKeys.sdPercentIncapEntireMatch)
     aCoder.encode(orangeSuccessDefended, forKey: SerializationKeys.orangeSuccessDefended)
     aCoder.encode(lfmLemonCycleL2, forKey: SerializationKeys.lfmLemonCycleL2)
     aCoder.encode(lemonCycleAll, forKey: SerializationKeys.lemonCycleAll)
@@ -978,6 +987,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     aCoder.encode(p75percentImpaired, forKey: SerializationKeys.p75percentImpaired)
     aCoder.encode(p75avgBadDecisions, forKey: SerializationKeys.p75avgBadDecisions)
     aCoder.encode(lfmPercentIncap, forKey: SerializationKeys.lfmPercentIncap)
+    aCoder.encode(lfmPercentIncapEntireMatch, forKey: SerializationKeys.lfmPercentIncapEntireMatch)
     aCoder.encode(lemonSuccessAll, forKey: SerializationKeys.lemonSuccessAll)
     aCoder.encode(p75lemonSuccessUndefended, forKey: SerializationKeys.p75lemonSuccessUndefended)
     aCoder.encode(lfmLemonSuccessL1, forKey: SerializationKeys.lfmLemonSuccessL1)
@@ -994,11 +1004,13 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     aCoder.encode(sdLemonSuccessAll, forKey: SerializationKeys.sdLemonSuccessAll)
     aCoder.encode(p75avgGoodDecisions, forKey: SerializationKeys.p75avgGoodDecisions)
     aCoder.encode(firstPickAbility, forKey: SerializationKeys.firstPickAbility)
-    aCoder.encode(lfmAvgOrangeFouls, forKey: SerializationKeys.lfmAvgOrangeFouls)
     aCoder.encode(avgLemonsSpilled, forKey: SerializationKeys.avgLemonsSpilled)
     aCoder.encode(p75avgLemonsSpilled, forKey: SerializationKeys.p75avgLemonsSpilled)
     aCoder.encode(lfmAvgLemonsSpilled, forKey: SerializationKeys.lfmAvgLemonsSpilled)
     aCoder.encode(sdAvgLemonsSpilled, forKey: SerializationKeys.sdAvgLemonsSpilled)
+    aCoder.encode(climbSuccessL1, forKey: SerializationKeys.climbSuccessL1)
+    aCoder.encode(climbSuccessL2, forKey: SerializationKeys.climbSuccessL2)
+    aCoder.encode(climbSuccessL3, forKey: SerializationKeys.climbSuccessL3)
   }
 
 }

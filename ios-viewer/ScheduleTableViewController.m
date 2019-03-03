@@ -120,7 +120,7 @@
     for (int i = 0; i < 3; i++) {
         //RED MATCH LABELS
         if(i < redTeams.count) {
-            [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[redTeams objectAtIndex:i]).number]] forKeyPath:[NSString stringWithFormat:@"red%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
+            [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[redTeams objectAtIndex:i]).teamNumber]] forKeyPath:[NSString stringWithFormat:@"red%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
             if(((Team *)[redTeams objectAtIndex:i]).calculatedData.percentIncap > 0 && self.firebaseFetcher.currentMatchManager.highlightDysfunc) {
                 switch(i) {
                     case 0:
@@ -146,7 +146,7 @@
         
         //BLUE MATCH LABELS
         if(i < blueTeams.count) {
-            [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[blueTeams objectAtIndex:i]).number]] forKeyPath:[NSString stringWithFormat:@"blue%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
+            [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[blueTeams objectAtIndex:i]).teamNumber]] forKeyPath:[NSString stringWithFormat:@"blue%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
             if(((Team *)[blueTeams objectAtIndex:i]).calculatedData.percentIncap > 0 && self.firebaseFetcher.currentMatchManager.highlightDysfunc) {
                 switch(i) {
                     case 0:

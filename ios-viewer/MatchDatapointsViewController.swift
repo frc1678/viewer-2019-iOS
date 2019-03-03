@@ -40,7 +40,7 @@ class MatchDatapointsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TIMDTableViewCell", for: indexPath) as! TIMDTableViewCell
-
+        cell.valueLabel.text = ""
         cell.datapointLabel.text = Utils.humanReadableNames[Utils.teamDetailsKeys.allTeamKeys[indexPath.row]]
         if (firebaseFetcher?.currentMatchManager.matchDetailsDatapoints.contains(Utils.teamDetailsKeys.allTeamKeys[indexPath.row]))! {
             cell.backgroundColor = UIColor.green

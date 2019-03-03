@@ -87,14 +87,13 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         let yesNoKeys : [String] = [
             "pitHasCamera",
             "pitHasVision",
-            "pitHasPid",
             "pitHasGyro",
             "pitHasEncoders",
             "pitCanBuddyStartLevel2",
             "calculatedData.hasOrangeGroundIntake",
             "calculatedData.hasLemonGroundIntake"
         ]
-        
+
         let abilityKeys = [
             "calculatedData.firstPickAbility",
             "calculatedData.secondPickAbility",
@@ -103,7 +102,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.actualNumRPs",
             "calculatedData.predictedRPs"
         ]
-        
+
         let allTeamKeys = [
             "pitWidth",
             "pitLength",
@@ -116,15 +115,13 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitClimbType",
             "pitHasCamera",
             "pitHasVision",
-            "pitHasPid",
             "pitHasGyro",
             "pitHasEncoders",
             "pitCanBuddyStartLevel2",
             "pitSandstormNavigationType",
             "pitHasOrangeShooter",
-            "number",
+            "teamNumber",
             "name",
-            "actualRPs",
             "matchesPlayed",
             "calculatedData.totalSuperNotes",
             "calculatedData.actualSeed",
@@ -136,7 +133,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.didPreloadLemon",
             "calculatedData.avgOrangesScored",
             "calculatedData.avgLemonsScored",
-            "calculatedData.avgOrangeFouls",
             "calculatedData.avgLemonsSpilled",
             "calculatedData.lemonLoadSuccess",
             "calculatedData.orangeCycleAll",
@@ -168,6 +164,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgTimeImpaired",
             "calculatedData.avgTimeClimbing",
             "calculatedData.percentIncap",
+            "calculatedData.percentIncapEntireMatch",
             "calculatedData.percentImpaired",
             "calculatedData.percentNoShow",
             "calculatedData.predictedDedicatedLemonCycles",
@@ -179,7 +176,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.secondPickAbility",
             "calculatedData.lfmAvgOrangesScored",
             "calculatedData.lfmAvgLemonsScored",
-            "calculatedData.lfmAvgOrangeFouls",
             "calculatedData.lfmAvgLemonsSpilled",
             "calculatedData.lfmLemonLoadSuccess",
             "calculatedData.lfmOrangeCycleAll",
@@ -211,11 +207,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.lfmAvgTimeImpaired",
             "calculatedData.lfmAvgTimeClimbing",
             "calculatedData.lfmPercentIncap",
+            "calculatedData.lfmPercentIncapEntireMatch",
             "calculatedData.lfmPercentImpaired",
             "calculatedData.lfmPercentNoShow",
             "calculatedData.sdAvgOrangesScored",
             "calculatedData.sdAvgLemonsScored",
-            "calculatedData.sdAvgOrangeFouls",
             "calculatedData.sdAvgLemonsSpilled",
             "calculatedData.sdLemonLoadSuccess",
             "calculatedData.sdOrangeCycleAll",
@@ -247,11 +243,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.sdAvgTimeImpaired",
             "calculatedData.sdAvgTimeClimbing",
             "calculatedData.sdPercentIncap",
+            "calculatedData.sdPercentIncapEntireMatch",
             "calculatedData.sdPercentImpaired",
             "calculatedData.sdPercentNoShow",
             "calculatedData.p75avgOrangesScored",
             "calculatedData.p75avgLemonsScored",
-            "calculatedData.p75avgOrangeFouls",
             "calculatedData.p75avgLemonsSpilled",
             "calculatedData.p75lemonLoadSuccess",
             "calculatedData.p75orangeCycleAll",
@@ -283,10 +279,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.p75avgTimeImpaired",
             "calculatedData.p75avgTimeClimbing",
             "calculatedData.p75percentIncap",
+            "calculatedData.p75percentIncapEntireMatch",
             "calculatedData.p75percentImpaired",
-            "calculatedData.p75percentNoShow"
+            "calculatedData.p75percentNoShow",
+            "calculatedData.climbSuccessL1",
+            "calculatedData.climbSuccessL2",
+            "calculatedData.climbSuccessL3"
         ]
-        
+
         /**
          Values that should not be graphed
          */
@@ -302,40 +302,39 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "Avg. Good Decisions",
             "Avg. Bad Decisions"
         ]
-        
+
         /** Values that should be displayed as long text cells */
         let TIMDLongTextCells : [String] = [
             "superNotes",
-        ]
-        
+            ]
+
         let longTextCells : [String] = [
             "pitSEALsNotes",
             "pitClimbType"
         ]
-        
+
         let unrankedCells = [
             "selectedImageURL",
             "otherUrls"
         ]
-        
+
         /** Values to be displayed as percentages. */
         let percentageValues : [String] = [
         ]
-        
+
         let addCommasBetweenCapitals : [String] = []
-        
+
         let boolValues = [
             "pitHasCamera",
             "pitHasVision",
-            "pitHasPid",
             "pitHasGyro",
             "pitHasEncoders",
             "pitCanBuddyStartLevel2",
             "calculatedData.hasOrangeGroundIntake",
             "calculatedData.hasLemonGroundIntake"
         ]
-        
-        
+
+
         let keySetNamesOld = [
             "Information",
             "Ability - High Level",
@@ -344,7 +343,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "Percentages",
             "Pit Scouting / Robot Design",
             "Additional Info"
-            ]
+        ]
         // MARK: KeySets, TeamDetails keys.
         func keySetNames(_ minimalist : Bool) -> [String] {
             if minimalist {
@@ -371,7 +370,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
                 "Pit Scout",
                 "SEALS"
             ]
-            
         }
         
         /** Sections of teamDetails view. */
@@ -387,48 +385,46 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
                 pitKeys,
                 sealKeys
             ]
-            
         }
-        
+
         /** Segues to schedules, things unrelated to data */
         let defaultKeys = [
             "TeamInMatchDatas",
             "matchDatas"
         ]
-        
+
         let highLevel : [String] = [ //needed
             "calculatedData.firstPickAbility",
-             "calculatedData.secondPickAbility"
+            "calculatedData.secondPickAbility"
         ]
-        
+
         /** Keys relating to autonomous to be displayed on teamDetails. */
         let autoKeys: [String] = [
-        //Some stuff is not needed
-             "calculatedData.habLineSuccessL1",
-             "calculatedData.habLineSuccessL2"
+            //Some stuff is not needed
+            "calculatedData.habLineSuccessL1",
+            "calculatedData.habLineSuccessL2"
         ]
-        
+
         /** Keys relating to Teleoperated to be displayed on teamDetails */
         let teleKeys: [String] = [
-             "calculatedData.hasOrangeGroundIntake",
-             "calculatedData.hasLemonGroundIntake",
-             "calculatedData.avgOrangesScored",
-             "calculatedData.avgLemonsScored",
-             "calculatedData.avgOrangeFouls",
-             "calculatedData.avgLemonsSpilled",
-             "calculatedData.avgGoodDecisions",
-             "calculatedData.avgBadDecisions"
+            "calculatedData.hasOrangeGroundIntake",
+            "calculatedData.hasLemonGroundIntake",
+            "calculatedData.avgOrangesScored",
+            "calculatedData.avgLemonsScored",
+            "calculatedData.avgLemonsSpilled",
+            "calculatedData.avgGoodDecisions",
         ]
         
         /** Dict translating a key for a teamDetails datapoint to the key for the respective TIMD datapoint. Does not include "calculatedData." in the keys. */
         let teamDetailsToTIMD = [
+
             //status
             "avgTimeIncap" : "calculatedData.timeIncap",
             "percentNoShow" : "isNoShow",
+
             //scoring stuff
             "avgOrangesScored" : "calculatedData.orangesScored",
             "avgLemonsScored" : "calculatedData.lemonsScored",
-            "avgOrangeFouls" : "calculatedData.orangeFouls",
             "avgLemonsSpilled" : "calculatedData.lemonsSpilled",
             "habLineSuccessL1" : "crossedHabLine",
             "habLineSuccessL2" : "crossedHabLine",
@@ -439,6 +435,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "avgAgility" : "rankAgility",
             "avgDrivingAbility" : "calculatedData.drivingAbility",
             "avgDefense" : "rankDefense",
+
             //RScore super data
             "RScoreDrivingAbility" : "calculatedData.drivingAbility",
             "RScoreAgility" : "rankAgility",
@@ -450,22 +447,26 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             //Misc
             "actualNumRPs" : "calculatedData.numRPs",
             "numAutoPoints" : "calculatedData.numAutoPoints"
-            
-            ]
-        
+        ]
+
         /** Keys relating to the portions of the game that occur in the end (climbing, challenging, etc) */
         let endGame : [String] = [
-             "calculatedData.avgTimeClimbing"
+            "calculatedData.avgTimeClimbing",
+            "calculatedData.climbSuccessL1",
+            "calculatedData.climbSuccessL2",
+            "calculatedData.climbSuccessL3"
         ]
-        
+
         /** Keys relating to the status of a robot to be displayed on teamDetails */
         let statusKeys : [String] = [
-             "calculatedData.avgTimeIncap",
-             "calculatedData.percentIncap",
-             "calculatedData.percentImpaired",
-             "calculatedData.percentNoShow"
+            "calculatedData.avgTimeIncap",
+            "calculatedData.avgTimeImpaired",
+            "calculatedData.percentIncap",
+            "calculatedData.percentIncapEntireMatch",
+            "calculatedData.percentImpaired",
+            "calculatedData.percentNoShow"
         ]
-        
+
         /** Keys relating to the data the pit scout collects to be displayed on teamDetails */
         let pitKeys = [
             "pitDrivetrain",
@@ -474,20 +475,20 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitProgrammingLanguage",
             "pitWheelDiameter",
             "pitHasCamera",
-             "pitWeight",
-             "pitClimbType",
-             "pitHasVision",
-             "pitHasGyro",
-             "pitHasEncoders",
-             "pitCanBuddyStartLevel2",
-             "pitSandstormNavigationType"
-       ]
-        
+            "pitWeight",
+            "pitClimbType",
+            "pitHasVision",
+            "pitHasGyro",
+            "pitHasEncoders",
+            "pitCanBuddyStartLevel2",
+            "pitSandstormNavigationType"
+        ]
+
         /** Data collected by SEALS */
         let sealKeys = [
             "pitSEALsNotes",
-        ]
-        
+            ]
+
         /** Human readable names for CTIMD keys */
         let calculatedTeamInMatchDataHumanReadableKeys = [
             "First Pick Ability",
@@ -500,8 +501,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "Score Contribution"
         ]
     }
-    
-    
+
     static let superKeys = [
         //superNotes- They're in TIMDs, so see TeamDetails for more info
         "superNotes",
@@ -512,26 +512,27 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         //"calculatedData.totalNumGoodDecisions",
         //"calculatedData.totalNumBadDecisions"
     ]
+
     static let statusKeys : [String] = []
     static let miscKeys = ["uploadedData.miscellaneousNotes"]
-    
+
     /** Keys that should be booleans in graphs */
     static let boolGraphs : [String] = [
     ]
-    
+
     // MARK: TIMD keys
     /** Keys relating to the Autonomous period to be displayed in the TIMD view */
     static let TIMDAutoKeys : [String] = [
     ]
-    
+
     /** Keys relating to the Teleoperated period to be displayed in the TIMD view */
     static let TIMDTeleKeys : [String] = [
     ]
-    
+
     /** Keys relating to the status of a robot to be displayed in the TIMD view */
     static let TIMDStatusKeys : [String] = [
     ]
-    
+
     /** Keys relating to the data Super Scouts collect to be displayed in the TIMD view */
     static let TIMDSuperKeys = [
         "rankSpeed",
@@ -541,7 +542,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "numGoodDecisions",
         "numBadDecisions"
     ]
-    
+
     /** All sections of the TIMD view */
     static let TIMDKeys = [
         TIMDAutoKeys,
@@ -549,14 +550,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         TIMDStatusKeys,
         TIMDSuperKeys
     ]
-    
+
     /** A dictionary turning TIMD keys into teamDetails keys */
     static let graphTitleSwitch = [
         "calculatedData.RScoreSpeed" : "calculatedData.avgSpeed",
         "calculatedData.totalNumGoodDecisions" : "numGoodDecisions",
         "calculatedData.totalNumBadDecisions" : "numBadDecisions"
     ]
-    
+
     /** Team Details keys? */
     static let teamCalcKeys = [
         "actualSeed",
@@ -568,14 +569,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "predictedSeed",
         "secondPickAbility"
     ]
-    
+
     /** Calculated TIMD keys */
     static let calculatedTeamInMatchDataKeys = [
         "calculatedData.firstPickAbility",
         "calculatedData.numRPs",
         "calculatedData.secondPickAbility"
     ]
-    
+
     /** A dictionary with datapoints as keys and Human Readable versions as values */
     static let humanReadableNames = [
         "pitWidth" : "Robot Width",
@@ -589,23 +590,19 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "pitClimbType" : "Climb Type",
         "pitHasCamera" : "Has Camera",
         "pitHasVision" : "Has Vision",
-        "pitHasPid" : "Has PID",
         "pitHasGyro" : "Has Gyro",
         "pitHasEncoders" : "Has Encoders",
         "pitCanBuddyStartLevel2" : "Buddy Start L2",
         "pitSandstormNavigationType" : "Sandstorm Nav.",
         "pitHasOrangeShooter" : "Cargo Shooter",
-        "number" : "Number",
+        "teamNumber" : "Team Number",
         "name" : "Name",
         "actualRPs" : "Avg. RPs",
         "matchesPlayed" : "Matches Played",
         "matchDatas" : "Matches",
-        "pitSEALsNotes" : "SEALs Notes",
-        "superNotes" : "Super Notes",
-        "TeamInMatchDatas" : "TIMDs",
         "calculatedData" : "Calculated Data",
-        "calculatedData.totalSuperNotes" : "All Super Notes",
         "calculatedData.actualSeed" : "Seed",
+        "calculatedData.totalSuperNotes" : "Total Super Notes",
         "calculatedData.predictedRPs" : "Predicted RPs",
         "calculatedData.predictedSeed" : "Predicted Seed",
         "calculatedData.hasOrangeGroundIntake" : "Cargo Ground Intake",
@@ -614,9 +611,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.didPreloadLemon" : "Has Preloaded Panel",
         "calculatedData.avgOrangesScored" : "Avg. Cargo Scored",
         "calculatedData.avgLemonsScored" : "Avg. Panels Scored",
-        "calculatedData.avgOrangeFouls" : "Avg. Cargo Fouls",
         "calculatedData.avgLemonsSpilled" : "Avg. Panel Spills",
-        "calculatedData.lemonLoadSuccess" : "Panel Loading Success",
         "calculatedData.orangeCycleAll" : "Cargo Cycle Times",
         "calculatedData.orangeCycleL1" : "Cargo Cycle L1",
         "calculatedData.orangeCycleL2" : "Cargo Cycle L2",
@@ -646,6 +641,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.avgTimeImpaired" : "Avg. Time Impaired",
         "calculatedData.avgTimeClimbing" : "Avg. Time Climbing",
         "calculatedData.percentIncap" : "Percent Incap",
+        "calculatedData.percentIncapEntireMatch" : "Percent Entirely Incap Matches",
         "calculatedData.percentImpaired" : "Percent Impaired",
         "calculatedData.percentNoShow" : "Percent No Show",
         "calculatedData.predictedDedicatedLemonCycles" : "Predicted Panel Cycle Time",
@@ -657,14 +653,13 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.secondPickAbility" : "Second Pick Ability",
         "calculatedData.lfmAvgOrangesScored" : "LFM Avg. Cargo Scored",
         "calculatedData.lfmAvgLemonsScored" : "LFM Avg. Panels Scored",
-        "calculatedData.lfmAvgOrangeFouls" : "LFM Avg. Cargo Fouls",
         "calculatedData.lfmAvgLemonsSpilled" : "LFM Avg. Panel Spills",
         "calculatedData.lfmLemonLoadSuccess" : "LFM Panel Loading Success",
         "calculatedData.lfmOrangeCycleAll" : "LFM Cargo Cycle Times",
         "calculatedData.lfmOrangeCycleL1" : "LFM Cargo Cycle L1",
         "calculatedData.lfmOrangeCycleL2" : "LFM Cargo Cycle L2",
         "calculatedData.lfmOrangeCycleL3" : "LFM Cargo Cycle L3",
-        "calculatedData.lfmLemonCycleAll" : "LFM Panel Cycle",
+        "calculatedData.lfmLemonCycleAll" : "LFM Panel Cycle Times",
         "calculatedData.lfmLemonCycleL1" : "LFM Panel Cycle L1",
         "calculatedData.lfmLemonCycleL2" : "LFM Panel Cycle L2",
         "calculatedData.lfmLemonCycleL3" : "LFM Panel Cycle L3",
@@ -689,12 +684,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.lfmAvgTimeImpaired" : "LFM Avg. Time Impaired",
         "calculatedData.lfmAvgTimeClimbing" : "LFM Avg. Time Climbing",
         "calculatedData.lfmPercentIncap" : "LFM Percent Incap",
+        "calculatedData.lfmPercentIncapEntireMatch" : "LFM Percent Entirely Incap Matches",
         "calculatedData.lfmPercentImpaired" : "LFM Percent Impaired",
         "calculatedData.lfmPercentNoShow" : "LFM Percent No Show",
         "calculatedData.sdAvgOrangesScored" : "σ Cargo Scored",
         "calculatedData.sdAvgLemonsScored" : "σ Panels Scored",
-        "calculatedData.sdAvgOrangeFouls" : "σ Cargo Fouls",
-        "calculatedData.sdAvgLemonsSpilled" : "σ Lemon Spills",
+        "calculatedData.sdAvgLemonsSpilled" : "σ Panel Spills",
         "calculatedData.sdLemonLoadSuccess" : "σ Panel Loading Success",
         "calculatedData.sdOrangeCycleAll" : "σ Cargo Cycle Times",
         "calculatedData.sdOrangeCycleL1" : "σ Cargo Cycle L1",
@@ -725,11 +720,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.sdAvgTimeImpaired" : "σ Time Impaired",
         "calculatedData.sdAvgTimeClimbing" : "σ Time Climbing",
         "calculatedData.sdPercentIncap" : "σ Percent Incap",
+        "calculatedData.sdPercentIncapEntireMatch" : "σ Percent Entirely Incap Matches",
         "calculatedData.sdPercentImpaired" : "σ Percent Impaired",
         "calculatedData.sdPercentNoShow" : "σ Percent No Show",
         "calculatedData.p75avgOrangesScored" : "75% Avg. Cargo Scored",
         "calculatedData.p75avgLemonsScored" : "75% Avg. Panels Scored",
-        "calculatedData.p75avgOrangeFouls" : "75% Avg. Cargo Fouls",
         "calculatedData.p75avgLemonsSpilled" : "75% Avg. Panel Spills",
         "calculatedData.p75lemonLoadSuccess" : "75% Panel Loading Success",
         "calculatedData.p75orangeCycleAll" : "75% Cargo Cycle Times",
@@ -761,6 +756,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.p75avgTimeImpaired" : "75% Avg. Time Impaired",
         "calculatedData.p75avgTimeClimbing" : "75% Avg. Time Climbing",
         "calculatedData.p75percentIncap" : "75% Percent Incap",
+        "calculatedData.p75percentIncapEntireMatch" : "75% Percent Entirely Incap Matches",
         "calculatedData.p75percentImpaired" : "75% Percent Impaired",
         "calculatedData.p75percentNoShow" : "75% Percent No Show",
         "timeline" : "Timeline",
@@ -779,28 +775,28 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "robot1" : "Robot 1",
         "robot2" : "Robot 2",
         "actual" : "Actual Climb",
-        "teamNumber" : "Team Number",
+        "matchNumber" : "Match Number",
         "startingLevel" : "Starting Level",
         "crossedHabLine" : "Crossed Hab Line",
         "startingLocation" : "Starting Location",
         "preload" : "Preloaded Gamepiece",
+        "redCargoShipPreloads" : "Red Cargo Ship Preloads",
+        "blueCargoShipPreloads" : "Blue Cargo Ship Preloads",
         "driverStation" : "Driver Station",
         "isNoShow" : "No Show",
         "calculatedData.orangesScored" : "Cargo Scored",
         "calculatedData.lemonsScored" : "Panels Scored",
-        "calculatedData.orangeFouls" : "Cargo Fouls",
         "calculatedData.lemonsSpilled" : "Panel Spills",
+        "calculatedData.lemonLoadSuccess" : "Panel Loading Success",
         "calculatedData.timeIncap" : "Time Incap",
         "calculatedData.timeImpaired" : "Time Impaired",
         "calculatedData.timeClimbing" : "Time Climbing",
-        "cargoShipPreload" : "Cargo Ship Preload",
         "leftNear" : "Left-Near",
         "leftMid" : "Left-Mid",
         "leftFar" : "Left-Right",
         "rightNear" : "Right-Near",
         "rightMid" : "Right-Mid",
         "rightFar" : "Right-Far",
-        "matchNumber" : "Match Number",
         "blueTeams" : "Blue Teams",
         "redTeams" : "Red Teams",
         "noShowTeams" : "No Show Teams",
@@ -823,9 +819,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.blueChanceWin" : "Blue Win Chance",
         "calculatedData.redChanceWin" : "Red Win Chance",
         "calculatedData.bluePredictedClimbPoints" : "Blue Predicted Climb Points",
-        "calculatedData.redPredictedClimbPoints" : "Red Predicted Climb Points"
+        "calculatedData.redPredictedClimbPoints" : "Red Predicted Climb Points",
+        "calculatedData.climbSuccessL1" : "Level 1 Climb Success",
+        "calculatedData.climbSuccessL2" : "Level 2 Climb Success",
+        "calculatedData.climbSuccessL3" : "Level 3 Climb Success"
     ]
-    
+
     /**
      Rounds a given float value to a given number of decimal places.
      - parameter value: Input value
@@ -836,14 +835,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         let f = NumberFormatter()
         f.numberStyle = NumberFormatter.Style.decimal
         f.maximumFractionDigits = numDecimalPlaces
-        
+
         if val == 0 {
             return "0"
         }
-        
+
         return f.string(from: val)!
     }
-    
+
     /**
      Rounds a given double value to a given number of decimal places.
      - parameter value: Input value
@@ -854,19 +853,19 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         let f = NumberFormatter()
         f.numberStyle = NumberFormatter.Style.decimal
         f.maximumFractionDigits = numDecimalPlaces
-        
+
         if val == 0 {
             return "0"
         }
-        
+
         return f.string(from: val)!
     }
-    
+
     /** Returns a human readable name for a given key. */
     class func getHumanReadableNameForKey(_ key: String) -> String? {
         return humanReadableNames[key]
     }
-    
+
     /** Returns the key for a human readable name */
     class func findKeyForValue(_ value: String) ->String?
     {
@@ -877,10 +876,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
                 return key
             }
         }
-        
         return nil
     }
-    
+
     /**
      Returns a key for a given Human Readable Name.
      - parameter name: Human Readable Name
@@ -892,7 +890,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         }
         return computerReadableNames[name]
     }
-    
+
     /** Detects if a given value is null. */
     class func isNull(_ object: AnyObject?) -> Bool {
         if object_getClass(object) == object_getClass(NSNull()) {
@@ -900,7 +898,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         }
         return false
     }
-    
+
     /** Converts a value to one that is presentable as a string on the screen. It won't have Optional() or anything like that in it. */
     class func sp(thing : Any?) -> String {
         if thing != nil {
@@ -918,7 +916,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             return ""
         }
     }
-    
+
     /**Conversion of bool value to string "Yes" or "No".*/
     class func boolToString(b: Bool?) -> String? {
         let stringBool : String? = b?.description ?? nil
@@ -926,29 +924,28 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "true" : "Yes",
             "false" : "No"
         ]
+
         if stringBool != nil {
             let stringReadable = boolToStringValues[stringBool!]
             return (stringReadable)
         }
         return(nil)
     }
-    
+
     /**
      Unwraps a value.
      */
     class func unwrap(any:Any) -> Any {
-        
+
         let mi = Mirror(reflecting: any)
         if mi.displayStyle != .optional {
             return any
         }
-        
         if mi.children.count == 0 { return NSNull() }
         let (_, some) = mi.children.first!
         return some
-        
     }
-    
+
     /** Gets the human readable name from a key... use humanReadableNames instead */
     class func humanReadableNameFromKey(key: String) -> String {
         let noCalculatedDataKey = key.replacingOccurrences(of: "calculatedData.", with: "").replacingOccurrences(of: "pit", with: "pitScout")
@@ -971,10 +968,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         finalName = String(Array(finalName.characters)[0]).uppercased() + String(finalName.characters.dropFirst())
         return finalName
     }
-    
+
     static func isLowercase(string: String) -> Bool {
         let set = CharacterSet.lowercaseLetters
-        
+
         if let scala = UnicodeScalar(string) {
             return set.contains(scala)
         } else {
@@ -988,4 +985,3 @@ extension String {
         return  String(self.characters.prefix(ind)) + string + String(self.characters.suffix(self.characters.count-ind))
     }
 }
-

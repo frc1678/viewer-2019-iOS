@@ -34,7 +34,7 @@
     } else {
         multiCell.rankLabel.text = @"NA";
     }
-    multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
+    multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.teamNumber];
     
     if(team.actualRPs != -1.0) {
         //score label is average number of rps
