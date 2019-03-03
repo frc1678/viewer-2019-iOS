@@ -597,7 +597,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "pitHasOrangeShooter" : "Cargo Shooter",
         "teamNumber" : "Team Number",
         "name" : "Name",
-        "actualRPs" : "Avg. RPs",
         "matchesPlayed" : "Matches Played",
         "matchDatas" : "Matches",
         "calculatedData" : "Calculated Data",
