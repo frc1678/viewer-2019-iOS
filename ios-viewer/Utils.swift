@@ -123,6 +123,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "teamNumber",
             "name",
             "matchesPlayed",
+            "actualRPs",
             "calculatedData.totalSuperNotes",
             "calculatedData.actualSeed",
             "calculatedData.predictedRPs",
@@ -297,6 +298,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "Picklist Position",
             "Percent Incap",
             "Percent Impaired",
+            "Percent Entirely Incap Matches",
             "Cargo Ground Intake",
             "Panel Ground Intake",
             "Avg. Good Decisions",
@@ -420,6 +422,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
 
             //status
             "avgTimeIncap" : "calculatedData.timeIncap",
+            "avgTimeImpaired" : "calculatedData.timeImpaired",
             "percentNoShow" : "isNoShow",
 
             //scoring stuff
@@ -597,8 +600,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "pitHasOrangeShooter" : "Cargo Shooter",
         "teamNumber" : "Team Number",
         "name" : "Name",
-        "actualRPs" : "Avg. RPs",
         "matchesPlayed" : "Matches Played",
+        "actualRPs" : "Avg. RPs",
         "matchDatas" : "Matches",
         "calculatedData" : "Calculated Data",
         "calculatedData.actualSeed" : "Seed",
