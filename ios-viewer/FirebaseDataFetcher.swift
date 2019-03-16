@@ -320,7 +320,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 }
                 })
             //get a ref to timds
-            let timdRef = self.firebase.child("TeamInMatchDatas")
+            let timdRef = self.firebase.child("TIMDs")
             //if a new timd was added
             timdRef.observe(.childAdded, with: { [unowned self] (snap) -> Void in
                 DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
