@@ -119,6 +119,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitHasEncoders",
             "pitCanBuddyStartLevel2",
             "pitSandstormNavigationType",
+            "pitRampAbility",
             "pitHasOrangeShooter",
             "teamNumber",
             "name",
@@ -133,7 +134,21 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.didPreloadOrange",
             "calculatedData.didPreloadLemon",
             "calculatedData.avgOrangesScored",
+            "calculatedData.avgOrangesScoredL1",
+            "calculatedData.avgOrangesScoredL2",
+            "calculatedData.avgOrangesScoredL3",
+            "calculatedData.avgOrangesScoredSandstorm",
+            "calculatedData.avgOrangesScoredTeleL1",
+            "calculatedData.avgOrangesScoredTeleL2",
+            "calculatedData.avgOrangesScoredTeleL3",
             "calculatedData.avgLemonsScored",
+            "calculatedData.avgLemonsScoredL1",
+            "calculatedData.avgLemonsScoredL2",
+            "calculatedData.avgLemonsScoredL3",
+            "calculatedData.avgLemonsScoredSandstorm",
+            "calculatedData.avgLemonsScoredTeleL1",
+            "calculatedData.avgLemonsScoredTeleL2",
+            "calculatedData.avgLemonsScoredTeleL3",
             "calculatedData.avgLemonsSpilled",
             "calculatedData.lemonLoadSuccess",
             "calculatedData.orangeCycleAll",
@@ -285,7 +300,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.p75percentNoShow",
             "calculatedData.climbSuccessL1",
             "calculatedData.climbSuccessL2",
-            "calculatedData.climbSuccessL3"
+            "calculatedData.climbSuccessL3",
+            "calculatedData.selfClimbLevel",
+            "calculatedData.robot1ClimbLevel",
+            "calculatedData.robot2ClimbLevel"
         ]
 
         /**
@@ -307,7 +325,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
 
         /** Values that should be displayed as long text cells */
         let TIMDLongTextCells : [String] = [
-            "notes",
+            "superNotes",
             ]
 
         let longTextCells : [String] = [
@@ -363,14 +381,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             }
             return [
                 "Default",
-                "High Level",
                 "Status",
+                "SEALS",
                 "Autonomous",
                 "Teleoperated",
                 "End Game",
                 "Super Scout",
                 "Pit Scout",
-                "SEALS"
+                "High Level",
             ]
         }
         
@@ -378,14 +396,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         func keySets(_ minimalist : Bool) -> [[String]] {
             return [
                 defaultKeys,
-                highLevel,
                 statusKeys,
+                sealKeys,
                 autoKeys,
                 teleKeys,
                 endGame,
                 superKeys,
                 pitKeys,
-                sealKeys
+                highLevel,
             ]
         }
 
@@ -427,7 +445,21 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
 
             //scoring stuff
             "avgOrangesScored" : "calculatedData.orangesScored",
+            "avgOrangesScoredL1" : "calculatedData.orangesScoredL1",
+            "avgOrangesScoredL2" : "calculatedData.orangesScoredL2",
+            "avgOrangesScoredL3" : "calculatedData.orangesScoredL3",
+            "avgOrangesScoredSandstorm" : "calculatedData.orangesScoredSandstorm",
+            "avgOrangesScoredTeleL1" : "calculatedData.orangesScoredTeleL1",
+            "avgOrangesScoredTeleL2" : "calculatedData.orangesScoredTeleL2",
+            "avgOrangesScoredTeleL3" : "calculatedData.orangesScoredTeleL3",
             "avgLemonsScored" : "calculatedData.lemonsScored",
+            "avgLemonsScoredL1" : "calculatedData.lemonsScoredL1",
+            "avgLemonsScoredL2" : "calculatedData.lemonsScoredL2",
+            "avgLemonsScoredL3" : "calculatedData.lemonsScoredL3",
+            "avgLemonsScoredSandstorm" : "calculatedData.lemonsScoredSandstorm",
+            "avgLemonsScoredTeleL1" : "calculatedData.lemonsScoredTeleL1",
+            "avgLemonsScoredTeleL2" : "calculatedData.lemonsScoredTeleL2",
+            "avgLemonsScoredTeleL3" : "calculatedData.lemonsScoredTeleL3",
             "avgLemonsSpilled" : "calculatedData.lemonsSpilled",
             "habLineSuccessL1" : "crossedHabLine",
             "habLineSuccessL2" : "crossedHabLine",
@@ -484,7 +516,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitHasGyro",
             "pitHasEncoders",
             "pitCanBuddyStartLevel2",
-            "pitSandstormNavigationType"
+            "pitSandstormNavigationType",
+            "pitRampAbility"
         ]
 
         /** Data collected by SEALS */
@@ -534,13 +567,15 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
 
     /** Keys relating to the status of a robot to be displayed in the TIMD view */
     static let TIMDStatusKeys : [String] = [
+        "isNoShow",
+        "calculatedData.timeIncap"
     ]
 
     /** Keys relating to the data Super Scouts collect to be displayed in the TIMD view */
     static let TIMDSuperKeys = [
         "rankSpeed",
         "rankAgility",
-        "rankDefense",
+        //"rankDefense",
         "notes",
         "numGoodDecisions",
         "numBadDecisions"
@@ -597,6 +632,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "pitHasEncoders" : "Has Encoders",
         "pitCanBuddyStartLevel2" : "Buddy Start L2",
         "pitSandstormNavigationType" : "Sandstorm Nav.",
+        "pitRampAbility" : "Ramp Ability",
         "pitHasOrangeShooter" : "Cargo Shooter",
         "teamNumber" : "Team Number",
         "name" : "Name",
@@ -613,7 +649,21 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.didPreloadOrange" : "Has Preloaded Cargo",
         "calculatedData.didPreloadLemon" : "Has Preloaded Panel",
         "calculatedData.avgOrangesScored" : "Avg. Cargo Scored",
+        "calculatedData.avgOrangesScoredL1" : "Avg. Cargo Scored in Lvl 1",
+        "calculatedData.avgOrangesScoredL2" : "Avg. Cargo Scored in Lvl 2",
+        "calculatedData.avgOrangesScoredL3" : "Avg. Cargo Scored in Lvl 3",
+        "calculatedData.avgOrangesScoredSandstorm" : "Avg. Cargo Scored in Sandstorm",
+        "calculatedData.avgOrangesScoredTeleL1" : "Avg. Cargo Scored in Lvl 1 Tele",
+        "calculatedData.avgOrangesScoredTeleL2" : "Avg. Cargo Scored in Lvl 2 Tele",
+        "calculatedData.avgOrangesScoredTeleL3" : "Avg. Cargo Scored in Lvl 3 Tele",
         "calculatedData.avgLemonsScored" : "Avg. Panels Scored",
+        "calculatedData.avgLemonsScoredL1" : "Avg. Panels Scored in Lvl 1",
+        "calculatedData.avgLemonsScoredL2" : "Avg. Panels Scored in Lvl 2",
+        "calculatedData.avgLemonsScoredL3" : "Avg. Panels Scored in Lvl 3",
+        "calculatedData.avgLemonsScoredSandstorm" : "Avg. Panels Scored in Sandstorm",
+        "calculatedData.avgLemonsScoredTeleL1" : "Avg. Panels Scored in Lvl 1 Tele",
+        "calculatedData.avgLemonsScoredTeleL2" : "Avg. Panels Scored in Lvl 2 Tele",
+        "calculatedData.avgLemonsScoredTeleL3" : "Avg. Panels Scored in Lvl 3 Tele",
         "calculatedData.avgLemonsSpilled" : "Avg. Panel Spills",
         "calculatedData.orangeCycleAll" : "Cargo Cycle Times",
         "calculatedData.orangeCycleL1" : "Cargo Cycle L1",
@@ -772,7 +822,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "structure" : "Structure",
         "side" : "Side",
         "level" : "Level",
-        "cause" : "Cause",
         "attempted" : "Attempted Climb",
         "self" : "Self",
         "robot1" : "Robot 1",
@@ -788,7 +837,21 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "driverStation" : "Driver Station",
         "isNoShow" : "No Show",
         "calculatedData.orangesScored" : "Cargo Scored",
+        "calculatedData.orangesScoredL1" : "Cargo Scored in Lvl 1",
+        "calculatedData.orangesScoredL2" : "Cargo Scored in Lvl 2",
+        "calculatedData.orangesScoredl3" : "Cargo Scored in Lvl 3",
+        "calculatedData.orangesScoredSandstorm" : "Cargo Scored in Sandstorm",
+        "calculatedData.orangesScoredTeleL1" : "Cargo Scored in Lvl 1 Tele",
+        "calculatedData.orangesScoredTeleL2" : "Cargo Scored in Lvl 2 Tele",
+        "calculatedData.orangesScoredTeleL3" : "Cargo Scored in Lvl 3 Tele",
         "calculatedData.lemonsScored" : "Panels Scored",
+        "calculatedData.lemonsScoredL1" : "Panels Scored in Lvl 1",
+        "calculatedData.lemonsScoredL2" : "Panels Scored in Lvl 2",
+        "calculatedData.lemonsScoredL3" : "Panels Scored in Lvl 3",
+        "calculatedData.lemonsScoredSandstorm" : "Panels Scored in Sandstorm",
+        "calculatedData.lemonsScoredTeleL1" : "Panels Scored in Lvl 1 Tele",
+        "calculatedData.lemonsScoredTeleL2" : "Panels Scored in Lvl 2 Tele",
+        "calculatedData.lemonsScoredTeleL3" : "Panels Scored in Lvl 3 Tele",
         "calculatedData.lemonsSpilled" : "Panel Spills",
         "calculatedData.lemonLoadSuccess" : "Panel Loading Success",
         "calculatedData.timeIncap" : "Time Incap",
@@ -825,7 +888,15 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.redPredictedClimbPoints" : "Red Predicted Climb Points",
         "calculatedData.climbSuccessL1" : "Level 1 Climb Success",
         "calculatedData.climbSuccessL2" : "Level 2 Climb Success",
-        "calculatedData.climbSuccessL3" : "Level 3 Climb Success"
+        "calculatedData.climbSuccessL3" : "Level 3 Climb Success",
+        "rankSpeed" : "Speed",
+        "rankAgility" : "Agility",
+        "numGoodDecisions" : "Good Decisions",
+        "numBadDecisions" : "Bad Decisions",
+        "notes" : "Super Notes"
+        "calculatedData.selfClimbLevel" : "Self Climb Level",
+        "calculatedData.robot1ClimbLevel" : "1st Assisted Climb Level",
+        "calculatedData.robot2ClimbLevel" : "2nd Assisted Climb Level"
     ]
 
     /**

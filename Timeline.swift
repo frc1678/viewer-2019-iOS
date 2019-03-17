@@ -14,7 +14,6 @@ public final class Timeline: NSCoding {
   private struct SerializationKeys {
     static let location = "location"
     static let didSucceed = "didSucceed"
-    static let cause = "cause"
     static let side = "side"
     static let piece = "piece"
     static let actual = "actual"
@@ -29,7 +28,6 @@ public final class Timeline: NSCoding {
   // MARK: Properties
   public var location: String?
   public var didSucceed: Bool? = false
-  public var cause: String?
   public var side: String?
   public var piece: String?
     public var actual: [String:Int]?
@@ -55,7 +53,6 @@ public final class Timeline: NSCoding {
   public required init(json: JSON) {
     location = json[SerializationKeys.location].string
     didSucceed = json[SerializationKeys.didSucceed].boolValue
-    cause = json[SerializationKeys.cause].string
     side = json[SerializationKeys.side].string
     piece = json[SerializationKeys.piece].string
     actual = (json[SerializationKeys.actual].dictionaryObject as! [String : Int])
@@ -74,7 +71,6 @@ public final class Timeline: NSCoding {
     var dictionary: [String: Any] = [:]
     if let value = location { dictionary[SerializationKeys.location] = value }
     dictionary[SerializationKeys.didSucceed] = didSucceed
-    if let value = cause { dictionary[SerializationKeys.cause] = value }
     if let value = side { dictionary[SerializationKeys.side] = value }
     if let value = piece { dictionary[SerializationKeys.piece] = value }
     if let value = actual { dictionary[SerializationKeys.actual] = value }
@@ -91,7 +87,6 @@ public final class Timeline: NSCoding {
   required public init(coder aDecoder: NSCoder) {
     self.location = aDecoder.decodeObject(forKey: SerializationKeys.location) as? String
     self.didSucceed = aDecoder.decodeBool(forKey: SerializationKeys.didSucceed)
-    self.cause = aDecoder.decodeObject(forKey: SerializationKeys.cause) as? String
     self.side = aDecoder.decodeObject(forKey: SerializationKeys.side) as? String
     self.piece = aDecoder.decodeObject(forKey: SerializationKeys.piece) as? String
     self.actual = aDecoder.decodeObject(forKey: SerializationKeys.actual) as? [String:Int]
@@ -106,7 +101,6 @@ public final class Timeline: NSCoding {
   public func encode(with aCoder: NSCoder) {
     aCoder.encode(location, forKey: SerializationKeys.location)
     aCoder.encode(didSucceed, forKey: SerializationKeys.didSucceed)
-    aCoder.encode(cause, forKey: SerializationKeys.cause)
     aCoder.encode(side, forKey: SerializationKeys.side)
     aCoder.encode(piece, forKey: SerializationKeys.piece)
     aCoder.encode(actual, forKey: SerializationKeys.actual)
