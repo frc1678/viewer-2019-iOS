@@ -567,13 +567,15 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
 
     /** Keys relating to the status of a robot to be displayed in the TIMD view */
     static let TIMDStatusKeys : [String] = [
+        "isNoShow",
+        "calculatedData.timeIncap"
     ]
 
     /** Keys relating to the data Super Scouts collect to be displayed in the TIMD view */
     static let TIMDSuperKeys = [
         "rankSpeed",
         "rankAgility",
-        "rankDefense",
+        //"rankDefense",
         "notes",
         "numGoodDecisions",
         "numBadDecisions"
@@ -887,6 +889,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.climbSuccessL1" : "Level 1 Climb Success",
         "calculatedData.climbSuccessL2" : "Level 2 Climb Success",
         "calculatedData.climbSuccessL3" : "Level 3 Climb Success",
+        "rankSpeed" : "Speed",
+        "rankAgility" : "Agility",
+        "numGoodDecisions" : "Good Decisions",
+        "numBadDecisions" : "Bad Decisions",
+        "notes" : "Super Notes"
         "calculatedData.selfClimbLevel" : "Self Climb Level",
         "calculatedData.robot1ClimbLevel" : "1st Assisted Climb Level",
         "calculatedData.robot2ClimbLevel" : "2nd Assisted Climb Level"
