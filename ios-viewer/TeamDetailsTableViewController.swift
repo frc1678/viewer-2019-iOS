@@ -294,7 +294,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                          notesCell.notesLabel.text = team!.pitSEALsNotes
                     }
                     else if dataKey == "pitClimbType" {
-                        notesCell.notesLabel!.text = "Self:  \(team!.pitClimbType?["self"]!) , Robot 1:  \(team!.pitClimbType?["robot1"]!) , Robot 2:  \(team!.pitClimbType?["robot2"]!)"
+                        notesCell.notesLabel!.text! = "Self:  \(String(describing: team!.pitClimbType?["self"] ?? 0)) , Robot 1:  \(String(describing: team!.pitClimbType?["robot1"] ?? 0)) , Robot 2:  \(String(describing: team!.pitClimbType?["robot2"] ?? 0))"
                     }
                     notesCell.selectionStyle = UITableViewCellSelectionStyle.none
                     cell = notesCell
