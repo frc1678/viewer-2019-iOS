@@ -186,7 +186,7 @@ class CurrentMatchManager: NSObject {
         }
     }
     
-    var matchDetailsScroll: Bool? {
+    var matchDetailsScroll: Bool? = false {
         didSet {
             cache.set(value: NSKeyedArchiver.archivedData(withRootObject: matchDetailsScroll!), key: "matchDetailsScroll")
         }
