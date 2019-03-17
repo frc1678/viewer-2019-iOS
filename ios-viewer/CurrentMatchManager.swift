@@ -81,7 +81,7 @@ class CurrentMatchManager: NSObject {
                     self.showRP = id
                 }
             } else {
-                self.showRP = false
+                self.showRP = true
             }
         }
         cache.fetch(key: "matchDetailsScroll").onSuccess { (d) -> () in
@@ -153,9 +153,13 @@ class CurrentMatchManager: NSObject {
     }
     
     var defaultMatchDetailsDatapoints: [String] = [
-        "calculatedData.hasOrangeGroundIntake",
         "calculatedData.percentIncap",
-        "calculatedData.orangeCycleAll",
+        "calculatedData.avgOrangesScored",
+        "calculatedData.avgLemonsScored",
+        "calculatedData.climbSuccessL3",
+        "calculatedData.climbSuccessL1",
+        "calculatedData.habLineSuccessL1",
+        "calculatedData.habLineSuccessL2",
     ]
     
     @objc var matchDetailsDatapoints = [String]() {
@@ -182,7 +186,7 @@ class CurrentMatchManager: NSObject {
         }
     }
     
-    var matchDetailsScroll: Bool? {
+    var matchDetailsScroll: Bool? = false {
         didSet {
             cache.set(value: NSKeyedArchiver.archivedData(withRootObject: matchDetailsScroll!), key: "matchDetailsScroll")
         }
