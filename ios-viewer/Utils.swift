@@ -319,13 +319,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "Percent Entirely Incap Matches",
             "Cargo Ground Intake",
             "Panel Ground Intake",
-            "Avg. Good Decisions",
-            "Avg. Bad Decisions"
         ]
 
         /** Values that should be displayed as long text cells */
         let TIMDLongTextCells : [String] = [
             "superNotes",
+            "notes"
             ]
 
         let longTextCells : [String] = [
@@ -470,6 +469,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "avgAgility" : "rankAgility",
             "avgDrivingAbility" : "calculatedData.drivingAbility",
             "avgDefense" : "rankDefense",
+            "avgGoodDecisions" : "calculatedData.numGoodDecisions",
+            "avgBadDecisions" : "calculatedData.numBadDecisions",
 
             //RScore super data
             "RScoreDrivingAbility" : "calculatedData.drivingAbility",
@@ -893,7 +894,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "rankAgility" : "Agility",
         "numGoodDecisions" : "Good Decisions",
         "numBadDecisions" : "Bad Decisions",
-        "notes" : "Super Notes"
+        "notes" : "Super Notes:",
         "calculatedData.selfClimbLevel" : "Self Climb Level",
         "calculatedData.robot1ClimbLevel" : "1st Assisted Climb Level",
         "calculatedData.robot2ClimbLevel" : "2nd Assisted Climb Level"
