@@ -263,7 +263,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     //set title
                         notesCell.titleLabel?.text = Utils.humanReadableNames[dataKey]
                     //get and sort timds by match num
-                    let TIMDs = firebaseFetcher?.getTIMDataForTeam(self.team!).sorted { $0.matchNumber! < $1.matchNumber! }
+                    var TIMDs: [TeamInMatchData]? = []
+                    TIMDs = firebaseFetcher?.getTIMDataForTeam(self.team!).sorted { $0.matchNumber! < $1.matchNumber! }
                     var datas = [String]()
                     //iterate thru timds
                     for TIMD in TIMDs! {

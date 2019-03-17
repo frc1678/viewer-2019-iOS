@@ -103,7 +103,6 @@ public final class CalculatedTeamInMatchData: NSCoding {
   public var selfClimbLevel: Int?
   public var robot1ClimbLevel: Int?
   public var robot2ClimbLevel: Int?
-
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
   ///

@@ -13,6 +13,8 @@ public final class Team: NSObject, NSCoding {
   // MARK: Declaration for string constants to be used to decode and also serialize.
   private struct SerializationKeys {
     static let name = "name"
+    static let redActualRPs = "redActualRPs"
+    static let blueActualRPs = "blueActualRPs"
     static let actualRPs = "actualRPs"
     static let pitMinHeight = "pitMinHeight"
     static let pitHasVision = "pitHasVision"
@@ -39,6 +41,8 @@ public final class Team: NSObject, NSCoding {
 
   // MARK: Properties
   public var name: String?
+  @objc public var redActualRPs: Int = -1
+  @objc public var blueActualRPs: Int = -1
   @objc public var actualRPs: Int = -1
   public var pitMinHeight: Int?
   public var pitHasVision: Bool? = false
@@ -76,6 +80,8 @@ public final class Team: NSObject, NSCoding {
   /// - parameter json: JSON object from SwiftyJSON.
   public required init(json: JSON) {
     name = json[SerializationKeys.name].string
+    redActualRPs = json[SerializationKeys.redActualRPs].intValue
+    blueActualRPs = json[SerializationKeys.blueActualRPs].intValue
     actualRPs = json[SerializationKeys.actualRPs].intValue
     pitMinHeight = json[SerializationKeys.pitMinHeight].int
     pitHasVision = json[SerializationKeys.pitHasVision].boolValue
@@ -106,6 +112,8 @@ public final class Team: NSObject, NSCoding {
   public func dictionaryRepresentation() -> [String: Any] {
     var dictionary: [String: Any] = [:]
     if let value = name { dictionary[SerializationKeys.name] = value }
+    dictionary[SerializationKeys.redActualRPs] = redActualRPs
+    dictionary[SerializationKeys.blueActualRPs] = blueActualRPs
     dictionary[SerializationKeys.actualRPs] = actualRPs
     if let value = pitMinHeight { dictionary[SerializationKeys.pitMinHeight] = value }
     dictionary[SerializationKeys.pitHasVision] = pitHasVision
@@ -134,6 +142,8 @@ public final class Team: NSObject, NSCoding {
   // MARK: NSCoding Protocol
   required public init(coder aDecoder: NSCoder) {
     self.name = aDecoder.decodeObject(forKey: SerializationKeys.name) as? String
+    self.redActualRPs = aDecoder.decodeInteger(forKey: SerializationKeys.redActualRPs)
+    self.blueActualRPs = aDecoder.decodeInteger(forKey: SerializationKeys.blueActualRPs)
     self.actualRPs = aDecoder.decodeInteger(forKey: SerializationKeys.actualRPs)
     self.pitMinHeight = aDecoder.decodeObject(forKey: SerializationKeys.pitMinHeight) as? Int
     self.pitHasVision = aDecoder.decodeObject(forKey: SerializationKeys.pitHasVision) as? Bool
@@ -160,6 +170,8 @@ public final class Team: NSObject, NSCoding {
 
   public func encode(with aCoder: NSCoder) {
     aCoder.encode(name, forKey: SerializationKeys.name)
+    aCoder.encode(redActualRPs, forKey: SerializationKeys.redActualRPs)
+    aCoder.encode(blueActualRPs, forKey: SerializationKeys.redActualRPs)
     aCoder.encode(actualRPs, forKey: SerializationKeys.actualRPs)
     aCoder.encode(pitMinHeight, forKey: SerializationKeys.pitMinHeight)
     aCoder.encode(pitHasVision, forKey: SerializationKeys.pitHasVision)
