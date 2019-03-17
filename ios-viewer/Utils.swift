@@ -363,14 +363,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             }
             return [
                 "Default",
-                "High Level",
                 "Status",
+                "SEALS",
                 "Autonomous",
                 "Teleoperated",
                 "End Game",
                 "Super Scout",
                 "Pit Scout",
-                "SEALS"
+                "High Level",
             ]
         }
         
@@ -378,14 +378,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         func keySets(_ minimalist : Bool) -> [[String]] {
             return [
                 defaultKeys,
-                highLevel,
                 statusKeys,
+                sealKeys,
                 autoKeys,
                 teleKeys,
                 endGame,
                 superKeys,
                 pitKeys,
-                sealKeys
+                highLevel,
             ]
         }
 
