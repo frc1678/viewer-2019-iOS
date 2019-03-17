@@ -318,6 +318,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         unrankedCell.detailLabel!.text! = String(describing: team!.pitLength ?? 0)
                     } else if dataKey == "pitSandstormNavigationType" {
                         unrankedCell.detailLabel!.text! = (team?.pitSandstormNavigationType) ?? ""
+                    } else if dataKey == "pitRampAbility" {
+                        unrankedCell.detailLabel!.text! = String(describing: team?.pitRampAbility ?? 0)
                     } else if Utils.teamDetailsKeys.addCommasBetweenCapitals.contains(dataKey) {
                         unrankedCell.detailLabel.text = "\(insertCommasAndSpacesBetweenCapitalsInString(roundValue(dataPoint!, toDecimalPlaces: 2)))"
                     } else if Utils.teamDetailsKeys.boolValues.contains(dataKey) {

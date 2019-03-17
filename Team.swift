@@ -33,6 +33,7 @@ public final class Team: NSObject, NSCoding {
     static let pitWheelDiameter = "pitWheelDiameter"
     static let pitClimbType = "pitClimbType"
     static let pitSEALsNotes = "pitSEALsNotes"
+    static let pitRampAbility = "pitRampAbility"
     static let calculatedData = "calculatedData"
   }
 
@@ -56,8 +57,9 @@ public final class Team: NSObject, NSCoding {
   public var pitSandstormNavigationType: String?
   public var pitMaxHeight: Int?
   public var pitWheelDiameter: String?
-    public var pitClimbType: [String:Int]?
-    public var pitSEALsNotes: String?
+  public var pitClimbType: [String:Int]?
+  public var pitSEALsNotes: String?
+  public var pitRampAbility: Int?
   @objc public var calculatedData: CalculatedTeamData?
 
   // MARK: SwiftyJSON Initializers
@@ -94,6 +96,7 @@ public final class Team: NSObject, NSCoding {
     pitWheelDiameter = json[SerializationKeys.pitWheelDiameter].string
     pitClimbType = (json[SerializationKeys.pitClimbType].dictionaryObject as? [String:Int])
     pitSEALsNotes = json[SerializationKeys.pitSEALsNotes].string
+    pitRampAbility = json[SerializationKeys.pitRampAbility].int
     calculatedData = CalculatedTeamData(json: json[SerializationKeys.calculatedData])
   }
 
@@ -123,6 +126,7 @@ public final class Team: NSObject, NSCoding {
     if let value = pitWheelDiameter { dictionary[SerializationKeys.pitWheelDiameter] = value }
     if let value = pitClimbType { dictionary[SerializationKeys.pitClimbType] = value }
     if let value = pitSEALsNotes { dictionary[SerializationKeys.pitSEALsNotes] = value }
+    if let value = pitRampAbility { dictionary[SerializationKeys.pitRampAbility] = value}
     if let value = calculatedData { dictionary[SerializationKeys.calculatedData] = value.dictionaryRepresentation() }
     return dictionary
   }
@@ -150,6 +154,7 @@ public final class Team: NSObject, NSCoding {
     self.pitWheelDiameter = aDecoder.decodeObject(forKey: SerializationKeys.pitWheelDiameter) as? String
     self.pitClimbType = aDecoder.decodeObject(forKey: SerializationKeys.pitClimbType) as? [String:Int]
     self.pitSEALsNotes = aDecoder.decodeObject(forKey: SerializationKeys.pitSEALsNotes) as? String
+    self.pitRampAbility = aDecoder.decodeObject(forKey: SerializationKeys.pitRampAbility) as? Int
     self.calculatedData = aDecoder.decodeObject(forKey: SerializationKeys.calculatedData) as? CalculatedTeamData
   }
 
@@ -175,6 +180,7 @@ public final class Team: NSObject, NSCoding {
     aCoder.encode(pitWheelDiameter, forKey: SerializationKeys.pitWheelDiameter)
     aCoder.encode(pitClimbType, forKey: SerializationKeys.pitClimbType)
     aCoder.encode(pitSEALsNotes, forKey: SerializationKeys.pitSEALsNotes)
+    aCoder.encode(pitRampAbility, forKey: SerializationKeys.pitRampAbility)
     aCoder.encode(calculatedData, forKey: SerializationKeys.calculatedData)
   }
 
