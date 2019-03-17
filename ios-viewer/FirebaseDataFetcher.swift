@@ -692,7 +692,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             }
         }
         searchArray.append(tempWord)
-        for match in self.matches  {
+        for match in self.currentMatchManager.matches  {
             for i in searchArray {
                 for teamNum in match.redTeams! {
                     if filteredMatches.contains(match) != true {
