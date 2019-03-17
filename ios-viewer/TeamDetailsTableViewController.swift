@@ -7,12 +7,10 @@
 //
 
 import UIKit
-import MWPhotoBrowser
-import SDWebImage
 import Haneke      
 
 //TableViewDataSource/Delegate allows vc to contain a table view/pass in info.
-class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, UIDocumentInteractionControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate {
+class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIDocumentInteractionControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate {
     
     var firebaseFetcher = AppDelegate.getAppDelegate().firebaseFetcher
     //setup visuals
@@ -37,95 +35,18 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     var num: Int? = nil
     var showMinimalistTeamDetails = false
     var shareController: UIDocumentInteractionController!
-    var photoBrowser = MWPhotoBrowser()
-    var photos: [MWPhoto] = []
     
     func reload() {
         if team != nil {
             if team?.teamNumber != nil {
                 tableView?.reloadData()
                 self.updateTitleAndTopInfo()
-                
-                //self.reloadImage()
                 self.resetTableViewHeight()
             }
         }
         
     }
-    
-    //sets selectedImage
-    /*func reloadImage() {
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-            //if team exists, if imageView exists
-            if let team = self.team,
-                let imageView = self.teamSelectedImageView {
-                    //if selected image name exists
-                    if team.pitSelectedImage != nil {
-                        //check the cache to see if the image is saved
-                        self.firebaseFetcher?.getImageForTeam((self.team?.number)!, fetchedCallback: { (image) -> () in
-                            DispatchQueue.main.async(execute: { () -> Void in
-                                //set the selected image
-                                imageView.image = image
-                                self.resetTableViewHeight()
-                            })
-                            }, couldNotFetch: {
-                                DispatchQueue.main.async(execute: { () -> Void in
-                                    //team has images
-                                    if team.pitAllImageURLs != nil {
-                                        //team has selected image
-                                        if team.pitSelectedImage != nil && team.pitSelectedImage != "" {
-                                            //get url
-                                            let url = URL(string: (Array(Array(team.pitAllImageURLs!)).filter { $0.contains((team.pitSelectedImage!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!
-                                            //set imageview
-                                            imageView.hnk_setImageFromURL(url, failure: { _ in
-                                                print("<reloadImage()> Failed to load image")
-                                            }, success: { _ in
-                                                print("<reloadImage()> Loaded image, reseting height...")
-                                                self.resetTableViewHeight()
-                                            })
-                                            
-                                        }
-                                    }
-                                })
-                        })
-                    }
-                    let noRobotPhoto = UIImage(named: "SorryNoRobotPhoto")
-                    //if team has urls
-                    if let urls = self.team?.pitAllImageURLs {
-                        //iterate thru urls
-                        for url in urls {
-                            //if not all photos are downloaded
-                            if self.photos.count < self.team!.pitAllImageURLs!.count {
-                                //add this photo
-                                self.photos.append(MWPhoto(url: URL(string: url)))
-                            }
-                        }
-                    }
-                //if there's a selected image
-                if self.team?.pitSelectedImage != nil && self.team?.pitSelectedImage != "string" {
-                    //if photos are downloaded and image view is not the same as the image for the url
-                    if self.teamSelectedImageView.image != MWPhoto(url: URL(string: (Array(Array(team.pitAllImageURLs!)).filter { $0.contains((team.pitSelectedImage!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!) && self.photos.count > 0 {
-                        //if photos are downloaded and the first one is not a no robot photo and it's height is greater than 0
-                        if self.photos.count > 0 && self.photos[0].underlyingImage != noRobotPhoto && (self.photos[0].underlyingImage ?? UIImage()).size.height > 0 {
-                            DispatchQueue.main.async(execute: { () -> Void in
-                                //selected image is the first picture
-                                let selImage = MWPhoto(url: URL(string: (Array(Array(team.pitAllImageURLs!)).filter { $0.contains((team.pitSelectedImage!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!)
-                                selImage?.loadUnderlyingImageAndNotify()
-                                self.teamSelectedImageView.image = selImage?.underlyingImage
-                                self.resetTableViewHeight()
-                               
 
-                            })
-                            
-                        }
-                        self.resetTableViewHeight()
-                    }
-                }
-            }
-        }
-        self.resetTableViewHeight()
-    }*/
-    
     //reset the height of the table so info doesn't go off
     func resetTableViewHeight() {
         DispatchQueue.main.async(execute: { () -> Void in
@@ -140,7 +61,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             }
         })
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reload()
@@ -151,18 +72,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         tableView.delegate = self
         
         self.navigationController?.delegate = self
-        self.photoBrowser.delegate = self
         self.scrollView.delegate = self
-        
-        //array of all photos
-        photos = []
-        
-        //longpress recognizer
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(TeamDetailsTableViewController.rankingDetailsSegue(_:)))
-        self.view.addGestureRecognizer(longPress)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(TeamDetailsTableViewController.didTapImage(_:)))
-        self.teamSelectedImageView.addGestureRecognizer(tap)
-        
+
         //constraints
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 1
@@ -188,16 +99,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         } else if recognizer.state == UIGestureRecognizerState.began {
             self.teamNumberLabel.textColor = UIColor.green
         } 
-    }
-    
-    //Image is tapped
-    @objc func didTapImage(_ recognizer: UITapGestureRecognizer) {
-        if recognizer.state == UIGestureRecognizerState.recognized {
-            //navigate to image browser
-            let nav = UINavigationController(rootViewController: self.photoBrowser)
-            nav.delegate = self
-            self.present(nav, animated: true, completion: nil)
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -477,31 +378,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         }
     }
     
-    /**
-     Returns the number of photos in a PhotoBrowser.
-     
-    - parameter photoBrowser: PhotoBrowser you want the function to count.
-    */
-    func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt {
-        return UInt(photos.count)
-    }
-    
-    /**
-    Initializes the photoBrowser.
-     
-    - parameter photoBrowser: The photoBrowser you want to initialize.
-     
-    - parameter photoAt: The index at which the photo you're initializing is located.
-     
-    - returns: The photo at the index you requested.
-    */
-    func photoBrowser(_ photoBrowser: MWPhotoBrowser!, photoAt index: UInt) -> MWPhotoProtocol! {
-        if index < UInt(photos.count) {
-            return photos[Int(index)]
-        }
-        return nil;
-    }
-    
     //preparing to change viewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         self.teamSelectedImageView.isUserInteractionEnabled = true;
@@ -509,20 +385,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if let dest = segue.destination as? SortedRankTableViewController {
                 dest.keyPath = sender as! String
             }
-        } else if segue.identifier == "Photos" {
-            let browser = segue.destination as! MWPhotoBrowser;
-            
-            browser.delegate = self;
-            
-            browser.displayActionButton = true; // Show action button to allow sharing, copying, etc (defaults to YES)
-            browser.displayNavArrows = false; // Whether to display left and right nav arrows on toolbar (defaults to NO)
-            browser.displaySelectionButtons = false; // Whether selection buttons are shown on each image (defaults to NO)
-            browser.zoomPhotosToFill = true; // Images that almost fill the screen will be initially zoomed to fill (defaults to YES)
-            browser.alwaysShowControls = false; // Allows to control whether the bars and controls are always visible or whether they fade away to show the photo full (defaults to NO)
-            browser.enableGrid = false; // Whether to allow the viewing of all the photo thumbnails on a grid (defaults to YES)
-            
-            SDImageCache.shared().maxCacheSize = UInt(20 * 1024 * 1024);
-        } else if segue.identifier == "Matches" {
+        }else if segue.identifier == "Matches" {
             let matchesForTeamController = segue.destination as! SpecificTeamScheduleTableViewController
             
             //if team exists
