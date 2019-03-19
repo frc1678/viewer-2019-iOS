@@ -7,12 +7,10 @@
 //
 
 import UIKit
-import MWPhotoBrowser
-import SDWebImage
-import Haneke
+import Haneke      
 
 //TableViewDataSource/Delegate allows vc to contain a table view/pass in info.
-class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, UIDocumentInteractionControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate {
+class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIDocumentInteractionControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate {
     
     var firebaseFetcher = AppDelegate.getAppDelegate().firebaseFetcher
     //setup visuals
@@ -28,7 +26,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     @objc var team: Team? = nil {
         didSet {
-            num = self.team?.number
+            num = self.team?.teamNumber
             updateTitleAndTopInfo()
             reload()
         }
@@ -37,94 +35,18 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     var num: Int? = nil
     var showMinimalistTeamDetails = false
     var shareController: UIDocumentInteractionController!
-    var photoBrowser = MWPhotoBrowser()
-    var photos: [MWPhoto] = []
     
     func reload() {
         if team != nil {
-            if team?.number != nil {
+            if team?.teamNumber != nil {
                 tableView?.reloadData()
                 self.updateTitleAndTopInfo()
-                
-                //self.reloadImage()
+                self.resetTableViewHeight()
             }
         }
         
     }
-    
-    //sets selectedImage
-    /*func reloadImage() {
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-            //if team exists, if imageView exists
-            if let team = self.team,
-                let imageView = self.teamSelectedImageView {
-                    //if selected image name exists
-                    if team.pitSelectedImage != nil {
-                        //check the cache to see if the image is saved
-                        self.firebaseFetcher?.getImageForTeam((self.team?.number)!, fetchedCallback: { (image) -> () in
-                            DispatchQueue.main.async(execute: { () -> Void in
-                                //set the selected image
-                                imageView.image = image
-                                self.resetTableViewHeight()
-                            })
-                            }, couldNotFetch: {
-                                DispatchQueue.main.async(execute: { () -> Void in
-                                    //team has images
-                                    if team.pitAllImageURLs != nil {
-                                        //team has selected image
-                                        if team.pitSelectedImage != nil && team.pitSelectedImage != "" {
-                                            //get url
-                                            let url = URL(string: (Array(Array(team.pitAllImageURLs!)).filter { $0.contains((team.pitSelectedImage!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!
-                                            //set imageview
-                                            imageView.hnk_setImageFromURL(url, failure: { _ in
-                                                print("<reloadImage()> Failed to load image")
-                                            }, success: { _ in
-                                                print("<reloadImage()> Loaded image, reseting height...")
-                                                self.resetTableViewHeight()
-                                            })
-                                            
-                                        }
-                                    }
-                                })
-                        })
-                    }
-                    let noRobotPhoto = UIImage(named: "SorryNoRobotPhoto")
-                    //if team has urls
-                    if let urls = self.team?.pitAllImageURLs {
-                        //iterate thru urls
-                        for url in urls {
-                            //if not all photos are downloaded
-                            if self.photos.count < self.team!.pitAllImageURLs!.count {
-                                //add this photo
-                                self.photos.append(MWPhoto(url: URL(string: url)))
-                            }
-                        }
-                    }
-                //if there's a selected image
-                if self.team?.pitSelectedImage != nil && self.team?.pitSelectedImage != "string" {
-                    //if photos are downloaded and image view is not the same as the image for the url
-                    if self.teamSelectedImageView.image != MWPhoto(url: URL(string: (Array(Array(team.pitAllImageURLs!)).filter { $0.contains((team.pitSelectedImage!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!) && self.photos.count > 0 {
-                        //if photos are downloaded and the first one is not a no robot photo and it's height is greater than 0
-                        if self.photos.count > 0 && self.photos[0].underlyingImage != noRobotPhoto && (self.photos[0].underlyingImage ?? UIImage()).size.height > 0 {
-                            DispatchQueue.main.async(execute: { () -> Void in
-                                //selected image is the first picture
-                                let selImage = MWPhoto(url: URL(string: (Array(Array(team.pitAllImageURLs!)).filter { $0.contains((team.pitSelectedImage!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!)
-                                selImage?.loadUnderlyingImageAndNotify()
-                                self.teamSelectedImageView.image = selImage?.underlyingImage
-                                self.resetTableViewHeight()
-                               
 
-                            })
-                            
-                        }
-                        self.resetTableViewHeight()
-                    }
-                }
-            }
-        }
-        self.resetTableViewHeight()
-    }*/
-    
     //reset the height of the table so info doesn't go off
     func resetTableViewHeight() {
         DispatchQueue.main.async(execute: { () -> Void in
@@ -139,7 +61,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             }
         })
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reload()
@@ -150,21 +72,13 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         tableView.delegate = self
         
         self.navigationController?.delegate = self
-        self.photoBrowser.delegate = self
         self.scrollView.delegate = self
-        
-        //array of all photos
-        photos = []
-        
-        //longpress recognizer
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(TeamDetailsTableViewController.rankingDetailsSegue(_:)))
-        self.view.addGestureRecognizer(longPress)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(TeamDetailsTableViewController.didTapImage(_:)))
-        self.teamSelectedImageView.addGestureRecognizer(tap)
-        
+
         //constraints
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 44.0
+        self.tableView.estimatedRowHeight = 1
+        self.tableView.estimatedSectionHeaderHeight = 0
+        self.tableView.estimatedSectionFooterHeight = 0
         
     }
     
@@ -185,16 +99,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         } else if recognizer.state == UIGestureRecognizerState.began {
             self.teamNumberLabel.textColor = UIColor.green
         } 
-    }
-    
-    //Image is tapped
-    @objc func didTapImage(_ recognizer: UITapGestureRecognizer) {
-        if recognizer.state == UIGestureRecognizerState.recognized {
-            //navigate to image browser
-            let nav = UINavigationController(rootViewController: self.photoBrowser)
-            nav.delegate = self
-            self.present(nav, animated: true, completion: nil)
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -229,7 +133,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         //if team exists
         if team != nil {
             //if team is not real (team number)
-            if team!.number == -1 {
+            if team!.teamNumber == -1 {
                 //no team number
                 cell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailStringCell", for: indexPath)
                 cell.textLabel?.text = "No team yet..."
@@ -257,12 +161,11 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 if Utils.teamDetailsKeys.TIMDLongTextCells.contains(dataKey) {
                     //get cell
                     let notesCell: ResizableNotesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailStringCell", for: indexPath) as! ResizableNotesTableViewCell
-                    
                     //set title
-                    notesCell.titleLabel?.text = Utils.humanReadableNames[dataKey]
-                    
+                        notesCell.titleLabel?.text = Utils.humanReadableNames[dataKey]
                     //get and sort timds by match num
-                    let TIMDs = firebaseFetcher?.getTIMDataForTeam(self.team!).sorted { $0.matchNumber! < $1.matchNumber! }
+                    var TIMDs: [TeamInMatchData]? = []
+                    TIMDs = firebaseFetcher?.getTIMDataForTeam(self.team!).sorted { $0.matchNumber! < $1.matchNumber! }
                     var datas = [String]()
                     //iterate thru timds
                     for TIMD in TIMDs! {
@@ -273,6 +176,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                             datas.append(dataString)
                         }
                     }
+ 
                     //consolidate into a single string file like so:
                     /*
                      Q#: Notes
@@ -287,7 +191,12 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 } else if Utils.teamDetailsKeys.longTextCells.contains(dataKey) {
                     let notesCell: ResizableNotesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailStringCell", for: indexPath) as! ResizableNotesTableViewCell
                     notesCell.titleLabel?.text = Utils.humanReadableNames[dataKey]
-                    notesCell.notesLabel.text = team!.pitSEALsNotes
+                    if dataKey == "pitSEALsNotes" {
+                         notesCell.notesLabel.text = team!.pitSEALsNotes
+                    }
+                    else if dataKey == "pitClimbType" {
+                        notesCell.notesLabel!.text = "Self:  \(String(describing: team!.pitClimbType?["self"] ?? 0)), Robot 1:  \(String(describing: team!.pitClimbType?["robot1"] ?? 0)), Robot 2:  \(String(describing: team!.pitClimbType?["robot2"] ?? 0))"
+                    }
                     notesCell.selectionStyle = UITableViewCellSelectionStyle.none
                     cell = notesCell
                 } else if Utils.teamDetailsKeys.unrankedCells.contains(dataKey) || dataKey.contains("pit") { //pit keys
@@ -303,14 +212,16 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         unrankedCell.detailLabel!.text! = (team?.pitProgrammingLanguage) ?? ""
                     } else if dataKey == "pitDrivetrain" {
                         unrankedCell.detailLabel!.text! = (team?.pitDrivetrain) ?? ""
-                    } else if dataKey == "pitClimbType" {
-                        unrankedCell.detailLabel!.text! = /*(team?.pitClimbType) ?? */"" //More complex now
                     } else if dataKey == "pitWheelDiameter" {
                         unrankedCell.detailLabel!.text! = (team?.pitWheelDiameter) ?? ""
                     } else if dataKey == "pitWidth" {
                         unrankedCell.detailLabel!.text! = String(describing: team!.pitWidth ?? 0)
                     } else if dataKey == "pitLength" {
                         unrankedCell.detailLabel!.text! = String(describing: team!.pitLength ?? 0)
+                    } else if dataKey == "pitSandstormNavigationType" {
+                        unrankedCell.detailLabel!.text! = (team?.pitSandstormNavigationType) ?? ""
+                    } else if dataKey == "pitRampAbility" {
+                        unrankedCell.detailLabel!.text! = String(describing: team?.pitRampAbility ?? 0)
                     } else if Utils.teamDetailsKeys.addCommasBetweenCapitals.contains(dataKey) {
                         unrankedCell.detailLabel.text = "\(insertCommasAndSpacesBetweenCapitalsInString(roundValue(dataPoint!, toDecimalPlaces: 2)))"
                     } else if Utils.teamDetailsKeys.boolValues.contains(dataKey) {
@@ -321,6 +232,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     
                     unrankedCell.selectionStyle = UITableViewCellSelectionStyle.none
                     cell = unrankedCell
+                    
                 } else {
                     //get cell
                     let multiCell: MultiCellTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MultiCellTableViewCell", for: indexPath) as! MultiCellTableViewCell
@@ -373,12 +285,16 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 unrankedCell.titleLabel.text = Utils.humanReadableNames[dataKey]
                 
                 unrankedCell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+
+                if dataKey == "TeamInMatchDatas"{
+                    unrankedCell.titleLabel.text = "TIMDs"
+                }
                 
                 if dataKey == "matchDatas" {
-                    let matchesUntilNextMatch : String = firebaseFetcher?.matchesUntilTeamNextMatch((team?.number)!) ?? "NA"
+                    let matchesUntilNextMatch : String = firebaseFetcher?.matchesUntilTeamNextMatch((team?.teamNumber)!) ?? "NA"
                     
                     //label: "Matches - #  Remaining
-                    unrankedCell.titleLabel.text = (unrankedCell.titleLabel.text)! + ": \(Utils.sp(thing: firebaseFetcher?.remainingMatchesForTeam((team?.number)!))) Left - Next in \(matchesUntilNextMatch)"
+                    unrankedCell.titleLabel.text = (unrankedCell.titleLabel.text)! + ": \(Utils.sp(thing: firebaseFetcher?.remainingMatchesForTeam((team?.teamNumber)!))) Left - Next in \(matchesUntilNextMatch)"
                 }
                 cell = unrankedCell
             }
@@ -423,7 +339,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if self.teamNameLabel.text == "" || self.teamNameLabel.text == "Unknown name..." {
                 let numText: String
                 let nameText: String
-                switch (team?.number, team?.name) {
+                switch (team?.teamNumber, team?.name) {
                 case (.some(let num), .some(let name)):
                     title = "\(num) - \(name)"
                     numText = "\(num)"
@@ -463,31 +379,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         }
     }
     
-    /**
-     Returns the number of photos in a PhotoBrowser.
-     
-    - parameter photoBrowser: PhotoBrowser you want the function to count.
-    */
-    func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt {
-        return UInt(photos.count)
-    }
-    
-    /**
-    Initializes the photoBrowser.
-     
-    - parameter photoBrowser: The photoBrowser you want to initialize.
-     
-    - parameter photoAt: The index at which the photo you're initializing is located.
-     
-    - returns: The photo at the index you requested.
-    */
-    func photoBrowser(_ photoBrowser: MWPhotoBrowser!, photoAt index: UInt) -> MWPhotoProtocol! {
-        if index < UInt(photos.count) {
-            return photos[Int(index)]
-        }
-        return nil;
-    }
-    
     //preparing to change viewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         self.teamSelectedImageView.isUserInteractionEnabled = true;
@@ -495,24 +386,11 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if let dest = segue.destination as? SortedRankTableViewController {
                 dest.keyPath = sender as! String
             }
-        } else if segue.identifier == "Photos" {
-            let browser = segue.destination as! MWPhotoBrowser;
-            
-            browser.delegate = self;
-            
-            browser.displayActionButton = true; // Show action button to allow sharing, copying, etc (defaults to YES)
-            browser.displayNavArrows = false; // Whether to display left and right nav arrows on toolbar (defaults to NO)
-            browser.displaySelectionButtons = false; // Whether selection buttons are shown on each image (defaults to NO)
-            browser.zoomPhotosToFill = true; // Images that almost fill the screen will be initially zoomed to fill (defaults to YES)
-            browser.alwaysShowControls = false; // Allows to control whether the bars and controls are always visible or whether they fade away to show the photo full (defaults to NO)
-            browser.enableGrid = false; // Whether to allow the viewing of all the photo thumbnails on a grid (defaults to YES)
-            
-            SDImageCache.shared().maxCacheSize = UInt(20 * 1024 * 1024);
-        } else if segue.identifier == "Matches" {
+        }else if segue.identifier == "Matches" {
             let matchesForTeamController = segue.destination as! SpecificTeamScheduleTableViewController
             
             //if team exists
-            if let teamNum = team?.number {
+            if let teamNum = team?.teamNumber {
                 //set team number
                 matchesForTeamController.teamNumber = teamNum
             }
@@ -521,7 +399,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             let TIMDScheduleForTeamController = segue.destination as! TIMDScheduleViewController
             
             //if team exists
-            if let teamNum = team?.number {
+            if let teamNum = team?.teamNumber {
                 //set team number
                 TIMDScheduleForTeamController.teamNumber = teamNum
             }
@@ -529,7 +407,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             //this is called for every timd graph, not just ctimds
             let graphViewController = segue.destination as! GraphViewController
             //if team number is not nil
-            if let teamNum = team?.number {
+            if let teamNum = team?.teamNumber {
                 //get indexpath
                 let indexPath = sender as! IndexPath
                 //if the cell exists
@@ -576,13 +454,13 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     //set left title
                     graphViewController.subDisplayLeftTitle = "Match: "
                     //set values
-                    graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher!.matchNumbersForTeamNumber((team?.number)!) as [NSNumber]) as [AnyObject]
+                    graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher!.matchNumbersForTeamNumber((team?.teamNumber)!) as [NSNumber]) as [AnyObject]
                     //iterate thru the values for the subvalues and remove empties
                     for i in nilValueIndecies.reversed() {
                         graphViewController.subValuesLeft.remove(at: i)
                     }
                     //replace with altmapping
-                    if altMapping != nil {
+                   if altMapping != nil {
                         graphViewController.zeroAndOneReplacementValues = altMapping!
                     }
                     //set title
@@ -597,7 +475,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         else if segue.identifier == "TGraph" {
             let graphViewController = segue.destination as! GraphViewController
             
-            if (team?.number) != nil {
+            if (team?.teamNumber) != nil {
                 let indexPath = sender as! IndexPath
                 let cell = tableView.cellForRow(at: indexPath) as! MultiCellTableViewCell
                 graphViewController.graphTitle = "\(cell.teamLabel!.text!)"
@@ -670,7 +548,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     @objc func reloadTableView(_ note: Notification) {
         if note.name.rawValue == "updateLeftTable" {
             if let t = note.object as? Team {
-                if t.number == team?.number {
+                if t.teamNumber == team?.teamNumber {
                     self.team = t
                     self.reload()
                 }

@@ -70,11 +70,12 @@ FIRDatabaseReference *firebase;
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
     multiCell.showsReorderControl = YES;
     multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)[self.firebaseFetcher rankOfTeam:team withCharacteristic:@"calculatedData.firstPickAbility"]];
-    multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
+    multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.teamNumber];
     // text size for first pick (rankLabel, teamLabel, and scoreLabel)
     multiCell.rankLabel.font = [multiCell.rankLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     multiCell.teamLabel.font = [multiCell.teamLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     multiCell.scoreLabel.font = [multiCell.scoreLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
+
     if(team.calculatedData.firstPickAbility != -1.0) {
         multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
                                      [Utils roundValue:team.calculatedData.firstPickAbility toDecimalPlaces:2]];
@@ -177,7 +178,7 @@ NSMutableArray<NSNumber *> *firstPicklist = nil;
             NSMutableArray<Team *> *tempPicklist = [NSMutableArray arrayWithArray:[self.firebaseFetcher getFirstPickList]];
             NSMutableArray *tempFirstPicklist = [[NSMutableArray alloc] init];
             for(int i = 0; i < [tempPicklist count]; i++) {
-                NSNumber *tempNum = @(tempPicklist[i].number);
+                NSNumber *tempNum = @(tempPicklist[i].teamNumber);
                 [tempFirstPicklist addObject:tempNum];
             }
             firstPicklist = tempFirstPicklist;
@@ -229,7 +230,7 @@ NSMutableArray<NSNumber *> *firstPicklist = nil;
     [ac addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         NSMutableArray<NSNumber *> *tempPicklist = [[NSMutableArray alloc] init];
         for(Team *i in [self.firebaseFetcher getFirstPickList]) {
-            [tempPicklist addObject:[NSNumber numberWithInt:i.number]];
+            [tempPicklist addObject:[NSNumber numberWithInt:i.teamNumber]];
         }
         [[self.ref child:@"picklist"] setValue:tempPicklist];
         self.firebaseFetcher.firstPicklist = tempPicklist;

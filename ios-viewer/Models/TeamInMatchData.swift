@@ -22,16 +22,12 @@ public final class TeamInMatchData: NSObject, NSCoding {
     static let isNoShow = "isNoShow"
     static let teamNumber = "teamNumber"
     static let matchNumber = "matchNumber"
-    static let notes = "notes"
-    static let rankSpeed = "rankSpeed"
-    static let rankAgility = "rankAgility"
-    static let numGoodDecisions = "numGoodDecisions"
-    static let numBadDecisions = "numBadDecisions"
+    static let superNotes = "superNotes"
   }
 
   // MARK: Properties
   public var crossedHabLine: Bool? = false
-  //public var timeline: [Timeline]?
+  public var timeline: [Timeline]?
   public var calculatedData: CalculatedTeamInMatchData?
   public var preload: String?
   public var startingLocation: String?
@@ -40,11 +36,7 @@ public final class TeamInMatchData: NSObject, NSCoding {
   public var isNoShow: Bool? = false
     public var teamNumber: Int?
     public var matchNumber: Int?
-    public var notes: String?
-    public var rankSpeed: Int?
-    public var rankAgility: Int?
-    public var numGoodDecisions: Int?
-    public var numBadDecisions: Int?
+    public var superNotes: String?
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -60,7 +52,7 @@ public final class TeamInMatchData: NSObject, NSCoding {
   /// - parameter json: JSON object from SwiftyJSON.
   public required init(json: JSON) {
     crossedHabLine = json[SerializationKeys.crossedHabLine].boolValue
-    //if let items = json[SerializationKeys.timeline].array { timeline = items.map { Timeline(json: $0) } }
+    if let items = json[SerializationKeys.timeline].array { timeline = items.map { Timeline(json: $0) } }
     calculatedData = CalculatedTeamInMatchData(json: json[SerializationKeys.calculatedData])
     preload = json[SerializationKeys.preload].string
     startingLocation = json[SerializationKeys.startingLocation].string
@@ -69,11 +61,7 @@ public final class TeamInMatchData: NSObject, NSCoding {
     isNoShow = json[SerializationKeys.isNoShow].boolValue
     teamNumber = json[SerializationKeys.teamNumber].int
     matchNumber = json[SerializationKeys.matchNumber].int
-    notes = json[SerializationKeys.notes].string
-    rankSpeed = json[SerializationKeys.rankSpeed].int
-    rankAgility = json[SerializationKeys.rankAgility].int
-    numGoodDecisions = json[SerializationKeys.numGoodDecisions].int
-    numBadDecisions = json[SerializationKeys.numBadDecisions].int
+    superNotes = json[SerializationKeys.superNotes].string
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -82,7 +70,7 @@ public final class TeamInMatchData: NSObject, NSCoding {
   public func dictionaryRepresentation() -> [String: Any] {
     var dictionary: [String: Any] = [:]
     dictionary[SerializationKeys.crossedHabLine] = crossedHabLine
-    //if let value = timeline { dictionary[SerializationKeys.timeline] = value.map { $0.dictionaryRepresentation() } }
+    if let value = timeline { dictionary[SerializationKeys.timeline] = value.map { $0.dictionaryRepresentation() } }
     if let value = calculatedData { dictionary[SerializationKeys.calculatedData] = value.dictionaryRepresentation() }
     if let value = preload { dictionary[SerializationKeys.preload] = value }
     if let value = startingLocation { dictionary[SerializationKeys.startingLocation] = value }
@@ -91,18 +79,14 @@ public final class TeamInMatchData: NSObject, NSCoding {
     dictionary[SerializationKeys.isNoShow] = isNoShow
     if let value = teamNumber { dictionary[SerializationKeys.teamNumber] = value }
     if let value = matchNumber { dictionary[SerializationKeys.matchNumber] = value }
-    if let value = notes { dictionary[SerializationKeys.notes] = value }
-    if let value = rankSpeed { dictionary[SerializationKeys.rankSpeed] = value }
-    if let value = rankAgility { dictionary[SerializationKeys.rankAgility] = value }
-    if let value = numGoodDecisions { dictionary[SerializationKeys.numGoodDecisions] = value }
-    if let value = numBadDecisions { dictionary[SerializationKeys.numBadDecisions] = value }
+    if let value = superNotes { dictionary[SerializationKeys.superNotes] = value }
     return dictionary
   }
 
   // MARK: NSCoding Protocol
   required public init(coder aDecoder: NSCoder) {
     self.crossedHabLine = aDecoder.decodeBool(forKey: SerializationKeys.crossedHabLine)
-    //self.timeline = aDecoder.decodeObject(forKey: SerializationKeys.timeline) as? [Timeline]
+    self.timeline = aDecoder.decodeObject(forKey: SerializationKeys.timeline) as? [Timeline]
     self.calculatedData = aDecoder.decodeObject(forKey: SerializationKeys.calculatedData) as? CalculatedTeamInMatchData
     self.preload = aDecoder.decodeObject(forKey: SerializationKeys.preload) as? String
     self.startingLocation = aDecoder.decodeObject(forKey: SerializationKeys.startingLocation) as? String
@@ -111,16 +95,12 @@ public final class TeamInMatchData: NSObject, NSCoding {
     self.isNoShow = aDecoder.decodeBool(forKey: SerializationKeys.isNoShow)
     self.teamNumber = aDecoder.decodeObject(forKey: SerializationKeys.teamNumber) as? Int
     self.matchNumber = aDecoder.decodeObject(forKey: SerializationKeys.matchNumber) as? Int
-    self.notes = aDecoder.decodeObject(forKey: SerializationKeys.notes) as? String
-    self.rankSpeed = aDecoder.decodeObject(forKey: SerializationKeys.rankSpeed) as? Int
-    self.rankAgility = aDecoder.decodeObject(forKey: SerializationKeys.rankAgility) as? Int
-    self.numGoodDecisions = aDecoder.decodeObject(forKey: SerializationKeys.numGoodDecisions) as? Int
-    self.numBadDecisions = aDecoder.decodeObject(forKey: SerializationKeys.numBadDecisions) as? Int
+    self.superNotes = aDecoder.decodeObject(forKey: SerializationKeys.superNotes) as? String
   }
 
   public func encode(with aCoder: NSCoder) {
     aCoder.encode(crossedHabLine, forKey: SerializationKeys.crossedHabLine)
-    //aCoder.encode(timeline, forKey: SerializationKeys.timeline)
+    aCoder.encode(timeline, forKey: SerializationKeys.timeline)
     aCoder.encode(calculatedData, forKey: SerializationKeys.calculatedData)
     aCoder.encode(preload, forKey: SerializationKeys.preload)
     aCoder.encode(startingLocation, forKey: SerializationKeys.startingLocation)
@@ -129,11 +109,7 @@ public final class TeamInMatchData: NSObject, NSCoding {
     aCoder.encode(isNoShow, forKey: SerializationKeys.isNoShow)
     aCoder.encode(teamNumber, forKey: SerializationKeys.teamNumber)
     aCoder.encode(matchNumber, forKey: SerializationKeys.matchNumber)
-    aCoder.encode(notes, forKey: SerializationKeys.notes)
-    aCoder.encode(rankSpeed, forKey: SerializationKeys.rankSpeed)
-    aCoder.encode(rankAgility, forKey: SerializationKeys.rankAgility)
-    aCoder.encode(numGoodDecisions, forKey: SerializationKeys.numGoodDecisions)
-    aCoder.encode(numBadDecisions, forKey: SerializationKeys.numBadDecisions)
+    aCoder.encode(superNotes, forKey: SerializationKeys.superNotes)
   }
 
 }
