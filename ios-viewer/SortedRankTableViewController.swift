@@ -40,7 +40,7 @@ class SortedRankTableViewController: ArrayTableViewController {
         //Rank is position + 1
         multiCell.rankLabel!.text = String(path.row + 1)
         //set team label
-        multiCell.teamLabel!.text = String(describing: team.number)
+        multiCell.teamLabel!.text = String(describing: team.teamNumber)
         if translatedKeyPath.range(of: "calculatedData") != nil {
             let propPath = translatedKeyPath.replacingOccurrences(of: "calculatedData.", with: "")
             if Utils.teamDetailsKeys.percentageValues.contains(translatedKeyPath) {
@@ -79,7 +79,7 @@ class SortedRankTableViewController: ArrayTableViewController {
     }
     
     override func filteredArray(forSearchText text: String!, inScope scope: Int) -> [Any]! {
-        return self.dataArray.filter { String(describing: ($0 as! Team).number).contains(text) }
+        return self.dataArray.filter { String(describing: ($0 as! Team).teamNumber).contains(text) }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
