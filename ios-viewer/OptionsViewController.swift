@@ -20,16 +20,21 @@ class OptionsViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         firebaseFetcher = AppDelegate.getAppDelegate().firebaseFetcher
         if let showRPs = firebaseFetcher?.currentMatchManager.showRP {
-            showRPSwitch.setOn(showRPs, animated: false)
+            // this sets the default of showRPs to on
+            showRPSwitch.setOn(showRPs, animated: true)
         }
         if let scrollMatch = firebaseFetcher?.currentMatchManager.matchDetailsScroll {
+            // this sets the default of scrollMatch to off
             scrollingMatchSwitch.setOn(scrollMatch, animated: false)
         }
         if let hiDysfunc = firebaseFetcher?.currentMatchManager.highlightDysfunc {
-            hiDysfuncSwitch.setOn(hiDysfunc, animated: false)
+            // this sets the default of hiDysfunc to on
+            hiDysfuncSwitch.setOn(hiDysfunc, animated: true)
         }
         if let textSize = firebaseFetcher?.currentMatchManager.textSize {
+            // this sets the textSize to textSizeSlider value
             self.textSizeSlider.value = Float(textSize)
+            // this sets the textSize minimumValue to 15
             textSizeSlider.minimumValue = 15;
         }
     }
