@@ -463,6 +463,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "habLineSuccessL1" : "crossedHabLine",
             "habLineSuccessL2" : "crossedHabLine",
             "avgTimeClimbing" : "calculatedData.timeClimbing",
+            "climbSuccessL1" : "calculatedData.selfClimbLevel",
+            "climbSuccessL2" : "calculatedData.selfClimbLevel",
+            "climbSuccessL3" : "calculatedData.selfClimbLevel",
 
             //super data
             "avgSpeed" : "rankSpeed",

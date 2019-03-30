@@ -381,7 +381,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     //preparing to change viewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        self.teamSelectedImageView.isUserInteractionEnabled = true;
         if segue.identifier == "sortedRankSegue" {
             if let dest = segue.destination as? SortedRankTableViewController {
                 dest.keyPath = sender as! String
