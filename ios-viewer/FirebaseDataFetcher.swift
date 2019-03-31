@@ -468,7 +468,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         //iterate thru all matches
         for match in self.currentMatchManager.matches {
             //iterate thru all red teams
-            for teamNumber in match.redTeams! {
+            /*for teamNumber in match.redTeams! {
                 //if the team matches, add that match
                 if (teamNumber as Int) == number {
                     array.append(match)
@@ -480,6 +480,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 if (teamNumber as Int) == number {
                     array.append(match)
                 }
+            }*/
+            if match.blueTeams!.contains(number) || match.redTeams!.contains(number) {
+                array.append(match)
             }
         }
         //sort array by # and return it
