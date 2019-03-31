@@ -141,7 +141,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         } else {
             tableView.isScrollEnabled = false
         }
-        return tableKeys.count
+        return (firebaseFetcher?.currentMatchManager.matchDetailsDatapoints.count)!
     }
     //boi?
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -162,6 +162,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableKeys = (firebaseFetcher?.currentMatchManager.matchDetailsDatapoints)!
         redTableView.reloadData()
         blueTableView.reloadData()
     }
