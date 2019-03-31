@@ -8,16 +8,21 @@
 
 import UIKit
 
-class MatchDatapointsViewController: UITableViewController {
+class MatchDatapointsViewController: ArrayTableViewController {
    
-    //get firebase fetcher
-    var firebaseFetcher = AppDelegate.getAppDelegate().firebaseFetcher
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(resetDatapoints))
+    }
+    
+    override func filteredArray(forSearchText text: String!, inScope scope: Int) -> [Any]! {
+        return Utils.teamDetailsKeys.allTeamKeys.filter { Utils.humanReadableNames[$0]!.lowercased().contains(text!.lowercased()) }
+    }
+    
+    override func cellIdentifier() -> String! {
+        return "TIMDTableCell"
     }
     
     @objc func resetDatapoints() {
@@ -35,29 +40,54 @@ class MatchDatapointsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Utils.teamDetailsKeys.allTeamKeys.count
+        var count = 0
+        if filteredArray != nil {
+            count = filteredArray.count
+        } else {
+            count = Utils.teamDetailsKeys.allTeamKeys.count
+        }
+        return count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TIMDTableViewCell", for: indexPath) as! TIMDTableViewCell
         cell.valueLabel.text = ""
-        cell.datapointLabel.text = Utils.humanReadableNames[Utils.teamDetailsKeys.allTeamKeys[indexPath.row]]
-        if (firebaseFetcher?.currentMatchManager.matchDetailsDatapoints.contains(Utils.teamDetailsKeys.allTeamKeys[indexPath.row]))! {
-            cell.backgroundColor = UIColor.green
+        if filteredArray != nil {
+            cell.datapointLabel.text = Utils.humanReadableNames[filteredArray[indexPath.row] as! String]
+            if (firebaseFetcher?.currentMatchManager.matchDetailsDatapoints.contains(Utils.teamDetailsKeys.allTeamKeys[indexPath.row]))! {
+                cell.backgroundColor = UIColor.green
+            } else {
+                cell.backgroundColor = UIColor.clear
+            }
         } else {
-            cell.backgroundColor = UIColor.clear
+            cell.datapointLabel.text = Utils.humanReadableNames[Utils.teamDetailsKeys.allTeamKeys[indexPath.row]]
+            if (firebaseFetcher?.currentMatchManager.matchDetailsDatapoints.contains(Utils.teamDetailsKeys.allTeamKeys[indexPath.row]))! {
+                cell.backgroundColor = UIColor.green
+            } else {
+                cell.backgroundColor = UIColor.clear
+            }
         }
+        
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (firebaseFetcher?.currentMatchManager.matchDetailsDatapoints.contains(Utils.teamDetailsKeys.allTeamKeys[indexPath.row]))! {
-            firebaseFetcher?.currentMatchManager.matchDetailsDatapoints.remove(at: (firebaseFetcher?.currentMatchManager.matchDetailsDatapoints.index(of: Utils.teamDetailsKeys.allTeamKeys[indexPath.row]))!)
+        if filteredArray != nil {
+            if (firebaseFetcher?.currentMatchManager.matchDetailsDatapoints.contains(filteredArray![indexPath.row] as! String))! {
+                firebaseFetcher?.currentMatchManager.matchDetailsDatapoints.remove(at: (firebaseFetcher?.currentMatchManager.matchDetailsDatapoints.index(of: filteredArray[indexPath.row] as! String))!)
+            } else {
+                firebaseFetcher?.currentMatchManager.matchDetailsDatapoints.append(filteredArray![indexPath.row] as! String)
+            }
+            self.tableView.reloadData()
         } else {
-            firebaseFetcher?.currentMatchManager.matchDetailsDatapoints.append(Utils.teamDetailsKeys.allTeamKeys[indexPath.row])
+            if (firebaseFetcher?.currentMatchManager.matchDetailsDatapoints.contains(Utils.teamDetailsKeys.allTeamKeys[indexPath.row]))! {
+                firebaseFetcher?.currentMatchManager.matchDetailsDatapoints.remove(at: (firebaseFetcher?.currentMatchManager.matchDetailsDatapoints.index(of: Utils.teamDetailsKeys.allTeamKeys[indexPath.row]))!)
+            } else {
+                firebaseFetcher?.currentMatchManager.matchDetailsDatapoints.append(Utils.teamDetailsKeys.allTeamKeys[indexPath.row])
+            }
+            self.tableView.reloadData()
         }
-        self.tableView.reloadData()
     }
     
     /*

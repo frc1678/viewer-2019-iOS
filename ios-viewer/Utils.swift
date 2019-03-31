@@ -319,8 +319,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "Percent Entirely Incap Matches",
             "Cargo Ground Intake",
             "Panel Ground Intake",
-            "Avg. Good Decisions",
-            "Avg. Bad Decisions"
         ]
 
         /** Values that should be displayed as long text cells */
@@ -381,14 +379,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             }
             return [
                 "Default",
-                "High Level",
                 "Status",
+                "SEALS",
                 "Autonomous",
                 "Teleoperated",
                 "End Game",
                 "Super Scout",
                 "Pit Scout",
-                "SEALS"
+                "High Level",
             ]
         }
         
@@ -396,14 +394,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         func keySets(_ minimalist : Bool) -> [[String]] {
             return [
                 defaultKeys,
-                highLevel,
                 statusKeys,
+                sealKeys,
                 autoKeys,
                 teleKeys,
                 endGame,
                 superKeys,
                 pitKeys,
-                sealKeys
+                highLevel,
             ]
         }
 
@@ -464,12 +462,17 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "habLineSuccessL1" : "crossedHabLine",
             "habLineSuccessL2" : "crossedHabLine",
             "avgTimeClimbing" : "calculatedData.timeClimbing",
+            "climbSuccessL1" : "calculatedData.selfClimbLevel",
+            "climbSuccessL2" : "calculatedData.selfClimbLevel",
+            "climbSuccessL3" : "calculatedData.selfClimbLevel",
 
             //super data
             "avgSpeed" : "rankSpeed",
             "avgAgility" : "rankAgility",
             "avgDrivingAbility" : "calculatedData.drivingAbility",
             "avgDefense" : "rankDefense",
+            "avgGoodDecisions" : "calculatedData.numGoodDecisions",
+            "avgBadDecisions" : "calculatedData.numBadDecisions",
 
             //RScore super data
             "RScoreDrivingAbility" : "calculatedData.drivingAbility",
@@ -523,6 +526,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         /** Data collected by SEALS */
         let sealKeys = [
             "pitSEALsNotes",
+            "notes"
             ]
 
         /** Human readable names for CTIMD keys */
@@ -540,7 +544,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
 
     static let superKeys = [
         //superNotes- They're in TIMDs, so see TeamDetails for more info
-        "superNotes",
+        "notes",
         //"calculatedData.avgDrivingAbility",
         //"calculatedData.avgSpeed",
         //"calculatedData.avgAgility",
@@ -567,14 +571,16 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
 
     /** Keys relating to the status of a robot to be displayed in the TIMD view */
     static let TIMDStatusKeys : [String] = [
+        "isNoShow",
+        "calculatedData.timeIncap"
     ]
 
     /** Keys relating to the data Super Scouts collect to be displayed in the TIMD view */
     static let TIMDSuperKeys = [
         "rankSpeed",
         "rankAgility",
-        "rankDefense",
-        "superNotes",
+        //"rankDefense",
+        "notes",
         "numGoodDecisions",
         "numBadDecisions"
     ]
@@ -887,6 +893,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.climbSuccessL1" : "Level 1 Climb Success",
         "calculatedData.climbSuccessL2" : "Level 2 Climb Success",
         "calculatedData.climbSuccessL3" : "Level 3 Climb Success",
+        "rankSpeed" : "Speed",
+        "rankAgility" : "Agility",
+        "numGoodDecisions" : "Good Decisions",
+        "numBadDecisions" : "Bad Decisions",
+        "notes" : "Super Notes:",
         "calculatedData.selfClimbLevel" : "Self Climb Level",
         "calculatedData.robot1ClimbLevel" : "1st Assisted Climb Level",
         "calculatedData.robot2ClimbLevel" : "2nd Assisted Climb Level"
