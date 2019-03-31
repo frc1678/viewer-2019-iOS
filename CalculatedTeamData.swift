@@ -186,7 +186,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     static let sdAvgLemonsSpilled = "sdAvgLemonsSpilled"
     static let climbSuccessL1 = "climbSuccessL1"
     static let climbSuccessL2 = "climbSuccessL2"
-    static let climbSuccessL3 = " climbSuccessL3"
+    static let climbSuccessL3 = "climbSuccessL3"
     static let selfClimbLevel = "selfClimbLevel"
     static let robot1ClimbLevel = "robot1ClimbLevel"
     static let robot2ClimbLevel = "robot2ClimbLevel"
