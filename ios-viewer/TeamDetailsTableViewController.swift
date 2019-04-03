@@ -199,6 +199,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     }
                     notesCell.selectionStyle = UITableViewCellSelectionStyle.none
                     cell = notesCell
+                
                 } else if Utils.teamDetailsKeys.unrankedCells.contains(dataKey) || dataKey.contains("pit") { //pit keys
                     //get cell
                     let unrankedCell: UnrankedTableViewCell = tableView.dequeueReusableCell(withIdentifier: "UnrankedCell", for: indexPath) as! UnrankedTableViewCell
@@ -220,12 +221,16 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         unrankedCell.detailLabel!.text! = String(describing: team!.pitLength ?? 0)
                     } else if dataKey == "pitSandstormNavigationType" {
                         unrankedCell.detailLabel!.text! = (team?.pitSandstormNavigationType) ?? ""
-                    } else if dataKey == "pitRampAbility" {
-                        unrankedCell.detailLabel!.text! = String(describing: team?.pitRampAbility ?? 0)
+                    } else if dataKey == "pitSEALsRampRanking" {
+                        unrankedCell.detailLabel!.text! = String(describing: team?.pitSEALsRampRanking ?? 0)
+                    } else if dataKey == "pitNumDriveTrainMotors" {
+                        unrankedCell.detailLabel!.text! = String(describing: team?.pitNumDriveTrainMotors ?? 0)
+                    } else if dataKey == "pitDriveTrainMotorType" {
+                        unrankedCell.detailLabel!.text! = (team!.pitDriveTrainMotorType ?? "")
                     } else if Utils.teamDetailsKeys.addCommasBetweenCapitals.contains(dataKey) {
                         unrankedCell.detailLabel.text = "\(insertCommasAndSpacesBetweenCapitalsInString(roundValue(dataPoint!, toDecimalPlaces: 2)))"
                     } else if Utils.teamDetailsKeys.boolValues.contains(dataKey) {
-                        unrankedCell.detailLabel.text = "\(boolToBoolString(dataPoint as! Bool))"
+                        unrankedCell.detailLabel.text = "\(boolToBoolString(dataPoint as? Bool ?? false))"
                     } else {
                         unrankedCell.detailLabel.text = "\(roundValue(dataPoint!, toDecimalPlaces: 2))"
                     }
@@ -365,7 +370,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             
             var seedText = "?"
             var predSeedText = "?"
-            if let seed = team?.calculatedData!.actualSeed, seed > 0 {
+            if let seed = team?.actualSeed, seed > 0 {
                 seedText = "Seed: \(seed)"
             }
             
@@ -385,7 +390,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if let dest = segue.destination as? SortedRankTableViewController {
                 dest.keyPath = sender as! String
             }
-        }else if segue.identifier == "Matches" {
+        } else if segue.identifier == "Matches" {
             let matchesForTeamController = segue.destination as! SpecificTeamScheduleTableViewController
             
             //if team exists

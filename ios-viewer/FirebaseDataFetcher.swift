@@ -320,7 +320,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 }
                 })
             //get a ref to timds
-            let timdRef = self.firebase.child("TeamInMatchDatas")
+            let timdRef = self.firebase.child("TIMDs")
             //if a new timd was added
             timdRef.observe(.childAdded, with: { [unowned self] (snap) -> Void in
                 DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
@@ -468,7 +468,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         //iterate thru all matches
         for match in self.currentMatchManager.matches {
             //iterate thru all red teams
-            for teamNumber in match.redTeams! {
+            /*for teamNumber in match.redTeams! {
                 //if the team matches, add that match
                 if (teamNumber as Int) == number {
                     array.append(match)
@@ -480,6 +480,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 if (teamNumber as Int) == number {
                     array.append(match)
                 }
+            }*/
+            if match.blueTeams!.contains(number) || match.redTeams!.contains(number) {
+                array.append(match)
             }
         }
         //sort array by # and return it
@@ -534,7 +537,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     /** Get list of teams sorted by seed */
     @objc func seedList() -> [Team] {
-        return (currentMatchManager.teams.sorted { $0.calculatedData!.actualSeed < $1.calculatedData!.actualSeed }).filter { $0.calculatedData?.actualSeed != 0 }
+        return (currentMatchManager.teams.sorted { $0.actualSeed < $1.actualSeed }).filter { $0.actualSeed != 0 }
     }
     
     /** Get list of teams sorted by predicted seed */
@@ -582,7 +585,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     /** See rankOfTeam, reverses */
     @objc func reverseRankOfTeam(_ team: Team, withCharacteristic:String) -> Int {
         var counter = 0
-        let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic).reversed().filter { $0.calculatedData?.actualSeed != 0 }
+        let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic).reversed().filter { $0.actualSeed != 0 }
         
         for loopTeam in sortedTeams {
             counter += 1
@@ -692,7 +695,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             }
         }
         searchArray.append(tempWord)
-        for match in self.matches  {
+        for match in self.currentMatchManager.matches  {
             for i in searchArray {
                 for teamNum in match.redTeams! {
                     if filteredMatches.contains(match) != true {

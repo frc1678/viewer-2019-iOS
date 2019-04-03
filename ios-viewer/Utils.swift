@@ -89,7 +89,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitHasVision",
             "pitHasGyro",
             "pitHasEncoders",
-            "pitCanBuddyStartLevel2",
+            "pitIsLemonSpecialist",
             "calculatedData.hasOrangeGroundIntake",
             "calculatedData.hasLemonGroundIntake"
         ]
@@ -106,8 +106,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         let allTeamKeys = [
             "pitWidth",
             "pitLength",
-            "pitMinHeight",
-            "pitMaxHeight",
             "pitWeight",
             "pitWheelDiameter",
             "pitDrivetrain",
@@ -117,16 +115,18 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitHasVision",
             "pitHasGyro",
             "pitHasEncoders",
-            "pitCanBuddyStartLevel2",
             "pitSandstormNavigationType",
-            "pitRampAbility",
+            "pitSEALsRampRanking",
             "pitHasOrangeShooter",
+            "pitIsLemonSpecialist",
+            "pitNumDriveTrainMotors",
+            "pitDriveTrainMotorType",
             "teamNumber",
             "name",
             "matchesPlayed",
             "actualRPs",
-            "calculatedData.totalSuperNotes",
-            "calculatedData.actualSeed",
+            "calculatedData.totalNotes",
+            "actualSeed",
             "calculatedData.predictedRPs",
             "calculatedData.predictedSeed",
             "calculatedData.hasOrangeGroundIntake",
@@ -137,6 +137,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgOrangesScoredL1",
             "calculatedData.avgOrangesScoredL2",
             "calculatedData.avgOrangesScoredL3",
+            "calculatedData.orangesScored",
+            "calculatedData.orangesScoredL1",
+            "calculatedData.orangesScoredL2",
+            "calculatedData.orangesScoredL3",
             "calculatedData.avgOrangesScoredSandstorm",
             "calculatedData.avgOrangesScoredTeleL1",
             "calculatedData.avgOrangesScoredTeleL2",
@@ -149,7 +153,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgLemonsScoredTeleL1",
             "calculatedData.avgLemonsScoredTeleL2",
             "calculatedData.avgLemonsScoredTeleL3",
-            "calculatedData.avgLemonsSpilled",
+            "calculatedData.avgPinningFouls",
             "calculatedData.lemonLoadSuccess",
             "calculatedData.orangeCycleAll",
             "calculatedData.orangeCycleL1",
@@ -174,11 +178,16 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.lemonSuccessFromSide",
             "calculatedData.habLineSuccessL1",
             "calculatedData.habLineSuccessL2",
+            //"calculatedData.habLineAttemptsL1",
+            //"calculatedData.habLineAttemptsL2",
+            "calculatedData.numHabLineAttemptsL1",
+            "calculatedData.numHabLineAttemptsL2",
             "calculatedData.avgGoodDecisions",
             "calculatedData.avgBadDecisions",
             "calculatedData.avgTimeIncap",
             "calculatedData.avgTimeImpaired",
             "calculatedData.avgTimeClimbing",
+            "calculatedData.percentDysfunctional",
             "calculatedData.percentIncap",
             "calculatedData.percentIncapEntireMatch",
             "calculatedData.percentImpaired",
@@ -192,7 +201,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.secondPickAbility",
             "calculatedData.lfmAvgOrangesScored",
             "calculatedData.lfmAvgLemonsScored",
-            "calculatedData.lfmAvgLemonsSpilled",
+            "calculatedData.lfmAvgPinningFouls",
             "calculatedData.lfmLemonLoadSuccess",
             "calculatedData.lfmOrangeCycleAll",
             "calculatedData.lfmOrangeCycleL1",
@@ -228,7 +237,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.lfmPercentNoShow",
             "calculatedData.sdAvgOrangesScored",
             "calculatedData.sdAvgLemonsScored",
-            "calculatedData.sdAvgLemonsSpilled",
+            "calculatedData.sdAvgPinningFouls",
             "calculatedData.sdLemonLoadSuccess",
             "calculatedData.sdOrangeCycleAll",
             "calculatedData.sdOrangeCycleL1",
@@ -264,7 +273,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.sdPercentNoShow",
             "calculatedData.p75avgOrangesScored",
             "calculatedData.p75avgLemonsScored",
-            "calculatedData.p75avgLemonsSpilled",
+            "calculatedData.p75avgPinningFouls",
             "calculatedData.p75lemonLoadSuccess",
             "calculatedData.p75orangeCycleAll",
             "calculatedData.p75orangeCycleL1",
@@ -298,12 +307,30 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.p75percentIncapEntireMatch",
             "calculatedData.p75percentImpaired",
             "calculatedData.p75percentNoShow",
+            //"calculatedData.climbAttemptsL1",
+            //"calculatedData.climbAttemptsL2",
+            //"calculatedData.climbAttemptsL3",
+            "calculatedData.numClimbAttemptsL1",
+            "calculatedData.numClimbAttemptsL2",
+            "calculatedData.numClimbAttemptsL3",
             "calculatedData.climbSuccessL1",
             "calculatedData.climbSuccessL2",
             "calculatedData.climbSuccessL3",
             "calculatedData.selfClimbLevel",
             "calculatedData.robot1ClimbLevel",
-            "calculatedData.robot2ClimbLevel"
+            "calculatedData.robot2ClimbLevel",
+            "calculatedData.failedCyclesCaused",
+            "calculatedData.avgRankDefense",
+            "calculatedData.totalTimeDefending",
+            "calculatedData.timeDefending",
+            "calculatedData.totalFailedCyclesCaused",
+            "calculatedData.avgFailedCyclesCaused",
+            "calculatedData.failedCyclesCausedPerSecond",
+            "calculatedData.lastMatch",
+            "calculatedData.avgTimeDefending",
+            "calculatedData.matchesDefended",
+            "calculatedData.avgPointsPrevented",
+            "calculatedData.pointsPrevented"
         ]
 
         /**
@@ -319,16 +346,20 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "Percent Entirely Incap Matches",
             "Cargo Ground Intake",
             "Panel Ground Intake",
+            //"Lvl. 1 Climb Attempts",
+            //"Lvl. 2 Climb Attempts",
+            //"Lvl. 3 Climb Attempts"
         ]
 
         /** Values that should be displayed as long text cells */
         let TIMDLongTextCells : [String] = [
-            "superNotes",
+            "notes",
             ]
 
         let longTextCells : [String] = [
             "pitSEALsNotes",
-            "pitClimbType"
+            "pitClimbType",
+            "notes"
         ]
 
         let unrankedCells = [
@@ -347,7 +378,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitHasVision",
             "pitHasGyro",
             "pitHasEncoders",
-            "pitCanBuddyStartLevel2",
+            "pitIsLemonSpecialist",
             "calculatedData.hasOrangeGroundIntake",
             "calculatedData.hasLemonGroundIntake"
         ]
@@ -420,7 +451,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         let autoKeys: [String] = [
             //Some stuff is not needed
             "calculatedData.habLineSuccessL1",
-            "calculatedData.habLineSuccessL2"
+            "calculatedData.habLineSuccessL2",
+            //"calculatedData.habLineAttemptsL1",
+            //"calculatedData.habLineAttemptsL2",
+            "calculatedData.numHabLineAttemptsL1",
+            "calculatedData.numHabLineAttemptsL2"
         ]
 
         /** Keys relating to Teleoperated to be displayed on teamDetails */
@@ -429,8 +464,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.hasLemonGroundIntake",
             "calculatedData.avgOrangesScored",
             "calculatedData.avgLemonsScored",
-            "calculatedData.avgLemonsSpilled",
+            "calculatedData.avgPinningFouls",
             "calculatedData.avgGoodDecisions",
+            "calculatedData.failedCyclesCaused"
         ]
         
         /** Dict translating a key for a teamDetails datapoint to the key for the respective TIMD datapoint. Does not include "calculatedData." in the keys. */
@@ -458,7 +494,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "avgLemonsScoredTeleL1" : "calculatedData.lemonsScoredTeleL1",
             "avgLemonsScoredTeleL2" : "calculatedData.lemonsScoredTeleL2",
             "avgLemonsScoredTeleL3" : "calculatedData.lemonsScoredTeleL3",
-            "avgLemonsSpilled" : "calculatedData.lemonsSpilled",
+            "avgPinningFouls" : "calculatedData.pinningFouls",
             "habLineSuccessL1" : "crossedHabLine",
             "habLineSuccessL2" : "crossedHabLine",
             "avgTimeClimbing" : "calculatedData.timeClimbing",
@@ -484,12 +520,24 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
 
             //Misc
             "actualNumRPs" : "calculatedData.numRPs",
-            "numAutoPoints" : "calculatedData.numAutoPoints"
+            "numAutoPoints" : "calculatedData.numAutoPoints",
+          /*  "failedCyclesCaused" : "calculatedData.totalFailedCyclesCaused",
+            "avgRankDefense" : "calculatedData.avgRankDefense",
+            "timeDefending" : "calculatedData.totalTimeDefending",
+            "avgFailedCyclesCaused" : "calculatedData.avgFailedCyclesCaused",
+            "failedCyclesCausedPerSecond" : "calculatedData.failedCyclesCausedPerSecond" */
+            "pointsPrevented" : "calculatedData.avgPointsPrevented"
         ]
 
         /** Keys relating to the portions of the game that occur in the end (climbing, challenging, etc) */
         let endGame : [String] = [
             "calculatedData.avgTimeClimbing",
+            //"calculatedData.climbAttemptsL1",
+            //"calculatedData.climbAttemptsL2",
+            //"calculatedData.climbAttemptsL3",
+            "calculatedData.numClimbAttemptsL1",
+            "calculatedData.numClimbAttemptsL2",
+            "calculatedData.numClimbAttemptsL3",
             "calculatedData.climbSuccessL1",
             "calculatedData.climbSuccessL2",
             "calculatedData.climbSuccessL3"
@@ -504,6 +552,13 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.percentImpaired",
             "calculatedData.percentNoShow"
         ]
+        
+       /* let calculatedStrings : [String] = [
+            "calculatedData.climbAttemptsL1",
+            "calculatedData.climbAttemptsL2",
+            "calculatedData.climbAttemptsL3",
+            "calculatedData.habLineAttemptsL2"
+        ] */
 
         /** Keys relating to the data the pit scout collects to be displayed on teamDetails */
         let pitKeys = [
@@ -518,15 +573,16 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitHasVision",
             "pitHasGyro",
             "pitHasEncoders",
-            "pitCanBuddyStartLevel2",
             "pitSandstormNavigationType",
-            "pitRampAbility"
+            "pitSEALsRampRanking",
+            "pitIsLemonSpecialist",
+            "pitNumDriveTrainMotors",
+            "pitDriveTrainMotorType"
         ]
 
         /** Data collected by SEALS */
         let sealKeys = [
             "pitSEALsNotes",
-            "notes"
             ]
 
         /** Human readable names for CTIMD keys */
@@ -623,8 +679,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     static let humanReadableNames = [
         "pitWidth" : "Robot Width",
         "pitLength" : "Robot Length",
-        "pitMinHeight" : "Min. Height",
-        "pitMaxHeight" : "Max. Height",
         "pitWeight" : "Robot Weight",
         "pitWheelDiameter" : "Wheel Diameter",
         "pitDrivetrain" : "Drive Train",
@@ -634,18 +688,20 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "pitHasVision" : "Has Vision",
         "pitHasGyro" : "Has Gyro",
         "pitHasEncoders" : "Has Encoders",
-        "pitCanBuddyStartLevel2" : "Buddy Start L2",
         "pitSandstormNavigationType" : "Sandstorm Nav.",
-        "pitRampAbility" : "Ramp Ability",
+        "pitSEALsRampRanking" : "Ramp Ability",
         "pitHasOrangeShooter" : "Cargo Shooter",
+        "pitIsLemonSpecialist" : "Hatch Specialist",
+        "pitNumDriveTrainMotors" : "# of Motors on Drive Train",
+        "pitDriveTrainMotorType" : "Type of Motor on Drive Train",
         "teamNumber" : "Team Number",
         "name" : "Name",
         "matchesPlayed" : "Matches Played",
         "actualRPs" : "Avg. RPs",
         "matchDatas" : "Matches",
         "calculatedData" : "Calculated Data",
-        "calculatedData.actualSeed" : "Seed",
-        "calculatedData.totalSuperNotes" : "Total Super Notes",
+        "actualSeed" : "Seed",
+        "calculatedData.totalNotes" : "All Super Notes",
         "calculatedData.predictedRPs" : "Predicted RPs",
         "calculatedData.predictedSeed" : "Predicted Seed",
         "calculatedData.hasOrangeGroundIntake" : "Cargo Ground Intake",
@@ -668,7 +724,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.avgLemonsScoredTeleL1" : "Avg. Panels Scored in Lvl 1 Tele",
         "calculatedData.avgLemonsScoredTeleL2" : "Avg. Panels Scored in Lvl 2 Tele",
         "calculatedData.avgLemonsScoredTeleL3" : "Avg. Panels Scored in Lvl 3 Tele",
-        "calculatedData.avgLemonsSpilled" : "Avg. Panel Spills",
+        "calculatedData.avgPinningFouls" : "Avg. Pinning Fouls",
         "calculatedData.orangeCycleAll" : "Cargo Cycle Times",
         "calculatedData.orangeCycleL1" : "Cargo Cycle L1",
         "calculatedData.orangeCycleL2" : "Cargo Cycle L2",
@@ -692,11 +748,16 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.lemonSuccessFromSide" : "Panel Side Success",
         "calculatedData.habLineSuccessL1" : "Hab Line Success L1",
         "calculatedData.habLineSuccessL2" : "Hab Line Success L2",
+        //"calculatedData.habLineAttemptsL1" : "Hab Line Attempts L1",
+        //"calculatedData.habLineAttemptsL2" : "Hab Line Attempts L2",
+        "calculatedData.numHabLineAttemptsL1" : "# of Attempts from Lvl. 1",
+        "calculatedData.numHabLineAttemptsL2" : "# of Attempts from Lvl. 2",
         "calculatedData.avgGoodDecisions" : "Avg. Good Decisions",
         "calculatedData.avgBadDecisions" : "Avg. Bad Decisions",
         "calculatedData.avgTimeIncap" : "Avg. Time Incap",
         "calculatedData.avgTimeImpaired" : "Avg. Time Impaired",
         "calculatedData.avgTimeClimbing" : "Avg. Time Climbing",
+        "calculatedData.percentDysfunctional" : "Percent Dysfuntional",
         "calculatedData.percentIncap" : "Percent Incap",
         "calculatedData.percentIncapEntireMatch" : "Percent Entirely Incap Matches",
         "calculatedData.percentImpaired" : "Percent Impaired",
@@ -710,7 +771,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.secondPickAbility" : "Second Pick Ability",
         "calculatedData.lfmAvgOrangesScored" : "LFM Avg. Cargo Scored",
         "calculatedData.lfmAvgLemonsScored" : "LFM Avg. Panels Scored",
-        "calculatedData.lfmAvgLemonsSpilled" : "LFM Avg. Panel Spills",
+        "calculatedData.lfmAvgPinningFouls" : "LFM Avg. Pinning Fouls",
         "calculatedData.lfmLemonLoadSuccess" : "LFM Panel Loading Success",
         "calculatedData.lfmOrangeCycleAll" : "LFM Cargo Cycle Times",
         "calculatedData.lfmOrangeCycleL1" : "LFM Cargo Cycle L1",
@@ -746,7 +807,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.lfmPercentNoShow" : "LFM Percent No Show",
         "calculatedData.sdAvgOrangesScored" : "σ Cargo Scored",
         "calculatedData.sdAvgLemonsScored" : "σ Panels Scored",
-        "calculatedData.sdAvgLemonsSpilled" : "σ Panel Spills",
+        "calculatedData.sdAvgPinningFouls" : "σ Pinning Fouls",
         "calculatedData.sdLemonLoadSuccess" : "σ Panel Loading Success",
         "calculatedData.sdOrangeCycleAll" : "σ Cargo Cycle Times",
         "calculatedData.sdOrangeCycleL1" : "σ Cargo Cycle L1",
@@ -782,7 +843,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.sdPercentNoShow" : "σ Percent No Show",
         "calculatedData.p75avgOrangesScored" : "75% Avg. Cargo Scored",
         "calculatedData.p75avgLemonsScored" : "75% Avg. Panels Scored",
-        "calculatedData.p75avgLemonsSpilled" : "75% Avg. Panel Spills",
+        "calculatedData.p75avgPinningFouls" : "75% Avg. Pinning Fouls",
         "calculatedData.p75lemonLoadSuccess" : "75% Panel Loading Success",
         "calculatedData.p75orangeCycleAll" : "75% Cargo Cycle Times",
         "calculatedData.p75orangeCycleL1" : "75% Cargo Cycle L1",
@@ -843,7 +904,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.orangesScored" : "Cargo Scored",
         "calculatedData.orangesScoredL1" : "Cargo Scored in Lvl 1",
         "calculatedData.orangesScoredL2" : "Cargo Scored in Lvl 2",
-        "calculatedData.orangesScoredl3" : "Cargo Scored in Lvl 3",
+        "calculatedData.orangesScoredL3" : "Cargo Scored in Lvl 3",
         "calculatedData.orangesScoredSandstorm" : "Cargo Scored in Sandstorm",
         "calculatedData.orangesScoredTeleL1" : "Cargo Scored in Lvl 1 Tele",
         "calculatedData.orangesScoredTeleL2" : "Cargo Scored in Lvl 2 Tele",
@@ -856,7 +917,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.lemonsScoredTeleL1" : "Panels Scored in Lvl 1 Tele",
         "calculatedData.lemonsScoredTeleL2" : "Panels Scored in Lvl 2 Tele",
         "calculatedData.lemonsScoredTeleL3" : "Panels Scored in Lvl 3 Tele",
-        "calculatedData.lemonsSpilled" : "Panel Spills",
+        "calculatedData.pinningFouls" : "Pinning Fouls",
         "calculatedData.lemonLoadSuccess" : "Panel Loading Success",
         "calculatedData.timeIncap" : "Time Incap",
         "calculatedData.timeImpaired" : "Time Impaired",
@@ -890,6 +951,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.redChanceWin" : "Red Win Chance",
         "calculatedData.bluePredictedClimbPoints" : "Blue Predicted Climb Points",
         "calculatedData.redPredictedClimbPoints" : "Red Predicted Climb Points",
+        //"calculatedData.climbAttemptsL1" : "Lvl. 1 Climb Attempts",
+        //"calculatedData.climbAttemptsL2" : "Lvl. 2 Climb Attempts",
+        //"calculatedData.climbAttemptsL3" : "Lvl. 3 Climb Attempts",
+        "calculatedData.numClimbAttemptsL1" : "# of Attempts to Lvl. 1",
+        "calculatedData.numClimbAttemptsL2" : "# of Attempts to Lvl. 2",
+        "calculatedData.numClimbAttemptsL3" : "# of Attempts to Lvl. 3",
         "calculatedData.climbSuccessL1" : "Level 1 Climb Success",
         "calculatedData.climbSuccessL2" : "Level 2 Climb Success",
         "calculatedData.climbSuccessL3" : "Level 3 Climb Success",
@@ -900,7 +967,19 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "notes" : "Super Notes:",
         "calculatedData.selfClimbLevel" : "Self Climb Level",
         "calculatedData.robot1ClimbLevel" : "1st Assisted Climb Level",
-        "calculatedData.robot2ClimbLevel" : "2nd Assisted Climb Level"
+        "calculatedData.robot2ClimbLevel" : "2nd Assisted Climb Level",
+        "calculatedData.failedCyclesCaused" : "Cycles Defended",
+        "calculatedData.avgRankDefense" : "Avg. Rank Defense",
+        "calculatedData.totalTimeDefending" : "Total Time Defendiing",
+        "calculatedData.timeDefending" : "Time Defending",
+        "calculatedData.totalFailedCyclesCaused" : "Total Cycles Defended",
+        "calculatedData.avgFailedCyclesCaused" : "Avg. Cycles Defended",
+        "calculatedData.failedCyclesCausedPerSecond" : "Cycles Defended Per Second",
+        "calculatedData.lastMatch" : "Last Match",
+        "calculatedData.avgTimeDefending" : "Avg. Time Defending",
+        "calculatedData.matchesDefended" : "Matches Defended",
+        "calculatedData.avgPointsPrevented" : "Avg. Points Prevented",
+        "calculatedData.pointsPrevented" : "Points Prevented"
     ]
 
     /**
