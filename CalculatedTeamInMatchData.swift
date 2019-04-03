@@ -109,7 +109,6 @@ public final class CalculatedTeamInMatchData: NSCoding {
   public var timeDefending: Float?
   public var totalFailedCyclesCaused: Int?
   public var pointsPrevented: Int?
-
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
   ///

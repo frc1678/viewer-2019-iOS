@@ -45,7 +45,7 @@ public final class TeamInMatchData: NSObject, NSCoding {
     public var rankAgility: Int?
     public var numGoodDecisions: Int?
     public var numBadDecisions: Int?
-    
+  
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
   ///

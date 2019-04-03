@@ -353,7 +353,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
 
         /** Values that should be displayed as long text cells */
         let TIMDLongTextCells : [String] = [
-            "notes",
+            "superNotes",
+            "notes"
             ]
 
         let longTextCells : [String] = [
@@ -635,7 +636,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     static let TIMDSuperKeys = [
         "rankSpeed",
         "rankAgility",
-        "rankDefense",
+        //"rankDefense",
         "notes",
         "numGoodDecisions",
         "numBadDecisions"

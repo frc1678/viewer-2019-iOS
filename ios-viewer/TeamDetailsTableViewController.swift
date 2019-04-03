@@ -390,7 +390,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if let dest = segue.destination as? SortedRankTableViewController {
                 dest.keyPath = sender as! String
             }
+          
         } else if segue.identifier == "Matches" {
+          
             let matchesForTeamController = segue.destination as! SpecificTeamScheduleTableViewController
             
             //if team exists

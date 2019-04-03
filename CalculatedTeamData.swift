@@ -1221,6 +1221,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     aCoder.encode(lastMatch, forKey: SerializationKeys.lastMatch)
     aCoder.encode(matchesDefended, forKey: SerializationKeys.matchesDefended)
     aCoder.encode(avgPointsPrevented, forKey: SerializationKeys.avgPointsPrevented)
+
   }
 
 }
