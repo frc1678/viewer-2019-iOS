@@ -346,6 +346,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "Percent Entirely Incap Matches",
             "Cargo Ground Intake",
             "Panel Ground Intake",
+            "# of Attempts to Lvl. 1",
+            "# of Attempts to Lvl. 2",
+            "# of Attempts to Lvl. 3",
+            "# of Attempts from Lvl. 1",
+            "# of Attempts from Lvl. 2"
             //"Lvl. 1 Climb Attempts",
             //"Lvl. 2 Climb Attempts",
             //"Lvl. 3 Climb Attempts"
