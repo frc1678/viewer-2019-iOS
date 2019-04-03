@@ -635,7 +635,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     static let TIMDSuperKeys = [
         "rankSpeed",
         "rankAgility",
-        //"rankDefense",
+        "rankDefense",
         "notes",
         "numGoodDecisions",
         "numBadDecisions"
