@@ -208,6 +208,8 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     static let lastMatch = "lastMatch"
     static let matchesDefended = "matchesDefended"
     static let avgPointsPrevented = "avgPointsPrevented"
+    static let avgLemonPointsPrevented = "avgLemonPointsPrevented"
+    static let avgOrangePointsPrevented = "avgOrangePointsPrevented"
     
   }
 
@@ -408,6 +410,8 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     @objc public var lastMatch: Int = -1
     @objc public var matchesDefended: Int = -1
     @objc public var avgPointsPrevented: Float = -1.0
+    @objc public var avgLemonPointsPrevented: Float = -1.0
+    @objc public var avgOrangePointsPrevented: Float = -1.0
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -618,6 +622,8 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     lastMatch = json[SerializationKeys.lastMatch].intValue
     matchesDefended = json[SerializationKeys.matchesDefended].intValue
     avgPointsPrevented = json[SerializationKeys.avgPointsPrevented].floatValue
+    avgLemonPointsPrevented = json[SerializationKeys.avgLemonPointsPrevented].floatValue
+    avgOrangePointsPrevented = json[SerializationKeys.avgOrangePointsPrevented].floatValue
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -821,6 +827,8 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     dictionary[SerializationKeys.lastMatch] = lastMatch
     dictionary[SerializationKeys.matchesDefended] = matchesDefended
     dictionary[SerializationKeys.avgPointsPrevented] = avgPointsPrevented
+    dictionary[SerializationKeys.avgLemonPointsPrevented] = avgLemonPointsPrevented
+    dictionary[SerializationKeys.avgOrangePointsPrevented] = avgOrangePointsPrevented
     return dictionary
   }
 
@@ -1022,6 +1030,8 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     self.lastMatch = aDecoder.decodeInteger(forKey: SerializationKeys.lastMatch)
     self.matchesDefended = aDecoder.decodeInteger(forKey: SerializationKeys.matchesDefended)
     self.avgPointsPrevented = aDecoder.decodeFloat(forKey: SerializationKeys.avgPointsPrevented)
+    self.avgLemonPointsPrevented = aDecoder.decodeFloat(forKey: SerializationKeys.avgLemonPointsPrevented)
+    self.avgOrangePointsPrevented = aDecoder.decodeFloat(forKey: SerializationKeys.avgOrangePointsPrevented)
   }
 
   public func encode(with aCoder: NSCoder) {
@@ -1221,6 +1231,8 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     aCoder.encode(lastMatch, forKey: SerializationKeys.lastMatch)
     aCoder.encode(matchesDefended, forKey: SerializationKeys.matchesDefended)
     aCoder.encode(avgPointsPrevented, forKey: SerializationKeys.avgPointsPrevented)
+    aCoder.encode(avgLemonPointsPrevented, forKey: SerializationKeys.avgLemonPointsPrevented)
+    aCoder.encode(avgOrangePointsPrevented, forKey: SerializationKeys.avgOrangePointsPrevented)
 
   }
 

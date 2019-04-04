@@ -182,8 +182,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             //"calculatedData.habLineAttemptsL2",
             "calculatedData.numHabLineAttemptsL1",
             "calculatedData.numHabLineAttemptsL2",
-            "calculatedData.avgGoodDecisions",
-            "calculatedData.avgBadDecisions",
             "calculatedData.avgTimeIncap",
             "calculatedData.avgTimeImpaired",
             "calculatedData.avgTimeClimbing",
@@ -226,8 +224,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.lfmLemonSuccessFromSide",
             "calculatedData.lfmHabLineSuccessL1",
             "calculatedData.lfmHabLineSuccessL2",
-            "calculatedData.lfmAvgGoodDecisions",
-            "calculatedData.lfmAvgBadDecisions",
             "calculatedData.lfmAvgTimeIncap",
             "calculatedData.lfmAvgTimeImpaired",
             "calculatedData.lfmAvgTimeClimbing",
@@ -262,8 +258,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.sdLemonSuccessFromSide",
             "calculatedData.sdHabLineSuccessL1",
             "calculatedData.sdHabLineSuccessL2",
-            "calculatedData.sdAvgGoodDecisions",
-            "calculatedData.sdAvgBadDecisions",
             "calculatedData.sdAvgTimeIncap",
             "calculatedData.sdAvgTimeImpaired",
             "calculatedData.sdAvgTimeClimbing",
@@ -298,8 +292,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.p75lemonSuccessFromSide",
             "calculatedData.p75habLineSuccessL1",
             "calculatedData.p75habLineSuccessL2",
-            "calculatedData.p75avgGoodDecisions",
-            "calculatedData.p75avgBadDecisions",
             "calculatedData.p75avgTimeIncap",
             "calculatedData.p75avgTimeImpaired",
             "calculatedData.p75avgTimeClimbing",
@@ -330,7 +322,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgTimeDefending",
             "calculatedData.matchesDefended",
             "calculatedData.avgPointsPrevented",
-            "calculatedData.pointsPrevented"
+            "calculatedData.avgLemonPointsPrevented",
+            "calculatedData.avgOrangePointsPrevented",
+            "calculatedData.pointsPrevented",
+            "calculatedData.lemonPointsPrevented",
+            "calculatedData.orangePointsPrevented"
         ]
 
         /**
@@ -420,6 +416,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
                 "SEALS",
                 "Autonomous",
                 "Teleoperated",
+                "Defense",
                 "End Game",
                 "Super Scout",
                 "Pit Scout",
@@ -435,6 +432,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
                 sealKeys,
                 autoKeys,
                 teleKeys,
+                defenseKeys,
                 endGame,
                 superKeys,
                 pitKeys,
@@ -471,8 +469,13 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgOrangesScored",
             "calculatedData.avgLemonsScored",
             "calculatedData.avgPinningFouls",
-            "calculatedData.avgGoodDecisions",
-            "calculatedData.failedCyclesCaused"
+        ]
+        
+        let defenseKeys: [String] = [
+            "calculatedData.totalTimeDefending",
+            "calculatedData.avgPointsPrevented",
+            "calculatedData.avgLemonPointsPrevented",
+            "calculatedData.avgOrangePointsPrevented"
         ]
         
         /** Dict translating a key for a teamDetails datapoint to the key for the respective TIMD datapoint. Does not include "calculatedData." in the keys. */
@@ -513,26 +516,22 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "avgAgility" : "rankAgility",
             "avgDrivingAbility" : "calculatedData.drivingAbility",
             "avgDefense" : "rankDefense",
-            "avgGoodDecisions" : "calculatedData.numGoodDecisions",
-            "avgBadDecisions" : "calculatedData.numBadDecisions",
 
             //RScore super data
             "RScoreDrivingAbility" : "calculatedData.drivingAbility",
             "RScoreAgility" : "rankAgility",
             "RScoreDefense" : "rankDefense",
             "RScoreSpeed" : "rankSpeed",
-            "totalNumGoodDecisions" : "numGoodDecisions",
-            "totalNumBadDecisions" : "numBadDecisions",
 
             //Misc
             "actualNumRPs" : "calculatedData.numRPs",
             "numAutoPoints" : "calculatedData.numAutoPoints",
-          /*  "failedCyclesCaused" : "calculatedData.totalFailedCyclesCaused",
+            "failedCyclesCaused" : "calculatedData.totalFailedCyclesCaused",
             "avgRankDefense" : "calculatedData.avgRankDefense",
-            "timeDefending" : "calculatedData.totalTimeDefending",
-            "avgFailedCyclesCaused" : "calculatedData.avgFailedCyclesCaused",
-            "failedCyclesCausedPerSecond" : "calculatedData.failedCyclesCausedPerSecond" */
-            "pointsPrevented" : "calculatedData.avgPointsPrevented"
+            "totalTimeDefending" : "calculatedData.timeDefending",
+            "avgPointsPrevented" : "calculatedData.pointsPrevented",
+            "avgLemonPointsPrevented" : "calculatedData.lemonPointsPrevented",
+            "avgOrangePointsPrevented" : "calculatedData.orangePointsPrevented"
         ]
 
         /** Keys relating to the portions of the game that occur in the end (climbing, challenging, etc) */
@@ -658,8 +657,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     /** A dictionary turning TIMD keys into teamDetails keys */
     static let graphTitleSwitch = [
         "calculatedData.RScoreSpeed" : "calculatedData.avgSpeed",
-        "calculatedData.totalNumGoodDecisions" : "numGoodDecisions",
-        "calculatedData.totalNumBadDecisions" : "numBadDecisions"
     ]
 
     /** Team Details keys? */
@@ -758,8 +755,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         //"calculatedData.habLineAttemptsL2" : "Hab Line Attempts L2",
         "calculatedData.numHabLineAttemptsL1" : "# of Attempts from Lvl. 1",
         "calculatedData.numHabLineAttemptsL2" : "# of Attempts from Lvl. 2",
-        "calculatedData.avgGoodDecisions" : "Avg. Good Decisions",
-        "calculatedData.avgBadDecisions" : "Avg. Bad Decisions",
         "calculatedData.avgTimeIncap" : "Avg. Time Incap",
         "calculatedData.avgTimeImpaired" : "Avg. Time Impaired",
         "calculatedData.avgTimeClimbing" : "Avg. Time Climbing",
@@ -802,8 +797,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.lfmLemonSuccessFromSide" : "LFM Panel Side Success",
         "calculatedData.lfmHabLineSuccessL1" : "LFM Hab Line Success L1",
         "calculatedData.lfmHabLineSuccessL2" : "LFM Hab Line Success L2",
-        "calculatedData.lfmAvgGoodDecisions" : "LFM Avg. Good Decisions",
-        "calculatedData.lfmAvgBadDecisions" : "LFM Avg. Bad Decisions",
         "calculatedData.lfmAvgTimeIncap" : "LFM Avg. Time Incap",
         "calculatedData.lfmAvgTimeImpaired" : "LFM Avg. Time Impaired",
         "calculatedData.lfmAvgTimeClimbing" : "LFM Avg. Time Climbing",
@@ -976,7 +969,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.robot2ClimbLevel" : "2nd Assisted Climb Level",
         "calculatedData.failedCyclesCaused" : "Cycles Defended",
         "calculatedData.avgRankDefense" : "Avg. Rank Defense",
-        "calculatedData.totalTimeDefending" : "Total Time Defendiing",
+        "calculatedData.totalTimeDefending" : "Total Time Defending",
         "calculatedData.timeDefending" : "Time Defending",
         "calculatedData.totalFailedCyclesCaused" : "Total Cycles Defended",
         "calculatedData.avgFailedCyclesCaused" : "Avg. Cycles Defended",
@@ -985,7 +978,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.avgTimeDefending" : "Avg. Time Defending",
         "calculatedData.matchesDefended" : "Matches Defended",
         "calculatedData.avgPointsPrevented" : "Avg. Points Prevented",
-        "calculatedData.pointsPrevented" : "Points Prevented"
+        "calculatedData.avgLemonPointsPrevented" : "Avg. Panel Points Prevented",
+        "calculatedData.avgOrangePointsPrevented" : "Avg. Cargo Points Prevented",
+        "calculatedData.pointsPrevented" : "Points Prevented",
+        "calculatedData.lemonPointsPrevented" : "Panel Points Prevented",
+        "calculatedData.orangePointsPrevented" : "Orange Points Prevented"
     ]
 
     /**
