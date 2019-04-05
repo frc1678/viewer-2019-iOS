@@ -92,7 +92,7 @@ FIRDatabaseReference *firebase;
             cell.textLabel.backgroundColor = [UIColor clearColor];
             cell.detailTextLabel.backgroundColor = [UIColor clearColor]; 
         }
-        multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", team.calculatedData.actualSeed];
+        multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", team.actualSeed];
     } else {
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.backgroundColor = [UIColor clearColor];

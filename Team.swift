@@ -16,12 +16,10 @@ public final class Team: NSObject, NSCoding {
     static let redActualRPs = "redActualRPs"
     static let blueActualRPs = "blueActualRPs"
     static let actualRPs = "actualRPs"
-    static let pitMinHeight = "pitMinHeight"
     static let pitHasVision = "pitHasVision"
     static let teamNumber = "teamNumber"
     static let pitHasCamera = "pitHasCamera"
     static let pitHasGyro = "pitHasGyro"
-    static let pitCanBuddyStartLevel2 = "pitCanBuddyStartLevel2"
     static let pitWidth = "pitWidth"
     static let pitWeight = "pitWeight"
     static let matchesPlayed = "matchesPlayed"
@@ -31,11 +29,15 @@ public final class Team: NSObject, NSCoding {
     static let pitHasEncoders = "pitHasEncoders"
     static let pitDrivetrain = "pitDrivetrain"
     static let pitSandstormNavigationType = "pitSandstormNavigationType"
-    static let pitMaxHeight = "pitMaxHeight"
     static let pitWheelDiameter = "pitWheelDiameter"
     static let pitClimbType = "pitClimbType"
     static let pitSEALsNotes = "pitSEALsNotes"
-    static let pitRampAbility = "pitRampAbility"
+    static let pitSEALsRampRanking = "pitSEALsRampRanking"
+    static let pitIsLemonSpecialist = "pitIsLemonSpecialist"
+    static let pitNumDriveTrainMotors = "pitNumDriveTrainMotors"
+    static let pitDriveTrainMotorType = "pitDriveTrainMotorType"
+    static let percentDysfunctional = "percentDysfunctional"
+    static let actualSeed = "actualSeed"
     static let calculatedData = "calculatedData"
   }
 
@@ -44,12 +46,10 @@ public final class Team: NSObject, NSCoding {
   @objc public var redActualRPs: Int = -1
   @objc public var blueActualRPs: Int = -1
   @objc public var actualRPs: Int = -1
-  public var pitMinHeight: Int?
   public var pitHasVision: Bool? = false
   @objc public var teamNumber: Int = -1
   public var pitHasCamera: Bool? = false
   public var pitHasGyro: Bool? = false
-  public var pitCanBuddyStartLevel2: Bool? = false
   public var pitWidth: Int?
   public var pitWeight: Int?
   public var matchesPlayed: Int?
@@ -59,11 +59,15 @@ public final class Team: NSObject, NSCoding {
   public var pitHasEncoders: Bool? = false
   public var pitDrivetrain: String?
   public var pitSandstormNavigationType: String?
-  public var pitMaxHeight: Int?
   public var pitWheelDiameter: String?
   public var pitClimbType: [String:Int]?
   public var pitSEALsNotes: String?
-  public var pitRampAbility: Int?
+  public var pitSEALsRampRanking: Int?
+  public var pitIsLemonSpecialist: Bool? = false
+    public var pitNumDriveTrainMotors: Int? = -1
+    public var pitDriveTrainMotorType: String?
+  public var percentDysfunctional: Int?
+@objc public var actualSeed: Int = -1
   @objc public var calculatedData: CalculatedTeamData?
 
   // MARK: SwiftyJSON Initializers
@@ -83,12 +87,10 @@ public final class Team: NSObject, NSCoding {
     redActualRPs = json[SerializationKeys.redActualRPs].intValue
     blueActualRPs = json[SerializationKeys.blueActualRPs].intValue
     actualRPs = json[SerializationKeys.actualRPs].intValue
-    pitMinHeight = json[SerializationKeys.pitMinHeight].int
     pitHasVision = json[SerializationKeys.pitHasVision].boolValue
     teamNumber = json[SerializationKeys.teamNumber].intValue
     pitHasCamera = json[SerializationKeys.pitHasCamera].boolValue
     pitHasGyro = json[SerializationKeys.pitHasGyro].boolValue
-    pitCanBuddyStartLevel2 = json[SerializationKeys.pitCanBuddyStartLevel2].boolValue
     pitWidth = json[SerializationKeys.pitWidth].int
     pitWeight = json[SerializationKeys.pitWeight].int
     matchesPlayed = json[SerializationKeys.matchesPlayed].int
@@ -98,11 +100,15 @@ public final class Team: NSObject, NSCoding {
     pitHasEncoders = json[SerializationKeys.pitHasEncoders].boolValue
     pitDrivetrain = json[SerializationKeys.pitDrivetrain].string
     pitSandstormNavigationType = json[SerializationKeys.pitSandstormNavigationType].string
-    pitMaxHeight = json[SerializationKeys.pitMaxHeight].int
     pitWheelDiameter = json[SerializationKeys.pitWheelDiameter].string
     pitClimbType = (json[SerializationKeys.pitClimbType].dictionaryObject as? [String:Int])
     pitSEALsNotes = json[SerializationKeys.pitSEALsNotes].string
-    pitRampAbility = json[SerializationKeys.pitRampAbility].int
+    pitSEALsRampRanking = json[SerializationKeys.pitSEALsRampRanking].int
+    pitIsLemonSpecialist = json[SerializationKeys.pitIsLemonSpecialist].boolValue
+    pitNumDriveTrainMotors = json[SerializationKeys.pitNumDriveTrainMotors].int
+    pitDriveTrainMotorType = json[SerializationKeys.pitDriveTrainMotorType].string
+    percentDysfunctional = json[SerializationKeys.percentDysfunctional].int
+    actualSeed = json[SerializationKeys.actualSeed].intValue
     calculatedData = CalculatedTeamData(json: json[SerializationKeys.calculatedData])
   }
 
@@ -115,12 +121,10 @@ public final class Team: NSObject, NSCoding {
     dictionary[SerializationKeys.redActualRPs] = redActualRPs
     dictionary[SerializationKeys.blueActualRPs] = blueActualRPs
     dictionary[SerializationKeys.actualRPs] = actualRPs
-    if let value = pitMinHeight { dictionary[SerializationKeys.pitMinHeight] = value }
     dictionary[SerializationKeys.pitHasVision] = pitHasVision
     dictionary[SerializationKeys.teamNumber] = teamNumber
     dictionary[SerializationKeys.pitHasCamera] = pitHasCamera
     dictionary[SerializationKeys.pitHasGyro] = pitHasGyro
-    dictionary[SerializationKeys.pitCanBuddyStartLevel2] = pitCanBuddyStartLevel2
     if let value = pitWidth { dictionary[SerializationKeys.pitWidth] = value }
     if let value = pitWeight { dictionary[SerializationKeys.pitWeight] = value }
     if let value = matchesPlayed { dictionary[SerializationKeys.matchesPlayed] = value }
@@ -130,11 +134,15 @@ public final class Team: NSObject, NSCoding {
     dictionary[SerializationKeys.pitHasEncoders] = pitHasEncoders
     if let value = pitDrivetrain { dictionary[SerializationKeys.pitDrivetrain] = value }
     if let value = pitSandstormNavigationType { dictionary[SerializationKeys.pitSandstormNavigationType] = value }
-    if let value = pitMaxHeight { dictionary[SerializationKeys.pitMaxHeight] = value }
     if let value = pitWheelDiameter { dictionary[SerializationKeys.pitWheelDiameter] = value }
     if let value = pitClimbType { dictionary[SerializationKeys.pitClimbType] = value }
     if let value = pitSEALsNotes { dictionary[SerializationKeys.pitSEALsNotes] = value }
-    if let value = pitRampAbility { dictionary[SerializationKeys.pitRampAbility] = value}
+    if let value = pitSEALsRampRanking { dictionary[SerializationKeys.pitSEALsRampRanking] = value}
+    if let value = pitIsLemonSpecialist { dictionary[SerializationKeys.pitIsLemonSpecialist] = value}
+    if let value = pitNumDriveTrainMotors { dictionary[SerializationKeys.pitNumDriveTrainMotors] = value}
+    if let value = pitDriveTrainMotorType { dictionary[SerializationKeys.pitDriveTrainMotorType] = value}
+    if let value = percentDysfunctional { dictionary[SerializationKeys.percentDysfunctional] = value}
+    dictionary[SerializationKeys.actualSeed] = actualSeed
     if let value = calculatedData { dictionary[SerializationKeys.calculatedData] = value.dictionaryRepresentation() }
     return dictionary
   }
@@ -145,12 +153,10 @@ public final class Team: NSObject, NSCoding {
     self.redActualRPs = aDecoder.decodeInteger(forKey: SerializationKeys.redActualRPs)
     self.blueActualRPs = aDecoder.decodeInteger(forKey: SerializationKeys.blueActualRPs)
     self.actualRPs = aDecoder.decodeInteger(forKey: SerializationKeys.actualRPs)
-    self.pitMinHeight = aDecoder.decodeObject(forKey: SerializationKeys.pitMinHeight) as? Int
     self.pitHasVision = aDecoder.decodeObject(forKey: SerializationKeys.pitHasVision) as? Bool
     self.teamNumber = aDecoder.decodeInteger(forKey: SerializationKeys.teamNumber)
     self.pitHasCamera = aDecoder.decodeObject(forKey: SerializationKeys.pitHasCamera) as? Bool
     self.pitHasGyro = aDecoder.decodeObject(forKey: SerializationKeys.pitHasGyro) as? Bool
-    self.pitCanBuddyStartLevel2 = aDecoder.decodeObject(forKey: SerializationKeys.pitCanBuddyStartLevel2) as? Bool
     self.pitWidth = aDecoder.decodeObject(forKey: SerializationKeys.pitWidth) as? Int
     self.pitWeight = aDecoder.decodeObject(forKey: SerializationKeys.pitWeight) as? Int
     self.matchesPlayed = aDecoder.decodeObject(forKey: SerializationKeys.matchesPlayed) as? Int
@@ -160,11 +166,15 @@ public final class Team: NSObject, NSCoding {
     self.pitHasEncoders = aDecoder.decodeObject(forKey: SerializationKeys.pitHasEncoders) as? Bool
     self.pitDrivetrain = aDecoder.decodeObject(forKey: SerializationKeys.pitDrivetrain) as? String
     self.pitSandstormNavigationType = aDecoder.decodeObject(forKey: SerializationKeys.pitSandstormNavigationType) as? String
-    self.pitMaxHeight = aDecoder.decodeObject(forKey: SerializationKeys.pitMaxHeight) as? Int
     self.pitWheelDiameter = aDecoder.decodeObject(forKey: SerializationKeys.pitWheelDiameter) as? String
     self.pitClimbType = aDecoder.decodeObject(forKey: SerializationKeys.pitClimbType) as? [String:Int]
     self.pitSEALsNotes = aDecoder.decodeObject(forKey: SerializationKeys.pitSEALsNotes) as? String
-    self.pitRampAbility = aDecoder.decodeObject(forKey: SerializationKeys.pitRampAbility) as? Int
+    self.pitSEALsRampRanking = aDecoder.decodeObject(forKey: SerializationKeys.pitSEALsRampRanking) as? Int
+    self.pitIsLemonSpecialist = aDecoder.decodeObject(forKey: SerializationKeys.pitIsLemonSpecialist) as? Bool
+    self.pitNumDriveTrainMotors = aDecoder.decodeObject(forKey: SerializationKeys.pitNumDriveTrainMotors) as? Int
+    self.pitDriveTrainMotorType = aDecoder.decodeObject(forKey: SerializationKeys.pitDriveTrainMotorType) as? String
+    self.percentDysfunctional = aDecoder.decodeObject(forKey: SerializationKeys.percentDysfunctional) as? Int
+    self.actualSeed = aDecoder.decodeInteger(forKey: SerializationKeys.actualSeed)
     self.calculatedData = aDecoder.decodeObject(forKey: SerializationKeys.calculatedData) as? CalculatedTeamData
   }
 
@@ -173,12 +183,10 @@ public final class Team: NSObject, NSCoding {
     aCoder.encode(redActualRPs, forKey: SerializationKeys.redActualRPs)
     aCoder.encode(blueActualRPs, forKey: SerializationKeys.redActualRPs)
     aCoder.encode(actualRPs, forKey: SerializationKeys.actualRPs)
-    aCoder.encode(pitMinHeight, forKey: SerializationKeys.pitMinHeight)
     aCoder.encode(pitHasVision, forKey: SerializationKeys.pitHasVision)
     aCoder.encode(teamNumber, forKey: SerializationKeys.teamNumber)
     aCoder.encode(pitHasCamera, forKey: SerializationKeys.pitHasCamera)
     aCoder.encode(pitHasGyro, forKey: SerializationKeys.pitHasGyro)
-    aCoder.encode(pitCanBuddyStartLevel2, forKey: SerializationKeys.pitCanBuddyStartLevel2)
     aCoder.encode(pitWidth, forKey: SerializationKeys.pitWidth)
     aCoder.encode(pitWeight, forKey: SerializationKeys.pitWeight)
     aCoder.encode(matchesPlayed, forKey: SerializationKeys.matchesPlayed)
@@ -188,11 +196,15 @@ public final class Team: NSObject, NSCoding {
     aCoder.encode(pitHasEncoders, forKey: SerializationKeys.pitHasEncoders)
     aCoder.encode(pitDrivetrain, forKey: SerializationKeys.pitDrivetrain)
     aCoder.encode(pitSandstormNavigationType, forKey: SerializationKeys.pitSandstormNavigationType)
-    aCoder.encode(pitMaxHeight, forKey: SerializationKeys.pitMaxHeight)
     aCoder.encode(pitWheelDiameter, forKey: SerializationKeys.pitWheelDiameter)
     aCoder.encode(pitClimbType, forKey: SerializationKeys.pitClimbType)
     aCoder.encode(pitSEALsNotes, forKey: SerializationKeys.pitSEALsNotes)
-    aCoder.encode(pitRampAbility, forKey: SerializationKeys.pitRampAbility)
+    aCoder.encode(pitSEALsRampRanking, forKey: SerializationKeys.pitSEALsRampRanking)
+    aCoder.encode(pitIsLemonSpecialist, forKey: SerializationKeys.pitIsLemonSpecialist)
+    aCoder.encode(pitNumDriveTrainMotors, forKey: SerializationKeys.pitNumDriveTrainMotors)
+    aCoder.encode(pitDriveTrainMotorType, forKey: SerializationKeys.pitDriveTrainMotorType)
+    aCoder.encode(percentDysfunctional, forKey: SerializationKeys.percentDysfunctional)
+    aCoder.encode(actualSeed, forKey: SerializationKeys.actualSeed)
     aCoder.encode(calculatedData, forKey: SerializationKeys.calculatedData)
   }
 

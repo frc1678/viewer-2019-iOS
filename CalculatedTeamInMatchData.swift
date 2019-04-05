@@ -13,7 +13,7 @@ public final class CalculatedTeamInMatchData: NSCoding {
   // MARK: Declaration for string constants to be used to decode and also serialize.
   private struct SerializationKeys {
     static let lemonLoadSuccess = "lemonLoadSuccess"
-    static let lemonsSpilled = "lemonsSpilled"
+    static let pinningFouls = "pinningFouls"
     static let lemonsScored = "lemonsScored"
     static let lemonsScoredL1 = "lemonsScoredL1"
     static let lemonsScoredL2 = "lemonsScoredL2"
@@ -51,16 +51,20 @@ public final class CalculatedTeamInMatchData: NSCoding {
     static let orangeCycleL2 = "orangeCycleL2"
     static let orangeCycleL3 = "orangeCycleL3"
     static let timeIncap = "timeIncap"
-    static let timeImpaired = "timeImpaired"
     static let timeClimbing = "timeClimbing"
     static let selfClimbLevel = "selfClimbLevel"
     static let robot1ClimbLevel = "robot1ClimbLevel"
     static let robot2ClimbLevel = "robot2ClimbLevel"
+    static let timeDefending = "timeDefending"
+    static let totalFailedCyclesCaused = "totalFailedCyclesCaused"
+    static let pointsPrevented = "pointsPrevented"
+    static let lemonPointsPrevented = "lemonPointsPrevented"
+    static let orangePointsPrevented = "orangePointsPrevented"
   }
 
   // MARK: Properties
   public var lemonLoadSuccess: Int?
-  public var lemonsSpilled: Int?
+  public var pinningFouls: Int?
   public var lemonsScored: Int?
   public var lemonsScoredL1: Int?
   public var lemonsScoredL2: Int?
@@ -97,12 +101,16 @@ public final class CalculatedTeamInMatchData: NSCoding {
   public var orangeCycleL1: Int?
   public var orangeCycleL2: Int?
   public var orangeCycleL3: Int?
-  public var timeIncap: Int?
-  public var timeImpaired: Int?
-  public var timeClimbing: Int?
+  public var timeIncap: Float?
+  public var timeClimbing: Float?
   public var selfClimbLevel: Int?
   public var robot1ClimbLevel: Int?
   public var robot2ClimbLevel: Int?
+  public var timeDefending: Float?
+  public var totalFailedCyclesCaused: Int?
+  public var pointsPrevented: Float?
+  public var lemonPointsPrevented: Float?
+  public var orangePointsPrevented: Float?
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
   ///
@@ -127,7 +135,7 @@ public final class CalculatedTeamInMatchData: NSCoding {
     orangesScoredTeleL3 = json[SerializationKeys.orangesScoredTeleL3].int
     orangeSuccessDefended = json[SerializationKeys.orangeSuccessDefended].int
     orangeSuccessL2 = json[SerializationKeys.orangeSuccessL2].int
-    timeIncap = json[SerializationKeys.timeIncap].int
+    timeIncap = json[SerializationKeys.timeIncap].float
     lemonCycleAll = json[SerializationKeys.lemonCycleAll].int
     lemonsScored = json[SerializationKeys.lemonsScored].int
     lemonsScoredL1 = json[SerializationKeys.lemonsScoredL1].intValue
@@ -146,20 +154,24 @@ public final class CalculatedTeamInMatchData: NSCoding {
     lemonSuccessL3 = json[SerializationKeys.lemonSuccessL3].int
     lemonSuccessAll = json[SerializationKeys.lemonSuccessAll].int
     lemonCycleL1 = json[SerializationKeys.lemonCycleL1].int
-    timeClimbing = json[SerializationKeys.timeClimbing].int
+    timeClimbing = json[SerializationKeys.timeClimbing].float
     orangeSuccessAll = json[SerializationKeys.orangeSuccessAll].int
     orangeCycleL2 = json[SerializationKeys.orangeCycleL2].int
     lemonSuccessL1 = json[SerializationKeys.lemonSuccessL1].int
-    timeImpaired = json[SerializationKeys.timeImpaired].int
     orangeCycleAll = json[SerializationKeys.orangeCycleAll].int
     lemonLoadSuccess = json[SerializationKeys.lemonLoadSuccess].int
     lemonSuccessDefended = json[SerializationKeys.lemonSuccessDefended].int
     orangeSuccessL1 = json[SerializationKeys.orangeSuccessL1].int
     orangeSuccessUndefended = json[SerializationKeys.orangeSuccessUndefended].int
-    lemonsSpilled = json[SerializationKeys.lemonsSpilled].int
+    pinningFouls = json[SerializationKeys.pinningFouls].int
     selfClimbLevel = json[SerializationKeys.selfClimbLevel].int
     robot1ClimbLevel = json[SerializationKeys.robot1ClimbLevel].int
     robot2ClimbLevel = json[SerializationKeys.robot2ClimbLevel].int
+    timeDefending = json[SerializationKeys.timeDefending].float
+    totalFailedCyclesCaused = json[SerializationKeys.totalFailedCyclesCaused].int
+    pointsPrevented = json[SerializationKeys.pointsPrevented].float
+    lemonPointsPrevented = json[SerializationKeys.lemonPointsPrevented].float
+    orangePointsPrevented = json[SerializationKeys.orangePointsPrevented].float
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -201,16 +213,20 @@ public final class CalculatedTeamInMatchData: NSCoding {
     if let value = orangeSuccessAll { dictionary[SerializationKeys.orangeSuccessAll] = value }
     if let value = orangeCycleL2 { dictionary[SerializationKeys.orangeCycleL2] = value }
     if let value = lemonSuccessL1 { dictionary[SerializationKeys.lemonSuccessL1] = value }
-    if let value = timeImpaired { dictionary[SerializationKeys.timeImpaired] = value }
     if let value = orangeCycleAll { dictionary[SerializationKeys.orangeCycleAll] = value }
     if let value = lemonLoadSuccess { dictionary[SerializationKeys.lemonLoadSuccess] = value }
     if let value = lemonSuccessDefended { dictionary[SerializationKeys.lemonSuccessDefended] = value }
     if let value = orangeSuccessL1 { dictionary[SerializationKeys.orangeSuccessL1] = value }
     if let value = orangeSuccessUndefended { dictionary[SerializationKeys.orangeSuccessUndefended] = value }
-    if let value = lemonsSpilled { dictionary[SerializationKeys.lemonsSpilled] = value }
+    if let value = pinningFouls { dictionary[SerializationKeys.pinningFouls] = value }
     if let value = selfClimbLevel { dictionary[SerializationKeys.selfClimbLevel] = value}
     if let value = robot1ClimbLevel { dictionary[SerializationKeys.robot1ClimbLevel] = value}
     if let value = robot2ClimbLevel { dictionary[SerializationKeys.robot2ClimbLevel] = value}
+    if let value = timeDefending { dictionary[SerializationKeys.timeDefending] = value}
+    if let value = totalFailedCyclesCaused { dictionary[SerializationKeys.totalFailedCyclesCaused] = value}
+    if let value = pointsPrevented { dictionary[SerializationKeys.pointsPrevented] = value}
+    if let value = lemonPointsPrevented { dictionary[SerializationKeys.lemonPointsPrevented] = value}
+    if let value = orangePointsPrevented { dictionary[SerializationKeys.orangePointsPrevented] = value}
     return dictionary
   }
 
@@ -227,7 +243,7 @@ public final class CalculatedTeamInMatchData: NSCoding {
     self.orangesScoredTeleL3 = aDecoder.decodeObject(forKey: SerializationKeys.orangesScoredTeleL3) as? Int
     self.orangeSuccessDefended = aDecoder.decodeObject(forKey: SerializationKeys.orangeSuccessDefended) as? Int
     self.orangeSuccessL2 = aDecoder.decodeObject(forKey: SerializationKeys.orangeSuccessL2) as? Int
-    self.timeIncap = aDecoder.decodeObject(forKey: SerializationKeys.timeIncap) as? Int
+    self.timeIncap = aDecoder.decodeObject(forKey: SerializationKeys.timeIncap) as? Float
     self.lemonCycleAll = aDecoder.decodeObject(forKey: SerializationKeys.lemonCycleAll) as? Int
     self.lemonsScored = aDecoder.decodeObject(forKey: SerializationKeys.lemonsScored) as? Int
     self.lemonsScoredL1 = aDecoder.decodeObject(forKey: SerializationKeys.lemonsScoredL1) as? Int
@@ -246,20 +262,24 @@ public final class CalculatedTeamInMatchData: NSCoding {
     self.lemonSuccessL3 = aDecoder.decodeObject(forKey: SerializationKeys.lemonSuccessL3) as? Int
     self.lemonSuccessAll = aDecoder.decodeObject(forKey: SerializationKeys.lemonSuccessAll) as? Int
     self.lemonCycleL1 = aDecoder.decodeObject(forKey: SerializationKeys.lemonCycleL1) as? Int
-    self.timeClimbing = aDecoder.decodeObject(forKey: SerializationKeys.timeClimbing) as? Int
+    self.timeClimbing = aDecoder.decodeObject(forKey: SerializationKeys.timeClimbing) as? Float
     self.orangeSuccessAll = aDecoder.decodeObject(forKey: SerializationKeys.orangeSuccessAll) as? Int
     self.orangeCycleL2 = aDecoder.decodeObject(forKey: SerializationKeys.orangeCycleL2) as? Int
     self.lemonSuccessL1 = aDecoder.decodeObject(forKey: SerializationKeys.lemonSuccessL1) as? Int
-    self.timeImpaired = aDecoder.decodeObject(forKey: SerializationKeys.timeImpaired) as? Int
     self.orangeCycleAll = aDecoder.decodeObject(forKey: SerializationKeys.orangeCycleAll) as? Int
     self.lemonLoadSuccess = aDecoder.decodeObject(forKey: SerializationKeys.lemonLoadSuccess) as? Int
     self.lemonSuccessDefended = aDecoder.decodeObject(forKey: SerializationKeys.lemonSuccessDefended) as? Int
     self.orangeSuccessL1 = aDecoder.decodeObject(forKey: SerializationKeys.orangeSuccessL1) as? Int
     self.orangeSuccessUndefended = aDecoder.decodeObject(forKey: SerializationKeys.orangeSuccessUndefended) as? Int
-    self.lemonsSpilled = aDecoder.decodeObject(forKey: SerializationKeys.lemonsSpilled) as? Int
+    self.pinningFouls = aDecoder.decodeObject(forKey: SerializationKeys.pinningFouls) as? Int
     self.selfClimbLevel = aDecoder.decodeObject(forKey: SerializationKeys.selfClimbLevel) as? Int
     self.robot1ClimbLevel = aDecoder.decodeObject(forKey: SerializationKeys.robot1ClimbLevel) as? Int
     self.robot2ClimbLevel = aDecoder.decodeObject(forKey: SerializationKeys.robot2ClimbLevel) as? Int
+    self.timeDefending = aDecoder.decodeObject(forKey: SerializationKeys.timeDefending) as? Float
+    self.totalFailedCyclesCaused = aDecoder.decodeObject(forKey: SerializationKeys.totalFailedCyclesCaused) as? Int
+    self.pointsPrevented = aDecoder.decodeObject(forKey: SerializationKeys.pointsPrevented) as? Float
+    self.lemonPointsPrevented = aDecoder.decodeObject(forKey: SerializationKeys.lemonPointsPrevented) as? Float
+    self.orangePointsPrevented = aDecoder.decodeObject(forKey: SerializationKeys.orangePointsPrevented) as? Float
   }
 
   public func encode(with aCoder: NSCoder) {
@@ -297,16 +317,20 @@ public final class CalculatedTeamInMatchData: NSCoding {
     aCoder.encode(orangeSuccessAll, forKey: SerializationKeys.orangeSuccessAll)
     aCoder.encode(orangeCycleL2, forKey: SerializationKeys.orangeCycleL2)
     aCoder.encode(lemonSuccessL1, forKey: SerializationKeys.lemonSuccessL1)
-    aCoder.encode(timeImpaired, forKey: SerializationKeys.timeImpaired)
     aCoder.encode(orangeCycleAll, forKey: SerializationKeys.orangeCycleAll)
     aCoder.encode(lemonLoadSuccess, forKey: SerializationKeys.lemonLoadSuccess)
     aCoder.encode(lemonSuccessDefended, forKey: SerializationKeys.lemonSuccessDefended)
     aCoder.encode(orangeSuccessL1, forKey: SerializationKeys.orangeSuccessL1)
     aCoder.encode(orangeSuccessUndefended, forKey: SerializationKeys.orangeSuccessUndefended)
-    aCoder.encode(lemonsSpilled, forKey: SerializationKeys.lemonsSpilled)
+    aCoder.encode(pinningFouls, forKey: SerializationKeys.pinningFouls)
     aCoder.encode(selfClimbLevel, forKey: SerializationKeys.selfClimbLevel)
     aCoder.encode(robot1ClimbLevel, forKey: SerializationKeys.robot1ClimbLevel)
     aCoder.encode(robot2ClimbLevel, forKey: SerializationKeys.robot2ClimbLevel)
+    aCoder.encode(timeDefending, forKey: SerializationKeys.timeDefending)
+    aCoder.encode(totalFailedCyclesCaused, forKey: SerializationKeys.totalFailedCyclesCaused)
+    aCoder.encode(pointsPrevented, forKey: SerializationKeys.pointsPrevented)
+    aCoder.encode(lemonPointsPrevented, forKey: SerializationKeys.lemonPointsPrevented)
+    aCoder.encode(orangePointsPrevented, forKey: SerializationKeys.orangePointsPrevented)
   }
 
 }

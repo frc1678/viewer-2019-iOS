@@ -28,9 +28,9 @@
     multiCell.teamLabel.font = [multiCell.teamLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     multiCell.scoreLabel.font = [multiCell.scoreLabel.font fontWithSize:self.firebaseFetcher.currentMatchManager.textSize];
     
-    if(team.calculatedData.actualSeed != nil){
+    if(team.actualSeed != nil){
         //get the rank where higher numbers are on the top
-        multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", [self.firebaseFetcher reverseRankOfTeam:team withCharacteristic:@"calculatedData.actualSeed"]];
+        multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", [self.firebaseFetcher reverseRankOfTeam:team withCharacteristic:@"actualSeed"]];
     } else {
         multiCell.rankLabel.text = @"NA";
     }

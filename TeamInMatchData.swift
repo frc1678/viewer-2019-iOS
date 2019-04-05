@@ -25,8 +25,6 @@ public final class TeamInMatchData: NSObject, NSCoding {
     static let notes = "notes"
     static let rankSpeed = "rankSpeed"
     static let rankAgility = "rankAgility"
-    static let numGoodDecisions = "numGoodDecisions"
-    static let numBadDecisions = "numBadDecisions"
   }
 
   // MARK: Properties
@@ -43,9 +41,7 @@ public final class TeamInMatchData: NSObject, NSCoding {
     public var notes: String?
     public var rankSpeed: Int?
     public var rankAgility: Int?
-    public var numGoodDecisions: Int?
-    public var numBadDecisions: Int?
-
+  
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
   ///
@@ -72,8 +68,6 @@ public final class TeamInMatchData: NSObject, NSCoding {
     notes = json[SerializationKeys.notes].string
     rankSpeed = json[SerializationKeys.rankSpeed].int
     rankAgility = json[SerializationKeys.rankAgility].int
-    numGoodDecisions = json[SerializationKeys.numGoodDecisions].int
-    numBadDecisions = json[SerializationKeys.numBadDecisions].int
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -94,8 +88,6 @@ public final class TeamInMatchData: NSObject, NSCoding {
     if let value = notes { dictionary[SerializationKeys.notes] = value }
     if let value = rankSpeed { dictionary[SerializationKeys.rankSpeed] = value }
     if let value = rankAgility { dictionary[SerializationKeys.rankAgility] = value }
-    if let value = numGoodDecisions { dictionary[SerializationKeys.numGoodDecisions] = value }
-    if let value = numBadDecisions { dictionary[SerializationKeys.numBadDecisions] = value }
     return dictionary
   }
 
@@ -114,8 +106,6 @@ public final class TeamInMatchData: NSObject, NSCoding {
     self.notes = aDecoder.decodeObject(forKey: SerializationKeys.notes) as? String
     self.rankSpeed = aDecoder.decodeObject(forKey: SerializationKeys.rankSpeed) as? Int
     self.rankAgility = aDecoder.decodeObject(forKey: SerializationKeys.rankAgility) as? Int
-    self.numGoodDecisions = aDecoder.decodeObject(forKey: SerializationKeys.numGoodDecisions) as? Int
-    self.numBadDecisions = aDecoder.decodeObject(forKey: SerializationKeys.numBadDecisions) as? Int
   }
 
   public func encode(with aCoder: NSCoder) {
@@ -132,8 +122,6 @@ public final class TeamInMatchData: NSObject, NSCoding {
     aCoder.encode(notes, forKey: SerializationKeys.notes)
     aCoder.encode(rankSpeed, forKey: SerializationKeys.rankSpeed)
     aCoder.encode(rankAgility, forKey: SerializationKeys.rankAgility)
-    aCoder.encode(numGoodDecisions, forKey: SerializationKeys.numGoodDecisions)
-    aCoder.encode(numBadDecisions, forKey: SerializationKeys.numBadDecisions)
   }
 
 }

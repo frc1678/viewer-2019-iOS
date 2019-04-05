@@ -80,7 +80,7 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
             multiCell!.scoreLabel!.text = ""
         }
         if self.inPicklist {
-            multiCell!.rankLabel!.text = "\(team!.calculatedData?.actualSeed ?? 0)"
+            multiCell!.rankLabel!.text = "\(team!.actualSeed ?? 0)"
         } else {
             multiCell!.rankLabel!.text = "\(self.firebaseFetcher.rankOfTeam(team!, withCharacteristic: "calculatedData.secondPickAbility"))"
         }

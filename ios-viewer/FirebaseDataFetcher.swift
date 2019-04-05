@@ -537,7 +537,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     /** Get list of teams sorted by seed */
     @objc func seedList() -> [Team] {
-        return (currentMatchManager.teams.sorted { $0.calculatedData!.actualSeed < $1.calculatedData!.actualSeed }).filter { $0.calculatedData?.actualSeed != 0 }
+        return (currentMatchManager.teams.sorted { $0.actualSeed < $1.actualSeed }).filter { $0.actualSeed != 0 }
     }
     
     /** Get list of teams sorted by predicted seed */
@@ -585,7 +585,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     /** See rankOfTeam, reverses */
     @objc func reverseRankOfTeam(_ team: Team, withCharacteristic:String) -> Int {
         var counter = 0
-        let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic).reversed().filter { $0.calculatedData?.actualSeed != 0 }
+        let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic).reversed().filter { $0.actualSeed != 0 }
         
         for loopTeam in sortedTeams {
             counter += 1
