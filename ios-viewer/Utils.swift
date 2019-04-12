@@ -563,10 +563,25 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     // MARK: TIMD keys
     /** Keys relating to the Autonomous period to be displayed in the TIMD view */
     static let TIMDAutoKeys : [String] = [
+        "startingLevel",
+        "crossedHabLine",
+        "startingLocation",
+        "preload",
     ]
 
     /** Keys relating to the Teleoperated period to be displayed in the TIMD view */
     static let TIMDTeleKeys : [String] = [
+        "calculatedData.orangesScored",
+        "calculatedData.lemonsScored",
+        "calculatedData.lemonLoadSuccess",
+        "calculatedData.orangeSuccessDefended",
+        "calculatedData.orangeSuccessL2",
+        "calculatedData.orangeSuccessL3",
+        "calculatedData.lemonSuccessDefended",
+        "calculatedData.lemonSuccessL2",
+        "calculatedData.lemonSuccessL3",
+        "calculatedData.timeClimbing",
+        "calculatedData.lemonsSpilled",
     ]
 
     /** Keys relating to the status of a robot to be displayed in the TIMD view */
