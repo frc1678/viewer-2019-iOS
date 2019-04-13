@@ -77,7 +77,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         //constraints
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 1
-        self.tableView.estimatedSectionHeaderHeight = 0
+        self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedSectionHeaderHeight = 1
         self.tableView.estimatedSectionFooterHeight = 0
         
     }
