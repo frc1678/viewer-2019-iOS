@@ -86,9 +86,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         let yesNoKeys : [String] = [
             "pitHasCamera",
-            "pitHasVision",
-            "pitHasGyro",
-            "pitHasEncoders",
             "pitIsLemonSpecialist",
             "calculatedData.hasOrangeGroundIntake",
             "calculatedData.hasLemonGroundIntake"
@@ -112,12 +109,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitProgrammingLanguage",
             "pitClimbType",
             "pitHasCamera",
-            "pitHasVision",
-            "pitHasGyro",
-            "pitHasEncoders",
-            "pitSandstormNavigationType",
             "pitSEALsRampRanking",
-            "pitHasOrangeShooter",
             "pitIsLemonSpecialist",
             "pitNumDriveTrainMotors",
             "pitDriveTrainMotorType",
@@ -345,14 +337,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
 
         /** Values that should be displayed as long text cells */
         let TIMDLongTextCells : [String] = [
-            "superNotes",
-            "notes"
             ]
 
         let longTextCells : [String] = [
             "pitSEALsNotes",
             "pitClimbType",
-            "notes"
         ]
 
         let unrankedCells = [
@@ -368,9 +357,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
 
         let boolValues = [
             "pitHasCamera",
-            "pitHasVision",
-            "pitHasGyro",
-            "pitHasEncoders",
             "pitIsLemonSpecialist",
             "calculatedData.hasOrangeGroundIntake",
             "calculatedData.hasLemonGroundIntake"
@@ -409,7 +395,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
                 "Teleoperated",
                 "Defense",
                 "End Game",
-                "Super Scout",
                 "Pit Scout",
                 "High Level",
             ]
@@ -425,7 +410,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
                 teleKeys,
                 defenseKeys,
                 endGame,
-                superKeys,
                 pitKeys,
                 highLevel,
             ]
@@ -563,10 +547,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitHasCamera",
             "pitWeight",
             "pitClimbType",
-            "pitHasVision",
-            "pitHasGyro",
-            "pitHasEncoders",
-            "pitSandstormNavigationType",
             "pitSEALsRampRanking",
             "pitIsLemonSpecialist",
             "pitNumDriveTrainMotors",
@@ -591,16 +571,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         ]
     }
 
-    static let superKeys = [
-        //superNotes- They're in TIMDs, so see TeamDetails for more info
-        "notes",
+    //static let superKeys = [
         //"calculatedData.avgDrivingAbility",
         //"calculatedData.avgSpeed",
         //"calculatedData.avgAgility",
         //"calculatedData.avgDefense",
         //"calculatedData.totalNumGoodDecisions",
         //"calculatedData.totalNumBadDecisions"
-    ]
+    //]
 
     static let statusKeys : [String] = []
     static let miscKeys = ["uploadedData.miscellaneousNotes"]
@@ -644,7 +622,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "rankSpeed",
         "rankAgility",
         //"rankDefense",
-        "notes",
     ]
 
     /** All sections of the TIMD view */
@@ -689,12 +666,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "pitProgrammingLanguage" : "Programming Language",
         "pitClimbType" : "Climb Type",
         "pitHasCamera" : "Has Camera",
-        "pitHasVision" : "Has Vision",
-        "pitHasGyro" : "Has Gyro",
-        "pitHasEncoders" : "Has Encoders",
-        "pitSandstormNavigationType" : "Sandstorm Nav.",
         "pitSEALsRampRanking" : "Ramp Ability",
-        "pitHasOrangeShooter" : "Cargo Shooter",
         "pitIsLemonSpecialist" : "Hatch Specialist",
         "pitNumDriveTrainMotors" : "# of Motors on Drive Train",
         "pitDriveTrainMotorType" : "Type of Motor on Drive Train",
@@ -949,7 +921,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.climbSuccessL3" : "Level 3 Climb Success",
         "rankSpeed" : "Speed",
         "rankAgility" : "Agility",
-        "notes" : "Super Notes:",
         "calculatedData.selfClimbLevel" : "Self Climb Level",
         "calculatedData.robot1ClimbLevel" : "1st Assisted Climb Level",
         "calculatedData.robot2ClimbLevel" : "2nd Assisted Climb Level",
