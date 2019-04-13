@@ -219,8 +219,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         unrankedCell.detailLabel!.text! = String(describing: team!.pitWidth ?? 0)
                     } else if dataKey == "pitLength" {
                         unrankedCell.detailLabel!.text! = String(describing: team!.pitLength ?? 0)
-                    } else if dataKey == "pitSandstormNavigationType" {
-                        unrankedCell.detailLabel!.text! = (team?.pitSandstormNavigationType) ?? ""
                     } else if dataKey == "pitSEALsRampRanking" {
                         unrankedCell.detailLabel!.text! = String(describing: team?.pitSEALsRampRanking ?? 0)
                     } else if dataKey == "pitNumDriveTrainMotors" {

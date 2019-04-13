@@ -22,7 +22,6 @@ public final class TeamInMatchData: NSObject, NSCoding {
     static let isNoShow = "isNoShow"
     static let teamNumber = "teamNumber"
     static let matchNumber = "matchNumber"
-    static let notes = "notes"
     static let rankSpeed = "rankSpeed"
     static let rankAgility = "rankAgility"
   }
@@ -65,7 +64,6 @@ public final class TeamInMatchData: NSObject, NSCoding {
     isNoShow = json[SerializationKeys.isNoShow].boolValue
     teamNumber = json[SerializationKeys.teamNumber].int
     matchNumber = json[SerializationKeys.matchNumber].int
-    notes = json[SerializationKeys.notes].string
     rankSpeed = json[SerializationKeys.rankSpeed].int
     rankAgility = json[SerializationKeys.rankAgility].int
   }
@@ -85,7 +83,6 @@ public final class TeamInMatchData: NSObject, NSCoding {
     dictionary[SerializationKeys.isNoShow] = isNoShow
     if let value = teamNumber { dictionary[SerializationKeys.teamNumber] = value }
     if let value = matchNumber { dictionary[SerializationKeys.matchNumber] = value }
-    if let value = notes { dictionary[SerializationKeys.notes] = value }
     if let value = rankSpeed { dictionary[SerializationKeys.rankSpeed] = value }
     if let value = rankAgility { dictionary[SerializationKeys.rankAgility] = value }
     return dictionary
@@ -103,7 +100,6 @@ public final class TeamInMatchData: NSObject, NSCoding {
     self.isNoShow = aDecoder.decodeBool(forKey: SerializationKeys.isNoShow)
     self.teamNumber = aDecoder.decodeObject(forKey: SerializationKeys.teamNumber) as? Int
     self.matchNumber = aDecoder.decodeObject(forKey: SerializationKeys.matchNumber) as? Int
-    self.notes = aDecoder.decodeObject(forKey: SerializationKeys.notes) as? String
     self.rankSpeed = aDecoder.decodeObject(forKey: SerializationKeys.rankSpeed) as? Int
     self.rankAgility = aDecoder.decodeObject(forKey: SerializationKeys.rankAgility) as? Int
   }
@@ -119,7 +115,6 @@ public final class TeamInMatchData: NSObject, NSCoding {
     aCoder.encode(isNoShow, forKey: SerializationKeys.isNoShow)
     aCoder.encode(teamNumber, forKey: SerializationKeys.teamNumber)
     aCoder.encode(matchNumber, forKey: SerializationKeys.matchNumber)
-    aCoder.encode(notes, forKey: SerializationKeys.notes)
     aCoder.encode(rankSpeed, forKey: SerializationKeys.rankSpeed)
     aCoder.encode(rankAgility, forKey: SerializationKeys.rankAgility)
   }
