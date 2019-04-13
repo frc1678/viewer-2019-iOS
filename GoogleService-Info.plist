@@ -13,21 +13,21 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.citrusciruits.ios-viewer</string>
+	<string>org.citruscircuits.ios-viewer</string>
 	<key>PROJECT_ID</key>
 	<string>scouting-2019-cmp-d43a4</string>
 	<key>STORAGE_BUCKET</key>
 	<string>scouting-2019-cmp-d43a4.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:354375974134:ios:6da2a8fda3565e2d</string>
 	<key>DATABASE_URL</key>
