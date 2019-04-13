@@ -60,7 +60,10 @@ class TIMDDetailsViewController: UITableViewController {
                 
                 print("Is Value Bool? \(value is Bool)")
                 if value is String {
-                    let stringValue = value as! String
+                    var stringValue = value as! String
+                    if stringValue == "orange" || stringValue == "lemon" {
+                        stringValue = ["orange":"Cargo","lemon":"Panel"][stringValue]!
+                    }
                     cell.valueLabel.text = stringValue
                 } else if Utils.teamDetailsKeys.boolValues.contains(key) && value is Bool {
                     let boolValue = value as! Bool
