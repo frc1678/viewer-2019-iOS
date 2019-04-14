@@ -283,9 +283,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.p75percentIncap",
             "calculatedData.p75percentIncapEntireMatch",
             "calculatedData.p75percentNoShow",
-            //"calculatedData.climbAttemptsL1",
-            //"calculatedData.climbAttemptsL2",
-            //"calculatedData.climbAttemptsL3",
+            "calculatedData.climbAttemptsL1",
+            "calculatedData.climbAttemptsL2",
+            "calculatedData.climbAttemptsL3",
             "calculatedData.numClimbAttemptsL1",
             "calculatedData.numClimbAttemptsL2",
             "calculatedData.numClimbAttemptsL3",
@@ -329,10 +329,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "# of Attempts to Lvl. 2",
             "# of Attempts to Lvl. 3",
             "# of Attempts from Lvl. 1",
-            "# of Attempts from Lvl. 2"
-            //"Lvl. 1 Climb Attempts",
-            //"Lvl. 2 Climb Attempts",
-            //"Lvl. 3 Climb Attempts"
+            "# of Attempts from Lvl. 2",
+            "Lvl. 1 Climb Attempts",
+            "Lvl. 2 Climb Attempts",
+            "Lvl. 3 Climb Attempts",
+            "Lvl. 1 Hab Line Attempts"
         ]
 
         /** Values that should be displayed as long text cells */
@@ -346,7 +347,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
 
         let unrankedCells = [
             "selectedImageURL",
-            "otherUrls"
+            "otherUrls",
+            "calculatedData.climbAttemptsL1",
+            "calculatedData.climbAttemptsL2",
+            "calculatedData.climbAttemptsL3",
+            "calculatedData.habLineAttemptsL1",
+            "calculatedData.habLineAttemptsL2"
         ]
 
         /** Values to be displayed as percentages. */
@@ -431,8 +437,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             //Some stuff is not needed
             "calculatedData.habLineSuccessL1",
             "calculatedData.habLineSuccessL2",
-            //"calculatedData.habLineAttemptsL1",
-            //"calculatedData.habLineAttemptsL2",
+            "calculatedData.habLineAttemptsL1",
+            "calculatedData.habLineAttemptsL2",
             "calculatedData.numHabLineAttemptsL1",
             "calculatedData.numHabLineAttemptsL2"
         ]
@@ -511,9 +517,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         /** Keys relating to the portions of the game that occur in the end (climbing, challenging, etc) */
         let endGame : [String] = [
             "calculatedData.avgTimeClimbing",
-            //"calculatedData.climbAttemptsL1",
-            //"calculatedData.climbAttemptsL2",
-            //"calculatedData.climbAttemptsL3",
+            "calculatedData.climbAttemptsL1",
+            "calculatedData.climbAttemptsL2",
+            "calculatedData.climbAttemptsL3",
             "calculatedData.numClimbAttemptsL1",
             "calculatedData.numClimbAttemptsL2",
             "calculatedData.numClimbAttemptsL3",
@@ -530,12 +536,13 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.percentNoShow"
         ]
         
-       /* let calculatedStrings : [String] = [
+       let calculatedStrings : [String] = [
             "calculatedData.climbAttemptsL1",
             "calculatedData.climbAttemptsL2",
             "calculatedData.climbAttemptsL3",
+            "calculatedData.habLineAttemptsL1",
             "calculatedData.habLineAttemptsL2"
-        ] */
+        ]
 
         /** Keys relating to the data the pit scout collects to be displayed on teamDetails */
         let pitKeys = [
@@ -724,8 +731,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.lemonSuccessFromSide" : "Panel Side Success",
         "calculatedData.habLineSuccessL1" : "Hab Line Success L1",
         "calculatedData.habLineSuccessL2" : "Hab Line Success L2",
-        //"calculatedData.habLineAttemptsL1" : "Hab Line Attempts L1",
-        //"calculatedData.habLineAttemptsL2" : "Hab Line Attempts L2",
+        "calculatedData.habLineAttemptsL1" : "Hab Line Attempts L1",
+        "calculatedData.habLineAttemptsL2" : "Hab Line Attempts L2",
         "calculatedData.numHabLineAttemptsL1" : "# of Attempts from Lvl. 1",
         "calculatedData.numHabLineAttemptsL2" : "# of Attempts from Lvl. 2",
         "calculatedData.avgTimeIncap" : "Avg. Time Incap",
@@ -910,9 +917,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.redChanceWin" : "Red Win Chance",
         "calculatedData.bluePredictedClimbPoints" : "Blue Predicted Climb Points",
         "calculatedData.redPredictedClimbPoints" : "Red Predicted Climb Points",
-        //"calculatedData.climbAttemptsL1" : "Lvl. 1 Climb Attempts",
-        //"calculatedData.climbAttemptsL2" : "Lvl. 2 Climb Attempts",
-        //"calculatedData.climbAttemptsL3" : "Lvl. 3 Climb Attempts",
+        "calculatedData.climbAttemptsL1" : "Lvl. 1 Climb Attempts",
+        "calculatedData.climbAttemptsL2" : "Lvl. 2 Climb Attempts",
+        "calculatedData.climbAttemptsL3" : "Lvl. 3 Climb Attempts",
         "calculatedData.numClimbAttemptsL1" : "# of Attempts to Lvl. 1",
         "calculatedData.numClimbAttemptsL2" : "# of Attempts to Lvl. 2",
         "calculatedData.numClimbAttemptsL3" : "# of Attempts to Lvl. 3",

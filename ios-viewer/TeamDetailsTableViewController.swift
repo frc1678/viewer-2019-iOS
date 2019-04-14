@@ -221,15 +221,17 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     } else if dataKey == "pitLength" {
                         unrankedCell.detailLabel!.text! = String(describing: team!.pitLength ?? 0)
                     } else if dataKey == "pitSEALsRampRanking" {
-                        unrankedCell.detailLabel!.text! = String(describing: team?.pitSEALsRampRanking ?? 0)
+                        unrankedCell.detailLabel!.text! = String(describing: team!.pitSEALsRampRanking ?? 0)
                     } else if dataKey == "pitNumDriveTrainMotors" {
-                        unrankedCell.detailLabel!.text! = String(describing: team?.pitNumDriveTrainMotors ?? 0)
+                        unrankedCell.detailLabel!.text! = String(describing: team!.pitNumDriveTrainMotors ?? 0)
                     } else if dataKey == "pitDriveTrainMotorType" {
-                        unrankedCell.detailLabel!.text! = (team!.pitDriveTrainMotorType ?? "")
+                        unrankedCell.detailLabel!.text! = (team?.pitDriveTrainMotorType) ?? ""
                     } else if Utils.teamDetailsKeys.addCommasBetweenCapitals.contains(dataKey) {
                         unrankedCell.detailLabel.text = "\(insertCommasAndSpacesBetweenCapitalsInString(roundValue(dataPoint!, toDecimalPlaces: 2)))"
                     } else if Utils.teamDetailsKeys.boolValues.contains(dataKey) {
                         unrankedCell.detailLabel.text = "\(boolToBoolString(dataPoint as? Bool ?? false))"
+                    } else if Utils.teamDetailsKeys.calculatedStrings.contains(dataKey) {
+                        unrankedCell.detailLabel.text = dataPoint as? String
                     } else {
                         unrankedCell.detailLabel.text = "\(roundValue(dataPoint!, toDecimalPlaces: 2))"
                     }
