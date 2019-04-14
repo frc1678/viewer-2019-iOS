@@ -77,7 +77,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         //constraints
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 1
-        self.tableView.estimatedSectionHeaderHeight = 0
+        self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedSectionHeaderHeight = 1
         self.tableView.estimatedSectionFooterHeight = 0
         
     }
@@ -219,8 +220,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         unrankedCell.detailLabel!.text! = String(describing: team!.pitWidth ?? 0)
                     } else if dataKey == "pitLength" {
                         unrankedCell.detailLabel!.text! = String(describing: team!.pitLength ?? 0)
-                    } else if dataKey == "pitSandstormNavigationType" {
-                        unrankedCell.detailLabel!.text! = (team?.pitSandstormNavigationType) ?? ""
                     } else if dataKey == "pitSEALsRampRanking" {
                         unrankedCell.detailLabel!.text! = String(describing: team?.pitSEALsRampRanking ?? 0)
                     } else if dataKey == "pitNumDriveTrainMotors" {
