@@ -135,6 +135,8 @@ public final class Team: NSObject, NSCoding {
     self.actualRPs = aDecoder.decodeInteger(forKey: SerializationKeys.actualRPs)
     self.teamNumber = aDecoder.decodeInteger(forKey: SerializationKeys.teamNumber)
     self.pitHasCamera = aDecoder.decodeObject(forKey: SerializationKeys.pitHasCamera) as? Bool
+    self.teamNumber = aDecoder.decodeInteger(forKey: SerializationKeys.teamNumber)
+    self.pitHasCamera = aDecoder.decodeObject(forKey: SerializationKeys.pitHasCamera) as? Bool
     self.pitWidth = aDecoder.decodeObject(forKey: SerializationKeys.pitWidth) as? Int
     self.pitWeight = aDecoder.decodeObject(forKey: SerializationKeys.pitWeight) as? Int
     self.matchesPlayed = aDecoder.decodeObject(forKey: SerializationKeys.matchesPlayed) as? Int
