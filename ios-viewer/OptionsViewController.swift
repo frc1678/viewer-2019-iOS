@@ -28,9 +28,15 @@ class OptionsViewController: UIViewController, UITableViewDelegate {
         if let hiDysfunc = firebaseFetcher?.currentMatchManager.highlightDysfunc {
             hiDysfuncSwitch.setOn(hiDysfunc, animated: false)
         }
+        // This is what sets the textSize to the slider value
         if let textSize = firebaseFetcher?.currentMatchManager.textSize {
+            // Gets the textSize value from the UI Slider and sets it to the textSize value
             self.textSizeSlider.value = Float(textSize)
+            // Sets the minimumValue of the textSize
             textSizeSlider.minimumValue = 15;
+            // Sets the maximumValue of the textSize
+            textSizeSlider.maximumValue = 28;
+
         }
     }
     
