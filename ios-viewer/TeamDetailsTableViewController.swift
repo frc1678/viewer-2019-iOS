@@ -210,22 +210,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     
                     if "\(String(describing: dataPoint))".isEmpty {
                         unrankedCell.detailLabel.text = ""
-                    } else if dataKey == "pitProgrammingLanguage" { //JUST WANNA SAY this sucks
-                        unrankedCell.detailLabel!.text! = (team?.pitProgrammingLanguage) ?? ""
-                    } else if dataKey == "pitDrivetrain" {
-                        unrankedCell.detailLabel!.text! = (team?.pitDrivetrain) ?? ""
-                    } else if dataKey == "pitWheelDiameter" {
-                        unrankedCell.detailLabel!.text! = (team?.pitWheelDiameter) ?? ""
-                    } else if dataKey == "pitWidth" {
-                        unrankedCell.detailLabel!.text! = String(describing: team!.pitWidth ?? 0)
-                    } else if dataKey == "pitLength" {
-                        unrankedCell.detailLabel!.text! = String(describing: team!.pitLength ?? 0)
-                    } else if dataKey == "pitSEALsRampRanking" {
-                        unrankedCell.detailLabel!.text! = String(describing: team!.pitSEALsRampRanking ?? 0)
-                    } else if dataKey == "pitNumDriveTrainMotors" {
-                        unrankedCell.detailLabel!.text! = String(describing: team!.pitNumDriveTrainMotors ?? 0)
-                    } else if dataKey == "pitDriveTrainMotorType" {
-                        unrankedCell.detailLabel!.text! = (team?.pitDriveTrainMotorType) ?? ""
+                    } else if Utils.teamDetailsKeys.pitStrings.contains(dataKey) {
+                        unrankedCell.detailLabel!.text = dataPoint as? String ?? ""
+                    } else if Utils.teamDetailsKeys.pitInts.contains(dataKey) {
+                        unrankedCell.detailLabel!.text = String(describing: dataPoint ?? 0 as AnyObject)
                     } else if Utils.teamDetailsKeys.addCommasBetweenCapitals.contains(dataKey) {
                         unrankedCell.detailLabel.text = "\(insertCommasAndSpacesBetweenCapitalsInString(roundValue(dataPoint!, toDecimalPlaces: 2)))"
                     } else if Utils.teamDetailsKeys.boolValues.contains(dataKey) {

@@ -544,6 +544,20 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitNumDriveTrainMotors",
             "pitDriveTrainMotorType"
         ]
+        
+        let pitStrings = [
+            "pitDrivetrain",
+            "pitProgrammingLanguage",
+            "pitWheelDiameter",
+            "pitDriveTrainMotorType"
+        ]
+        
+        let pitInts = [
+            "pitWidth",
+            "pitLength",
+            "pitSEALsRampRanking",
+            "pitNumDriveTrainMotors"
+        ]
 
         /** Data collected by SEALS */
         let sealKeys = [
