@@ -194,6 +194,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     static let avgPointsPrevented = "avgPointsPrevented"
     static let avgLemonPointsPrevented = "avgLemonPointsPrevented"
     static let avgOrangePointsPrevented = "avgOrangePointsPrevented"
+    static let pushAbility = "pushAbility"
     
   }
 
@@ -380,6 +381,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     @objc public var avgPointsPrevented: Float = -1.0
     @objc public var avgLemonPointsPrevented: Float = -1.0
     @objc public var avgOrangePointsPrevented: Float = -1.0
+    @objc public var pushAbility: Float = -1.0
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -576,6 +578,8 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     avgPointsPrevented = json[SerializationKeys.avgPointsPrevented].floatValue
     avgLemonPointsPrevented = json[SerializationKeys.avgLemonPointsPrevented].floatValue
     avgOrangePointsPrevented = json[SerializationKeys.avgOrangePointsPrevented].floatValue
+    pushAbility = json[SerializationKeys.pushAbility].floatValue
+
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -765,6 +769,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     dictionary[SerializationKeys.avgPointsPrevented] = avgPointsPrevented
     dictionary[SerializationKeys.avgLemonPointsPrevented] = avgLemonPointsPrevented
     dictionary[SerializationKeys.avgOrangePointsPrevented] = avgOrangePointsPrevented
+    dictionary[SerializationKeys.pushAbility] = pushAbility
     return dictionary
   }
 
@@ -952,6 +957,8 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     self.avgPointsPrevented = aDecoder.decodeFloat(forKey: SerializationKeys.avgPointsPrevented)
     self.avgLemonPointsPrevented = aDecoder.decodeFloat(forKey: SerializationKeys.avgLemonPointsPrevented)
     self.avgOrangePointsPrevented = aDecoder.decodeFloat(forKey: SerializationKeys.avgOrangePointsPrevented)
+    self.pushAbility = aDecoder.decodeFloat(forKey: SerializationKeys.pushAbility)
+
   }
 
   public func encode(with aCoder: NSCoder) {
@@ -1137,6 +1144,7 @@ public final class CalculatedTeamData: NSObject, NSCoding {
     aCoder.encode(avgPointsPrevented, forKey: SerializationKeys.avgPointsPrevented)
     aCoder.encode(avgLemonPointsPrevented, forKey: SerializationKeys.avgLemonPointsPrevented)
     aCoder.encode(avgOrangePointsPrevented, forKey: SerializationKeys.avgOrangePointsPrevented)
+    aCoder.encode(pushAbility, forKey: SerializationKeys.pushAbility)
 
   }
 
