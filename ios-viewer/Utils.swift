@@ -386,12 +386,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             return [
                 "Default",
                 "Status",
-                "SEALS",
                 "Autonomous",
                 "Teleoperated",
                 "Defense",
                 "End Game",
                 "Pit Scout",
+                "SEALs",
                 "High Level",
             ]
         }
@@ -401,12 +401,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             return [
                 defaultKeys,
                 statusKeys,
-                sealKeys,
                 autoKeys,
                 teleKeys,
                 defenseKeys,
                 endGame,
                 pitKeys,
+                sealKeys,
                 highLevel,
             ]
         }
