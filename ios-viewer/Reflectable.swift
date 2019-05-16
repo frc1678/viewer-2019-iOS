@@ -14,6 +14,7 @@ protocol Reflectable {
 
 extension Reflectable
 {
+    // Hack
     func properties() -> [String] {
         var s = [String]()
         let ch = Mirror(reflecting: self).children

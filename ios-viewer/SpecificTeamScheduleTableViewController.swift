@@ -22,7 +22,7 @@ class SpecificTeamScheduleTableViewController : ScheduleTableViewController {
     override func loadDataArray(_ shouldForce: Bool) -> [Any]! {
         return self.firebaseFetcher.getMatchesForTeamWithNumber(self.teamNumber)
     }
-    
+    // Hack
     @objc func starAll() {
         let slackId = self.firebaseFetcher.currentMatchManager.slackId
         if slackId != nil {
