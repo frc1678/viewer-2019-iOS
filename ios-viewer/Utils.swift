@@ -522,7 +522,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.percentNoShow"
         ]
         
-       let calculatedStrings : [String] = [
+        /** calculatedData keys that are strings in the database */
+        let calculatedStrings : [String] = [
             "calculatedData.climbAttemptsL1",
             "calculatedData.climbAttemptsL2",
             "calculatedData.climbAttemptsL3",
@@ -545,14 +546,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitNumDriveTrainMotors",
             "pitDriveTrainMotorType"
         ]
-        
+        /** pitKeys that are strings */
         let pitStrings = [
             "pitDrivetrain",
             "pitProgrammingLanguage",
             "pitWheelDiameter",
             "pitDriveTrainMotorType"
         ]
-        
+        /** pitKeys that are integers */
         let pitInts = [
             "pitWidth",
             "pitLength",
@@ -578,14 +579,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         ]
     }
 
-    //static let superKeys = [
-        //"calculatedData.avgDrivingAbility",
-        //"calculatedData.avgSpeed",
-        //"calculatedData.avgAgility",
-        //"calculatedData.avgDefense",
-        //"calculatedData.totalNumGoodDecisions",
-        //"calculatedData.totalNumBadDecisions"
-    //]
+    /*static let superKeys = [
+        "calculatedData.avgDrivingAbility",
+        "calculatedData.avgSpeed",
+        "calculatedData.avgAgility",
+        "calculatedData.avgDefense",
+        "calculatedData.totalNumGoodDecisions",
+        "calculatedData.totalNumBadDecisions"
+    ]*/
 
     static let statusKeys : [String] = []
     static let miscKeys = ["uploadedData.miscellaneousNotes"]
