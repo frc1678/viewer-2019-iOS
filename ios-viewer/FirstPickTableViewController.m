@@ -111,6 +111,7 @@ FIRDatabaseReference *firebase;
     [firstPicklist insertObject:movedObject atIndex:destinationIndexPath.row];
     self.firebaseFetcher.firstPicklist = firstPicklist;
     [[self.ref child:@"picklist"] setValue:firstPicklist];
+    // Hack
     if(sourceIndexPath.row > destinationIndexPath.row) {
         for(int j = destinationIndexPath.row; j <= sourceIndexPath.row; j++){
             [[[[self.ref child:@"Teams"] child: [[NSNumber numberWithDouble:fabs([firstPicklist[j] doubleValue])] stringValue]] child:@"picklistPosition"] setValue:[NSNumber numberWithInteger:j]];

@@ -95,7 +95,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         default:
             break
         }
-        
+        // Hack
         if tableKeys[indexPath.row].contains("calculatedData.") {
             if Utils.teamDetailsKeys.percentageValues.contains(tableKeys[indexPath.row]) {
                 //If the value is a percentage, multiply float by 100 and add %
@@ -143,7 +143,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         }
         return (firebaseFetcher?.currentMatchManager.matchDetailsDatapoints.count)!
     }
-    //boi?
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (firebaseFetcher?.currentMatchManager.matchDetailsScroll ?? false) {
             let boi = CGFloat(Double((firebaseFetcher?.currentMatchManager.textSize)!) * (Double((firebaseFetcher?.currentMatchManager.matchDetailsDatapoints[indexPath.row].count)!)/10.0))

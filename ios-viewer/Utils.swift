@@ -22,7 +22,7 @@ func roundValue(_ value: AnyObject?, toDecimalPlaces numDecimalPlaces: Int) -> S
         if val == 0 {
             return "0"
         }
-        
+        // Hack
         return f.string(from: val as NSNumber!)!
     }
     

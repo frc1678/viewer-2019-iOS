@@ -43,6 +43,7 @@
             //add the match number
             [intMatches addObject:[NSNumber numberWithInt:[item integerValue]]];
         }
+        //not implemented
         NSString *slackId = self.firebaseFetcher.currentMatchManager.slackId;
         if(slackId != nil) {
             [[[[[[FIRDatabase database] reference] child: @"activeSlackProfiles"] child:slackId] child: @"starredMatches"] setValue:intMatches];
@@ -298,7 +299,7 @@
 - (NSArray *)scopeButtonTitles {
     return @[@"Teams", @"Matches"];
 }
-
+    // Hack 
 - (NSAttributedString *)textForScheduleLabelForType:(NSInteger)type forString:(NSString *)string {
     int bad = 0;
     UIColor *thing;

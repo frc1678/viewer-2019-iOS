@@ -100,6 +100,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             var profiles : [String:SlackProfile] = [:]
             if let snappy = snapshot.childSnapshot(forPath: "slackProfiles").value as? [String:[String:Any]] {
                 for i in snappy.values {
+                    // Hack
                     profiles[(snappy as NSDictionary?)?.allKeys(for: i)[0] as! String] = SlackProfile(json: JSON(snapshot.childSnapshot(forPath: "slackProfiles").childSnapshot(forPath: (snapshot.childSnapshot(forPath: "slackProfiles").value as? [String:[String:Any]] as NSDictionary?)?.allKeys(for: i)[0] as! String).value))
                 }
                 if profiles.count != 0 {
