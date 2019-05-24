@@ -84,8 +84,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //self.reload()
-        //reloadImage()
+
 
     }
     
@@ -116,6 +115,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         return team == nil ? nil : Utils.teamDetailsKeys.keySetNames(self.showMinimalistTeamDetails)[section]
     }
     
+    //number of sections should be the total count of all sections listed in keySetNames
     func numberOfSections(in tableView: UITableView) -> Int {
         return team == nil ? 1 : Utils.teamDetailsKeys.keySetNames(self.showMinimalistTeamDetails).count
     }
@@ -144,7 +144,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             //set datakey to the appropriate key
             let dataKey: String = Utils.teamDetailsKeys.keySets(self.showMinimalistTeamDetails)[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
             
-            //NOTE: This is if NOT a default key! Don't go looking thru this thinking it will run if it's a default key, you will waste your time.
+            //NOTE: This is if NOT a default key! Don't go looking through this thinking it will run if it's a default key, you will waste your time.
             if !Utils.teamDetailsKeys.defaultKeys.contains(dataKey) { //Default keys are currently just 'matchDatas' and 'TeamInMatchDatas'... if NOT a default key
                 var dataPoint = AnyObject?.init(nilLiteral: ())
                 var secondDataPoint = AnyObject?.init(nilLiteral: ())
@@ -196,12 +196,12 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                          notesCell.notesLabel.text = team!.pitSEALsNotes
                     }
                     else if dataKey == "pitClimbType" {
-                        notesCell.notesLabel!.text = "Self:  \(String(describing: team!.pitClimbType?["self"] ?? 0)), Robot 1:  \(String(describing: team!.pitClimbType?["robot1"] ?? 0)), Robot 2:  \(String(describing: team!.pitClimbType?["robot2"] ?? 0))"
+                        notesCell.notesLabel!.text = "Self:  \(String(describing: team!.pitClimbType?["self"] ?? 0)), Robot 1:  \(String(describing: team!.pitClimbType?["robot1"] ?? 0)), Robot 2:  \(String(describing: team!.pitClimbType?["robot2"] ?? 0))" //Climb data needs to be displayed for up to three robots- the robot itself (robot1) and any robots it may have helped up (robot2 and robot3)
                     }
                     notesCell.selectionStyle = UITableViewCellSelectionStyle.none
                     cell = notesCell
                 
-                } else if Utils.teamDetailsKeys.unrankedCells.contains(dataKey) || dataKey.contains("pit") { //pit keys
+                } else if Utils.teamDetailsKeys.unrankedCells.contains(dataKey) || dataKey.contains("pit") { //pit keys and cells not to be ranked
                     //get cell
                     let unrankedCell: UnrankedTableViewCell = tableView.dequeueReusableCell(withIdentifier: "UnrankedCell", for: indexPath) as! UnrankedTableViewCell
                     
@@ -219,7 +219,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     } else if Utils.teamDetailsKeys.boolValues.contains(dataKey) {
                         unrankedCell.detailLabel.text = "\(boolToBoolString(dataPoint as? Bool ?? false))"
                     } else if Utils.teamDetailsKeys.calculatedStrings.contains(dataKey) {
-                        unrankedCell.detailLabel.text = dataPoint as? String
+                        unrankedCell.detailLabel.text = dataPoint as? String // If the data key is in the Utils.swift dictionary 'calculatedStrings' (is a calculated string), the detail label is the corresponding data point. This is because calculated strings didn't display normally like calculated integers
                     } else {
                         unrankedCell.detailLabel.text = "\(roundValue(dataPoint!, toDecimalPlaces: 2))"
                     }
@@ -428,7 +428,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         //get the values in timds for this key
                         (values, altMapping) = (firebaseFetcher?.getMatchValuesForTeamForPath(key!, forTeam: team!))!
                     }
-                    //if the key contains accuracy, it's a percentage graph
+                    //if the key contains 'accuracy', it's a percentage graph
                     if key?.range(of: "Accuracy") != nil {
                         graphViewController.isPercentageGraph = true
                     }
