@@ -12,26 +12,26 @@ public final class CalculatedTeamInMatchData: NSCoding {
 
   // MARK: Declaration for string constants to be used to decode and also serialize.
   private struct SerializationKeys {
-    static let lemonLoadSuccess = "lemonLoadSuccess"
+    static let panelLoadSuccess = "panelLoadSuccess"
     static let pinningFouls = "pinningFouls"
-    static let lemonsScored = "lemonsScored"
-    static let lemonsScoredL1 = "lemonsScoredL1"
-    static let lemonsScoredL2 = "lemonsScoredL2"
-    static let lemonsScoredL3 = "lemonsScoredL3"
-    static let lemonsScoredSandstorm = "lemonsScoredSandstorm"
-    static let lemonsScoredTeleL1 = "lemonsScoredTeleL1"
-    static let lemonsScoredTeleL2 = "lemonsScoredTeleL2"
-    static let lemonsScoredTeleL3 = "lemonsScoredTeleL2"
-    static let lemonSuccessDefended = "lemonSuccessDefended"
-    static let lemonSuccessUndefended = "lemonSuccessUndefended"
-    static let lemonSuccessL1 = "lemonSuccessL1"
-    static let lemonSuccessL2 = "lemonSuccessL2"
-    static let lemonSuccessL3 = "lemonSuccessL3"
-    static let lemonSuccessAll = "lemonSuccessAll"
-    static let lemonCycleAll = "lemonCycleAll"
-    static let lemonCycleL1 = "lemonCycleL1"
-    static let lemonCycleL2 = "lemonCycleL2"
-    static let lemonCycleL3 = "lemonCycleL3"
+    static let panelsScored = "panelsScored"
+    static let panelsScoredL1 = "panelsScoredL1"
+    static let panelsScoredL2 = "panelsScoredL2"
+    static let panelsScoredL3 = "panelsScoredL3"
+    static let panelsScoredSandstorm = "panelsScoredSandstorm"
+    static let panelsScoredTeleL1 = "panelsScoredTeleL1"
+    static let panelsScoredTeleL2 = "panelsScoredTeleL2"
+    static let panelsScoredTeleL3 = "panelsScoredTeleL2"
+    static let panelSuccessDefended = "panelSuccessDefended"
+    static let panelSuccessUndefended = "panelSuccessUndefended"
+    static let panelSuccessL1 = "panelSuccessL1"
+    static let panelSuccessL2 = "panelSuccessL2"
+    static let panelSuccessL3 = "panelSuccessL3"
+    static let panelSuccessAll = "panelSuccessAll"
+    static let panelCycleAll = "panelCycleAll"
+    static let panelCycleL1 = "panelCycleL1"
+    static let panelCycleL2 = "panelCycleL2"
+    static let panelCycleL3 = "panelCycleL3"
     static let cargoScored = "cargoScored"
     static let cargoScoredL1 = "cargoScoredL1"
     static let cargoScoredL2 = "cargoScoredL2"
@@ -58,31 +58,31 @@ public final class CalculatedTeamInMatchData: NSCoding {
     static let timeDefending = "timeDefending"
     static let totalFailedCyclesCaused = "totalFailedCyclesCaused"
     static let pointsPrevented = "pointsPrevented"
-    static let lemonPointsPrevented = "lemonPointsPrevented"
+    static let panelPointsPrevented = "panelPointsPrevented"
     static let cargoPointsPrevented = "cargoPointsPrevented"
   }
 
   // MARK: Properties
-  public var lemonLoadSuccess: Int?
+  public var panelLoadSuccess: Int?
   public var pinningFouls: Int?
-  public var lemonsScored: Int?
-  public var lemonsScoredL1: Int?
-  public var lemonsScoredL2: Int?
-  public var lemonsScoredL3: Int?
-  public var lemonsScoredSandstorm: Int?
-  public var lemonsScoredTeleL1: Int?
-  public var lemonsScoredTeleL2: Int?
-  public var lemonsScoredTeleL3: Int?
-  public var lemonSuccessDefended: Int?
-  public var lemonSuccessUndefended: Int?
-  public var lemonSuccessL1: Int?
-  public var lemonSuccessL2: Int?
-  public var lemonSuccessL3: Int?
-  public var lemonSuccessAll: Int?
-  public var lemonCycleAll: Int?
-  public var lemonCycleL1: Int?
-  public var lemonCycleL2: Int?
-  public var lemonCycleL3: Int?
+  public var panelsScored: Int?
+  public var panelsScoredL1: Int?
+  public var panelsScoredL2: Int?
+  public var panelsScoredL3: Int?
+  public var panelsScoredSandstorm: Int?
+  public var panelsScoredTeleL1: Int?
+  public var panelsScoredTeleL2: Int?
+  public var panelsScoredTeleL3: Int?
+  public var panelSuccessDefended: Int?
+  public var panelSuccessUndefended: Int?
+  public var panelSuccessL1: Int?
+  public var panelSuccessL2: Int?
+  public var panelSuccessL3: Int?
+  public var panelSuccessAll: Int?
+  public var panelCycleAll: Int?
+  public var panelCycleL1: Int?
+  public var panelCycleL2: Int?
+  public var panelCycleL3: Int?
   public var cargoScored: Int?
   public var cargoScoredL1: Int?
   public var cargoScoredL2: Int?
@@ -109,7 +109,7 @@ public final class CalculatedTeamInMatchData: NSCoding {
   public var timeDefending: Float?
   public var totalFailedCyclesCaused: Int?
   public var pointsPrevented: Float?
-  public var lemonPointsPrevented: Float?
+  public var panelPointsPrevented: Float?
   public var cargoPointsPrevented: Float?
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -124,7 +124,7 @@ public final class CalculatedTeamInMatchData: NSCoding {
   ///
   /// - parameter json: JSON object from SwiftyJSON.
   public required init(json: JSON) {
-    lemonSuccessUndefended = json[SerializationKeys.lemonSuccessUndefended].int
+    panelSuccessUndefended = json[SerializationKeys.panelSuccessUndefended].int
     cargoScored = json[SerializationKeys.cargoScored].int
     cargoScoredL1 = json[SerializationKeys.cargoScoredL1].int
     cargoScoredL2 = json[SerializationKeys.cargoScoredL2].int
@@ -136,31 +136,31 @@ public final class CalculatedTeamInMatchData: NSCoding {
     cargoSuccessDefended = json[SerializationKeys.cargoSuccessDefended].int
     cargoSuccessL2 = json[SerializationKeys.cargoSuccessL2].int
     timeIncap = json[SerializationKeys.timeIncap].float
-    lemonCycleAll = json[SerializationKeys.lemonCycleAll].int
-    lemonsScored = json[SerializationKeys.lemonsScored].int
-    lemonsScoredL1 = json[SerializationKeys.lemonsScoredL1].intValue
-    lemonsScoredL2 = json[SerializationKeys.lemonsScoredL2].intValue
-    lemonsScoredL3 = json[SerializationKeys.lemonsScoredL3].intValue
-    lemonsScoredSandstorm = json[SerializationKeys.lemonsScoredSandstorm].intValue
-    lemonsScoredTeleL1 = json[SerializationKeys.lemonsScoredTeleL1].intValue
-    lemonsScoredTeleL2 = json[SerializationKeys.lemonsScoredTeleL2].intValue
-    lemonsScoredTeleL3 = json [SerializationKeys.lemonsScoredTeleL3].intValue
-    lemonCycleL2 = json[SerializationKeys.lemonCycleL2].int
+    panelCycleAll = json[SerializationKeys.panelCycleAll].int
+    panelsScored = json[SerializationKeys.panelsScored].int
+    panelsScoredL1 = json[SerializationKeys.panelsScoredL1].intValue
+    panelsScoredL2 = json[SerializationKeys.panelsScoredL2].intValue
+    panelsScoredL3 = json[SerializationKeys.panelsScoredL3].intValue
+    panelsScoredSandstorm = json[SerializationKeys.panelsScoredSandstorm].intValue
+    panelsScoredTeleL1 = json[SerializationKeys.panelsScoredTeleL1].intValue
+    panelsScoredTeleL2 = json[SerializationKeys.panelsScoredTeleL2].intValue
+    panelsScoredTeleL3 = json [SerializationKeys.panelsScoredTeleL3].intValue
+    panelCycleL2 = json[SerializationKeys.panelCycleL2].int
     cargoSuccessL3 = json[SerializationKeys.cargoSuccessL3].int
     cargoCycleL1 = json[SerializationKeys.cargoCycleL1].int
     cargoCycleL3 = json[SerializationKeys.cargoCycleL3].int
-    lemonCycleL3 = json[SerializationKeys.lemonCycleL3].int
-    lemonSuccessL2 = json[SerializationKeys.lemonSuccessL2].int
-    lemonSuccessL3 = json[SerializationKeys.lemonSuccessL3].int
-    lemonSuccessAll = json[SerializationKeys.lemonSuccessAll].int
-    lemonCycleL1 = json[SerializationKeys.lemonCycleL1].int
+    panelCycleL3 = json[SerializationKeys.panelCycleL3].int
+    panelSuccessL2 = json[SerializationKeys.panelSuccessL2].int
+    panelSuccessL3 = json[SerializationKeys.panelSuccessL3].int
+    panelSuccessAll = json[SerializationKeys.panelSuccessAll].int
+    panelCycleL1 = json[SerializationKeys.panelCycleL1].int
     timeClimbing = json[SerializationKeys.timeClimbing].float
     cargoSuccessAll = json[SerializationKeys.cargoSuccessAll].int
     cargoCycleL2 = json[SerializationKeys.cargoCycleL2].int
-    lemonSuccessL1 = json[SerializationKeys.lemonSuccessL1].int
+    panelSuccessL1 = json[SerializationKeys.panelSuccessL1].int
     cargoCycleAll = json[SerializationKeys.cargoCycleAll].int
-    lemonLoadSuccess = json[SerializationKeys.lemonLoadSuccess].int
-    lemonSuccessDefended = json[SerializationKeys.lemonSuccessDefended].int
+    panelLoadSuccess = json[SerializationKeys.panelLoadSuccess].int
+    panelSuccessDefended = json[SerializationKeys.panelSuccessDefended].int
     cargoSuccessL1 = json[SerializationKeys.cargoSuccessL1].int
     cargoSuccessUndefended = json[SerializationKeys.cargoSuccessUndefended].int
     pinningFouls = json[SerializationKeys.pinningFouls].int
@@ -170,7 +170,7 @@ public final class CalculatedTeamInMatchData: NSCoding {
     timeDefending = json[SerializationKeys.timeDefending].float
     totalFailedCyclesCaused = json[SerializationKeys.totalFailedCyclesCaused].int
     pointsPrevented = json[SerializationKeys.pointsPrevented].float
-    lemonPointsPrevented = json[SerializationKeys.lemonPointsPrevented].float
+    panelPointsPrevented = json[SerializationKeys.panelPointsPrevented].float
     cargoPointsPrevented = json[SerializationKeys.cargoPointsPrevented].float
   }
 
@@ -179,7 +179,7 @@ public final class CalculatedTeamInMatchData: NSCoding {
   /// - returns: A Key value pair containing all valid values in the object.
   public func dictionaryRepresentation() -> [String: Any] {
     var dictionary: [String: Any] = [:]
-    if let value = lemonSuccessUndefended { dictionary[SerializationKeys.lemonSuccessUndefended] = value }
+    if let value = panelSuccessUndefended { dictionary[SerializationKeys.panelSuccessUndefended] = value }
     if let value = cargoScored { dictionary[SerializationKeys.cargoScored] = value }
     if let value = cargoScoredL1 { dictionary[SerializationKeys.cargoScoredL1] = value }
     if let value = cargoScoredL2 { dictionary[SerializationKeys.cargoScoredL2] = value }
@@ -191,31 +191,31 @@ public final class CalculatedTeamInMatchData: NSCoding {
     if let value = cargoSuccessDefended { dictionary[SerializationKeys.cargoSuccessDefended] = value }
     if let value = cargoSuccessL2 { dictionary[SerializationKeys.cargoSuccessL2] = value }
     if let value = timeIncap { dictionary[SerializationKeys.timeIncap] = value }
-    if let value = lemonCycleAll { dictionary[SerializationKeys.lemonCycleAll] = value }
-    if let value = lemonsScored { dictionary[SerializationKeys.lemonsScored] = value }
-    if let value = lemonsScoredL1 { dictionary[SerializationKeys.lemonsScoredL1] = value }
-    if let value = lemonsScoredL2 { dictionary[SerializationKeys.lemonsScoredL2] = value }
-    if let value = lemonsScoredL3 { dictionary[SerializationKeys.lemonsScoredL3] = value }
-    if let value = lemonsScoredSandstorm { dictionary[SerializationKeys.lemonsScoredSandstorm] = value }
-    if let value = lemonsScoredTeleL1 { dictionary[SerializationKeys.lemonsScoredTeleL1] = value }
-    if let value = lemonsScoredTeleL2 { dictionary[SerializationKeys.lemonsScoredTeleL2] = value }
-    if let value = lemonsScoredTeleL3 { dictionary[SerializationKeys.lemonsScoredTeleL3] = value }
-    if let value = lemonCycleL2 { dictionary[SerializationKeys.lemonCycleL2] = value }
+    if let value = panelCycleAll { dictionary[SerializationKeys.panelCycleAll] = value }
+    if let value = panelsScored { dictionary[SerializationKeys.panelsScored] = value }
+    if let value = panelsScoredL1 { dictionary[SerializationKeys.panelsScoredL1] = value }
+    if let value = panelsScoredL2 { dictionary[SerializationKeys.panelsScoredL2] = value }
+    if let value = panelsScoredL3 { dictionary[SerializationKeys.panelsScoredL3] = value }
+    if let value = panelsScoredSandstorm { dictionary[SerializationKeys.panelsScoredSandstorm] = value }
+    if let value = panelsScoredTeleL1 { dictionary[SerializationKeys.panelsScoredTeleL1] = value }
+    if let value = panelsScoredTeleL2 { dictionary[SerializationKeys.panelsScoredTeleL2] = value }
+    if let value = panelsScoredTeleL3 { dictionary[SerializationKeys.panelsScoredTeleL3] = value }
+    if let value = panelCycleL2 { dictionary[SerializationKeys.panelCycleL2] = value }
     if let value = cargoSuccessL3 { dictionary[SerializationKeys.cargoSuccessL3] = value }
     if let value = cargoCycleL1 { dictionary[SerializationKeys.cargoCycleL1] = value }
     if let value = cargoCycleL3 { dictionary[SerializationKeys.cargoCycleL3] = value }
-    if let value = lemonCycleL3 { dictionary[SerializationKeys.lemonCycleL3] = value }
-    if let value = lemonSuccessL2 { dictionary[SerializationKeys.lemonSuccessL2] = value }
-    if let value = lemonSuccessL3 { dictionary[SerializationKeys.lemonSuccessL3] = value }
-    if let value = lemonSuccessAll { dictionary[SerializationKeys.lemonSuccessAll] = value }
-    if let value = lemonCycleL1 { dictionary[SerializationKeys.lemonCycleL1] = value }
+    if let value = panelCycleL3 { dictionary[SerializationKeys.panelCycleL3] = value }
+    if let value = panelSuccessL2 { dictionary[SerializationKeys.panelSuccessL2] = value }
+    if let value = panelSuccessL3 { dictionary[SerializationKeys.panelSuccessL3] = value }
+    if let value = panelSuccessAll { dictionary[SerializationKeys.panelSuccessAll] = value }
+    if let value = panelCycleL1 { dictionary[SerializationKeys.panelCycleL1] = value }
     if let value = timeClimbing { dictionary[SerializationKeys.timeClimbing] = value }
     if let value = cargoSuccessAll { dictionary[SerializationKeys.cargoSuccessAll] = value }
     if let value = cargoCycleL2 { dictionary[SerializationKeys.cargoCycleL2] = value }
-    if let value = lemonSuccessL1 { dictionary[SerializationKeys.lemonSuccessL1] = value }
+    if let value = panelSuccessL1 { dictionary[SerializationKeys.panelSuccessL1] = value }
     if let value = cargoCycleAll { dictionary[SerializationKeys.cargoCycleAll] = value }
-    if let value = lemonLoadSuccess { dictionary[SerializationKeys.lemonLoadSuccess] = value }
-    if let value = lemonSuccessDefended { dictionary[SerializationKeys.lemonSuccessDefended] = value }
+    if let value = panelLoadSuccess { dictionary[SerializationKeys.panelLoadSuccess] = value }
+    if let value = panelSuccessDefended { dictionary[SerializationKeys.panelSuccessDefended] = value }
     if let value = cargoSuccessL1 { dictionary[SerializationKeys.cargoSuccessL1] = value }
     if let value = cargoSuccessUndefended { dictionary[SerializationKeys.cargoSuccessUndefended] = value }
     if let value = pinningFouls { dictionary[SerializationKeys.pinningFouls] = value }
@@ -225,14 +225,14 @@ public final class CalculatedTeamInMatchData: NSCoding {
     if let value = timeDefending { dictionary[SerializationKeys.timeDefending] = value}
     if let value = totalFailedCyclesCaused { dictionary[SerializationKeys.totalFailedCyclesCaused] = value}
     if let value = pointsPrevented { dictionary[SerializationKeys.pointsPrevented] = value}
-    if let value = lemonPointsPrevented { dictionary[SerializationKeys.lemonPointsPrevented] = value}
+    if let value = panelPointsPrevented { dictionary[SerializationKeys.panelPointsPrevented] = value}
     if let value = cargoPointsPrevented { dictionary[SerializationKeys.cargoPointsPrevented] = value}
     return dictionary
   }
 
   // MARK: NSCoding Protocol
   required public init(coder aDecoder: NSCoder) {
-    self.lemonSuccessUndefended = aDecoder.decodeObject(forKey: SerializationKeys.lemonSuccessUndefended) as? Int
+    self.panelSuccessUndefended = aDecoder.decodeObject(forKey: SerializationKeys.panelSuccessUndefended) as? Int
     self.cargoScored = aDecoder.decodeObject(forKey: SerializationKeys.cargoScored) as? Int
     self.cargoScoredL1 = aDecoder.decodeObject(forKey: SerializationKeys.cargoScoredL1) as? Int
     self.cargoScoredL2 = aDecoder.decodeObject(forKey: SerializationKeys.cargoScoredL2) as? Int
@@ -244,31 +244,31 @@ public final class CalculatedTeamInMatchData: NSCoding {
     self.cargoSuccessDefended = aDecoder.decodeObject(forKey: SerializationKeys.cargoSuccessDefended) as? Int
     self.cargoSuccessL2 = aDecoder.decodeObject(forKey: SerializationKeys.cargoSuccessL2) as? Int
     self.timeIncap = aDecoder.decodeObject(forKey: SerializationKeys.timeIncap) as? Float
-    self.lemonCycleAll = aDecoder.decodeObject(forKey: SerializationKeys.lemonCycleAll) as? Int
-    self.lemonsScored = aDecoder.decodeObject(forKey: SerializationKeys.lemonsScored) as? Int
-    self.lemonsScoredL1 = aDecoder.decodeObject(forKey: SerializationKeys.lemonsScoredL1) as? Int
-    self.lemonsScoredL2 = aDecoder.decodeObject(forKey: SerializationKeys.lemonsScoredL2) as? Int
-    self.lemonsScoredL3 = aDecoder.decodeObject(forKey: SerializationKeys.lemonsScoredL3) as? Int
-    self.lemonsScoredSandstorm = aDecoder.decodeObject(forKey: SerializationKeys.lemonsScoredSandstorm) as? Int
-    self.lemonsScoredTeleL1 = aDecoder.decodeObject(forKey: SerializationKeys.lemonsScoredTeleL1) as? Int
-    self.lemonsScoredTeleL2 = aDecoder.decodeObject(forKey: SerializationKeys.lemonsScoredTeleL2) as? Int
-    self.lemonsScoredTeleL3 = aDecoder.decodeObject(forKey: SerializationKeys.lemonsScoredTeleL3) as? Int
-    self.lemonCycleL2 = aDecoder.decodeObject(forKey: SerializationKeys.lemonCycleL2) as? Int
+    self.panelCycleAll = aDecoder.decodeObject(forKey: SerializationKeys.panelCycleAll) as? Int
+    self.panelsScored = aDecoder.decodeObject(forKey: SerializationKeys.panelsScored) as? Int
+    self.panelsScoredL1 = aDecoder.decodeObject(forKey: SerializationKeys.panelsScoredL1) as? Int
+    self.panelsScoredL2 = aDecoder.decodeObject(forKey: SerializationKeys.panelsScoredL2) as? Int
+    self.panelsScoredL3 = aDecoder.decodeObject(forKey: SerializationKeys.panelsScoredL3) as? Int
+    self.panelsScoredSandstorm = aDecoder.decodeObject(forKey: SerializationKeys.panelsScoredSandstorm) as? Int
+    self.panelsScoredTeleL1 = aDecoder.decodeObject(forKey: SerializationKeys.panelsScoredTeleL1) as? Int
+    self.panelsScoredTeleL2 = aDecoder.decodeObject(forKey: SerializationKeys.panelsScoredTeleL2) as? Int
+    self.panelsScoredTeleL3 = aDecoder.decodeObject(forKey: SerializationKeys.panelsScoredTeleL3) as? Int
+    self.panelCycleL2 = aDecoder.decodeObject(forKey: SerializationKeys.panelCycleL2) as? Int
     self.cargoSuccessL3 = aDecoder.decodeObject(forKey: SerializationKeys.cargoSuccessL3) as? Int
     self.cargoCycleL1 = aDecoder.decodeObject(forKey: SerializationKeys.cargoCycleL1) as? Int
     self.cargoCycleL3 = aDecoder.decodeObject(forKey: SerializationKeys.cargoCycleL3) as? Int
-    self.lemonCycleL3 = aDecoder.decodeObject(forKey: SerializationKeys.lemonCycleL3) as? Int
-    self.lemonSuccessL2 = aDecoder.decodeObject(forKey: SerializationKeys.lemonSuccessL2) as? Int
-    self.lemonSuccessL3 = aDecoder.decodeObject(forKey: SerializationKeys.lemonSuccessL3) as? Int
-    self.lemonSuccessAll = aDecoder.decodeObject(forKey: SerializationKeys.lemonSuccessAll) as? Int
-    self.lemonCycleL1 = aDecoder.decodeObject(forKey: SerializationKeys.lemonCycleL1) as? Int
+    self.panelCycleL3 = aDecoder.decodeObject(forKey: SerializationKeys.panelCycleL3) as? Int
+    self.panelSuccessL2 = aDecoder.decodeObject(forKey: SerializationKeys.panelSuccessL2) as? Int
+    self.panelSuccessL3 = aDecoder.decodeObject(forKey: SerializationKeys.panelSuccessL3) as? Int
+    self.panelSuccessAll = aDecoder.decodeObject(forKey: SerializationKeys.panelSuccessAll) as? Int
+    self.panelCycleL1 = aDecoder.decodeObject(forKey: SerializationKeys.panelCycleL1) as? Int
     self.timeClimbing = aDecoder.decodeObject(forKey: SerializationKeys.timeClimbing) as? Float
     self.cargoSuccessAll = aDecoder.decodeObject(forKey: SerializationKeys.cargoSuccessAll) as? Int
     self.cargoCycleL2 = aDecoder.decodeObject(forKey: SerializationKeys.cargoCycleL2) as? Int
-    self.lemonSuccessL1 = aDecoder.decodeObject(forKey: SerializationKeys.lemonSuccessL1) as? Int
+    self.panelSuccessL1 = aDecoder.decodeObject(forKey: SerializationKeys.panelSuccessL1) as? Int
     self.cargoCycleAll = aDecoder.decodeObject(forKey: SerializationKeys.cargoCycleAll) as? Int
-    self.lemonLoadSuccess = aDecoder.decodeObject(forKey: SerializationKeys.lemonLoadSuccess) as? Int
-    self.lemonSuccessDefended = aDecoder.decodeObject(forKey: SerializationKeys.lemonSuccessDefended) as? Int
+    self.panelLoadSuccess = aDecoder.decodeObject(forKey: SerializationKeys.panelLoadSuccess) as? Int
+    self.panelSuccessDefended = aDecoder.decodeObject(forKey: SerializationKeys.panelSuccessDefended) as? Int
     self.cargoSuccessL1 = aDecoder.decodeObject(forKey: SerializationKeys.cargoSuccessL1) as? Int
     self.cargoSuccessUndefended = aDecoder.decodeObject(forKey: SerializationKeys.cargoSuccessUndefended) as? Int
     self.pinningFouls = aDecoder.decodeObject(forKey: SerializationKeys.pinningFouls) as? Int
@@ -278,12 +278,12 @@ public final class CalculatedTeamInMatchData: NSCoding {
     self.timeDefending = aDecoder.decodeObject(forKey: SerializationKeys.timeDefending) as? Float
     self.totalFailedCyclesCaused = aDecoder.decodeObject(forKey: SerializationKeys.totalFailedCyclesCaused) as? Int
     self.pointsPrevented = aDecoder.decodeObject(forKey: SerializationKeys.pointsPrevented) as? Float
-    self.lemonPointsPrevented = aDecoder.decodeObject(forKey: SerializationKeys.lemonPointsPrevented) as? Float
+    self.panelPointsPrevented = aDecoder.decodeObject(forKey: SerializationKeys.panelPointsPrevented) as? Float
     self.cargoPointsPrevented = aDecoder.decodeObject(forKey: SerializationKeys.cargoPointsPrevented) as? Float
   }
 
   public func encode(with aCoder: NSCoder) {
-    aCoder.encode(lemonSuccessUndefended, forKey: SerializationKeys.lemonSuccessUndefended)
+    aCoder.encode(panelSuccessUndefended, forKey: SerializationKeys.panelSuccessUndefended)
     aCoder.encode(cargoScored, forKey: SerializationKeys.cargoScored)
     aCoder.encode(cargoScoredL1, forKey: SerializationKeys.cargoScoredL1)
     aCoder.encode(cargoScoredL2, forKey: SerializationKeys.cargoScoredL2)
@@ -295,31 +295,31 @@ public final class CalculatedTeamInMatchData: NSCoding {
     aCoder.encode(cargoSuccessDefended, forKey: SerializationKeys.cargoSuccessDefended)
     aCoder.encode(cargoSuccessL2, forKey: SerializationKeys.cargoSuccessL2)
     aCoder.encode(timeIncap, forKey: SerializationKeys.timeIncap)
-    aCoder.encode(lemonCycleAll, forKey: SerializationKeys.lemonCycleAll)
-    aCoder.encode(lemonsScored, forKey: SerializationKeys.lemonsScored)
-    aCoder.encode(lemonsScoredL1, forKey: SerializationKeys.lemonsScoredL1)
-    aCoder.encode(lemonsScoredL2, forKey: SerializationKeys.lemonsScoredL2)
-    aCoder.encode(lemonsScoredL3, forKey: SerializationKeys.lemonsScoredL3)
-    aCoder.encode(lemonsScoredSandstorm, forKey: SerializationKeys.lemonsScoredSandstorm)
-    aCoder.encode(lemonsScoredTeleL1, forKey: SerializationKeys.lemonsScoredTeleL1)
-    aCoder.encode(lemonsScoredTeleL2, forKey: SerializationKeys.lemonsScoredTeleL2)
-    aCoder.encode(lemonsScoredTeleL3, forKey: SerializationKeys.lemonsScoredTeleL3)
-    aCoder.encode(lemonCycleL2, forKey: SerializationKeys.lemonCycleL2)
+    aCoder.encode(panelCycleAll, forKey: SerializationKeys.panelCycleAll)
+    aCoder.encode(panelsScored, forKey: SerializationKeys.panelsScored)
+    aCoder.encode(panelsScoredL1, forKey: SerializationKeys.panelsScoredL1)
+    aCoder.encode(panelsScoredL2, forKey: SerializationKeys.panelsScoredL2)
+    aCoder.encode(panelsScoredL3, forKey: SerializationKeys.panelsScoredL3)
+    aCoder.encode(panelsScoredSandstorm, forKey: SerializationKeys.panelsScoredSandstorm)
+    aCoder.encode(panelsScoredTeleL1, forKey: SerializationKeys.panelsScoredTeleL1)
+    aCoder.encode(panelsScoredTeleL2, forKey: SerializationKeys.panelsScoredTeleL2)
+    aCoder.encode(panelsScoredTeleL3, forKey: SerializationKeys.panelsScoredTeleL3)
+    aCoder.encode(panelCycleL2, forKey: SerializationKeys.panelCycleL2)
     aCoder.encode(cargoSuccessL3, forKey: SerializationKeys.cargoSuccessL3)
     aCoder.encode(cargoCycleL1, forKey: SerializationKeys.cargoCycleL1)
     aCoder.encode(cargoCycleL3, forKey: SerializationKeys.cargoCycleL3)
-    aCoder.encode(lemonCycleL3, forKey: SerializationKeys.lemonCycleL3)
-    aCoder.encode(lemonSuccessL2, forKey: SerializationKeys.lemonSuccessL2)
-    aCoder.encode(lemonSuccessL3, forKey: SerializationKeys.lemonSuccessL3)
-    aCoder.encode(lemonSuccessAll, forKey: SerializationKeys.lemonSuccessAll)
-    aCoder.encode(lemonCycleL1, forKey: SerializationKeys.lemonCycleL1)
+    aCoder.encode(panelCycleL3, forKey: SerializationKeys.panelCycleL3)
+    aCoder.encode(panelSuccessL2, forKey: SerializationKeys.panelSuccessL2)
+    aCoder.encode(panelSuccessL3, forKey: SerializationKeys.panelSuccessL3)
+    aCoder.encode(panelSuccessAll, forKey: SerializationKeys.panelSuccessAll)
+    aCoder.encode(panelCycleL1, forKey: SerializationKeys.panelCycleL1)
     aCoder.encode(timeClimbing, forKey: SerializationKeys.timeClimbing)
     aCoder.encode(cargoSuccessAll, forKey: SerializationKeys.cargoSuccessAll)
     aCoder.encode(cargoCycleL2, forKey: SerializationKeys.cargoCycleL2)
-    aCoder.encode(lemonSuccessL1, forKey: SerializationKeys.lemonSuccessL1)
+    aCoder.encode(panelSuccessL1, forKey: SerializationKeys.panelSuccessL1)
     aCoder.encode(cargoCycleAll, forKey: SerializationKeys.cargoCycleAll)
-    aCoder.encode(lemonLoadSuccess, forKey: SerializationKeys.lemonLoadSuccess)
-    aCoder.encode(lemonSuccessDefended, forKey: SerializationKeys.lemonSuccessDefended)
+    aCoder.encode(panelLoadSuccess, forKey: SerializationKeys.panelLoadSuccess)
+    aCoder.encode(panelSuccessDefended, forKey: SerializationKeys.panelSuccessDefended)
     aCoder.encode(cargoSuccessL1, forKey: SerializationKeys.cargoSuccessL1)
     aCoder.encode(cargoSuccessUndefended, forKey: SerializationKeys.cargoSuccessUndefended)
     aCoder.encode(pinningFouls, forKey: SerializationKeys.pinningFouls)
@@ -329,7 +329,7 @@ public final class CalculatedTeamInMatchData: NSCoding {
     aCoder.encode(timeDefending, forKey: SerializationKeys.timeDefending)
     aCoder.encode(totalFailedCyclesCaused, forKey: SerializationKeys.totalFailedCyclesCaused)
     aCoder.encode(pointsPrevented, forKey: SerializationKeys.pointsPrevented)
-    aCoder.encode(lemonPointsPrevented, forKey: SerializationKeys.lemonPointsPrevented)
+    aCoder.encode(panelPointsPrevented, forKey: SerializationKeys.panelPointsPrevented)
     aCoder.encode(cargoPointsPrevented, forKey: SerializationKeys.cargoPointsPrevented)
   }
 

@@ -28,7 +28,7 @@ public final class Team: NSObject, NSCoding {
     static let pitClimbType = "pitClimbType"
     static let pitSEALsNotes = "pitSEALsNotes"
     static let pitSEALsRampRanking = "pitSEALsRampRanking"
-    static let pitIsLemonSpecialist = "pitIsLemonSpecialist"
+    static let pitIsPanelSpecialist = "pitIsPanelSpecialist"
     static let pitNumDriveTrainMotors = "pitNumDriveTrainMotors"
     static let pitDriveTrainMotorType = "pitDriveTrainMotorType"
     static let percentDysfunctional = "percentDysfunctional"
@@ -53,7 +53,7 @@ public final class Team: NSObject, NSCoding {
   public var pitClimbType: [String:Int]?
   public var pitSEALsNotes: String?
   public var pitSEALsRampRanking: Int?
-  public var pitIsLemonSpecialist: Bool? = false
+  public var pitIsPanelSpecialist: Bool? = false
     public var pitNumDriveTrainMotors: Int? = -1
     public var pitDriveTrainMotorType: String?
   public var percentDysfunctional: Int?
@@ -89,7 +89,7 @@ public final class Team: NSObject, NSCoding {
     pitClimbType = (json[SerializationKeys.pitClimbType].dictionaryObject as? [String:Int])
     pitSEALsNotes = json[SerializationKeys.pitSEALsNotes].string
     pitSEALsRampRanking = json[SerializationKeys.pitSEALsRampRanking].int
-    pitIsLemonSpecialist = json[SerializationKeys.pitIsLemonSpecialist].boolValue
+    pitIsPanelSpecialist = json[SerializationKeys.pitIsPanelSpecialist].boolValue
     pitNumDriveTrainMotors = json[SerializationKeys.pitNumDriveTrainMotors].int
     pitDriveTrainMotorType = json[SerializationKeys.pitDriveTrainMotorType].string
     percentDysfunctional = json[SerializationKeys.percentDysfunctional].int
@@ -118,7 +118,7 @@ public final class Team: NSObject, NSCoding {
     if let value = pitClimbType { dictionary[SerializationKeys.pitClimbType] = value }
     if let value = pitSEALsNotes { dictionary[SerializationKeys.pitSEALsNotes] = value }
     if let value = pitSEALsRampRanking { dictionary[SerializationKeys.pitSEALsRampRanking] = value}
-    if let value = pitIsLemonSpecialist { dictionary[SerializationKeys.pitIsLemonSpecialist] = value}
+    if let value = pitIsPanelSpecialist { dictionary[SerializationKeys.pitIsPanelSpecialist] = value}
     if let value = pitNumDriveTrainMotors { dictionary[SerializationKeys.pitNumDriveTrainMotors] = value}
     if let value = pitDriveTrainMotorType { dictionary[SerializationKeys.pitDriveTrainMotorType] = value}
     if let value = percentDysfunctional { dictionary[SerializationKeys.percentDysfunctional] = value}
@@ -147,7 +147,7 @@ public final class Team: NSObject, NSCoding {
     self.pitClimbType = aDecoder.decodeObject(forKey: SerializationKeys.pitClimbType) as? [String:Int]
     self.pitSEALsNotes = aDecoder.decodeObject(forKey: SerializationKeys.pitSEALsNotes) as? String
     self.pitSEALsRampRanking = aDecoder.decodeObject(forKey: SerializationKeys.pitSEALsRampRanking) as? Int
-    self.pitIsLemonSpecialist = aDecoder.decodeObject(forKey: SerializationKeys.pitIsLemonSpecialist) as? Bool
+    self.pitIsPanelSpecialist = aDecoder.decodeObject(forKey: SerializationKeys.pitIsPanelSpecialist) as? Bool
     self.pitNumDriveTrainMotors = aDecoder.decodeObject(forKey: SerializationKeys.pitNumDriveTrainMotors) as? Int
     self.pitDriveTrainMotorType = aDecoder.decodeObject(forKey: SerializationKeys.pitDriveTrainMotorType) as? String
     self.percentDysfunctional = aDecoder.decodeObject(forKey: SerializationKeys.percentDysfunctional) as? Int
@@ -172,7 +172,7 @@ public final class Team: NSObject, NSCoding {
     aCoder.encode(pitClimbType, forKey: SerializationKeys.pitClimbType)
     aCoder.encode(pitSEALsNotes, forKey: SerializationKeys.pitSEALsNotes)
     aCoder.encode(pitSEALsRampRanking, forKey: SerializationKeys.pitSEALsRampRanking)
-    aCoder.encode(pitIsLemonSpecialist, forKey: SerializationKeys.pitIsLemonSpecialist)
+    aCoder.encode(pitIsPanelSpecialist, forKey: SerializationKeys.pitIsPanelSpecialist)
     aCoder.encode(pitNumDriveTrainMotors, forKey: SerializationKeys.pitNumDriveTrainMotors)
     aCoder.encode(pitDriveTrainMotorType, forKey: SerializationKeys.pitDriveTrainMotorType)
     aCoder.encode(percentDysfunctional, forKey: SerializationKeys.percentDysfunctional)
