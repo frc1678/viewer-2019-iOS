@@ -154,8 +154,8 @@ class CurrentMatchManager: NSObject {
     
     var defaultMatchDetailsDatapoints: [String] = [
         "calculatedData.percentIncap",
-        "calculatedData.avgOrangesScored",
-        "calculatedData.avgLemonsScored",
+        "calculatedData.avgCargoScored",
+        "calculatedData.avgPanelsScored",
         "calculatedData.climbSuccessL3",
         "calculatedData.climbSuccessL1",
         "calculatedData.habLineSuccessL1",
